@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>328</width>
-    <height>231</height>
+    <width>668</width>
+    <height>566</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Function Generator</string>
+   <string>Lockin Controller</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -27,7 +27,7 @@
           <enum>QFormLayout::FieldsStayAtSizeHint</enum>
          </property>
          <item row="0" column="0">
-          <widget class="QLCDNumber" name="lcdNumber"/>
+          <widget class="QLCDNumber" name="amplitude"/>
          </item>
         </layout>
        </item>
@@ -41,7 +41,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>328</width>
+     <width>668</width>
      <height>21</height>
     </rect>
    </property>

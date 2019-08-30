@@ -1,4 +1,4 @@
-from lantz.qt.app import start_gui
+from lantz import Feat
 from lantz.core import foreign
 
 
@@ -14,14 +14,10 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self.lib._SetLockInPllOn.restype = foreign.TYPES["L"]
         self.lib._SetLockInFreq.restype = foreign.TYPES["f64"]
         self.lib._SetLockInFreq.restype = foreign.TYPES["f64"]
-        self.set_pll(True)
-
-    def set_pll(self, bool):
-        self.pll_status = bool
-        num = 0
-        if bool:
-            num = 1
-        return self.lib._SetLockInPllOn(foreign.TYPES["L"](num))
+        self.pll = True
+        self.set_lockin_time_constant(5)
+        self.set_input_gain(10)
+        self.set_lockin_harmonic(1)
 
     def set_lockin_freq(self, float):
         """This Function sets the center frequency of the lockin to a value in Hz if the PLL is off. If the PLL is on,
@@ -47,14 +43,25 @@ class AnfatecAMU24(foreign.LibraryDriver):
     def set_lockin_time_constant(self, num):
         return self.lib._SetLockInTimeConst(foreign.TYPES["L"](num))
 
-    def get_amplitude(self):
+    @Feat(units='V')
+    def amplitude(self):
         return self.lib._GetLockInChannel(2)
 
-    def get_phase(self):
+    @Feat(units='degrees')
+    def phase(self):
         return self.lib._GetLockInChannel(3)
 
-    def get_pll_status(self):
+    @Feat()
+    def pll(self):
         return self.pll_status
+
+    @pll.setter
+    def pll(self, bool):
+        self.pll_status = bool
+        num = 0
+        if bool:
+            num = 1
+        self.lib._SetLockInPllOn(foreign.TYPES["L"](num))
 
     def get_lockin_status(self):
         return self.lib._GetLockInStatus()
