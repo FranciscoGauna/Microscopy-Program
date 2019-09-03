@@ -44,15 +44,18 @@
         <layout class="QVBoxLayout" name="inputGainLayout">
          <item>
           <widget class="QLabel" name="label">
+           <property name="locale">
+            <locale language="English" country="UnitedStates"/>
+           </property>
            <property name="text">
             <string>TextLabel</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton">
+          <widget class="QPushButton" name="radioButton">
            <property name="text">
-            <string>RadioButton</string>
+            <string>No anda :/</string>
            </property>
           </widget>
          </item>
@@ -78,13 +81,19 @@
       <layout class="QVBoxLayout" name="amplitudeLayout">
        <item>
         <widget class="QLabel" name="amplitudeLabel">
+         <property name="locale">
+          <locale language="English" country="UnitedStates"/>
+         </property>
          <property name="text">
-          <string>TextLabel</string>
+          <string>Amplitude</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLCDNumber" name="amplitudeWdiget"/>
+        <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+       </item>
+       <item>
+        <widget class="QLCDNumber" name="amplitudeWidget"/>
        </item>
       </layout>
      </item>
