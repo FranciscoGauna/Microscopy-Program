@@ -16,22 +16,25 @@ class LockinControlUi(Frontend):
 
     backend: LockinControl
 
-    gui = 'UI/mainWindow.ui'
+    # gui = 'UI/mainWindow.ui'
+    gui = 'UI/test.ui'
 
     def setupUi(self):
         super().setupUi()
         print(90)
-        self.widget.doubleSpinBox.setValue(90.0)
-        self.widget.radioButton.pressed.connect(self.update_amplitude)
+        # self.widget.doubleSpinBox.setValue(90.0)
+        # self.widget.radioButton.pressed.connect(self.update_amplitude)
+        self.widget.button.clicked.connect(lambda: print("asd"))
 
     def connect_backend(self):
         super().connect_backend()
 
         #self.connect_feat(self.widget.doubleSpinBox, self.backend.lockin, 'amplitude')
-        self.widget.radioButton.pressed.connect(self.update_amplitude)
+        #self.widget.radioButton.pressed.connect(self.update_amplitude)
 
     def update_amplitude(self):
         print("Success")
+        exit()
 
 
 if __name__ != '__main__':

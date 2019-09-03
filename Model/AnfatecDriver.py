@@ -2,6 +2,12 @@ from lantz import Feat
 from lantz.core import foreign
 from enum import Enum
 
+
+
+class Coupling(Enum):
+    ac = 1
+    dc = 0
+
 class AnfatecAMU24(foreign.LibraryDriver):
     pll_status = True
     LIBRARY_NAME = "Lockin.dll"
@@ -10,56 +16,67 @@ class AnfatecAMU24(foreign.LibraryDriver):
         super().__init__(library_name="Lockin.dll")
 
         self.lib._GetLockInChannel.restype = foreign.TYPES["f64"]
-        self.lib._GetLockInStatus.restype = foreign.TYPES["L"]
+        self.lib._GetLockInStatus.restype = foreign.TYPES["l"]
         self.lib._SetLockInPhase.restype = foreign.TYPES["f64"]
-        self.lib._SetLockInPllOn.restype = foreign.TYPES["L"]
+        self.lib._SetLockInPllOn.restype = foreign.TYPES["l"]
         self.lib._SetLockInFreq.restype = foreign.TYPES["f64"]
         self.lib._SetLockInFreq.restype = foreign.TYPES["f64"]
 
+        self.lockin_phase = 0
         self.pll = True
         self.set_lockin_time_constant(5)
         self.set_input_gain(10)
         self.harmonic = 1
         self.coupling = Coupling.ac
-        self.lockin_amplitude_value = 0.0
-        self.lockin_freq_value = 0.0
+        self.lockin_amplitude = 0.0
+        self.lockin_frequency = 0.0
 
-    @Feat()
+    @Feat(units="Hz")
     def lockin_frequency(self):
         """This Function sets the center frequency of the lockin to a value in Hz if the PLL is off. If the PLL is on,
         it returns the external frequency value"""
-        return self.lib._SetLockInFreq()
+        return self._lockin_frequency
 
     @lockin_frequency.setter
     def lockin_frequency(self, float):
         """This Function sets the center frequency of the lockin to a value in Hz if the PLL is off. If the PLL is on,
         it returns the external frequency value"""
+        self._lockin_frequency = float
         self.lib._SetLockInFreq(foreign.TYPES["f64"](float))
 
     @Feat()
     def lockin_amplitude(self):
         """This Function returns the amplitude in V of the reference output"""
-        return self.lockin_amplitude_value
+        return self._lockin_amplitude
 
     @lockin_amplitude.setter
     def lockin_amplitude(self, float):
         """This Function sets the amplitude in V of the reference output and gives no value back"""
         self.lib._SetLockInAmpl(foreign.TYPES["f64"](float))
-        self.lockin_amplitude_value = float
+        self._lockin_amplitude = float
 
-    def set_lockin_phase(self, float):
-        return self.lib._SetLockInPhase(foreign.TYPES["f64"](float))
+    @Feat()
+    def lockin_phase(self):
+        return self._lockin_phase
+
+    @lockin_phase.setter
+    def lockin_phase(self, float):
+        self._lockin_phase = float
+        self.lib._SetLockInPhase(foreign.TYPES["f64"](float))
+
 
     def set_input_gain(self, num):
         return self.lib._SetLockInHardGain(foreign.TYPES["L"](num))
 
     @Feat
     def coupling(self):
-        return self.lockin_coupling
+        return self._coupling
 
     @coupling.setter
-    def coupling(self, type: coupling):
-        self.lockin_coupling = type
+    def coupling(self, type: Coupling):
+        if not isinstance(type, Coupling):
+            raise TypeError()
+        self._coupling = type
         self.lib._SetLockInCoupling(foreign.TYPES["L"](type.value))
 
     @Feat()
@@ -68,7 +85,7 @@ class AnfatecAMU24(foreign.LibraryDriver):
 
     @harmonic.setter
     def harmonic(self, num):
-        self.lockin_harmonic = num
+        self._lockin_harmonic = num
         self.lib._SetLockInHarm(foreign.TYPES["L"](num))
 
     def set_lockin_time_constant(self, num):
@@ -92,13 +109,8 @@ class AnfatecAMU24(foreign.LibraryDriver):
         num = 0
         if bool:
             num = 1
-        self.lib._SetLockInPllOn(foreign.TYPES["L"](num))
+        self.lib._SetLockInPllOn(foreign.TYPES["l"](num))
 
     @Feat()
     def status(self):
-        return self.lib._GetLockInStatus()
-
-
-class Coupling(Enum):
-    ac = 1
-    dc = 0
+        return bool(self.lib._GetLockInStatus()-9)
