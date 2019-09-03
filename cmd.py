@@ -5,8 +5,10 @@ inst = AnfatecAMU24()
 inst.pll = True
 inst.set_lockin_time_constant(5)
 inst.set_input_gain(10)
-inst.set_lockin_harmonic(1)
+inst.harmonic = 1
+inst.pll = False
 time.sleep(1)
-print(inst.amplitude.magnitude)
+inst.lockin_amplitude = 10
+inst.lockin_frequency = 1000
 time.sleep(1)
-print(inst.amplitude)
+print(inst.harmonic)
