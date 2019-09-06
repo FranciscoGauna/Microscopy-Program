@@ -11,7 +11,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
     config = configparser.ConfigParser()
     config.read("config.ini")
-    log_to_screen(DEBUG)
+    if config["DEFAULT"]["env"] == "dev":
+        log_to_screen(DEBUG)
     if args.locale:
         set_locale(args.locale)
     elif config["DEFAULT"]["env"] != "dev":

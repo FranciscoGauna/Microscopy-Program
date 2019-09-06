@@ -1,12 +1,13 @@
 from lantz import Feat
 from lantz.core import foreign
 from enum import Enum
-
+from lantz import Q_
 
 
 class Coupling(Enum):
     ac = 1
     dc = 0
+
 
 class AnfatecAMU24(foreign.LibraryDriver):
     pll_status = True
@@ -22,14 +23,14 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self.lib._SetLockInFreq.restype = foreign.TYPES["f64"]
         self.lib._SetLockInFreq.restype = foreign.TYPES["f64"]
 
-        self.lockin_phase = 0
+        self.lockin_phase = 10
         self.pll = True
         self.set_lockin_time_constant(5)
-        self.set_input_gain(10)
+        self.input_gain = 10
         self.harmonic = 1
-        self.coupling = Coupling.ac
-        self.lockin_amplitude = 0.0
-        self.lockin_frequency = 0.0
+        self.coupling = Coupling.dc
+        self.lockin_amplitude = 10
+        self.lockin_frequency = Q_(100.0, "hertz")
 
     @Feat(units="Hz")
     def lockin_frequency(self):
@@ -64,9 +65,16 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self._lockin_phase = float
         self.lib._SetLockInPhase(foreign.TYPES["f64"](float))
 
+    @Feat
+    def input_gain(self):
+        return self._input_gain
 
-    def set_input_gain(self, num):
-        return self.lib._SetLockInHardGain(foreign.TYPES["L"](num))
+    @input_gain.setter
+    def input_gain(self, num):
+        if num not in [1,10,100]:
+            raise ValueError
+        self._input_gain = num
+        self.lib._SetLockInHardGain(foreign.TYPES["L"](num))
 
     @Feat
     def coupling(self):
@@ -89,6 +97,7 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self.lib._SetLockInHarm(foreign.TYPES["L"](num))
 
     def set_lockin_time_constant(self, num):
+        # 0 = 0.25ms, 1 = 0.5ms, 2 = 1ms, 3 = 2ms, 4 = 5ms, ... 13 = 5s
         return self.lib._SetLockInTimeConst(foreign.TYPES["L"](num))
 
     @Feat(units='V')
@@ -104,10 +113,10 @@ class AnfatecAMU24(foreign.LibraryDriver):
         return self.pll_status
 
     @pll.setter
-    def pll(self, bool):
-        self.pll_status = bool
+    def pll(self, flag: bool):
+        self.pll_status = flag
         num = 0
-        if bool:
+        if flag:
             num = 1
         self.lib._SetLockInPllOn(foreign.TYPES["l"](num))
 
