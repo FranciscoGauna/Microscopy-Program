@@ -6,7 +6,7 @@ from lantz.core.log import log_to_screen, INFO
 #log_to_screen(INFO)
 inst = AnfatecAMU24()
 inst.pll = False
-
+inst.set_lockin_time_constant(13)
 def func(inst):
     while True:
         for t in range(0, 5):
@@ -15,7 +15,7 @@ def func(inst):
         print(inst.status)
         inst.pll = not inst.pll
         inst.set_lockin_time_constant(0)
-        inst.lockin_frequency = Q_(100,"Hz")
+        inst.lockin_frequency = Q_(100, "Hz")
         inst.coupling = Coupling.ac
         print(inst.pll)
 

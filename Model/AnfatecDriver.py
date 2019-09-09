@@ -23,13 +23,13 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self.lib._SetLockInFreq.restype = foreign.TYPES["f64"]
         self.lib._SetLockInFreq.restype = foreign.TYPES["f64"]
 
-        self.lockin_phase = 10
-        self.pll = True
+        self.lockin_phase = 45
+        self.pll = False
         self.set_lockin_time_constant(5)
         self.input_gain = 10
         self.harmonic = 1
         self.coupling = Coupling.dc
-        self.lockin_amplitude = 10
+        self.lockin_amplitude = Q_(10, "V")
         self.lockin_frequency = Q_(100.0, "hertz")
 
     @Feat(units="Hz")
@@ -45,7 +45,7 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self._lockin_frequency = float
         self.lib._SetLockInFreq(foreign.TYPES["f64"](float))
 
-    @Feat()
+    @Feat(units="V")
     def lockin_amplitude(self):
         """This Function returns the amplitude in V of the reference output"""
         return self._lockin_amplitude
@@ -56,7 +56,7 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self.lib._SetLockInAmpl(foreign.TYPES["f64"](float))
         self._lockin_amplitude = float
 
-    @Feat()
+    @Feat(units="deg")
     def lockin_phase(self):
         return self._lockin_phase
 
@@ -119,6 +119,11 @@ class AnfatecAMU24(foreign.LibraryDriver):
         if flag:
             num = 1
         self.lib._SetLockInPllOn(foreign.TYPES["l"](num))
+
+    def pll_frequency(self):
+        if self.pll_status:
+            return self.lib._SetLockInFreq(foreign.TYPES["f64"](10.0))
+        return 0
 
     @Feat()
     def status(self):
