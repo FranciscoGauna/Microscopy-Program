@@ -17,7 +17,7 @@ if __name__ == "__main__":
         config["DEFAULT"]["env"] = "usr"
     if config["DEFAULT"]["env"] == "dev":
         pass
-        # log_to_screen(DEBUG)
+        log_to_screen(DEBUG)
     if args.locale:
         set_locale(args.locale)
     elif config["DEFAULT"]["env"] != "dev":
@@ -25,7 +25,6 @@ if __name__ == "__main__":
             set_locale(config["DEFAULT"]["locale"])
         except KeyError:
             set_locale("en")
-
 
 app = QApplication([])
 

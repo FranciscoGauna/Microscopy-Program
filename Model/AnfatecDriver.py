@@ -10,12 +10,23 @@ class Coupling(Enum):
 
 
 class AnfatecAMU24(foreign.LibraryDriver):
-    pll_status = True
     LIBRARY_NAME = "Lockin.dll"
 
-    def __init__(self):
-        super().__init__(library_name="Lockin.dll")
+    def __init__(self, *args, **kwargs):
+        pll = kwargs.pop("pll", False) # False
+        time_constant = (kwargs.pop("time_constant", 5))
+        roll_off = (kwargs.pop("roll_off", 1))
+        input_gain = kwargs.pop("input_gain", 1)
+        harmonic = kwargs.pop("harmonic", 1)
+        coupling = kwargs.pop("coupling", Coupling.dc)
+        lockin_phase = Q_(kwargs.pop("lockin_phase", 45), "deg")
+        lockin_amplitude = Q_(kwargs.pop("lockin_amplitude", 10), "V")
+        lockin_frequency = Q_(kwargs.pop("lockin_frequency", 100), "hertz")
 
+        super().__init__(library_name="Lockin.dll", *args, **kwargs)
+
+        self._time_constant = 0
+        self._roll_off = 0
         self.lib._GetLockInChannel.restype = foreign.TYPES["f64"]
         self.lib._GetLockInStatus.restype = foreign.TYPES["l"]
         self.lib._SetLockInPhase.restype = foreign.TYPES["f64"]
@@ -23,14 +34,15 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self.lib._SetLockInFreq.restype = foreign.TYPES["f64"]
         self.lib._SetLockInFreq.restype = foreign.TYPES["f64"]
 
-        self.lockin_phase = 45
-        self.pll = False
-        self.set_lockin_time_constant(5)
-        self.input_gain = 10
-        self.harmonic = 1
-        self.coupling = Coupling.dc
-        self.lockin_amplitude = Q_(10, "V")
-        self.lockin_frequency = Q_(100.0, "hertz")
+        self.pll = pll
+        self.set_lockin_time_constant(time_constant)
+        self.set_lockin_time_constant(roll_off)
+        self.input_gain = input_gain
+        self.harmonic = harmonic
+        self.coupling = coupling
+        self.lockin_phase = lockin_phase
+        self.lockin_amplitude = lockin_amplitude
+        self.lockin_frequency = lockin_frequency
 
     @Feat(units="Hz")
     def lockin_frequency(self):
@@ -51,10 +63,10 @@ class AnfatecAMU24(foreign.LibraryDriver):
         return self._lockin_amplitude
 
     @lockin_amplitude.setter
-    def lockin_amplitude(self, float):
+    def lockin_amplitude(self, value):
         """This Function sets the amplitude in V of the reference output and gives no value back"""
-        self.lib._SetLockInAmpl(foreign.TYPES["f64"](float))
-        self._lockin_amplitude = float
+        self.lib._SetLockInAmpl(foreign.TYPES["f64"](value))
+        self._lockin_amplitude = value
 
     @Feat(units="deg")
     def lockin_phase(self):
@@ -93,12 +105,28 @@ class AnfatecAMU24(foreign.LibraryDriver):
 
     @harmonic.setter
     def harmonic(self, num):
-        self._lockin_harmonic = num
+        self._harmonic = num
         self.lib._SetLockInHarm(foreign.TYPES["L"](num))
 
     def set_lockin_time_constant(self, num):
-        # 0 = 0.25ms, 1 = 0.5ms, 2 = 1ms, 3 = 2ms, 4 = 5ms, ... 13 = 5s
+        if num not in range(0, 14):
+            raise IndexError
+        self._time_constant = num
         return self.lib._SetLockInTimeConst(foreign.TYPES["L"](num))
+
+    def get_lockin_time_constant(self):
+        # 0 = 0.25ms, 1 = 0.5ms, 2 = 1ms, 3 = 2ms, 4 = 5ms, ... 13 = 5s
+        return self._time_constant
+
+    def set_lockin_roll_off(self, num):
+        if num not in range(0, 3):
+            raise IndexError
+        self._roll_off = num
+        return self.lib._SetLockInRollOff(foreign.TYPES["L"](num))
+
+    def get_lockin_roll_off(self):
+        # 0 = 0.25ms, 1 = 0.5ms, 2 = 1ms, 3 = 2ms, 4 = 5ms, ... 13 = 5s
+        return self._roll_off
 
     @Feat(units='V')
     def amplitude(self):
@@ -110,21 +138,42 @@ class AnfatecAMU24(foreign.LibraryDriver):
 
     @Feat()
     def pll(self):
-        return self.pll_status
+        return self._pll
 
     @pll.setter
     def pll(self, flag: bool):
-        self.pll_status = flag
+        self._pll = flag
         num = 0
         if flag:
             num = 1
         self.lib._SetLockInPllOn(foreign.TYPES["l"](num))
 
     def pll_frequency(self):
-        if self.pll_status:
+        if self._pll:
             return self.lib._SetLockInFreq(foreign.TYPES["f64"](10.0))
         return 0
 
     @Feat()
     def status(self):
         return bool(self.lib._GetLockInStatus()-9)
+
+    def real_part_x(self):
+        return self.lib._GetLockInChannel(0)
+
+    def imaginary_part_y(self):
+        return self.lib._GetLockInChannel(1)
+
+    def export_settings(self):
+        settings = {
+            "pll": self._pll,
+            "time_constant": self._time_constant,
+            "roll_off": self._roll_off,
+            "input_gain": self._input_gain,
+            "harmonic": self._harmonic,
+            "coupling": self._coupling,
+            "lockin_phase": self._lockin_phase,
+            "lockin_amplitude": self._lockin_amplitude,
+            "lockin_frequency": self._lockin_frequency,
+        }
+
+        return settings

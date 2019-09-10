@@ -53,6 +53,7 @@ def make_time_constant_box(MainWindow):
     time_constant_box.addItem("1 s")
     time_constant_box.addItem("2 s")
     time_constant_box.addItem("5 s")
+    time_constant_box.setCurrentIndex(MainWindow.lockin.get_lockin_time_constant())
     time_constant_box.currentIndexChanged.connect(MainWindow.helper.change_time_constant)
     parent_layout.addWidget(time_constant_box)
     MainWindow.helper.time_constant_box = time_constant_box
@@ -77,71 +78,3 @@ class Helper:
         # Este codigo usa el index y la variable times para convertir a en b
         times = [20, 20, 20, 20, 20, 20, 20, 50, 100, 200, 500, 1000, 2000, 5000]
         self.lockin.set_lockin_time_constant(self.time_constant_box.currentIndex())
-        self.amplitude_timer.setInterval(10*times[self.time_constant_box.currentIndex()])
-        self.phase_timer.setInterval(10*times[self.time_constant_box.currentIndex()])
-
-    def channel_combo(self):
-        chanel_cb = QComboBox()
-        chanel_cb.addItem(locale.get("X", "str_X"))
-        chanel_cb.addItem(locale.get("Y", "str_Y"))
-        chanel_cb.addItem(locale.get("amplitude", "str_amplitude"))
-        chanel_cb.addItem(locale.get("phase", "str_phase"))
-        return chanel_cb
-
-    def create_amplitude_lcd_display(self, MainWindow):
-        layout = QVBoxLayout()
-        upper_layout = QVBoxLayout()
-        upper_layout.addStretch(0)
-        under_layout = QVBoxLayout()
-        channel_layout = QHBoxLayout()
-
-        channel_layout.addWidget(QLabel(locale.get("channel", "str_channel")))
-        channel_cb = self.channel_combo()
-        channel_cb.setCurrentIndex(2)
-        channel_layout.addWidget(channel_cb)
-
-        self.amplitude_widget = QLCDNumber(MainWindow)
-        self.amplitude_widget.setMinimumHeight(80)
-        self.amplitude_timer = QTimer()
-        self.amplitude_timer.setInterval(1000)
-        self.amplitude_timer.timeout.connect(self.reload_amplitude)
-        self.amplitude_timer.start()
-
-        upper_layout.addWidget(self.amplitude_widget)
-        under_layout.addLayout(channel_layout)
-        under_layout.addStretch(1)
-        layout.addLayout(upper_layout)
-        layout.addLayout(under_layout)
-        return layout
-
-    def reload_amplitude(self):
-        self.amplitude_widget.display(self.lockin.amplitude.magnitude)
-
-    def create_phase_lcd_display(self, MainWindow):
-        layout = QVBoxLayout()
-        upper_layout = QVBoxLayout()
-        upper_layout.addStretch(0)
-        under_layout = QVBoxLayout()
-        channel_layout = QHBoxLayout()
-
-        channel_layout.addWidget(QLabel(locale.get("channel", "str_channel")))
-        channel_cb = self.channel_combo()
-        channel_cb.setCurrentIndex(3)
-        channel_layout.addWidget(channel_cb)
-
-        self.phase_widget = QLCDNumber(MainWindow)
-        self.phase_widget.setMinimumHeight(80)
-        self.phase_timer = QTimer()
-        self.phase_timer.setInterval(1000)
-        self.phase_timer.timeout.connect(self.reload_phase)
-        self.phase_timer.start()
-
-        upper_layout.addWidget(self.phase_widget)
-        under_layout.addLayout(channel_layout)
-        under_layout.addStretch(1)
-        layout.addLayout(upper_layout)
-        layout.addLayout(under_layout)
-        return layout
-
-    def reload_phase(self):
-        self.phase_widget.display(self.lockin.phase.magnitude)
