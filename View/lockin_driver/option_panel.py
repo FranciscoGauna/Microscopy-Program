@@ -60,7 +60,7 @@ def make_time_constant_box(MainWindow):
     return parent_layout
 
 
-class Helper:
+class OptionsPanel:
     def __init__(self, lockin):
         self.lockin = lockin
         self.time_constant_box = None

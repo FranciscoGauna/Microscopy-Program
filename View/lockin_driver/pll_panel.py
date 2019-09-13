@@ -1,11 +1,16 @@
 from PyQt5.QtCore import QTimer
 from PyQt5.QtGui import QDoubleValidator
-from PyQt5.QtWidgets import QVBoxLayout, QCheckBox, QLabel, QLineEdit, QSpacerItem, QHBoxLayout
+from PyQt5.QtWidgets import QVBoxLayout, QCheckBox, QLabel, QLineEdit, QHBoxLayout
 from lantz import Q_
 from View.localization import locale
+from View.pyqt_utils import delete_items_of_layout
 
 
-class PllTab:
+class PllPanel:
+    """This class is used for building and managing a panel that interacts with the pll and lockin values, providing an
+     appropiate interface for situations where the pll is on or off
+     This class should be saved in a internal variable of the window, or it will get garbage collected, and the timers
+     and update methods will not work"""
     def __init__(self, lockin):
         self.lockin = lockin
         self.layout = QVBoxLayout()
@@ -36,6 +41,7 @@ class PllTab:
         self.layout.addLayout(self.on_layout()) if self.lockin.pll else self.layout.addLayout(self.off_layout())
 
     def on_layout(self):
+        """Creates a layout with the external frequency and an overload status for when the pll is on"""
         check_box = QCheckBox(locale.get("external_reference", "str_external_reference"))
         check_box.setChecked(self.lockin.pll)
         check_box.stateChanged.connect(self.set_pll)
@@ -68,9 +74,11 @@ class PllTab:
         return on_layout
 
     def reload_external_frequency(self):
+        """Function gets called by a timer: Updates the external frequency"""
         self.frequency_counter.setText(str(self.lockin.pll_frequency()))
 
     def off_layout(self):
+        """Creates a layout with the external frequency and an overload status for when the pll is on"""
         check_box = QCheckBox(locale.get("external_reference", "str_external_reference"))
         check_box.setChecked(self.lockin.pll)
         check_box.stateChanged.connect(self.set_pll)
@@ -122,24 +130,13 @@ class PllTab:
         return off_layout
 
     def insert_frequency(self):
+        """Function gets called when the user inputs a value in the text box: Updates the lockin frequency"""
         self.lockin.lockin_frequency = Q_(float(self.frequency_input.text()), "hertz")
 
     def insert_amplitude(self):
+        """Function gets called when the user inputs a value in the text box: Updates the lockin amplitude"""
         self.lockin.lockin_amplitude = Q_(float(self.amplitude_input.text()), "V")
 
     def insert_phase(self):
+        """Function gets called when the user inputs a value in the text box: Updates the lockin phase"""
         self.lockin.lockin_phase = Q_(float(self.phase_input.text()), "deg")
-
-
-# Refactor, it should be a top level utility function
-def delete_items_of_layout(layout):
-    if layout is not None:
-        while layout.count():
-            item = layout.takeAt(0)
-            widget = item.widget()
-            if isinstance(item, QSpacerItem):
-                pass
-            elif widget is not None:
-                widget.deleteLater()
-            else:
-                delete_items_of_layout(item.layout())

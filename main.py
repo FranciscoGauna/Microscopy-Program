@@ -1,7 +1,7 @@
 import configparser
 from PyQt5.QtWidgets import QApplication
 from View.localization import set_locale
-from View.viewController import MainWindow
+from View.lockin_driver.lockin_window import MainWindow
 import argparse
 from lantz.core.log import log_to_screen, DEBUG
 

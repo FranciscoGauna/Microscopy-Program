@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QLCDNumber, QComboBox, QVBoxLayout, QHBoxLayout, QLa
 from View.localization import locale
 
 
-class LCDisplay:
+class LCDPanel:
 
     def __init__(self, lockin: AnfatecAMU24()):
         self.display = QLCDNumber()
@@ -42,6 +42,7 @@ class LCDisplay:
         self.timer.setInterval(2000)
         self.timer.timeout.connect(func)
         self.timer.start()
+        func()
 
         upper_layout.addWidget(self.display)
         under_layout.addLayout(channel_layout)
@@ -52,7 +53,12 @@ class LCDisplay:
 
     def change_channel(self):
         funcs = [self.reload_x, self.reload_y, self.reload_amplitude, self.reload_phase]
+        funcs[self.combo_box.currentIndex()]()
+
+        self.timer = QTimer()
+        self.timer.setInterval(2000)
         self.timer.timeout.connect(funcs[self.combo_box.currentIndex()])
+        self.timer.start()
 
     def reload_amplitude(self):
         self.display.display(self.lockin.amplitude.magnitude)

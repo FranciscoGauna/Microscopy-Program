@@ -13,15 +13,18 @@ class AnfatecAMU24(foreign.LibraryDriver):
     LIBRARY_NAME = "Lockin.dll"
 
     def __init__(self, *args, **kwargs):
-        pll = kwargs.pop("pll", False) # False
+        """Instanciates a new copy of the driver. -if you want to load the settings of a previous instance of this class
+        , you should use the method export_settings and add it to the kwargs"""
+        # Popeo las variables que usa el programa
+        pll = kwargs.pop("pll", False)
         time_constant = (kwargs.pop("time_constant", 5))
         roll_off = (kwargs.pop("roll_off", 1))
         input_gain = kwargs.pop("input_gain", 1)
         harmonic = kwargs.pop("harmonic", 1)
         coupling = kwargs.pop("coupling", Coupling.dc)
-        lockin_phase = Q_(kwargs.pop("lockin_phase", 45), "deg")
-        lockin_amplitude = Q_(kwargs.pop("lockin_amplitude", 10), "V")
-        lockin_frequency = Q_(kwargs.pop("lockin_frequency", 100), "hertz")
+        lockin_phase = Q_(kwargs.pop("lockin_phase", 0), "deg")
+        lockin_amplitude = Q_(kwargs.pop("lockin_amplitude", 1), "V")
+        lockin_frequency = Q_(kwargs.pop("lockin_frequency", 10000), "hertz")
 
         super().__init__(library_name="Lockin.dll", *args, **kwargs)
 
@@ -36,7 +39,7 @@ class AnfatecAMU24(foreign.LibraryDriver):
 
         self.pll = pll
         self.set_lockin_time_constant(time_constant)
-        self.set_lockin_time_constant(roll_off)
+        self.set_lockin_roll_off(roll_off)
         self.input_gain = input_gain
         self.harmonic = harmonic
         self.coupling = coupling
@@ -46,14 +49,12 @@ class AnfatecAMU24(foreign.LibraryDriver):
 
     @Feat(units="Hz")
     def lockin_frequency(self):
-        """This Function sets the center frequency of the lockin to a value in Hz if the PLL is off. If the PLL is on,
-        it returns the external frequency value"""
+        """This Function returns the center frequency of the lockin in Hz."""
         return self._lockin_frequency
 
     @lockin_frequency.setter
     def lockin_frequency(self, float):
-        """This Function sets the center frequency of the lockin to a value in Hz if the PLL is off. If the PLL is on,
-        it returns the external frequency value"""
+        """This Function sets the center frequency of the lockin to a value in Hz. It will only be used if the PLL is off."""
         self._lockin_frequency = float
         self.lib._SetLockInFreq(foreign.TYPES["f64"](float))
 
@@ -70,30 +71,36 @@ class AnfatecAMU24(foreign.LibraryDriver):
 
     @Feat(units="deg")
     def lockin_phase(self):
+        """This function returns the phase offset between the input and the reference output in degrees"""
         return self._lockin_phase
 
     @lockin_phase.setter
     def lockin_phase(self, float):
+        """This function sets the phase offset between the input and the reference output in degrees"""
         self._lockin_phase = float
         self.lib._SetLockInPhase(foreign.TYPES["f64"](float))
 
     @Feat
     def input_gain(self):
+        """This function returns the input gain. It is a multiplier of either 1, 10 or 100"""
         return self._input_gain
 
     @input_gain.setter
     def input_gain(self, num):
-        if num not in [1,10,100]:
+        """This function sets the input gain. It is a multiplier of either 1, 10 or 100"""
+        if num not in [1, 10, 100]:
             raise ValueError
         self._input_gain = num
         self.lib._SetLockInHardGain(foreign.TYPES["L"](num))
 
     @Feat
     def coupling(self):
+        """This function returns the coupling gain. It returns an instance of the Coupling Enum Class"""
         return self._coupling
 
     @coupling.setter
     def coupling(self, type: Coupling):
+        """This function sets the coupling gain. It requires an instance of the Coupling Enum Class"""
         if not isinstance(type, Coupling):
             raise TypeError()
         self._coupling = type
@@ -101,47 +108,66 @@ class AnfatecAMU24(foreign.LibraryDriver):
 
     @Feat()
     def harmonic(self):
+        """This function returns the harmonic, an integer between 1 and 15"""
         return self.lib._SetLockInHarm()
 
     @harmonic.setter
     def harmonic(self, num):
+        """This function sets the harmonic, and it should be an integer between 1 and 15"""
         self._harmonic = num
         self.lib._SetLockInHarm(foreign.TYPES["L"](num))
 
+    def get_lockin_time_constant(self):
+        """This function sets the time constant that the lockin uses for integration,
+         and it should be an integer between 0 and 13, with the following value
+        assigned to each number: 0 = 0.25ms, 1 = 0.5ms, 2 = 1ms, 3 = 2ms, 4 = 5ms, ... 13 = 5s"""
+        # 0 = 0.25ms, 1 = 0.5ms, 2 = 1ms, 3 = 2ms, 4 = 5ms, ... 13 = 5s
+        return self._time_constant
+
     def set_lockin_time_constant(self, num):
+        """This function sets the time constant that the lockin uses for integration,
+        and it should be an integer between 0 and 13, with the following value
+        assigned to each number: 0 = 0.25ms, 1 = 0.5ms, 2 = 1ms, 3 = 2ms, 4 = 5ms, ... 13 = 5s"""
         if num not in range(0, 14):
             raise IndexError
         self._time_constant = num
         return self.lib._SetLockInTimeConst(foreign.TYPES["L"](num))
 
-    def get_lockin_time_constant(self):
-        # 0 = 0.25ms, 1 = 0.5ms, 2 = 1ms, 3 = 2ms, 4 = 5ms, ... 13 = 5s
-        return self._time_constant
-
     def set_lockin_roll_off(self, num):
+        """This function sets the roll off which is used for the low pass filter
+        , and it should be an integer between 0 and 2, with the following value.
+        assigned to each number: 0 = 6dB/oct, 1 = 12dB/oct, 2 = 24dB/oct"""
         if num not in range(0, 3):
             raise IndexError
         self._roll_off = num
         return self.lib._SetLockInRollOff(foreign.TYPES["L"](num))
 
     def get_lockin_roll_off(self):
-        # 0 = 0.25ms, 1 = 0.5ms, 2 = 1ms, 3 = 2ms, 4 = 5ms, ... 13 = 5s
+        """This function returns the roll off which is used for the low pass filter
+        , and it should be an integer between 0 and 2, with the following value.
+        assigned to each number: 0 = 6dB/oct, 1 = 12dB/oct, 2 = 24dB/oct"""
         return self._roll_off
 
     @Feat(units='V')
     def amplitude(self):
+        """Returns the value of the amplitude channel, which measures from the input signal"""
         return self.lib._GetLockInChannel(2)
 
     @Feat(units='degrees')
     def phase(self):
+        """phase returns the value of the phase channel, which measures from the input signal"""
         return self.lib._GetLockInChannel(3)
 
     @Feat()
     def pll(self):
+        """Returns the value of pll. If true, the lockin uses the frequency of the external reference and if false it
+        uses the internal value, assigned in lockin_frequency"""
         return self._pll
 
     @pll.setter
     def pll(self, flag: bool):
+        """Sets what frequency to use. If true, the lockin uses the frequency of the external reference and if false it
+        uses the internal value, assigned in lockin_frequency"""
         self._pll = flag
         num = 0
         if flag:
@@ -149,21 +175,28 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self.lib._SetLockInPllOn(foreign.TYPES["l"](num))
 
     def pll_frequency(self):
+        """Returns the fequency of the pll if the pll is on. Otherwise returns 0"""
         if self._pll:
             return self.lib._SetLockInFreq(foreign.TYPES["f64"](10.0))
         return 0
 
     @Feat()
-    def status(self):
+    def overloaded(self):
+        """Overloaded returns true when the lockin is overloaded and false when it is working correctly"""
         return bool(self.lib._GetLockInStatus()-9)
 
     def real_part_x(self):
+        """Real Part x returns the value of the x channel , which measures from the input signal"""
         return self.lib._GetLockInChannel(0)
 
     def imaginary_part_y(self):
+        """Imaginaty part y returns the value of the x channel , which measures from the input signal"""
         return self.lib._GetLockInChannel(1)
 
     def export_settings(self):
+        """This function returns a dictionary of the values used for the configuration of the lockin. If you want to
+         load a new instance with these setting you should add this dictionary to the kwargs when you instantiante the
+         class"""
         settings = {
             "pll": self._pll,
             "time_constant": self._time_constant,

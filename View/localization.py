@@ -17,4 +17,5 @@ locale = dict()
 
 
 def set_locale(lang):
+    """Changes the locale dictionary to the one with appropiate language"""
     locale.update(_local_meta_dict.get(lang, _local_meta_dict["en"]))
