@@ -109,7 +109,7 @@ class AnfatecAMU24(foreign.LibraryDriver):
     @Feat()
     def harmonic(self):
         """This function returns the harmonic, an integer between 1 and 15"""
-        return self.lib._SetLockInHarm()
+        return self._harmonic
 
     @harmonic.setter
     def harmonic(self, num):

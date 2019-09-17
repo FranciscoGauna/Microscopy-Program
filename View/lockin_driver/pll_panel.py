@@ -19,6 +19,8 @@ class PllPanel:
         self.frequency_input = None
         self.amplitude_input = None
         self.phase_input = None
+        self.status_indicator = None
+        self.status_timer = None
 
     def pll_layout(self):
         self.layout.addLayout(self.on_layout()) if self.lockin.pll else self.layout.addLayout(self.off_layout())
@@ -42,9 +44,7 @@ class PllPanel:
 
     def on_layout(self):
         """Creates a layout with the external frequency and an overload status for when the pll is on"""
-        check_box = QCheckBox(locale.get("external_reference", "str_external_reference"))
-        check_box.setChecked(self.lockin.pll)
-        check_box.stateChanged.connect(self.set_pll)
+        check_box = self.make_pll_checkbox()
 
         frequency_label = QLabel(locale.get("external_frequency", "str_external_frequency"))
         frequency_units = QLabel("Hz")
@@ -66,6 +66,7 @@ class PllPanel:
         under_layout = QVBoxLayout()
         under_layout.addWidget(frequency_label)
         under_layout.addLayout(frequency_layout)
+        under_layout.addWidget(self.make_status_label())
 
         under_layout.addStretch(1)
         on_layout = QVBoxLayout()
@@ -79,9 +80,7 @@ class PllPanel:
 
     def off_layout(self):
         """Creates a layout with the external frequency and an overload status for when the pll is on"""
-        check_box = QCheckBox(locale.get("external_reference", "str_external_reference"))
-        check_box.setChecked(self.lockin.pll)
-        check_box.stateChanged.connect(self.set_pll)
+        check_box = self.make_pll_checkbox()
 
         frequency_units = QLabel("Hz")
         frequency_units.setMaximumWidth(20)
@@ -122,12 +121,36 @@ class PllPanel:
         under_layout.addLayout(amplitude_layout)
         under_layout.addWidget(QLabel(locale.get("phase_input", "str_phase_input")))
         under_layout.addLayout(phase_layout)
+        under_layout.addWidget(self.make_status_label())
 
         under_layout.addStretch(1)
         off_layout = QVBoxLayout()
         off_layout.addLayout(upper_layout)
         off_layout.addLayout(under_layout)
         return off_layout
+
+    def make_pll_checkbox(self):
+        check_box = QCheckBox(locale.get("external_reference", "str_external_reference"))
+        check_box.setChecked(self.lockin.pll)
+        check_box.stateChanged.connect(self.set_pll)
+        return check_box
+
+    def make_status_label(self):
+        self.status_indicator = QLabel("")
+        self.status_indicator.setStyleSheet("color: black;")
+        self.status_timer = QTimer()
+        self.status_timer.setInterval(1000)
+        self.status_timer.timeout.connect(self.status_overload)
+        self.status_timer.start()
+        return self.status_indicator
+
+    def status_overload(self):
+        if self.lockin.overloaded:
+            self.status_indicator.setStyleSheet("color: black; background-color: red;")
+            self.status_indicator.setText(locale.get("overloaded", "str_overloaded"))
+        else:
+            self.status_indicator.setStyleSheet("color: black;")
+            self.status_indicator.setText("")
 
     def insert_frequency(self):
         """Function gets called when the user inputs a value in the text box: Updates the lockin frequency"""

@@ -1,4 +1,4 @@
-from View.lockin_driver.option_panel import make_gain_buttons, make_time_constant_box, OptionsPanel
+from View.lockin_driver.option_panel import OptionsPanel
 from Model.AnfatecDriver import AnfatecAMU24
 from PyQt5.QtWidgets import QMainWindow, QHBoxLayout, QVBoxLayout, QWidget
 from View.lockin_driver.lcd_panel import LCDPanel
@@ -18,12 +18,10 @@ class MainWindow(QMainWindow):
         self.pll_tab = PllPanel(self.lockin)
 
         layout = QHBoxLayout()
-        stats_layout = QVBoxLayout()
+        stats_layout = self.helper.make_layout()
         amplitude_layout = QVBoxLayout()
         phase_layout = QVBoxLayout()
         signal_layout = self.pll_tab.pll_layout()
-        stats_layout.addLayout(make_time_constant_box(self))
-        stats_layout.addLayout(make_gain_buttons(self))
         amplitude_layout.addLayout(self.amplitude_display.build_display(self.amplitude_display.reload_amplitude))
         phase_layout.addLayout(self.phase_display.build_display(self.phase_display.reload_phase))
 

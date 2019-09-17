@@ -39,6 +39,7 @@ class LCDPanel:
         channel_layout.addWidget(self.combo_box)
 
         self.display.setMinimumHeight(80)
+        self.display.setDigitCount(10)
         self.timer.setInterval(2000)
         self.timer.timeout.connect(func)
         self.timer.start()
