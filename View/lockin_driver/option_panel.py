@@ -9,6 +9,8 @@ class OptionsPanel:
         self.time_constant_box = None
         self.roll_off_box = None
         self.harmonics_box = None
+        self.rf_index = {6:0,}
+        self.index_rf = {6:0,}
 
     def make_layout(self):
         layout = QVBoxLayout()
@@ -34,14 +36,14 @@ class OptionsPanel:
         roll_off_box.addItem("6 dB/oct")
         roll_off_box.addItem("12 dB/oct")
         roll_off_box.addItem("24 dB/oct")
-        roll_off_box.setCurrentIndex(self.lockin.get_lockin_roll_off())
+        roll_off_box.setCurrentIndex(self.lockin.lockin_roll_off)
         roll_off_box.currentIndexChanged.connect(self.set_roll_off)
         parent_layout.addWidget(roll_off_box)
         self.roll_off_box = roll_off_box
         return parent_layout
 
     def set_roll_off(self):
-        self.lockin.set_lockin_roll_off(self.roll_off_box.currentIndex())
+        self.lockin.lockin_roll_off = self.roll_off_box.currentIndex()
 
     def make_time_constant_box(self):
         parent_layout = QVBoxLayout()

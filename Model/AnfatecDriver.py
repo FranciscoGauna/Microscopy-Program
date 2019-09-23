@@ -2,6 +2,8 @@ from lantz import Feat
 from lantz.core import foreign
 from enum import Enum
 from lantz import Q_
+from os.path import dirname
+from inspect import getfile
 
 
 class Coupling(Enum):
@@ -26,7 +28,7 @@ class AnfatecAMU24(foreign.LibraryDriver):
         lockin_amplitude = Q_(kwargs.pop("lockin_amplitude", 1), "V")
         lockin_frequency = Q_(kwargs.pop("lockin_frequency", 10000), "hertz")
 
-        super().__init__(library_name="Lockin.dll", *args, **kwargs)
+        super().__init__(library_name="Lockin.dll", library_folder=dirname(getfile(AnfatecAMU24)), *args, **kwargs)
 
         self._time_constant = 0
         self._roll_off = 0
@@ -39,7 +41,7 @@ class AnfatecAMU24(foreign.LibraryDriver):
 
         self.pll = pll
         self.set_lockin_time_constant(time_constant)
-        self.set_lockin_roll_off(roll_off)
+        self.lockin_roll_off = roll_off
         self.input_gain = input_gain
         self.harmonic = harmonic
         self.coupling = coupling
@@ -93,18 +95,18 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self._input_gain = num
         self.lib._SetLockInHardGain(foreign.TYPES["L"](num))
 
-    @Feat
+    @Feat(values={Coupling.ac, Coupling.dc})
     def coupling(self):
         """This function returns the coupling gain. It returns an instance of the Coupling Enum Class"""
         return self._coupling
 
     @coupling.setter
-    def coupling(self, type: Coupling):
+    def coupling(self, coupling: Coupling):
         """This function sets the coupling gain. It requires an instance of the Coupling Enum Class"""
-        if not isinstance(type, Coupling):
+        if not isinstance(coupling, Coupling):
             raise TypeError()
-        self._coupling = type
-        self.lib._SetLockInCoupling(foreign.TYPES["L"](type.value))
+        self._coupling = coupling
+        self.lib._SetLockInCoupling(foreign.TYPES["L"](coupling.value))
 
     @Feat()
     def harmonic(self):
@@ -133,20 +135,20 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self._time_constant = num
         return self.lib._SetLockInTimeConst(foreign.TYPES["L"](num))
 
-    def set_lockin_roll_off(self, num):
-        """This function sets the roll off which is used for the low pass filter
-        , and it should be an integer between 0 and 2, with the following value.
-        assigned to each number: 0 = 6dB/oct, 1 = 12dB/oct, 2 = 24dB/oct"""
-        if num not in range(0, 3):
-            raise IndexError
-        self._roll_off = num
-        return self.lib._SetLockInRollOff(foreign.TYPES["L"](num))
-
-    def get_lockin_roll_off(self):
+    @Feat()
+    def lockin_roll_off(self):
         """This function returns the roll off which is used for the low pass filter
         , and it should be an integer between 0 and 2, with the following value.
         assigned to each number: 0 = 6dB/oct, 1 = 12dB/oct, 2 = 24dB/oct"""
         return self._roll_off
+
+    @lockin_roll_off.setter
+    def lockin_roll_off(self, num):
+        """This function sets the roll off which is used for the low pass filter
+        , and it should be an integer between 0 and 2, with the following value.
+        assigned to each number: 0 = 6dB/oct, 1 = 12dB/oct, 2 = 24dB/oct"""
+        self._roll_off = num
+        self.lib._SetLockInRollOff(foreign.TYPES["L"](num))
 
     @Feat(units='V')
     def amplitude(self):

@@ -1,17 +1,26 @@
-from pixelink import PixeLINK
-from PIL import Image
-cam = PixeLINK()
-cam.shutter = 0.002
-#print(cam.grab())
-result = None
-result = cam.grab()
-print(result.mean())
-im = Image.fromarray(result)
-im.save('test0.png')
-cam.shutter = 0.003
-raw_data = cam.grab()
-print(raw_data.mean())
-cam.close()
+import numpy as np
+import cv2
 
-im = Image.fromarray(raw_data)
-im.save('test1.png')
+cap = cv2.VideoCapture(0)
+
+# Define the codec and create VideoWriter object
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+out = cv2.VideoWriter('output.avi',fourcc, 20.0, (640,480))
+
+while(cap.isOpened()):
+    ret, frame = cap.read()
+    if ret:
+
+        # write the flipped frame
+        out.write(frame)
+
+        cv2.imshow('frame', frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+    else:
+        break
+
+# Release everything if job is finished
+cap.release()
+out.release()
+cv2.destroyAllWindows()
