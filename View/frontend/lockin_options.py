@@ -1,8 +1,11 @@
 from PyQt5.QtWidgets import QComboBox
 from lantz.qt import Frontend
 from PyQt5.QtCore import QTimer
-from Backend.lockin_options_backend import LockinControl
+from lantz.qt.connect import connect_feat
+
+from Backend.lockin_options import LockinControl
 from View.localization import locale
+from Model.AnfatecDriver import Coupling
 
 
 class LockinOptions(Frontend):
@@ -31,6 +34,8 @@ class LockinOptions(Frontend):
         self.widget.tc_cb.addItem("1 s")
         self.widget.tc_cb.addItem("5 s")
 
+        self.widget.h_label.setText(locale.get("harmonic", "str_harmonic"))
+
         self.widget.ig_label.setText(locale.get("input_gain", "str_input_gain"))
         self.widget.ig_0.setText(locale.get("1_time", "str_1_time"))
         self.widget.ig_1.setText(locale.get("10_times", "str_10_times"))
@@ -49,6 +54,26 @@ class LockinOptions(Frontend):
         self.widget.roll_off_cb.currentIndexChanged.connect(self.set_roll_off)
 
         self.widget.tc_cb.setCurrentIndex(self.backend.get_lockin_tc())
+        self.widget.roll_off_cb.currentIndexChanged.connect(self.set_tc)
+
+        connect_feat(self.widget.h_spinbox, self.backend.lockin, "harmonic")
+
+        ig_rb = {1: self.widget.ig_0,
+                 10: self.widget.ig_1,
+                 100: self.widget.ig_2}
+        ig_rb[self.backend.get_input_gain()].setChecked(True)
+        self.widget.ig_0.pressed.connect(lambda: self.backend.set_input_gain(1))
+        self.widget.ig_1.pressed.connect(lambda: self.backend.set_input_gain(10))
+        self.widget.ig_2.pressed.connect(lambda: self.backend.set_input_gain(100))
+
+        coupling_rb = {Coupling.dc: self.widget.coupling_0,
+                       Coupling.ac: self.widget.coupling_1}
+        coupling_rb[self.backend.get_coupling()].setChecked(True)
+        self.widget.coupling_0.pressed.connect(lambda: self.backend.set_coupling(Coupling.dc))
+        self.widget.coupling_1.pressed.connect(lambda: self.backend.set_coupling(Coupling.ac))
 
     def set_roll_off(self):
         self.backend.set_lockin_rf(self.widget.roll_off_cb.currentIndex())
+
+    def set_tc(self):
+        self.backend.set_lockin_tc(self.widget.tc_cb.currentIndex())

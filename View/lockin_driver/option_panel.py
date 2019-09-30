@@ -63,7 +63,7 @@ class OptionsPanel:
         time_constant_box.addItem("1 s")
         time_constant_box.addItem("2 s")
         time_constant_box.addItem("5 s")
-        time_constant_box.setCurrentIndex(self.lockin.get_lockin_time_constant())
+        time_constant_box.setCurrentIndex(self.lockin.time_constant)
         time_constant_box.currentIndexChanged.connect(self.change_time_constant)
         parent_layout.addWidget(time_constant_box)
         self.time_constant_box = time_constant_box
@@ -71,8 +71,7 @@ class OptionsPanel:
 
     def change_time_constant(self):
         # Este codigo usa el index y la variable times para convertir a en b
-        times = [20, 20, 20, 20, 20, 20, 20, 50, 100, 200, 500, 1000, 2000, 5000]
-        self.lockin.set_lockin_time_constant(self.time_constant_box.currentIndex())
+        self.lockin.time_constant = self.time_constant_box.currentIndex()
 
     def make_harmonics_box(self):
         parent_layout = QVBoxLayout()

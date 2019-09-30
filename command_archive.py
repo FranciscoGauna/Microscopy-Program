@@ -9,6 +9,7 @@ out = cv2.VideoWriter('output.avi',fourcc, 20.0, (640,480))
 
 while(cap.isOpened()):
     ret, frame = cap.read()
+    print(frame)
     if ret:
 
         # write the flipped frame

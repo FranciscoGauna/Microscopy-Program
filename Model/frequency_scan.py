@@ -13,7 +13,7 @@ def frequency_scanner_linear(inst: AnfatecAMU24, start: int, end: int, step: int
     results = []
     while start < end:
         inst.lockin_frequency = Q_(start, "hertz")
-        sleep(time_constant_list[inst.get_lockin_time_constant()]*0.001*10)
+        sleep(time_constant_list[inst.time_constant()] * 0.001 * 10)
         results.append([])
         results[-1].append(start)
         results[-1].append(inst.real_part_x())

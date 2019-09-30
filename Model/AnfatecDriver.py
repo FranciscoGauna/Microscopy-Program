@@ -40,7 +40,7 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self.lib._SetLockInFreq.restype = foreign.TYPES["f64"]
 
         self.pll = pll
-        self.set_lockin_time_constant(time_constant)
+        self.time_constant = time_constant
         self.lockin_roll_off = roll_off
         self.input_gain = input_gain
         self.harmonic = harmonic
@@ -82,7 +82,7 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self._lockin_phase = float
         self.lib._SetLockInPhase(foreign.TYPES["f64"](float))
 
-    @Feat
+    @Feat(values={1, 10, 100})
     def input_gain(self):
         """This function returns the input gain. It is a multiplier of either 1, 10 or 100"""
         return self._input_gain
@@ -90,8 +90,6 @@ class AnfatecAMU24(foreign.LibraryDriver):
     @input_gain.setter
     def input_gain(self, num):
         """This function sets the input gain. It is a multiplier of either 1, 10 or 100"""
-        if num not in [1, 10, 100]:
-            raise ValueError
         self._input_gain = num
         self.lib._SetLockInHardGain(foreign.TYPES["L"](num))
 
@@ -108,7 +106,7 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self._coupling = coupling
         self.lib._SetLockInCoupling(foreign.TYPES["L"](coupling.value))
 
-    @Feat()
+    @Feat(values=set(range(0, 16)))
     def harmonic(self):
         """This function returns the harmonic, an integer between 1 and 15"""
         return self._harmonic
@@ -119,21 +117,21 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self._harmonic = num
         self.lib._SetLockInHarm(foreign.TYPES["L"](num))
 
-    def get_lockin_time_constant(self):
+    @Feat(values=set(range(0, 14)))
+    def time_constant(self):
         """This function sets the time constant that the lockin uses for integration,
          and it should be an integer between 0 and 13, with the following value
         assigned to each number: 0 = 0.25ms, 1 = 0.5ms, 2 = 1ms, 3 = 2ms, 4 = 5ms, ... 13 = 5s"""
         # 0 = 0.25ms, 1 = 0.5ms, 2 = 1ms, 3 = 2ms, 4 = 5ms, ... 13 = 5s
         return self._time_constant
 
-    def set_lockin_time_constant(self, num):
+    @time_constant.setter
+    def time_constant(self, num):
         """This function sets the time constant that the lockin uses for integration,
         and it should be an integer between 0 and 13, with the following value
         assigned to each number: 0 = 0.25ms, 1 = 0.5ms, 2 = 1ms, 3 = 2ms, 4 = 5ms, ... 13 = 5s"""
-        if num not in range(0, 14):
-            raise IndexError
         self._time_constant = num
-        return self.lib._SetLockInTimeConst(foreign.TYPES["L"](num))
+        self.lib._SetLockInTimeConst(foreign.TYPES["L"](num))
 
     @Feat()
     def lockin_roll_off(self):
@@ -180,7 +178,7 @@ class AnfatecAMU24(foreign.LibraryDriver):
         """Returns the fequency of the pll if the pll is on. Otherwise returns 0"""
         if self._pll:
             return self.lib._SetLockInFreq(foreign.TYPES["f64"](10.0))
-        return 0
+        return 0.0
 
     @Feat()
     def overloaded(self):

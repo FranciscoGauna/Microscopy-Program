@@ -1,6 +1,6 @@
 from lantz.qt import Frontend
 from PyQt5.QtCore import QTimer
-from Backend.lockin_options_backend import LockinControl
+from Backend.lockin_options import LockinControl
 from View.localization import locale
 
 class LockinDisplay(Frontend):
@@ -24,6 +24,7 @@ class LockinDisplay(Frontend):
         self.widget.display_cb.addItem(locale.get("Y", "str_Y"))
         self.widget.display_cb.setCurrentIndex(self.starting_channel)
         self.widget.display_cb.currentIndexChanged.connect(self.update_channel)
+        self.widget.display_label.setText(locale.get("channel", "str_channel"))
         super().setupUi()
 
     def connect_backend(self):
@@ -36,7 +37,7 @@ class LockinDisplay(Frontend):
         ]
         self.func = self.channels[self.starting_channel]
         self.update_lcd()
-        self.timer.setInterval(2000)
+        self.timer.setInterval(1000)
         self.timer.timeout.connect(self.update_lcd)
         self.timer.start()
 

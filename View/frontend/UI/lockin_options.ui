@@ -25,7 +25,7 @@
         <string notr="true">background-color: lightgray;</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="0">
+        <item row="3" column="0">
          <layout class="QVBoxLayout" name="roll_off_layout">
           <item>
            <widget class="QLabel" name="roll_off_label">
@@ -77,12 +77,39 @@
       </widget>
      </item>
      <item>
+      <widget class="QWidget" name="h_widget" native="true">
+       <property name="styleSheet">
+        <string notr="true">background-color: lightgray;</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="0" column="0">
+         <layout class="QVBoxLayout" name="h_layout">
+          <item>
+           <widget class="QLabel" name="h_label">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="h_spinbox">
+            <property name="styleSheet">
+             <string notr="true">background-color: Pale gray;</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
       <widget class="QWidget" name="ig_widget" native="true">
        <property name="styleSheet">
         <string notr="true">background-color: lightgray;</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_4">
-        <item row="0" column="0">
+        <item row="1" column="0">
          <layout class="QVBoxLayout" name="ig_layout">
           <item>
            <widget class="QLabel" name="ig_label">
