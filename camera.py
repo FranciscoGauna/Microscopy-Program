@@ -1,3 +1,6 @@
+import sys
+from PyQt5.QtWidgets import QApplication
+newApp = QApplication(sys.argv)
 from Backend.camera_backend import CameraBackend
 from View.camera_window import CameraControlUi
 from lantz.qt import start_gui_app

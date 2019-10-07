@@ -1,0 +1,59 @@
+from Model.point import Point
+
+def log_list(start: int, end: int, n: int) -> list:
+    if start > end:
+        temp = start
+        start = end
+        end = temp
+    if n < 1 or start <= 0:
+        raise ValueError
+    if n == 1:
+        return [start]
+    results = []
+    for i in range(0, n):
+        results.append(start*pow(end/start, i/(n-1)))
+    return results
+
+
+def lin_list(start: int, end: int, n: int):
+    if start > end:
+        temp = start
+        start = end
+        end = temp
+    if n < 1:
+        raise ValueError
+    if n == 1:
+        return [start]
+    results = []
+    step = (end - start) / (n - 1)
+    for i in range(0, n):
+        results.append(start + i * step)
+    return results
+
+
+class ScalerController:
+    _scale = "linear"
+    scales = {"linear", "log"}
+
+    def scale(self):
+        return self._scale
+
+    def set_scale(self, scale):
+        if scale not in self.scales:
+            raise ValueError
+        self._scale = scale
+
+    def make_points(self, x, y, f_s, f_e, n, m):
+        results = []
+        if self._scale == "linear":
+            freqs = lin_list(f_s, f_e, n)
+        else: # elif self._scale == "log"
+            freqs = log_list(f_s, f_e, n)
+        for freq in freqs:
+            results.append(Point(x, y, freq, m))
+        return results
+
+
+    def make_points_line(self, x_s):
+        pass
+
