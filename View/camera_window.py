@@ -2,6 +2,8 @@ from lantz.qt import Frontend
 from lantz.qt.connect import connect_feat
 from PyQt5.QtCore import QTimer
 from PyQt5.QtGui import QPixmap, QImage
+
+from Backend.rect_backend import RectangleController
 from View.localization import locale
 from View.frontend.FrequencyStepFrontend import FrequencyStepFrontend
 from View.widgets.custom_image import ImageWidget
@@ -20,7 +22,11 @@ class CameraControlUi(Frontend):
     flag_first_line = False
     flag_first_rect = False
     point_list = list()
+    image: ImageWidget
+    frequency_frontend: FrequencyStepFrontend
     point_controller: PointController
+    line_controller: LineController
+    rect_controller: RectangleController
 
     def setupUi(self):
         self.widget.snap_button.setText(locale.get("start_camera", "str_start_camera"))
@@ -38,6 +44,7 @@ class CameraControlUi(Frontend):
         self.frequency_frontend = FrequencyStepFrontend(backend=freq_backend)
         self.point_controller = PointController(freq_backend)
         self.line_controller = LineController(freq_backend)
+        self.rect_controller = RectangleController(freq_backend)
         self.widget.sweep_layout.addWidget(self.frequency_frontend.widget)
 
         self.timer.setInterval(15)
@@ -46,6 +53,8 @@ class CameraControlUi(Frontend):
         self.image = ImageWidget(self.take_photo())
         self.widget.camera_layout.addWidget(self.image)
         self.image.mousePressEvent = self.get_pos
+
+        connect_feat(self.widget.exposure_time_input, self.backend, "exposure")
 
         self.widget.draw_point_button.pressed.connect(self.draw_point)
 
@@ -64,6 +73,13 @@ class CameraControlUi(Frontend):
 
         self.widget.draw_rect_button.pressed.connect(self.draw_rectangle)
 
+        connect_feat(self.widget.x_start_rect_input, self.rect_controller, "x_start")
+        connect_feat(self.widget.x_end_rect_input, self.rect_controller, "x_end")
+        connect_feat(self.widget.y_start_rect_input, self.rect_controller, "y_start")
+        connect_feat(self.widget.y_end_rect_input, self.rect_controller, "y_end")
+        connect_feat(self.widget.x_steps_input, self.rect_controller, "x_steps")
+        connect_feat(self.widget.y_steps_input, self.rect_controller, "y_steps")
+        self.widget.add_rect_button.pressed.connect(lambda: self.rect_controller.add_rect(self.point_list))
 
     def get_pos(self, event):
         x = event.pos().x()

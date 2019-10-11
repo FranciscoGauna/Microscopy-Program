@@ -21,7 +21,7 @@
        <item>
         <widget class="QTabWidget" name="draw_tabs">
          <property name="currentIndex">
-          <number>1</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="point_tab">
           <attribute name="title">
@@ -149,7 +149,11 @@
               </widget>
              </item>
              <item>
-              <widget class="QSpinBox" name="lines_steps_input"/>
+              <widget class="QSpinBox" name="lines_steps_input">
+               <property name="minimum">
+                <number>2</number>
+               </property>
+              </widget>
              </item>
              <item>
               <spacer name="verticalSpacer_3">
@@ -263,6 +267,20 @@
               </widget>
              </item>
              <item>
+              <widget class="QLabel" name="x_steps_label">
+               <property name="text">
+                <string>TextLabel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="x_steps_input">
+               <property name="minimum">
+                <number>2</number>
+               </property>
+              </widget>
+             </item>
+             <item>
               <spacer name="verticalSpacer_5">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -308,6 +326,20 @@
               </widget>
              </item>
              <item>
+              <widget class="QLabel" name="y_steps_label">
+               <property name="text">
+                <string>TextLabel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="y_steps_input">
+               <property name="minimum">
+                <number>2</number>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QPushButton" name="draw_rect_button">
                <property name="text">
                 <string>PushButton</string>
@@ -326,6 +358,13 @@
                 </size>
                </property>
               </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="add_rect_button">
+               <property name="text">
+                <string>PushButton</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -349,6 +388,9 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="exposure_time_input"/>
        </item>
        <item>
         <widget class="QPushButton" name="snap_button">

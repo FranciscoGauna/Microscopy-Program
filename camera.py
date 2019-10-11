@@ -9,6 +9,11 @@ import cv2
 
 cv2.destroyAllWindows()
 cap = cv2.VideoCapture(0)
+ret, frame = cap.read()
+if not ret:
+    cap.release()
+    cv2.destroyAllWindows()
+    raise Exception("The camera isn't plugged in")
 
 app = CameraBackend(cap)
 start_gui_app(app, CameraControlUi)

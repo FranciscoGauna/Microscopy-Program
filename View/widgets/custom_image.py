@@ -2,6 +2,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPainter, QPen, QPixmap
 from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout
 from lantz.core.log import DEBUG
+from Model.scaler import lin_list
 
 
 class ImageWidget(QWidget):
@@ -11,6 +12,8 @@ class ImageWidget(QWidget):
     x2 = 0
     y1 = 0
     y2 = 0
+    x_steps = 2
+    y_steps = 2
 
     def __init__(self, pixmap: QPixmap):
         super().__init__()
