@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QSpacerItem
 """Top Level module for useful view util methods"""
 
+
 def delete_items_of_layout(layout):
     """Deletes all the widgets inside a layout and all sublayouts"""
     if layout is not None:

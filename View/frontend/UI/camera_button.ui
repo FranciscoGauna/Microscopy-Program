@@ -21,7 +21,7 @@
        <item>
         <widget class="QTabWidget" name="draw_tabs">
          <property name="currentIndex">
-          <number>2</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="point_tab">
           <attribute name="title">
@@ -52,7 +52,7 @@
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>20</width>
-                 <height>40</height>
+                 <height>0</height>
                 </size>
                </property>
               </spacer>
@@ -90,7 +90,7 @@
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>20</width>
-                 <height>40</height>
+                 <height>0</height>
                 </size>
                </property>
               </spacer>
@@ -163,7 +163,7 @@
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>20</width>
-                 <height>40</height>
+                 <height>0</height>
                 </size>
                </property>
               </spacer>
@@ -215,7 +215,7 @@
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>20</width>
-                 <height>40</height>
+                 <height>0</height>
                 </size>
                </property>
               </spacer>
@@ -278,6 +278,9 @@
                <property name="minimum">
                 <number>2</number>
                </property>
+               <property name="maximum">
+                <number>1000</number>
+               </property>
               </widget>
              </item>
              <item>
@@ -288,7 +291,7 @@
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>20</width>
-                 <height>40</height>
+                 <height>0</height>
                 </size>
                </property>
               </spacer>
@@ -337,6 +340,9 @@
                <property name="minimum">
                 <number>2</number>
                </property>
+               <property name="maximum">
+                <number>1000</number>
+               </property>
               </widget>
              </item>
              <item>
@@ -354,7 +360,7 @@
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>20</width>
-                 <height>40</height>
+                 <height>0</height>
                 </size>
                </property>
               </spacer>

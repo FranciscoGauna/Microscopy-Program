@@ -5,6 +5,7 @@ from PyQt5.QtGui import QPixmap, QImage
 
 from Backend.rect_backend import RectangleController
 from View.localization import locale
+from View.frontend.point_list import PointList
 from View.frontend.FrequencyStepFrontend import FrequencyStepFrontend
 from View.widgets.custom_image import ImageWidget
 from Backend.camera_backend import CameraBackend
@@ -21,7 +22,7 @@ class CameraControlUi(Frontend):
     old_paint_event = None
     flag_first_line = False
     flag_first_rect = False
-    point_list = list()
+    point_list_frontend: PointList
     image: ImageWidget
     frequency_frontend: FrequencyStepFrontend
     point_controller: PointController
@@ -37,15 +38,38 @@ class CameraControlUi(Frontend):
 
         self.widget.x_point_label.setText(locale.get("x", "str_x"))
         self.widget.y_point_label.setText(locale.get("y", "str_y"))
-        self.widget.draw_point_button.setText(locale.get("draw", "str_draw"))
+        self.widget.draw_point_button.setText(locale.get("draw_point", "str_draw_point"))
+        self.widget.add_point_button.setText(locale.get("add_point", "str_add_point"))
+
+        self.widget.x_start_line_label.setText(locale.get("start_x", "str_start_x"))
+        self.widget.x_end_line_label.setText(locale.get("end_x", "str_end_x"))
+        self.widget.y_start_line_label.setText(locale.get("start_y", "str_start_y"))
+        self.widget.y_end_line_label.setText(locale.get("end_y", "str_end_y"))
+        self.widget.lines_steps_label.setText(locale.get("line_steps", "str_line_steps"))
+        self.widget.draw_line_button.setText(locale.get("draw_line", "str_draw_line"))
+        self.widget.add_line_button.setText(locale.get("add_line", "str_add_line"))
+
+        self.widget.x_start_rect_label.setText(locale.get("start_x", "str_start_x"))
+        self.widget.x_end_rect_label.setText(locale.get("end_x", "str_end_x"))
+        self.widget.y_start_rect_label.setText(locale.get("start_y", "str_start_y"))
+        self.widget.y_end_rect_label.setText(locale.get("end_y", "str_end_y"))
+        self.widget.x_steps_label.setText(locale.get("x_steps", "str_x_steps"))
+        self.widget.y_steps_label.setText(locale.get("y_steps", "str_y_steps"))
+        self.widget.draw_rect_button.setText(locale.get("draw_rect", "str_draw_rect"))
+        self.widget.add_rect_button.setText(locale.get("add_rect", "str_add_rect"))
 
     def connect_backend(self):
+        self.point_list_frontend = PointList(backend=[])
+
         freq_backend = FrequencyController()
         self.frequency_frontend = FrequencyStepFrontend(backend=freq_backend)
+        self.frequency_frontend.widget.oper_order_cb.currentIndexChanged.connect(self.point_list_frontend.update_view_point)
         self.point_controller = PointController(freq_backend)
         self.line_controller = LineController(freq_backend)
         self.rect_controller = RectangleController(freq_backend)
         self.widget.sweep_layout.addWidget(self.frequency_frontend.widget)
+
+        self.widget.sweep_layout.addWidget(self.point_list_frontend.widget)
 
         self.timer.setInterval(15)
         self.timer.timeout.connect(self.put_photo)
@@ -57,29 +81,29 @@ class CameraControlUi(Frontend):
         connect_feat(self.widget.exposure_time_input, self.backend, "exposure")
 
         self.widget.draw_point_button.pressed.connect(self.draw_point)
-
         connect_feat(self.widget.x_point_input, self.point_controller, "x")
         connect_feat(self.widget.y_point_input, self.point_controller, "y")
-        self.widget.add_point_button.pressed.connect(lambda: self.point_controller.add_point(self.point_list))
+        self.widget.add_point_button.pressed.connect(lambda: self.point_controller.add_point(self.point_list_frontend.point_list))
+        self.widget.add_point_button.pressed.connect(self.point_list_frontend.update_view_point)
 
         self.widget.draw_line_button.pressed.connect(self.draw_line)
-
         connect_feat(self.widget.x_start_line_input, self.line_controller, "x_start")
         connect_feat(self.widget.x_end_line_input, self.line_controller, "x_end")
         connect_feat(self.widget.y_start_line_input, self.line_controller, "y_start")
         connect_feat(self.widget.y_end_line_input, self.line_controller, "y_end")
         connect_feat(self.widget.lines_steps_input, self.line_controller, "line_steps")
-        self.widget.add_line_button.pressed.connect(lambda: self.line_controller.add_line(self.point_list))
+        self.widget.add_line_button.pressed.connect(lambda: self.line_controller.add_line(self.point_list_frontend.point_list))
+        self.widget.add_line_button.pressed.connect(self.point_list_frontend.update_view_point)
 
         self.widget.draw_rect_button.pressed.connect(self.draw_rectangle)
-
         connect_feat(self.widget.x_start_rect_input, self.rect_controller, "x_start")
         connect_feat(self.widget.x_end_rect_input, self.rect_controller, "x_end")
         connect_feat(self.widget.y_start_rect_input, self.rect_controller, "y_start")
         connect_feat(self.widget.y_end_rect_input, self.rect_controller, "y_end")
         connect_feat(self.widget.x_steps_input, self.rect_controller, "x_steps")
         connect_feat(self.widget.y_steps_input, self.rect_controller, "y_steps")
-        self.widget.add_rect_button.pressed.connect(lambda: self.rect_controller.add_rect(self.point_list))
+        self.widget.add_rect_button.pressed.connect(lambda: self.rect_controller.add_rect(self.point_list_frontend.point_list))
+        self.widget.add_rect_button.pressed.connect(self.point_list_frontend.update_view_point)
 
     def get_pos(self, event):
         x = event.pos().x()
@@ -142,16 +166,3 @@ class CameraControlUi(Frontend):
         reconvert = QPixmap.fromImage(reconvert)
         pixmap = QPixmap(reconvert)
         return pixmap
-
-# # x_start, x_end, y_start, y_end
-#     def paintEvent(self, event):
-#         painter = QPainter(self)
-#         pixmap = self.widget.image_label.pixmap()
-#         painter.drawPixmap(self.rect(), pixmap)
-#         pen = QPen(Qt.red, 3)
-#         painter.setPen(pen)
-#         x_start = self.widget.x_start_line_input.value()
-#         x_end = self.widget.x_end_line_input.value()
-#         y_start = self.widget.y_start_line_input.value()
-#         y_end = self.widget.y_end_line_input.value()
-#         painter.drawLine(x_start, y_start, x_end,  y_end)

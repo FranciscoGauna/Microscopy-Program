@@ -14,8 +14,6 @@ class PointController(Backend):
 
     def add_point(self, point_list):
         point_list.extend(self.freq_backend.make_points(self._x, self._y))
-        for element in point_list:
-            print(element)
 
     @Feat()
     def x(self):

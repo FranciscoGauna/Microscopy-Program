@@ -36,7 +36,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="freq_start_input"/>
+        <widget class="QSpinBox" name="freq_start_input">
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>10000000</number>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QLabel" name="freq_end_label">
@@ -46,7 +53,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="freq_end_input"/>
+        <widget class="QSpinBox" name="freq_end_input">
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>10000000</number>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -70,7 +84,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="freq_amount_input"/>
+        <widget class="QSpinBox" name="freq_amount_input">
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>1000</number>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QLabel" name="repeat_n_label">
@@ -80,7 +101,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="repeat_n_input"/>
+        <widget class="QSpinBox" name="repeat_n_input">
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>1000</number>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>

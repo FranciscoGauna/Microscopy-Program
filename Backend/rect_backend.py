@@ -25,8 +25,6 @@ class RectangleController(Backend):
             for i in range(0, self._x_steps):
                 results.extend(self.freq_backend.make_points(x_range[i], y_range[j]))
         point_list.extend(results)
-        for element in point_list:
-            print(element)
 
     @Feat()
     def x_start(self):

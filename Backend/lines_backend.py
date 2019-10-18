@@ -23,8 +23,6 @@ class LineController(Backend):
         for i in range(0, self._line_steps):
             results.extend(self.freq_backend.make_points(x_range[i], y_range[i]))
         point_list.extend(results)
-        for element in point_list:
-            print(element)
 
     @Feat()
     def x_start(self):

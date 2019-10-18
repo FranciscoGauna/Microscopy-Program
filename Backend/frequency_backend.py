@@ -1,6 +1,8 @@
 from lantz.qt import Backend
 from lantz.core import Feat
 from Model.scaler import ScalerController
+from Model.point import Point, change_ordering
+from View.localization import locale
 
 
 class FrequencyController(Backend):
@@ -45,10 +47,22 @@ class FrequencyController(Backend):
     def amount_repeat(self, amount_repeat):
         self._amount_repeat = amount_repeat
 
-    @Feat(values=scaler.scales)
+    @Feat(values={
+        locale.get("linear", "str_linear"): "linear",
+        locale.get("log", "str_log"): "log"})
     def scale(self):
         return self.scaler.scale()
 
     @scale.setter
     def scale(self, scale):
         self.scaler.set_scale(scale)
+
+    @Feat(values={
+        locale.get("pos_order", "str_pos_order"): "pos",
+        locale.get("freq_order", "str_freq_order"): "freq"})
+    def point_order(self):
+        return Point._ordering
+
+    @point_order.setter
+    def point_order(self, order):
+        change_ordering(order)
