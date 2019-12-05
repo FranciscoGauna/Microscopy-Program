@@ -75,7 +75,7 @@ class CameraControlUi(Frontend):
         self.timer.timeout.connect(self.put_photo)
         self.widget.snap_button.pressed.connect(self.start_stop)
         self.image = ImageWidget(self.take_photo())
-        self.widget.camera_layout.addWidget(self.image)
+        self.widget.image_lt.addWidget(self.image)
         self.image.mousePressEvent = self.get_pos
 
         connect_feat(self.widget.exposure_time_input, self.backend, "exposure")
