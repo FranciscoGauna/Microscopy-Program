@@ -96,6 +96,12 @@
             <property name="styleSheet">
              <string notr="true">background-color: Pale gray;</string>
             </property>
+            <property name="minimum">
+             <number>-1000000</number>
+            </property>
+            <property name="maximum">
+             <number>1000000</number>
+            </property>
            </widget>
           </item>
          </layout>

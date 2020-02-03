@@ -1,9 +1,13 @@
 import configparser
-from PyQt5.QtWidgets import QApplication
-from View.localization import set_locale
-from View.lockin_driver.lockin_window import MainWindow
 import argparse
+
+from lantz.qt import start_gui_app
 from lantz.core.log import log_to_screen, DEBUG
+
+from Backend.main_backend import MainBackend
+
+from View.localization import set_locale
+from View.program_window import MainFrontend
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -16,7 +20,6 @@ if __name__ == "__main__":
     except KeyError:
         config["DEFAULT"]["env"] = "usr"
     if config["DEFAULT"]["env"] == "dev":
-        pass
         log_to_screen(DEBUG)
     if args.locale:
         set_locale(args.locale)
@@ -26,9 +29,6 @@ if __name__ == "__main__":
         except KeyError:
             set_locale("en")
 
-app = QApplication([])
 
-window = MainWindow()
-window.show()
-
-app.exec_()
+app = MainBackend()
+start_gui_app(app, MainFrontend)

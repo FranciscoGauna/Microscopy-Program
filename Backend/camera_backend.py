@@ -4,8 +4,9 @@ from lantz.core import Feat
 
 
 class CameraBackend(Backend):
+    camera: cv2.VideoCapture
 
-    def __init__(self, camera):
+    def __init__(self, camera: cv2.VideoCapture):
         super().__init__()
         self.camera = camera
 
@@ -17,7 +18,7 @@ class CameraBackend(Backend):
 
     @Feat()
     def exposure(self):
-        return self.camera.get(cv2.CAP_PROP_EXPOSURE)
+        return abs(self.camera.get(cv2.CAP_PROP_EXPOSURE))
 
     @exposure.setter
     def exposure(self, time):

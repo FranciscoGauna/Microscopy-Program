@@ -1,7 +1,8 @@
+from PyQt5.QtGui import QPainter, QPen, QPixmap, QHoverEvent, QMouseEvent
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPainter, QPen, QPixmap
 from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout
 from lantz.core.log import DEBUG
+
 from Model.scaler import lin_list
 
 
@@ -15,11 +16,14 @@ class ImageWidget(QWidget):
     x_steps = 2
     y_steps = 2
 
-    def __init__(self, pixmap: QPixmap):
+    def __init__(self, pixmap: QPixmap, line_edit):
         super().__init__()
         scale = pixmap.height() / pixmap.width()
         self.setFixedSize(640, int(640*scale))
         self.pixmap = pixmap
+        self.line_edit = line_edit
+
+        self.setAttribute(Qt.WA_MouseTracking)
 
     def set_image(self, pixmap):
         self.pixmap = pixmap
@@ -66,4 +70,6 @@ class ImageWidget(QWidget):
         else:
             pass
 
-
+    def mouseMoveEvent(self, event: QMouseEvent):
+        string = str(event.pos().x()) + "," + str(event.pos().y())
+        self.line_edit.setText(string)

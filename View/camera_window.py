@@ -1,18 +1,22 @@
+import cv2
 from lantz.qt import Frontend
 from lantz.qt.connect import connect_feat
 from PyQt5.QtCore import QTimer
 from PyQt5.QtGui import QPixmap, QImage
 
-from Backend.rect_backend import RectangleController
+from View.frontend.camera_only import CameraOnlyWindow
 from View.localization import locale
 from View.frontend.point_list import PointList
 from View.frontend.FrequencyStepFrontend import FrequencyStepFrontend
+from View.frontend.platina_frontend import PlatinaFrontend
 from View.widgets.custom_image import ImageWidget
 from Backend.camera_backend import CameraBackend
+from Backend.rect_backend import RectangleController
 from Backend.points_backend import PointController
 from Backend.lines_backend import LineController
 from Backend.frequency_backend import FrequencyController
-import cv2
+from Backend.platina_backend import PlatinaBackend
+from Model.MotorDriver import Motor
 
 
 class CameraControlUi(Frontend):
@@ -30,8 +34,6 @@ class CameraControlUi(Frontend):
     rect_controller: RectangleController
 
     def setupUi(self):
-        self.widget.snap_button.setText(locale.get("start_camera", "str_start_camera"))
-
         self.widget.draw_tabs.setTabText(0, locale.get("point", "str_point"))
         self.widget.draw_tabs.setTabText(1, locale.get("line", "str_line"))
         self.widget.draw_tabs.setTabText(2, locale.get("rect", "str_rect"))
@@ -73,12 +75,12 @@ class CameraControlUi(Frontend):
 
         self.timer.setInterval(15)
         self.timer.timeout.connect(self.put_photo)
-        self.widget.snap_button.pressed.connect(self.start_stop)
-        self.image = ImageWidget(self.take_photo())
-        self.widget.image_lt.addWidget(self.image)
-        self.image.mousePressEvent = self.get_pos
+        self.timer.start()
 
-        connect_feat(self.widget.exposure_time_input, self.backend, "exposure")
+        self.camera_window = CameraOnlyWindow(backend=self.backend)
+        self.widget.camera_layout.addWidget(self.camera_window.widget)
+        self.image = self.camera_window.image
+        self.image.mousePressEvent = self.get_pos
 
         self.widget.draw_point_button.pressed.connect(self.draw_point)
         connect_feat(self.widget.x_point_input, self.point_controller, "x")

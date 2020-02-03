@@ -40,7 +40,10 @@ class PointList(Frontend):
             points_read = []
             for line in file:
                 point_data = line.split(",")
-                points_read.append(Point(float(point_data[0]), float(point_data[1]), int(point_data[2]), float(point_data[3])))
+                try:
+                    points_read.append(Point(float(point_data[0]), float(point_data[1]), int(point_data[2]), float(point_data[3])))
+                except Exception:
+                    pass
             self.point_list = points_read
             self.update_view_point()
 

@@ -381,37 +381,7 @@
       </layout>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="camera_layout">
-       <item>
-        <widget class="QSpinBox" name="exposure_time_input"/>
-       </item>
-       <item>
-        <widget class="QPushButton" name="snap_button">
-         <property name="text">
-          <string>Take Photo</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="image_lt"/>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="mouse_pos_le"/>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_8">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
+      <layout class="QVBoxLayout" name="camera_layout"/>
      </item>
     </layout>
    </item>

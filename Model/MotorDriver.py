@@ -1,10 +1,13 @@
 import os
+import re
 import sys
 import configparser
 
+from pathlib import Path
 from datetime import datetime, timedelta
 from time import sleep
 from lantz import Driver, Feat
+from lantz.core.log import ERROR
 
 cur_dir = os.path.abspath(os.path.dirname(__file__))
 ximc_dir = os.path.join(cur_dir, "..", "ximc")
@@ -25,7 +28,6 @@ enum_hints = b"addr=192.168.0.1,172.16.2.3"
 
 def get_available_motors():
     motors = {}
-    motors[""] = ""
     dev_enum = lib.enumerate_devices(probe_flags, enum_hints)
     dev_count = lib.get_device_count(dev_enum)
     controller_name = controller_name_t()
@@ -40,6 +42,7 @@ def get_available_motors():
 class Motor(Driver):
     x: int
     y: int
+    virtual = False
     _device_id = None
     _lib = lib
     _motor: str
@@ -54,10 +57,22 @@ class Motor(Driver):
     def current_motor(self):
         return self._motor
 
-    def open_motor(self, motor, file):
+    def open_motor(self, motor, file=None):
         self._motor = motor
-        self._device_id = self._lib.open_device(motor)
-        self._setup_file(file)
+        if motor == "virtual":
+            self.virtual = True
+            path = Path(str(Path.cwd()) + "/tmp/file.bin")
+            uri = path.as_uri()
+            uri = re.sub(r'^file', 'xi-emu', uri).encode()
+            self._device_id = self._lib.open_device(uri)
+        else:
+            self._device_id = self._lib.open_device(motor)
+        if self._device_id == -1:
+            self.log(ERROR, "Failed to open Device")
+        if file:
+            self._setup_file(file)
+        else:
+            self.log(ERROR, "No configuration file")
         self._status = status_t()
         sleep(0.1)
         self._update_status()
@@ -91,7 +106,7 @@ class Motor(Driver):
         result = self._lib.get_position(self._device_id, byref(position_struct))
         if result != Result.Ok:
             raise Exception("Failed Getting Status")
-        return position_struct.Position, position_struct.EncPosition
+        return position_struct.Position
 
 
     def _setup_feedback_encoder(self, config):
