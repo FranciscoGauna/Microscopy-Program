@@ -18,21 +18,7 @@ class LockinOptions(Frontend):
         self.widget.roll_off_cb.addItem("12 dB/oct")
         self.widget.roll_off_cb.addItem("24 dB/oct")
 
-        self.widget.tc_label.setText(locale.get("time_constant", "str_time_constant"))
-        self.widget.tc_cb.addItem("0.25 ms")
-        self.widget.tc_cb.addItem("0.5 ms")
-        self.widget.tc_cb.addItem("1 ms")
-        self.widget.tc_cb.addItem("2 ms")
-        self.widget.tc_cb.addItem("5 ms")
-        self.widget.tc_cb.addItem("10 ms")
-        self.widget.tc_cb.addItem("20 ms")
-        self.widget.tc_cb.addItem("50 ms")
-        self.widget.tc_cb.addItem("0.1 s")
-        self.widget.tc_cb.addItem("0.2 s")
-        self.widget.tc_cb.addItem("0.5 s")
-        self.widget.tc_cb.addItem("2 s")
-        self.widget.tc_cb.addItem("1 s")
-        self.widget.tc_cb.addItem("5 s")
+        self.widget.tc_label.setText(locale.get("time_constant_ms", "str_time_constant_ms"))
 
         self.widget.h_label.setText(locale.get("harmonic", "str_harmonic"))
 
@@ -57,6 +43,7 @@ class LockinOptions(Frontend):
         self.widget.roll_off_cb.currentIndexChanged.connect(self.set_tc)
 
         connect_feat(self.widget.h_spinbox, self.backend.lockin, "harmonic")
+        connect_feat(self.widget.tc_cb, self.backend.lockin, "time_constant")
 
         ig_rb = {1: self.widget.ig_0,
                  10: self.widget.ig_1,

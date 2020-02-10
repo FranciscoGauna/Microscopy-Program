@@ -18,12 +18,18 @@ class MotorFrontend(Frontend):
 
     def connect_backend(self):
         super().connect_backend()
+
+        self.widget.next_lb.setText(locale.get("next_pos", "str_next_pos"))
+
+        self.widget.current_lb.setText(locale.get("current_pos", "str_current_pos"))
         self.widget.current_le.setText(str(self.backend.position()))
+
+        self.widget.prev_lb.setText(locale.get("prev_pos", "str_prev_pos"))
         self.widget.prev_le.setText(str(self.backend.position()))
 
         self.timer.setInterval(500)
         self.timer.timeout.connect(self.update)
-        self.timer.start(   )
+        self.timer.start()
 
     def move_to(self):
         self.widget.prev_le.setText(self.widget.current_le.text())

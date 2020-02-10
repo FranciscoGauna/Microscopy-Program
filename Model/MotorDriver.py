@@ -69,6 +69,7 @@ class Motor(Driver):
             self._device_id = self._lib.open_device(motor)
         if self._device_id == -1:
             self.log(ERROR, "Failed to open Device")
+            raise Exception("Failed Opening Device")
         if file:
             self._setup_file(file)
         else:
@@ -79,25 +80,28 @@ class Motor(Driver):
         sleep(0.1)
 
     def _update_status(self):
-        print("Timedelta: " + str(datetime.now() - self._status_time))
+        #print("Timedelta: " + str(datetime.now() - self._status_time))
         if (datetime.now() - self._status_time) < self._status_interval:
             sleep(0.01)
-        print("Timedelta: " + str(datetime.now() - self._status_time))
+        #print("Timedelta: " + str(datetime.now() - self._status_time))
         result = self._lib.get_status(self._device_id, byref(self._status))
         if result != Result.Ok:
+            #print(result)
             raise Exception("Failed Getting Status")
         self._status_time = datetime.now()
-        print("speed:" + str(self._status.CurSpeed))
-        print("status:" + str(self._status.MoveSts))
+        #print("speed:" + str(self._status.CurSpeed))
+        #print("status:" + str(self._status.MoveSts))
 
     def move_to(self, x_count):
         if self._device_id is None:
             raise ClosedMotorException
-        result = self._lib.command_move(self._device_id, x_count, 0)
+        result = self._lib.command_move(self._device_id, int(x_count), 0)
         self._status_time = datetime.now()
         return Result.Ok == result
 
     def stopped(self):
+        if self._motor == "virtual":
+            return True
         self._update_status()
         return self._status.CurSpeed == 0 and (self._status.MoveSts % 2) == 0
 

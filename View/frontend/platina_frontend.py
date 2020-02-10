@@ -51,7 +51,7 @@ class PlatinaFrontend(Frontend):
             self.conf_y = open(file_name, "r+")
 
     def open_motors(self):
-        if self.widget.x_cb.currentText() == self.widget.y_cb.currentText():
+        if self.widget.x_cb.currentText() == self.widget.y_cb.currentText() and self.widget.x_cb.currentText() != "virtual":
             raise MotorAlreadyOpenException
         self.backend.set_motor_x(self.backend.motors[self.widget.x_cb.currentText()], self.conf_x)
         self.backend.set_motor_y(self.backend.motors[self.widget.y_cb.currentText()], self.conf_y)

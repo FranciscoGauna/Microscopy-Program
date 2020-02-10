@@ -50,5 +50,5 @@ class CameraOnlyWindow(Frontend):
 
     def closeEvent(self, event):
         if self.closed_target is not None:
-            self.closed_target.close_camera()
+            self.closed_target.toggle_camera()
         event.accept()

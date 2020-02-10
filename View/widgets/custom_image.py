@@ -1,14 +1,11 @@
-from PyQt5.QtGui import QPainter, QPen, QPixmap, QHoverEvent, QMouseEvent
+from PyQt5.QtGui import QPainter, QPen, QPixmap, QMouseEvent
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout
-from lantz.core.log import DEBUG
-
-from Model.scaler import lin_list
+from PyQt5.QtWidgets import QWidget
 
 
 class ImageWidget(QWidget):
     pixmap = None
-    draw_what = "point"
+    draw_what = "none"
     x1 = 0
     x2 = 0
     y1 = 0
@@ -73,3 +70,13 @@ class ImageWidget(QWidget):
     def mouseMoveEvent(self, event: QMouseEvent):
         string = str(event.pos().x()) + "," + str(event.pos().y())
         self.line_edit.setText(string)
+
+    def new_image_data(self, image):
+        image.draw_what = self.draw_what
+        image.x1 = self.x1
+        image.x2 = self.x2
+        image.y1 = self.y1
+        image.y2 = self.y2
+        image.x_steps = self.x_steps
+        image.y_steps = self.y_steps
+        image.update()

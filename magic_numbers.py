@@ -1,0 +1,1 @@
+pixel_to_counts_factor = 100
