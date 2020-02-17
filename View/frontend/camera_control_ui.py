@@ -1,22 +1,13 @@
-import cv2
 from lantz.qt import Frontend
 from lantz.qt.connect import connect_feat
-from PyQt5.QtCore import QTimer
-from PyQt5.QtGui import QPixmap, QImage
 
-from View.frontend.camera_only import CameraOnlyWindow
 from View.localization import locale
-from View.frontend.point_list import PointList
+from View.frontend.point_list import OperationList
 from View.frontend.FrequencyStepFrontend import FrequencyStepFrontend
-from View.frontend.platina_frontend import PlatinaFrontend
 from View.widgets.custom_image import ImageWidget
-from Backend.camera_backend import CameraBackend
 from Backend.rect_backend import RectangleController
 from Backend.points_backend import PointController
 from Backend.lines_backend import LineController
-from Backend.frequency_backend import FrequencyController
-from Backend.platina_backend import PlatinaBackend
-from Model.MotorDriver import Motor
 
 
 class ImageDrawerFt(Frontend):
@@ -24,7 +15,9 @@ class ImageDrawerFt(Frontend):
     old_paint_event = None
     flag_first_line = False
     flag_first_rect = False
-    point_list_frontend: PointList
+    _x_offset = 0
+    _y_offset = 0
+    operation_frontend: OperationList
     image: ImageWidget
     frequency_frontend: FrequencyStepFrontend
     point_controller: PointController
@@ -32,7 +25,7 @@ class ImageDrawerFt(Frontend):
     rect_controller: RectangleController
 
     def __init__(self, point_list, frequency_frontend, image, *args, **kwargs):
-        self.point_list_frontend = point_list
+        self.operation_frontend = point_list
         self.frequency_frontend = frequency_frontend
         self.image = image
         super().__init__(*args, **kwargs)
@@ -69,7 +62,6 @@ class ImageDrawerFt(Frontend):
     def connect_backend(self):
         freq_backend = self.frequency_frontend.backend
 
-        self.frequency_frontend.widget.oper_order_cb.currentIndexChanged.connect(self.point_list_frontend.update_view_point)
         self.point_controller = PointController(freq_backend)
         self.line_controller = LineController(freq_backend)
         self.rect_controller = RectangleController(freq_backend)
@@ -79,8 +71,8 @@ class ImageDrawerFt(Frontend):
         self.widget.draw_point_button.pressed.connect(self.draw_point)
         connect_feat(self.widget.x_point_input, self.point_controller, "x")
         connect_feat(self.widget.y_point_input, self.point_controller, "y")
-        self.widget.add_point_button.pressed.connect(lambda: self.point_controller.add_point(self.point_list_frontend.point_list))
-        self.widget.add_point_button.pressed.connect(self.point_list_frontend.update_view_point)
+        self.widget.add_point_button.pressed.connect(lambda: self.point_controller.add_point(self.operation_frontend.point_list))
+        self.widget.add_point_button.pressed.connect(self.operation_frontend.update_view_point)
 
         self.widget.draw_line_button.pressed.connect(self.draw_line)
         connect_feat(self.widget.x_start_line_input, self.line_controller, "x_start")
@@ -88,8 +80,8 @@ class ImageDrawerFt(Frontend):
         connect_feat(self.widget.y_start_line_input, self.line_controller, "y_start")
         connect_feat(self.widget.y_end_line_input, self.line_controller, "y_end")
         connect_feat(self.widget.lines_steps_input, self.line_controller, "line_steps")
-        self.widget.add_line_button.pressed.connect(lambda: self.line_controller.add_line(self.point_list_frontend.point_list))
-        self.widget.add_line_button.pressed.connect(self.point_list_frontend.update_view_point)
+        self.widget.add_line_button.pressed.connect(lambda: self.line_controller.add_line(self.operation_frontend.point_list))
+        self.widget.add_line_button.pressed.connect(self.operation_frontend.update_view_point)
 
         self.widget.draw_rect_button.pressed.connect(self.draw_rectangle)
         connect_feat(self.widget.x_start_rect_input, self.rect_controller, "x_start")
@@ -98,17 +90,16 @@ class ImageDrawerFt(Frontend):
         connect_feat(self.widget.y_end_rect_input, self.rect_controller, "y_end")
         connect_feat(self.widget.x_steps_input, self.rect_controller, "x_steps")
         connect_feat(self.widget.y_steps_input, self.rect_controller, "y_steps")
-        self.widget.add_rect_button.pressed.connect(lambda: self.rect_controller.add_rect(self.point_list_frontend.point_list))
-        self.widget.add_rect_button.pressed.connect(self.point_list_frontend.update_view_point)
+        self.widget.add_rect_button.pressed.connect(lambda: self.rect_controller.add_rect(self.operation_frontend.point_list))
+        self.widget.add_rect_button.pressed.connect(self.operation_frontend.update_view_point)
 
     def connect_image(self, image: ImageWidget):
         self.image = image
         self.image.mousePressEvent = self.get_pos
 
-
     def get_pos(self, event):
-        x = event.pos().x()
-        y = event.pos().y()
+        x = event.pos().x() + self._x_offset
+        y = event.pos().y() + self._y_offset
         if self.widget.draw_tabs.currentWidget() == self.widget.point_tab:
             self.widget.x_point_input.setValue(x)
             self.widget.y_point_input.setValue(y)
@@ -133,18 +124,43 @@ class ImageDrawerFt(Frontend):
             self.flag_first_rect = not self.flag_first_rect
 
     def draw_point(self):
-        self.image.draw_point(self.widget.x_point_input.value(), self.widget.y_point_input.value())
+        self.image.draw_point(self.widget.x_point_input.value() - self._x_offset,
+                              self.widget.y_point_input.value() - self._y_offset)
 
     def draw_line(self):
-        x1 = self.widget.x_start_line_input.value()
-        x2 = self.widget.x_end_line_input.value()
-        y1 = self.widget.y_start_line_input.value()
-        y2 = self.widget.y_end_line_input.value()
+        x1 = self.widget.x_start_line_input.value() - self._x_offset
+        x2 = self.widget.x_end_line_input.value() - self._x_offset
+        y1 = self.widget.y_start_line_input.value() - self._y_offset
+        y2 = self.widget.y_end_line_input.value() - self._y_offset
         self.image.draw_line(x1, x2, y1, y2)
 
     def draw_rectangle(self):
-        x1 = self.widget.x_start_rect_input.value()
-        x2 = self.widget.x_end_rect_input.value()
-        y1 = self.widget.y_start_rect_input.value()
-        y2 = self.widget.y_end_rect_input.value()
+        x1 = self.widget.x_start_rect_input.value() - self._x_offset
+        x2 = self.widget.x_end_rect_input.value() - self._x_offset
+        y1 = self.widget.y_start_rect_input.value() - self._y_offset
+        y2 = self.widget.y_end_rect_input.value() - self._y_offset
         self.image.draw_rect(x1, x2, y1, y2)
+
+    def update_offset(self, new_x_o, new_y_o):
+        x_o = new_x_o - self._x_offset
+        y_o = new_y_o - self._y_offset
+        self._x_offset = new_x_o
+        self._y_offset = new_y_o
+
+        self.widget.x_point_input.setValue(self.widget.x_point_input.value() + x_o)
+        self.widget.y_point_input.setValue(self.widget.y_point_input.value() + y_o)
+
+        self.widget.x_start_line_input.setValue(self.widget.x_start_line_input.value() + x_o)
+        self.widget.x_end_line_input.setValue(self.widget.x_end_line_input.value() + x_o)
+        self.widget.y_start_line_input.setValue(self.widget.y_start_line_input.value() + y_o)
+        self.widget.y_end_line_input.setValue(self.widget.y_end_line_input.value() + y_o)
+
+        self.widget.x_start_rect_input.setValue(self.widget.x_start_rect_input.value() + x_o)
+        self.widget.x_end_rect_input.setValue(self.widget.x_end_rect_input.value() + x_o)
+        self.widget.y_start_rect_input.setValue(self.widget.y_start_rect_input.value() + y_o)
+        self.widget.y_end_rect_input.setValue(self.widget.y_end_rect_input.value() + y_o)
+
+        for operation in self.operation_frontend.point_list:
+            operation.update_offset(x_o, y_o)
+
+        self.operation_frontend.update_view_point()

@@ -47,13 +47,8 @@ class ScalerController:
         results = []
         if self._scale == "linear":
             freqs = lin_list(f_s, f_e, n)
-        else: # elif self._scale == "log"
+        else:  # elif self._scale == "log"
             freqs = log_list(f_s, f_e, n)
         for freq in freqs:
             results.append(Point(x, y, freq, m))
         return results
-
-
-    def make_points_line(self, x_s):
-        pass
-

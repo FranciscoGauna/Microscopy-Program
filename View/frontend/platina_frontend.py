@@ -7,7 +7,7 @@ from View.localization import locale
 from pathlib import Path
 
 
-class PlatinaFrontend(Frontend):
+class MotorSelector(Frontend):
     backend: PlatinaBackend
     gui = ("UI", "select_motors_interface.ui")
     conf_x = None

@@ -1,5 +1,7 @@
 from lantz.qt import Backend
 from lantz.core import Feat
+
+from Model.operation import RectOperation
 from Model.scaler import lin_list
 from Backend.frequency_backend import FrequencyController
 
@@ -18,13 +20,10 @@ class RectangleController(Backend):
         self.freq_backend = freq_backend
 
     def add_rect(self, point_list):
-        results = []
-        x_range = lin_list(self._x_start, self._x_end, self._x_steps)
-        y_range = lin_list(self._y_start, self._y_end, self._y_steps)
-        for j in range(0, self._y_steps):
-            for i in range(0, self._x_steps):
-                results.extend(self.freq_backend.make_points(x_range[i], y_range[j]))
-        point_list.extend(results)
+        operation = RectOperation(self._x_start, self._x_end, self._y_start, self._y_end, self._x_steps, self._y_steps,
+                                  self.freq_backend.start_f, self.freq_backend.end_f, self.freq_backend.amount_f,
+                                  self.freq_backend.int_scale(), self.freq_backend.amount_repeat)
+        point_list.append(operation)
 
     @Feat()
     def x_start(self):

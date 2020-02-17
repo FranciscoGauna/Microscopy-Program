@@ -14,9 +14,6 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="0">
-    <widget class="QListView" name="point_list_view"/>
-   </item>
    <item row="3" column="0">
     <layout class="QHBoxLayout" name="button_layout">
      <item>
@@ -47,6 +44,9 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item row="1" column="0">
+    <widget class="QTableView" name="point_list_view"/>
    </item>
   </layout>
  </widget>

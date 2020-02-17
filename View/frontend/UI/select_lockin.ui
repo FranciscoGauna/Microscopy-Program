@@ -18,16 +18,16 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="main_lt">
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="lockin_lb">
        <property name="text">
         <string>TextLabel</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox">
+      <widget class="QComboBox" name="lockin_cb">
        <property name="styleSheet">
         <string notr="true">background-color: Pale gray;</string>
        </property>

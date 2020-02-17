@@ -1,6 +1,7 @@
 from lantz.qt import Backend
 from lantz.core import Feat
 from Backend.frequency_backend import FrequencyController
+from Model.operation import PointOperation
 
 
 class PointController(Backend):
@@ -13,7 +14,10 @@ class PointController(Backend):
         self.freq_backend = freq_backend
 
     def add_point(self, point_list):
-        point_list.extend(self.freq_backend.make_points(self._x, self._y))
+        point_operation = PointOperation(self._x, self._y, self.freq_backend.start_f, self.freq_backend.end_f,
+                                         self.freq_backend.amount_f, self.freq_backend.int_scale(),
+                                         self.freq_backend.amount_repeat)
+        point_list.append(point_operation)
 
     @Feat()
     def x(self):

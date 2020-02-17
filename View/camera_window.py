@@ -6,9 +6,9 @@ from PyQt5.QtGui import QPixmap, QImage
 
 from View.frontend.camera_only import CameraOnlyWindow
 from View.localization import locale
-from View.frontend.point_list import PointList
+from View.frontend.point_list import OperationList
 from View.frontend.FrequencyStepFrontend import FrequencyStepFrontend
-from View.frontend.platina_frontend import PlatinaFrontend
+from View.frontend.platina_frontend import MotorSelector
 from View.widgets.custom_image import ImageWidget
 from Backend.camera_backend import CameraBackend
 from Backend.rect_backend import RectangleController
@@ -26,7 +26,7 @@ class CameraControlUi(Frontend):
     old_paint_event = None
     flag_first_line = False
     flag_first_rect = False
-    point_list_frontend: PointList
+    point_list_frontend: OperationList
     image: ImageWidget
     frequency_frontend: FrequencyStepFrontend
     point_controller: PointController
@@ -61,7 +61,7 @@ class CameraControlUi(Frontend):
         self.widget.add_rect_button.setText(locale.get("add_rect", "str_add_rect"))
 
     def connect_backend(self):
-        self.point_list_frontend = PointList(backend=[])
+        self.point_list_frontend = OperationList(backend=[])
 
         freq_backend = FrequencyController()
         self.frequency_frontend = FrequencyStepFrontend(backend=freq_backend)

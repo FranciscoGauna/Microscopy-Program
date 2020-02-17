@@ -25,7 +25,7 @@
         </size>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="point_tab">
         <attribute name="title">
@@ -43,6 +43,9 @@
            </item>
            <item>
             <widget class="QSpinBox" name="x_point_input">
+             <property name="minimum">
+              <number>-10000</number>
+             </property>
              <property name="maximum">
               <number>10000</number>
              </property>
@@ -74,6 +77,9 @@
            </item>
            <item>
             <widget class="QSpinBox" name="y_point_input">
+             <property name="minimum">
+              <number>-10000</number>
+             </property>
              <property name="maximum">
               <number>10000</number>
              </property>
@@ -126,6 +132,9 @@
            </item>
            <item>
             <widget class="QSpinBox" name="x_start_line_input">
+             <property name="minimum">
+              <number>-10000</number>
+             </property>
              <property name="maximum">
               <number>10000</number>
              </property>
@@ -140,6 +149,9 @@
            </item>
            <item>
             <widget class="QSpinBox" name="x_end_line_input">
+             <property name="minimum">
+              <number>-10000</number>
+             </property>
              <property name="maximum">
               <number>10000</number>
              </property>
@@ -185,6 +197,9 @@
            </item>
            <item>
             <widget class="QSpinBox" name="y_start_line_input">
+             <property name="minimum">
+              <number>-10000</number>
+             </property>
              <property name="maximum">
               <number>10000</number>
              </property>
@@ -199,6 +214,9 @@
            </item>
            <item>
             <widget class="QSpinBox" name="y_end_line_input">
+             <property name="minimum">
+              <number>-10000</number>
+             </property>
              <property name="maximum">
               <number>10000</number>
              </property>
@@ -251,6 +269,9 @@
            </item>
            <item>
             <widget class="QSpinBox" name="x_start_rect_input">
+             <property name="minimum">
+              <number>-10000</number>
+             </property>
              <property name="maximum">
               <number>10000</number>
              </property>
@@ -265,6 +286,9 @@
            </item>
            <item>
             <widget class="QSpinBox" name="x_end_rect_input">
+             <property name="minimum">
+              <number>-10000</number>
+             </property>
              <property name="maximum">
               <number>10000</number>
              </property>
@@ -313,6 +337,9 @@
            </item>
            <item>
             <widget class="QSpinBox" name="y_start_rect_input">
+             <property name="minimum">
+              <number>-10000</number>
+             </property>
              <property name="maximum">
               <number>10000</number>
              </property>
@@ -327,6 +354,9 @@
            </item>
            <item>
             <widget class="QSpinBox" name="y_end_rect_input">
+             <property name="minimum">
+              <number>-10000</number>
+             </property>
              <property name="maximum">
               <number>10000</number>
              </property>

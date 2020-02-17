@@ -7,7 +7,7 @@ from pathlib import Path
 from datetime import datetime, timedelta
 from time import sleep
 from lantz import Driver, Feat
-from lantz.core.log import ERROR
+from lantz.core.log import ERROR, DEBUG
 
 cur_dir = os.path.abspath(os.path.dirname(__file__))
 ximc_dir = os.path.join(cur_dir, "..", "ximc")
@@ -96,6 +96,7 @@ class Motor(Driver):
         if self._device_id is None:
             raise ClosedMotorException
         result = self._lib.command_move(self._device_id, int(x_count), 0)
+        self.log(DEBUG, str(result))
         self._status_time = datetime.now()
         return Result.Ok == result
 
@@ -110,7 +111,7 @@ class Motor(Driver):
         result = self._lib.get_position(self._device_id, byref(position_struct))
         if result != Result.Ok:
             raise Exception("Failed Getting Status")
-        return position_struct.Position
+        return position_struct.EncPosition
 
 
     def _setup_feedback_encoder(self, config):

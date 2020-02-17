@@ -10,10 +10,8 @@ class FrequencyController(Backend):
     _end_f = 1
     _amount_f = 1
     _amount_repeat = 1
-    scaler = ScalerController()
-
-    def make_points(self, x, y):
-        return self.scaler.make_points(x, y, self._start_f, self._end_f, self._amount_f, self._amount_repeat)
+    _scale = "log"
+    _order = "pos"
 
     @Feat()
     def start_f(self):
@@ -51,18 +49,21 @@ class FrequencyController(Backend):
         locale.get("linear", "str_linear"): "linear",
         locale.get("log", "str_log"): "log"})
     def scale(self):
-        return self.scaler.scale()
+        return self._scale
 
     @scale.setter
     def scale(self, scale):
-        self.scaler.set_scale(scale)
+        self._scale = scale
+
+    def int_scale(self):
+        return self._scale
 
     @Feat(values={
         locale.get("pos_order", "str_pos_order"): "pos",
         locale.get("freq_order", "str_freq_order"): "freq"})
     def point_order(self):
-        return Point._ordering
+        return self._order
 
     @point_order.setter
     def point_order(self, order):
-        change_ordering(order)
+        self._order = order

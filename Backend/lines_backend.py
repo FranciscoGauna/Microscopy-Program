@@ -1,5 +1,7 @@
 from lantz.qt import Backend
 from lantz.core import Feat
+
+from Model.operation import LineOperation
 from Model.scaler import lin_list
 from Backend.frequency_backend import FrequencyController
 
@@ -17,12 +19,10 @@ class LineController(Backend):
         self.freq_backend = freq_backend
 
     def add_line(self, point_list):
-        results = []
-        x_range = lin_list(self._x_start, self._x_end, self._line_steps)
-        y_range = lin_list(self._y_start, self._y_end, self._line_steps)
-        for i in range(0, self._line_steps):
-            results.extend(self.freq_backend.make_points(x_range[i], y_range[i]))
-        point_list.extend(results)
+        operation = LineOperation(self._x_start, self._x_end, self._y_start, self._y_end, self._line_steps,
+                                  self.freq_backend.start_f, self.freq_backend.end_f, self.freq_backend.amount_f,
+                                  self.freq_backend.int_scale(), self.freq_backend.amount_repeat)
+        point_list.append(operation)
 
     @Feat()
     def x_start(self):
