@@ -85,7 +85,7 @@ class CameraControlUi(Frontend):
         self.widget.draw_point_button.pressed.connect(self.draw_point)
         connect_feat(self.widget.x_point_input, self.point_controller, "x")
         connect_feat(self.widget.y_point_input, self.point_controller, "y")
-        self.widget.add_point_button.pressed.connect(lambda: self.point_controller.add_point(self.point_list_frontend.point_list))
+        self.widget.add_point_button.pressed.connect(lambda: self.point_controller.add_point(self.point_list_frontend.operation_list))
         self.widget.add_point_button.pressed.connect(self.point_list_frontend.update_view_point)
 
         self.widget.draw_line_button.pressed.connect(self.draw_line)
@@ -94,7 +94,7 @@ class CameraControlUi(Frontend):
         connect_feat(self.widget.y_start_line_input, self.line_controller, "y_start")
         connect_feat(self.widget.y_end_line_input, self.line_controller, "y_end")
         connect_feat(self.widget.lines_steps_input, self.line_controller, "line_steps")
-        self.widget.add_line_button.pressed.connect(lambda: self.line_controller.add_line(self.point_list_frontend.point_list))
+        self.widget.add_line_button.pressed.connect(lambda: self.line_controller.add_line(self.point_list_frontend.operation_list))
         self.widget.add_line_button.pressed.connect(self.point_list_frontend.update_view_point)
 
         self.widget.draw_rect_button.pressed.connect(self.draw_rectangle)
@@ -104,7 +104,7 @@ class CameraControlUi(Frontend):
         connect_feat(self.widget.y_end_rect_input, self.rect_controller, "y_end")
         connect_feat(self.widget.x_steps_input, self.rect_controller, "x_steps")
         connect_feat(self.widget.y_steps_input, self.rect_controller, "y_steps")
-        self.widget.add_rect_button.pressed.connect(lambda: self.rect_controller.add_rect(self.point_list_frontend.point_list))
+        self.widget.add_rect_button.pressed.connect(lambda: self.rect_controller.add_rect(self.point_list_frontend.operation_list))
         self.widget.add_rect_button.pressed.connect(self.point_list_frontend.update_view_point)
 
     def get_pos(self, event):

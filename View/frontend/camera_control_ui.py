@@ -1,6 +1,7 @@
 from lantz.qt import Frontend
 from lantz.qt.connect import connect_feat
 
+from View.frontend.offset_frontend import OffsetFrontend
 from View.localization import locale
 from View.frontend.point_list import OperationList
 from View.frontend.FrequencyStepFrontend import FrequencyStepFrontend
@@ -15,6 +16,7 @@ class ImageDrawerFt(Frontend):
     old_paint_event = None
     flag_first_line = False
     flag_first_rect = False
+    flag_click_override = False
     _x_offset = 0
     _y_offset = 0
     operation_frontend: OperationList
@@ -23,6 +25,7 @@ class ImageDrawerFt(Frontend):
     point_controller: PointController
     line_controller: LineController
     rect_controller: RectangleController
+    offset_ft: OffsetFrontend
 
     def __init__(self, point_list, frequency_frontend, image, *args, **kwargs):
         self.operation_frontend = point_list
@@ -71,7 +74,7 @@ class ImageDrawerFt(Frontend):
         self.widget.draw_point_button.pressed.connect(self.draw_point)
         connect_feat(self.widget.x_point_input, self.point_controller, "x")
         connect_feat(self.widget.y_point_input, self.point_controller, "y")
-        self.widget.add_point_button.pressed.connect(lambda: self.point_controller.add_point(self.operation_frontend.point_list))
+        self.widget.add_point_button.pressed.connect(lambda: self.point_controller.add_point(self.operation_frontend.operation_list))
         self.widget.add_point_button.pressed.connect(self.operation_frontend.update_view_point)
 
         self.widget.draw_line_button.pressed.connect(self.draw_line)
@@ -80,7 +83,7 @@ class ImageDrawerFt(Frontend):
         connect_feat(self.widget.y_start_line_input, self.line_controller, "y_start")
         connect_feat(self.widget.y_end_line_input, self.line_controller, "y_end")
         connect_feat(self.widget.lines_steps_input, self.line_controller, "line_steps")
-        self.widget.add_line_button.pressed.connect(lambda: self.line_controller.add_line(self.operation_frontend.point_list))
+        self.widget.add_line_button.pressed.connect(lambda: self.line_controller.add_line(self.operation_frontend.operation_list))
         self.widget.add_line_button.pressed.connect(self.operation_frontend.update_view_point)
 
         self.widget.draw_rect_button.pressed.connect(self.draw_rectangle)
@@ -90,7 +93,7 @@ class ImageDrawerFt(Frontend):
         connect_feat(self.widget.y_end_rect_input, self.rect_controller, "y_end")
         connect_feat(self.widget.x_steps_input, self.rect_controller, "x_steps")
         connect_feat(self.widget.y_steps_input, self.rect_controller, "y_steps")
-        self.widget.add_rect_button.pressed.connect(lambda: self.rect_controller.add_rect(self.operation_frontend.point_list))
+        self.widget.add_rect_button.pressed.connect(lambda: self.rect_controller.add_rect(self.operation_frontend.operation_list))
         self.widget.add_rect_button.pressed.connect(self.operation_frontend.update_view_point)
 
     def connect_image(self, image: ImageWidget):
@@ -98,6 +101,9 @@ class ImageDrawerFt(Frontend):
         self.image.mousePressEvent = self.get_pos
 
     def get_pos(self, event):
+        if self.flag_click_override:
+            self.offset_ft.set_offset(event.pos().x(), event.pos().y())
+            return
         x = event.pos().x() + self._x_offset
         y = event.pos().y() + self._y_offset
         if self.widget.draw_tabs.currentWidget() == self.widget.point_tab:
@@ -160,7 +166,7 @@ class ImageDrawerFt(Frontend):
         self.widget.y_start_rect_input.setValue(self.widget.y_start_rect_input.value() + y_o)
         self.widget.y_end_rect_input.setValue(self.widget.y_end_rect_input.value() + y_o)
 
-        for operation in self.operation_frontend.point_list:
+        for operation in self.operation_frontend.operation_list:
             operation.update_offset(x_o, y_o)
 
         self.operation_frontend.update_view_point()

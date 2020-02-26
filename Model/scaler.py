@@ -31,24 +31,12 @@ def lin_list(start: int, end: int, n: int):
     return results
 
 
-class ScalerController:
-    _scale = "linear"
-    scales = {"linear", "log"}
-
-    def scale(self):
-        return self._scale
-
-    def set_scale(self, scale):
-        if scale not in self.scales:
-            raise ValueError
-        self._scale = scale
-
-    def make_points(self, x, y, f_s, f_e, n, m):
-        results = []
-        if self._scale == "linear":
-            freqs = lin_list(f_s, f_e, n)
-        else:  # elif self._scale == "log"
-            freqs = log_list(f_s, f_e, n)
-        for freq in freqs:
-            results.append(Point(x, y, freq, m))
-        return results
+def make_points(x, y, f_s, f_e, n, m, scale):
+    results = []
+    if scale == "linear":
+        freqs = lin_list(f_s, f_e, n)
+    else:  # elif self._scale == "log"
+        freqs = log_list(f_s, f_e, n)
+    for freq in freqs:
+        results.append(Point(x, y, freq, m))
+    return results

@@ -2,12 +2,12 @@ from lantz.qt import Frontend
 from PyQt5.QtCore import QTimer
 from lantz.qt.connect import connect_feat
 
-from Backend.lockin_options import LockinControl
+from Backend.lockin_options import LockinBackend
 from View.localization import locale
 
 
 class LockinPll(Frontend):
-    backend: LockinControl
+    backend: LockinBackend
     gui = ('UI', 'lockin_pll.ui')
     timer = QTimer()
 

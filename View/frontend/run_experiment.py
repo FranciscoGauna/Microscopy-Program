@@ -5,7 +5,7 @@ from datetime import datetime
 from lantz.qt import Frontend
 from PyQt5.QtCore import QThread, QTimer
 
-from Backend.lockin_options import LockinControl
+from Backend.lockin_options import LockinBackend
 from Backend.platina_backend import PlatinaBackend
 from View.localization import locale
 from magic_numbers import pixel_to_counts_factor
@@ -15,7 +15,7 @@ class ExperimentWorker(QThread):
     step = 0
     total = 1
 
-    def __init__(self, point_list_ft, platina: PlatinaBackend, lockin: LockinControl, parent=None):
+    def __init__(self, point_list_ft, platina: PlatinaBackend, lockin: LockinBackend, parent=None):
         QThread.__init__(self, parent)
         self.exiting = False
         self.point_list_ft = point_list_ft

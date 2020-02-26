@@ -17,12 +17,17 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="main_program_tabs">
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="lockin_tab">
       <attribute name="title">
        <string>Tab 1</string>
       </attribute>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="lockin_tab_lt"/>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="motor_tab">
       <attribute name="title">

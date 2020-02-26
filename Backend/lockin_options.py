@@ -2,7 +2,7 @@ from lantz.qt import Backend, InstrumentSlot
 from Model.AnfatecDriver import AnfatecAMU24
 
 
-class LockinControl(Backend):
+class LockinBackend(Backend):
     lockin: AnfatecAMU24 = InstrumentSlot
 
     def set_lockin_tc(self, num):

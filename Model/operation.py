@@ -2,7 +2,7 @@ from abc import abstractmethod, ABC
 from typing import List
 
 from Model.point import Point
-from Model.scaler import ScalerController, lin_list
+from Model.scaler import make_points, lin_list
 from View.localization import locale
 
 
@@ -18,7 +18,7 @@ class Operation(ABC):
     amount_f: int
     amount_repeat: int
     point_order: str
-    scaler = ScalerController()
+    scale: str
     type: str
 
     @abstractmethod
@@ -40,21 +40,17 @@ class Operation(ABC):
     def f_range(self) -> str:
         return str(self.start_f) + "-" + str(self.end_f)
 
-    def scale(self) -> str:
-        return self.scaler.scale()
-
     def update_offset(self, x_o, y_o):
         self.x1 += x_o
         self.x2 += x_o
         self.y1 += y_o
         self.y2 += y_o
 
-
+    def type_localized(self):
+        return locale.get(self.type, "str_" + self.type)
 
 
 class PointOperation(Operation):
-
-    type = locale.get("point", "str_point")
 
     def __init__(self, x, y, start_f, end_f, amount_f, scale, repeat):
         self.x1 = self.x2 = x
@@ -63,8 +59,9 @@ class PointOperation(Operation):
         self.start_f = start_f
         self.end_f = end_f
         self.amount_f = amount_f
-        self.scaler.set_scale(scale)
+        self.scale = scale
         self.amount_repeat = repeat
+        self.type = "point"
 
     def total(self) -> int:
         return self.amount_f
@@ -76,12 +73,10 @@ class PointOperation(Operation):
         return str(self.y1)
 
     def to_points(self) -> List[Point]:
-        return self.scaler.make_points(self.x1, self.y1, self.start_f, self.end_f, self.amount_f, self.amount_repeat)
+        return make_points(self.x1, self.y1, self.start_f, self.end_f, self.amount_f, self.amount_repeat, self.scale)
 
 
 class LineOperation(Operation):
-
-    type = locale.get("line", "str_line")
 
     def __init__(self, x_1, x_2, y_1, y_2, line_amount, start_f, end_f, amount_f, scale, repeat):
         self.x1 = x_1
@@ -92,8 +87,9 @@ class LineOperation(Operation):
         self.start_f = start_f
         self.end_f = end_f
         self.amount_f = amount_f
-        self.scaler.set_scale(scale)
+        self.scale = scale
         self.amount_repeat = repeat
+        self.type = "line"
 
     def x_range(self) -> str:
         return str(self.x1) + "-" + str(self.x2)
@@ -109,13 +105,12 @@ class LineOperation(Operation):
         x_range = lin_list(int(self.x1), int(self.x2), self.x_amount)
         y_range = lin_list(int(self.y1), int(self.y2), self.y_amount)
         for i in range(0, self.x_amount):
-            results.extend(self.scaler.make_points(x_range[i], y_range[i], self.start_f, self.end_f, self.amount_f,
-                                                   self.amount_repeat))
+            results.extend(make_points(x_range[i], y_range[i], self.start_f, self.end_f, self.amount_f,
+                                       self.amount_repeat, self.scale))
         return results
 
 
 class RectOperation(Operation):
-    type = locale.get("rect", "str_rect")
 
     def __init__(self, x_1, x_2, y_1, y_2, x_amount, y_amount, start_f, end_f, amount_f, scale, repeat):
         self.x1 = x_1
@@ -127,8 +122,9 @@ class RectOperation(Operation):
         self.start_f = start_f
         self.end_f = end_f
         self.amount_f = amount_f
-        self.scaler.set_scale(scale)
+        self.scale = scale
         self.amount_repeat = repeat
+        self.type = "rect"
 
     def x_range(self) -> str:
         return str(self.x1) + "-" + str(self.x2)
@@ -145,6 +141,6 @@ class RectOperation(Operation):
         y_range = lin_list(int(self.y1), int(self.y2), self.y_amount)
         for j in range(0, self.y_amount):
             for i in range(0, self.x_amount):
-                results.extend(self.scaler.make_points(x_range[i], y_range[j], self.start_f,
-                                                       self.end_f, self.amount_f, self.amount_repeat))
+                results.extend(make_points(x_range[i], y_range[j], self.start_f,
+                                           self.end_f, self.amount_f, self.amount_repeat, self.scale))
         return results

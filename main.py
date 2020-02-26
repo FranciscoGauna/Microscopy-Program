@@ -24,7 +24,8 @@ if __name__ == "__main__":
     except KeyError:
         config["DEFAULT"]["env"] = "usr"
     if config["DEFAULT"]["env"] == "dev":
-        log_to_screen(DEBUG)
+        pass
+        #log_to_screen(DEBUG)
     if args.locale:
         set_locale(args.locale)
     elif config["DEFAULT"]["env"] != "dev":

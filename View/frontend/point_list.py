@@ -1,3 +1,4 @@
+import json
 import traceback
 from typing import List
 from logging import ERROR
@@ -6,14 +7,14 @@ from PyQt5.QtCore import QAbstractTableModel, QModelIndex, QVariant, Qt
 from PyQt5.QtWidgets import QFileDialog
 from lantz.qt import Frontend
 
-from Model.operation import Operation
+from Model.operation import Operation, PointOperation, LineOperation, RectOperation
 from View.localization import locale
 from Model.point import Point
 
 
 class OperationList(Frontend):
     backend: list
-    point_list = []
+    operation_list = []
     gui = ("UI", "point_list.ui")
 
     def setupUi(self):
@@ -27,7 +28,7 @@ class OperationList(Frontend):
         self.widget.load_button.pressed.connect(self.open_file)
 
     def update_view_point(self):
-        model = PointTableModel(self.point_list)
+        model = PointTableModel(self.operation_list)
         self.widget.point_list_view.setModel(model)
 
     def open_file(self):
@@ -36,15 +37,16 @@ class OperationList(Frontend):
                                                    "Comma Separated Values (*.csv);;All Files (*)", options=options)
         if file_name:
             file = open(file_name, "r+")
-            points_read = []
-            for line in file:
-                point_data = line.split(",")
-                try:
-                    points_read.append(Point(float(point_data[0]), float(point_data[1]),
-                                             int(point_data[2]), float(point_data[3])))
-                except:
-                    self.log(ERROR, traceback.format_exc())
-            self.point_list = points_read
+            operations_read = []
+            data = json.load(file)
+            for d in data:
+                if d["type"] == "point":
+                    operations_read.append(PointOperation(d["x1"], d["y1"], d["start_f"], d["end_f"], d["amount_f"], d["scale"], d["amount_repeat"]))
+                if d["type"] == "line":
+                    operations_read.append(LineOperation(d["x1"], d["x2"], d["y1"], d["y2"], d["x_amount"], d["start_f"], d["end_f"], d["amount_f"], d["scale"], d["amount_repeat"]))
+                if d["type"] == "rect":
+                    operations_read.append(RectOperation(d["x1"], d["x2"], d["y1"], d["y2"], d["x_amount"], d["y_amount"], d["start_f"], d["end_f"], d["amount_f"], d["scale"], d["amount_repeat"]))
+            self.operation_list = operations_read
             self.update_view_point()
 
     def save_file(self):
@@ -53,16 +55,8 @@ class OperationList(Frontend):
                                                    "Comma Separated Values (*.csv);;All Files (*)", options=options)
         if file_name:
             file = open(file_name, "w+")
-            for point in self.point_list:
-                file.write(str(point.x))
-                file.write(",")
-                file.write(str(point.y))
-                file.write(",")
-                file.write(str(point.frequency))
-                file.write(",")
-                file.write(str(point.n))
-                if point is not self.point_list[-1]:
-                    file.write("\n")
+            file.write(json.dumps(self.operation_list, default=lambda x: x.__dict__))
+            file.close()
 
 
 class PointTableModel(QAbstractTableModel):
@@ -83,7 +77,7 @@ class PointTableModel(QAbstractTableModel):
 
         if role == Qt.DisplayRole:
             if index.column() == 0:
-                return operation.type
+                return operation.type_localized()
             if index.column() == 1:
                 return operation.total()
             if index.column() == 2:
@@ -99,7 +93,7 @@ class PointTableModel(QAbstractTableModel):
             if index.column() == 7:
                 return operation.amount_f
             if index.column() == 8:
-                return operation.scale()
+                return operation.scale
             if index.column() == 9:
                 return operation.amount_repeat
 

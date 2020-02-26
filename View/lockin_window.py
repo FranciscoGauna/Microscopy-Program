@@ -1,12 +1,12 @@
 from lantz.qt import Frontend
-from Backend.lockin_options import LockinControl
+from Backend.lockin_options import LockinBackend
 from View.frontend.lockin_display import LockinDisplay
 from View.frontend.lockin_options import LockinOptions
 from View.frontend.lockin_pll import LockinPll
 
 
 class LockinControlUi(Frontend):
-    backend: LockinControl
+    backend: LockinBackend
     gui = ('frontend', 'UI', 'lockin_window.ui')
 
     def connect_backend(self):

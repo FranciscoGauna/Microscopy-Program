@@ -1,11 +1,12 @@
 from lantz.qt import Frontend
 
 from Backend.frequency_backend import FrequencyController
-from Backend.lockin_options import LockinControl
+from Backend.lockin_options import LockinBackend
 from View.frontend.FrequencyStepFrontend import FrequencyStepFrontend
 from View.frontend.camera_control_ui import ImageDrawerFt
 from View.frontend.lockin_options import LockinOptions
 from View.frontend.lockin_pll import LockinPll
+from View.frontend.lockin_tab import LockinTab
 from View.frontend.offset_frontend import OffsetFrontend
 from View.frontend.point_list import OperationList
 from View.frontend.run_experiment import ExperimentWorker, ExperimentRunner
@@ -18,7 +19,7 @@ class TabsFrontend(Frontend):
     point_list_ft: OperationList
     point_gen_ft: ImageDrawerFt
 
-    lockin_backend: LockinControl
+    lockin_backend: LockinBackend
     lockin_options: LockinOptions
     lockin_pll: LockinPll
 
@@ -27,9 +28,10 @@ class TabsFrontend(Frontend):
     def __init__(self, image, lockin, motor_interface):
         super().__init__()
 
-        self.lockin_backend = LockinControl(lockin=lockin)
-        self.lockin_options = LockinOptions(backend=self.lockin_backend)
-        self.lockin_pll = LockinPll(backend=self.lockin_backend)
+        lockin_backend = LockinBackend(lockin=lockin)
+        self.lockin_tab = LockinTab(backend=lockin_backend)
+
+        self.widget.lockin_tab_lt.addWidget(self.lockin_tab)
 
         self.widget.motor_tab_lt.addWidget(motor_interface, 1, 1)
 
@@ -45,5 +47,5 @@ class TabsFrontend(Frontend):
         self.widget.top_c_lt.addWidget(self.offset_ft)
         self.widget.bot_c_lt.addWidget(self.point_list_ft)
 
-        experiment_worker = ExperimentWorker(self.point_list_ft, motor_interface.backend, self.lockin_backend)
+        experiment_worker = ExperimentWorker(self.point_list_ft, motor_interface.backend, lockin_backend)
         self.experiment_ft = ExperimentRunner(backend=experiment_worker)

@@ -1,10 +1,10 @@
 from lantz.qt import Frontend
 from PyQt5.QtCore import QTimer
-from Backend.lockin_options import LockinControl
+from Backend.lockin_options import LockinBackend
 from View.localization import locale
 
 class LockinDisplay(Frontend):
-    backend: LockinControl
+    backend: LockinBackend
     gui = ('UI', 'lockin_display.ui')
     timer = QTimer()
     func = None

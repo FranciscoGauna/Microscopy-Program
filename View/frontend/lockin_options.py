@@ -2,12 +2,12 @@ from lantz.qt import Frontend
 from lantz.qt.connect import connect_feat
 
 from Model.AnfatecDriver import Coupling
-from Backend.lockin_options import LockinControl
+from Backend.lockin_options import LockinBackend
 from View.localization import locale
 
 
 class LockinOptions(Frontend):
-    backend: LockinControl
+    backend: LockinBackend
     gui = ('UI', 'lockin_options.ui')
 
     def setupUi(self):

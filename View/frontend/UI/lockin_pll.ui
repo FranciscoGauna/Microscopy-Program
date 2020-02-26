@@ -58,7 +58,7 @@
         <item>
          <widget class="QStackedWidget" name="pll_spanel">
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="on_widget">
            <layout class="QGridLayout" name="gridLayout_2">

@@ -1,6 +1,5 @@
 from lantz.qt import Backend
 from lantz.core import Feat
-from Model.scaler import ScalerController
 from Model.point import Point, change_ordering
 from View.localization import locale
 

@@ -1,0 +1,1 @@
+[{"x1": 492, "x2": 51, "y1": 385, "y2": 34, "x_amount": 2, "y_amount": 2, "start_f": 1, "end_f": 1, "amount_f": 1, "scale": "log", "amount_repeat": 1, "type": "line"}, {"x1": 561, "x2": 264, "y1": 74, "y2": 348, "x_amount": 2, "y_amount": 2, "start_f": 1, "end_f": 1, "amount_f": 1, "scale": "log", "amount_repeat": 1, "type": "rect"}]

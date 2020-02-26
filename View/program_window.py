@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QErrorMessage
 from Model.MotorDriver import Motor
 from Backend.camera_backend import CameraBackend
 from Backend.frequency_backend import FrequencyController
-from Backend.lockin_options import LockinControl
+from Backend.lockin_options import LockinBackend
 from Backend.platina_backend import PlatinaBackend
 from View.frontend.FrequencyStepFrontend import FrequencyStepFrontend
 from View.frontend.camera_control_ui import ImageDrawerFt
@@ -118,4 +118,4 @@ class MainFrontend(Frontend):
             self.image_ft.show()
             self.image_ft.closed_target = self
             self.camera_open = True
-            self.widget.change_bt.setText(locale.get("close_camera", "str_close_camera"))
+            self.widget.change_bt.setText(locale.get("pop_in_camera", "str_pop_in_camera"))
