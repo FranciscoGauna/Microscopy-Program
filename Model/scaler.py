@@ -1,4 +1,6 @@
 from Model.point import Point
+from math import sqrt
+
 
 def log_list(start: int, end: int, n: int) -> list:
     if start > end:
@@ -39,4 +41,21 @@ def make_points(x, y, f_s, f_e, n, m, scale):
         freqs = log_list(f_s, f_e, n)
     for freq in freqs:
         results.append(Point(x, y, freq, m))
+    return results
+
+
+def square_list(start: int, end: int, n: int) -> list:
+    if start > end:
+        temp = start
+        start = end
+        end = temp
+    if n < 1:
+        raise ValueError("n < 1")
+    if n == 1:
+        return [start]
+    results = []
+    c = (pow(end, 2) - pow(start, 2)) / (n - 1)
+    results.append(start)
+    for i in range(1, n):
+        results.append(sqrt(pow(results[i-1], 2) + c))
     return results

@@ -52,3 +52,12 @@ class CameraOnlyWindow(Frontend):
         if self.closed_target is not None:
             self.closed_target.toggle_camera()
         event.accept()
+
+    def toggle_take_photos(self, boolean=None):
+        if self.timer.isActive() != boolean:
+            if self.timer.isActive():
+                self.timer.stop()
+                return False
+            else:
+                self.timer.start()
+                return True

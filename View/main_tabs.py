@@ -4,6 +4,7 @@ from Backend.frequency_backend import FrequencyController
 from Backend.lockin_options import LockinBackend
 from View.frontend.FrequencyStepFrontend import FrequencyStepFrontend
 from View.frontend.camera_control_ui import ImageDrawerFt
+from View.frontend.experiment_tab import ExperimentTab
 from View.frontend.lockin_options import LockinOptions
 from View.frontend.lockin_pll import LockinPll
 from View.frontend.lockin_tab import LockinTab
@@ -48,4 +49,5 @@ class TabsFrontend(Frontend):
         self.widget.bot_c_lt.addWidget(self.point_list_ft)
 
         experiment_worker = ExperimentWorker(self.point_list_ft, motor_interface.backend, lockin_backend)
-        self.experiment_ft = ExperimentRunner(backend=experiment_worker)
+        self.experiment_tab = ExperimentTab(backend=experiment_worker)
+        self.widget.experiment_lt.addWidget(self.experiment_tab)

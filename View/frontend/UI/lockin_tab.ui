@@ -121,6 +121,9 @@
            <property name="decimals">
             <number>3</number>
            </property>
+           <property name="minimum">
+            <double>-12000000.000000000000000</double>
+           </property>
            <property name="maximum">
             <double>12000000.000000000000000</double>
            </property>
@@ -133,6 +136,9 @@
           <widget class="QDoubleSpinBox" name="real_max_sb">
            <property name="decimals">
             <number>3</number>
+           </property>
+           <property name="minimum">
+            <double>-12000000.000000000000000</double>
            </property>
            <property name="maximum">
             <double>12000000.000000000000000</double>
@@ -161,6 +167,9 @@
            <property name="decimals">
             <number>3</number>
            </property>
+           <property name="minimum">
+            <double>-12000000.000000000000000</double>
+           </property>
            <property name="maximum">
             <double>12000000.000000000000000</double>
            </property>
@@ -173,6 +182,9 @@
           <widget class="QDoubleSpinBox" name="imag_max_sb">
            <property name="decimals">
             <number>3</number>
+           </property>
+           <property name="minimum">
+            <double>-12000000.000000000000000</double>
            </property>
            <property name="maximum">
             <double>12000000.000000000000000</double>

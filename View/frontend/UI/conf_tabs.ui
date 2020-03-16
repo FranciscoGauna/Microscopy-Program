@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="main_program_tabs">
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="lockin_tab">
       <attribute name="title">
@@ -53,6 +53,16 @@
           <layout class="QHBoxLayout" name="bot_c_lt"/>
          </item>
         </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="experiment_tab">
+      <attribute name="title">
+       <string>Page</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="0" column="0">
+        <layout class="QVBoxLayout" name="experiment_lt"/>
        </item>
       </layout>
      </widget>
