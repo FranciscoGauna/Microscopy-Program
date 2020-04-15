@@ -74,7 +74,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QProgressBar" name="progressBar">
+        <widget class="QProgressBar" name="exp_bar">
          <property name="value">
           <number>24</number>
          </property>
@@ -88,20 +88,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTableView" name="current_tv">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>40</height>
-          </size>
-         </property>
-        </widget>
+        <widget class="QLineEdit" name="current_le"/>
        </item>
       </layout>
      </item>

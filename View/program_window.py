@@ -96,10 +96,9 @@ class MainFrontend(Frontend):
             self.tab_frontend = TabsFrontend(self.image_ft.image, lockin, motor_interface)
             self.point_gen_ft = self.tab_frontend.point_gen_ft
             self.widget.main_lt.addWidget(self.tab_frontend)
-        except Exception as e:
+        except:
             traceback.print_exc()
             sys.exit()
-
 
     def closeEvent(self, event):
         self.is_closing = True

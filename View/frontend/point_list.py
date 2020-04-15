@@ -1,7 +1,5 @@
 import json
-import traceback
 from typing import List
-from logging import ERROR
 
 from PyQt5.QtCore import QAbstractTableModel, QModelIndex, QVariant, Qt
 from PyQt5.QtWidgets import QFileDialog
@@ -9,7 +7,6 @@ from lantz.qt import Frontend
 
 from Model.operation import Operation, PointOperation, LineOperation, RectOperation
 from View.localization import locale
-from Model.point import Point
 
 
 class OperationList(Frontend):
@@ -41,11 +38,16 @@ class OperationList(Frontend):
             data = json.load(file)
             for d in data:
                 if d["type"] == "point":
-                    operations_read.append(PointOperation(d["x1"], d["y1"], d["start_f"], d["end_f"], d["amount_f"], d["scale"], d["amount_repeat"]))
+                    operations_read.append(PointOperation(d["x1"], d["y1"], d["start_f"], d["end_f"], d["amount_f"],
+                                                          d["scale"], d["amount_repeat"]))
                 if d["type"] == "line":
-                    operations_read.append(LineOperation(d["x1"], d["x2"], d["y1"], d["y2"], d["x_amount"], d["start_f"], d["end_f"], d["amount_f"], d["scale"], d["amount_repeat"]))
+                    operations_read.append(LineOperation(d["x1"], d["x2"], d["y1"], d["y2"], d["x_amount"],
+                                                         d["start_f"], d["end_f"], d["amount_f"], d["scale"],
+                                                         d["amount_repeat"]))
                 if d["type"] == "rect":
-                    operations_read.append(RectOperation(d["x1"], d["x2"], d["y1"], d["y2"], d["x_amount"], d["y_amount"], d["start_f"], d["end_f"], d["amount_f"], d["scale"], d["amount_repeat"]))
+                    operations_read.append(RectOperation(d["x1"], d["x2"], d["y1"], d["y2"], d["x_amount"],
+                                                         d["y_amount"], d["start_f"], d["end_f"], d["amount_f"],
+                                                         d["scale"], d["amount_repeat"]))
             self.operation_list = operations_read
             self.update_view_point()
 

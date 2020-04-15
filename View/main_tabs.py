@@ -10,21 +10,19 @@ from View.frontend.lockin_pll import LockinPll
 from View.frontend.lockin_tab import LockinTab
 from View.frontend.offset_frontend import OffsetFrontend
 from View.frontend.point_list import OperationList
-from View.frontend.run_experiment import ExperimentWorker, ExperimentRunner
+from View.frontend.run_experiment import ExperimentWorker
 
 
 class TabsFrontend(Frontend):
     gui = ("frontend", "UI", "conf_tabs.ui")
 
     frequency_ft: FrequencyStepFrontend
-    point_list_ft: OperationList
+    operation_list_ft: OperationList
     point_gen_ft: ImageDrawerFt
 
     lockin_backend: LockinBackend
     lockin_options: LockinOptions
     lockin_pll: LockinPll
-
-    experiment_ft: ExperimentRunner
 
     def __init__(self, image, lockin, motor_interface):
         super().__init__()
@@ -38,16 +36,17 @@ class TabsFrontend(Frontend):
 
         freq_backend = FrequencyController()
         self.frequency_ft = FrequencyStepFrontend(backend=freq_backend)
-        self.point_list_ft = OperationList(backend=[])
-        self.point_gen_ft = ImageDrawerFt(self.point_list_ft, self.frequency_ft, image)
+        self.operation_list_ft = OperationList(backend=[])
+        self.point_gen_ft = ImageDrawerFt(self.operation_list_ft, self.frequency_ft, image)
 
         self.offset_ft = OffsetFrontend(self.point_gen_ft)
 
         self.widget.top_c_lt.addWidget(self.point_gen_ft)
         self.widget.top_c_lt.addWidget(self.frequency_ft)
         self.widget.top_c_lt.addWidget(self.offset_ft)
-        self.widget.bot_c_lt.addWidget(self.point_list_ft)
+        self.widget.bot_c_lt.addWidget(self.operation_list_ft)
 
-        experiment_worker = ExperimentWorker(self.point_list_ft, motor_interface.backend, lockin_backend)
+        experiment_worker = ExperimentWorker(self.operation_list_ft.operation_list, motor_interface.backend,
+                                             lockin_backend)
         self.experiment_tab = ExperimentTab(backend=experiment_worker)
         self.widget.experiment_lt.addWidget(self.experiment_tab)

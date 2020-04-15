@@ -1,17 +1,13 @@
 import configparser
 import argparse
-import cv2
 
 from lantz.qt import start_gui_app
 from lantz.core.log import log_to_screen, DEBUG
 
 from Backend.main_backend import MainBackend
-from Backend.camera_backend import CameraBackend
 
 from View.localization import set_locale
 from View.program_window import MainFrontend
-
-from View.camera_window import CameraControlUi
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -37,5 +33,3 @@ if __name__ == "__main__":
 
 app = MainBackend()
 start_gui_app(app, MainFrontend)
-#app = CameraBackend(cv2.VideoCapture(0))
-#start_gui_app(app, CameraControlUi)

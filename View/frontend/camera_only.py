@@ -42,10 +42,13 @@ class CameraOnlyWindow(Frontend):
 
     def take_photo(self):
         frame = self.backend.snap()
-        rgb_image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        reconvert = QImage(rgb_image.data, rgb_image.shape[1], rgb_image.shape[0], QImage.Format_RGB888)
-        reconvert = QPixmap.fromImage(reconvert)
-        pixmap = QPixmap(reconvert)
+        try:
+            rgb_image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            reconvert = QImage(rgb_image.data, rgb_image.shape[1], rgb_image.shape[0], QImage.Format_RGB888)
+            reconvert = QPixmap.fromImage(reconvert)
+            pixmap = QPixmap(reconvert)
+        except:
+            pixmap = QPixmap()
         return pixmap
 
     def closeEvent(self, event):

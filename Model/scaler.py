@@ -17,7 +17,7 @@ def log_list(start: int, end: int, n: int) -> list:
     return results
 
 
-def lin_list(start: int, end: int, n: int):
+def lin_list(start, end, n: int):
     if start > end:
         temp = start
         start = end
