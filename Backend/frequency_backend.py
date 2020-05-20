@@ -66,3 +66,6 @@ class FrequencyController(Backend):
     @point_order.setter
     def point_order(self, order):
         self._order = order
+
+    def point_order_backend(self):
+        return self._order

@@ -1,5 +1,6 @@
 from lantz.qt import Frontend
 
+from Backend.experiment_backend import ExperimentBackend
 from Backend.frequency_backend import FrequencyController
 from Backend.lockin_options import LockinBackend
 from View.frontend.FrequencyStepFrontend import FrequencyStepFrontend
@@ -10,7 +11,8 @@ from View.frontend.lockin_pll import LockinPll
 from View.frontend.lockin_tab import LockinTab
 from View.frontend.offset_frontend import OffsetFrontend
 from View.frontend.point_list import OperationList
-from View.frontend.run_experiment import ExperimentWorker
+from Model.run_experiment import ExperimentWorker
+from View.localization import locale
 
 
 class TabsFrontend(Frontend):
@@ -48,5 +50,9 @@ class TabsFrontend(Frontend):
 
         experiment_worker = ExperimentWorker(self.operation_list_ft.operation_list, motor_interface.backend,
                                              lockin_backend)
-        self.experiment_tab = ExperimentTab(backend=experiment_worker)
+        experiment_backend = ExperimentBackend(worker=experiment_worker)
+        self.experiment_tab = ExperimentTab(backend=experiment_backend)
         self.widget.experiment_lt.addWidget(self.experiment_tab)
+
+    def setupUi(self):
+        self.widget.lockin_tab.setTabText(locale.get("",""))

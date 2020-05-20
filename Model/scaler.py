@@ -33,15 +33,22 @@ def lin_list(start, end, n: int):
     return results
 
 
-def make_points(x, y, f_s, f_e, n, m, scale):
+def make_freq_in_points(x, y, f_s, f_e, n, m, scale, display_x):
     results = []
-    if scale == "linear":
-        freqs = lin_list(f_s, f_e, n)
-    else:  # elif self._scale == "log"
-        freqs = log_list(f_s, f_e, n)
-    for freq in freqs:
-        results.append(Point(x, y, freq, m))
+    display_y = 0
+    list_freq = freq_list_scale(f_s, f_e, n, scale)
+    for freq in list_freq:
+        results.append(Point(x, y, freq, m, display_x, display_y))
+        display_y += 1
     return results
+
+
+def freq_list_scale(f_s, f_e, n, scale):
+    if scale == "linear":
+        list_freq = lin_list(f_s, f_e, n)
+    else:
+        list_freq = log_list(f_s, f_e, n)
+    return list_freq
 
 
 def square_list(start: int, end: int, n: int) -> list:

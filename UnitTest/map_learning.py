@@ -3,7 +3,7 @@ from time import sleep
 from math import sqrt
 
 from PyQt5.QtCore import QTimer, QThread
-from PyQt5.QtGui import QPixmap, QColor
+from PyQt5.QtGui import QPixmap, QColor, QImage, QPainter
 from PyQt5.QtWidgets import QGraphicsScene, QGraphicsPixmapItem
 from lantz.qt import Backend, Frontend, start_gui_app
 
@@ -19,7 +19,7 @@ class LoaderWorker(QThread):
         try:
             while True:
                 self.obj.load_value()
-                sleep(0.001)
+                sleep(0.002)
         except:
             traceback.print_exc()
 
@@ -34,7 +34,7 @@ class ViewTestBt(Backend):
     color_list_base = square_list(0, 255, spectrum_n)
     color_list = []
     color_value_list = []
-    recalculated = False
+    qimage: QImage
 
     points = []
 
@@ -42,6 +42,7 @@ class ViewTestBt(Backend):
         super().__init__(**instruments_and_backends)
         self.min = self.max = self.test_point()
 
+        # Initialization of the color spectrum and the image
         for i in range(self.spectrum_n):
             color = QColor()
             color.setRgb(self.color_list_base[i], 255, 0)
@@ -50,49 +51,35 @@ class ViewTestBt(Backend):
             color = QColor()
             color.setRgb(255, self.color_list_base[i], 0)
             self.color_list.append(color)
-
         self.create_colors()
+        self.qimage = QImage(self.width(), self.height(), QImage.Format_RGB32)
+
+        # Create sub-worker to reload image
         self.worker = LoaderWorker(self)
         self.worker.start()
 
     def width(self):
         return 200
 
-    def lenght(self):
+    def height(self):
         return 200
 
     def test_point(self):
         return sqrt(pow(self.x, 2) + pow(self.y, 2))
 
-    def read_point(self):
-        offset_x = offset_y = 40
-        result = sqrt(pow(self.x - offset_x, 2) + pow(self.y - offset_y, 2))
-        self.x += 1
-        if self.x >= 200:
-            self.x = 0
-            self.y += 1
-            if self.y >= 200:
-                self.y = 0
-        return result
-
     # Aca empiezan el codigo del color
-    def load_value(self):
-        try:
-            x = self.x
-            y = self.y
-            value = self.read_point()
-            if value > self.max:
-                self.max = value
-                self.create_colors()
-                self.recalculate_colors()
-            if value < self.min:
-                self.min = value
-                self.create_colors()
-                self.recalculate_colors()
-
-            self.points.append([x, y, value, self.decide_color(value)])
-        except:
-            traceback.print_exc()
+    def load_pixel_color(self, x, y, value):
+        if value > self.max:
+            self.max = value
+            self.create_colors()
+            self.recalculate_colors()
+        if value < self.min:
+            self.min = value
+            self.create_colors()
+            self.recalculate_colors()
+        color = self.decide_color(value)
+        self.points.append([x, y, value, color])
+        self.qimage.setPixelColor(x, y, color)
 
     def create_colors(self):
         result = []
@@ -112,9 +99,11 @@ class ViewTestBt(Backend):
 
     def recalculate_colors(self):
         for point in self.points:
+            x = point[0]
+            y = point[1]
             value = point[2]
             point[3] = self.decide_color(value)
-        self.recalculated = True
+            self.qimage.setPixelColor(x, y, point[3])
 
 
 class ViewTestFt(Frontend):
@@ -123,32 +112,21 @@ class ViewTestFt(Frontend):
     backend: ViewTestBt
     scene: QGraphicsScene
     timer = QTimer()
-    g_points = {}
     current_scale = 1
 
     def connect_backend(self):
-        self.scene = QGraphicsScene(0, 0, self.backend.width(), self.backend.lenght())
+        self.scene = QGraphicsScene(0, 0, self.backend.width(), self.backend.height())
         self.widget.map_view.setScene(self.scene)
-        self.timer.setInterval(16)
+        self.timer.setInterval(30)
         self.timer.timeout.connect(self.load_points)
         self.timer.start()
 
     def load_points(self):
         try:
-            for point in self.backend.points:
-                x = point[0]
-                y = point[1]
-                value = point[2]
-                color = point[3]
-
-                pixmap = QPixmap(1, 1)
-                pixmap.fill(color)
-                g_pixmap = QGraphicsPixmapItem(pixmap)
-                g_pixmap.setOffset(x, y)
-                if x not in self.g_points:
-                    self.g_points[x] = {}
-                self.g_points[x][y] = (value, g_pixmap)
-                self.scene.addItem(g_pixmap)
+            pixmap = QPixmap()
+            pixmap.convertFromImage(self.backend.qimage)
+            g_pixmap = QGraphicsPixmapItem(pixmap)
+            self.scene.addItem(g_pixmap)
         except:
             traceback.print_exc()
 

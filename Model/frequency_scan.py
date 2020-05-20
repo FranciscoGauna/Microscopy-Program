@@ -42,6 +42,7 @@ def frequency_scanner_point(points: list, platina: PlatinaBackend):
             sleep(0.01)
         print(datetime.now()-time)
 
+
 def test():
     platini = PlatinaBackend(Motor(), Motor())
     platini.set_motor_x("virtual")

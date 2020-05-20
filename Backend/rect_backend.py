@@ -22,7 +22,8 @@ class RectangleController(Backend):
     def add_rect(self, point_list):
         operation = RectOperation(self._x_start, self._x_end, self._y_start, self._y_end, self._x_steps, self._y_steps,
                                   self.freq_backend.start_f, self.freq_backend.end_f, self.freq_backend.amount_f,
-                                  self.freq_backend.int_scale(), self.freq_backend.amount_repeat)
+                                  self.freq_backend.int_scale(), self.freq_backend.amount_repeat,
+                                  self.freq_backend.point_order_backend())
         point_list.append(operation)
 
     @Feat()

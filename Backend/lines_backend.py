@@ -1,3 +1,5 @@
+import traceback
+
 from lantz.qt import Backend
 from lantz.core import Feat
 
@@ -19,10 +21,14 @@ class LineController(Backend):
         self.freq_backend = freq_backend
 
     def add_line(self, point_list):
-        operation = LineOperation(self._x_start, self._x_end, self._y_start, self._y_end, self._line_steps,
-                                  self.freq_backend.start_f, self.freq_backend.end_f, self.freq_backend.amount_f,
-                                  self.freq_backend.int_scale(), self.freq_backend.amount_repeat)
-        point_list.append(operation)
+        try:
+            operation = LineOperation(self._x_start, self._x_end, self._y_start, self._y_end, self._line_steps,
+                                      self.freq_backend.start_f, self.freq_backend.end_f, self.freq_backend.amount_f,
+                                      self.freq_backend.int_scale(), self.freq_backend.amount_repeat,
+                                      self.freq_backend.point_order_backend())
+            point_list.append(operation)
+        except:
+            traceback.print_exc()
 
     @Feat()
     def x_start(self):

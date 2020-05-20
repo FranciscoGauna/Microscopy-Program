@@ -1,3 +1,5 @@
+from random import randrange
+
 from lantz import Feat
 from lantz.core import foreign
 from enum import Enum
@@ -136,7 +138,7 @@ class VirtualLockin(foreign.Driver):
     @Feat(units='V')
     def amplitude(self):
         """Returns the value of the amplitude channel, which measures from the input signal"""
-        return 0
+        return randrange(200)
 
     @Feat(units='degrees')
     def phase(self):

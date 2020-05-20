@@ -22,8 +22,11 @@
        <height>0</height>
       </size>
      </property>
+     <property name="cursor">
+      <cursorShape>IBeamCursor</cursorShape>
+     </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="point_tab">
       <attribute name="title">
@@ -166,6 +169,9 @@
           <widget class="QSpinBox" name="lines_steps_input">
            <property name="minimum">
             <number>2</number>
+           </property>
+           <property name="maximum">
+            <number>10000000</number>
            </property>
           </widget>
          </item>

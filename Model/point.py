@@ -13,11 +13,13 @@ def change_ordering(set_ordering):
 class Point:
     _ordering = "freq"
 
-    def __init__(self, x: float, y: float, freq: int, n=1):
+    def __init__(self, x: float, y: float, freq: int, n=1, display_x: int = 0, display_y: int = 0):
         super().__init__()
         self.x = x
         self.y = y
         self.frequency = freq
+        self.display_x = display_x
+        self.display_y = display_y
         if n < 1:
             raise ValueError
         self.n = n

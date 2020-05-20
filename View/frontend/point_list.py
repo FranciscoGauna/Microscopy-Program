@@ -1,3 +1,4 @@
+import traceback
 import json
 from typing import List
 
@@ -18,11 +19,16 @@ class OperationList(Frontend):
         super().setupUi()
         self.widget.save_button.setText(locale.get("save", "str_save"))
         self.widget.load_button.setText(locale.get("load", "str_load"))
+        self.widget.reset_button.setText(locale.get("reset", "str_reset"))
+        self.setFocusPolicy(Qt.StrongFocus)
 
     def connect_backend(self):
         super().connect_backend()
         self.widget.save_button.pressed.connect(self.save_file)
         self.widget.load_button.pressed.connect(self.open_file)
+        self.widget.reset_button.pressed.connect(self.reset_list)
+        self.widget.point_list_view.setFocusPolicy(Qt.StrongFocus)
+        self.widget.point_list_view.keyPressEvent = self.keyPressEvent
 
     def update_view_point(self):
         model = PointTableModel(self.operation_list)
@@ -43,12 +49,12 @@ class OperationList(Frontend):
                 if d["type"] == "line":
                     operations_read.append(LineOperation(d["x1"], d["x2"], d["y1"], d["y2"], d["x_amount"],
                                                          d["start_f"], d["end_f"], d["amount_f"], d["scale"],
-                                                         d["amount_repeat"]))
+                                                         d["amount_repeat"], d["order"]))
                 if d["type"] == "rect":
                     operations_read.append(RectOperation(d["x1"], d["x2"], d["y1"], d["y2"], d["x_amount"],
                                                          d["y_amount"], d["start_f"], d["end_f"], d["amount_f"],
-                                                         d["scale"], d["amount_repeat"]))
-            self.operation_list = operations_read
+                                                         d["scale"], d["amount_repeat"], d["order"]))
+            self.operation_list.extend(operations_read)
             self.update_view_point()
 
     def save_file(self):
@@ -59,6 +65,18 @@ class OperationList(Frontend):
             file = open(file_name, "w+")
             file.write(json.dumps(self.operation_list, default=lambda x: x.__dict__))
             file.close()
+
+    def reset_list(self):
+        self.operation_list.clear()
+        self.update_view_point()
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key_Delete:
+            indexes = self.widget.point_list_view.selectedIndexes()
+            indexes = sorted(indexes, key=lambda x: x.row(), reverse=True)
+            for index in indexes:
+                self.operation_list.pop(index.row())
+            self.update_view_point()
 
 
 class PointTableModel(QAbstractTableModel):
