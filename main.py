@@ -1,6 +1,9 @@
 import configparser
 import argparse
+import os
 
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QApplication
 from lantz.qt import start_gui_app
 from lantz.core.log import log_to_screen, DEBUG
 
@@ -32,4 +35,6 @@ if __name__ == "__main__":
 
 
 app = MainBackend()
-start_gui_app(app, MainFrontend)
+qapp = QApplication([''])
+qapp.setWindowIcon(QIcon(os.path.join("Assets", "laser.png")))
+start_gui_app(app, MainFrontend, qapp)

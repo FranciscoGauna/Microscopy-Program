@@ -1,8 +1,20 @@
 import comtypes
 import comtypes.client
 
-progid = comtypes.GUID("{DB9935C1-19C5-4ed2-ADD2-9A57E19F53A3}")
-com_class = comtypes.client.CreateObject(progid)
-print(com_class.HelloWorld())
-print(com_class.NewMethod())
-print(com_class.DeviceList())
+from lantz import Driver
+
+
+class VirtualDAQ(Driver):
+    pass
+
+
+class ComDAQ(Driver):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        program_id = comtypes.GUID("{DB9935C1-19C5-4ed2-ADD2-9A57E19F53A3}")
+        self.lib = comtypes.client.CreateObject(program_id)
+        print(self.lib.HelloWorld())
+        print(self.lib.NewMethod())
+        print(self.lib.DeviceList())

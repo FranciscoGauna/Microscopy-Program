@@ -1,4 +1,4 @@
-from random import randrange
+from random import randrange, gauss
 
 from lantz import Feat
 from lantz.core import foreign
@@ -143,7 +143,7 @@ class VirtualLockin(foreign.Driver):
     @Feat(units='degrees')
     def phase(self):
         """phase returns the value of the phase channel, which measures from the input signal"""
-        return 0
+        return gauss(50, 10)
 
     @Feat()
     def pll(self):

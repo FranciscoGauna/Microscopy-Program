@@ -108,6 +108,44 @@
       </layout>
      </item>
      <item>
+      <layout class="QVBoxLayout" name="map_button_vl">
+       <item>
+        <widget class="QPushButton" name="zoom_in_bt">
+         <property name="text">
+          <string>+ zoom</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="zoom_out_bt">
+         <property name="text">
+          <string>- zoom</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="zoom_reset_bt">
+         <property name="text">
+          <string>reset zoom</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
       <layout class="QVBoxLayout" name="map_vl">
        <item>
         <widget class="QLabel" name="map_lb">
@@ -117,7 +155,20 @@
         </widget>
        </item>
        <item>
-        <widget class="QGraphicsView" name="map_view"/>
+        <widget class="QGraphicsView" name="map_view">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>300</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QLineEdit" name="map_le"/>
@@ -125,9 +176,9 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="historiogram_lt">
+      <layout class="QVBoxLayout" name="histogram_vl">
        <item>
-        <widget class="QLabel" name="historiogram_lb">
+        <widget class="QLabel" name="histogram_lb">
          <property name="text">
           <string>TextLabel</string>
          </property>

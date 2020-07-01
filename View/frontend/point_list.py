@@ -36,8 +36,8 @@ class OperationList(Frontend):
 
     def open_file(self):
         options = QFileDialog.Options()
-        file_name, _ = QFileDialog.getOpenFileName(self, "Open File", "",
-                                                   "Comma Separated Values (*.csv);;All Files (*)", options=options)
+        file_name, _ = QFileDialog.getOpenFileName(self, "Open File", "", "JavaScript Object Notation (*.json);;All "
+                                                                          "Files (*)", options=options)
         if file_name:
             file = open(file_name, "r+")
             operations_read = []
@@ -59,8 +59,8 @@ class OperationList(Frontend):
 
     def save_file(self):
         options = QFileDialog.Options()
-        file_name, _ = QFileDialog.getSaveFileName(self, "Save File", "",
-                                                   "Comma Separated Values (*.csv);;All Files (*)", options=options)
+        file_name, _ = QFileDialog.getSaveFileName(self, "Save File", "", "JavaScript Object Notation (*.json);;All "
+                                                                          "Files (*)", options=options)
         if file_name:
             file = open(file_name, "w+")
             file.write(json.dumps(self.operation_list, default=lambda x: x.__dict__))

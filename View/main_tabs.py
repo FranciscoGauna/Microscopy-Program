@@ -26,7 +26,7 @@ class TabsFrontend(Frontend):
     lockin_options: LockinOptions
     lockin_pll: LockinPll
 
-    def __init__(self, image, lockin, motor_interface):
+    def __init__(self, image, lockin, motor_interface, focus_backend):
         super().__init__()
 
         lockin_backend = LockinBackend(lockin=lockin)
@@ -49,10 +49,13 @@ class TabsFrontend(Frontend):
         self.widget.bot_c_lt.addWidget(self.operation_list_ft)
 
         experiment_worker = ExperimentWorker(self.operation_list_ft.operation_list, motor_interface.backend,
-                                             lockin_backend)
+                                             lockin_backend, focus_backend)
         experiment_backend = ExperimentBackend(worker=experiment_worker)
         self.experiment_tab = ExperimentTab(backend=experiment_backend)
         self.widget.experiment_lt.addWidget(self.experiment_tab)
 
     def setupUi(self):
-        self.widget.lockin_tab.setTabText(locale.get("",""))
+        self.widget.main_program_tabs.setTabText(0, locale.get("lockin_configuration", "str_lockin_configuration"))
+        self.widget.main_program_tabs.setTabText(1, locale.get("sample_alignment", "str_sample_alignment"))
+        self.widget.main_program_tabs.setTabText(2, locale.get("protocol_selection", "str_protocol_selection"))
+        self.widget.main_program_tabs.setTabText(3, locale.get("thermal_imaging", "str_thermal_imaging"))

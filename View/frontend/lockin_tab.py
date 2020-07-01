@@ -2,7 +2,7 @@ import math
 from datetime import datetime
 
 from PyQt5.QtCore import Qt, QTimer
-from PyQt5.QtGui import QPainter
+from PyQt5.QtGui import QPainter, QColor, QBrush
 from lantz.qt import Frontend
 from PyQt5.QtChart import QLineSeries, QChart, QChartView, QValueAxis
 
@@ -66,6 +66,8 @@ class LockinTab(Frontend):
         self.amp_y_min = 0
 
         self.amp_chart = QChart(flags=Qt.WindowFlags())
+        self.amp_chart.layout().setContentsMargins(4, 4, 4, 4)
+        self.amp_chart.setBackgroundRoundness(0)
         self.amp_chart.addSeries(self.amp_series)
         self.amp_chart.createDefaultAxes()
         self.amp_y_axe = self.amp_chart.axes(Qt.Vertical)[0]
@@ -81,6 +83,8 @@ class LockinTab(Frontend):
         self.widget.phase_min_sb.setValue(self.phase_y_min)
 
         self.phase_chart = QChart(flags=Qt.WindowFlags())
+        self.phase_chart.layout().setContentsMargins(4, 4, 4, 4)
+        self.phase_chart.setBackgroundRoundness(0)
         self.phase_chart.addSeries(self.phase_series)
         self.phase_chart.createDefaultAxes()
         self.phase_y_axe = self.phase_chart.axes(Qt.Vertical)[0]
@@ -94,6 +98,8 @@ class LockinTab(Frontend):
         self.real_y_min = 0
 
         self.real_chart = QChart(flags=Qt.WindowFlags())
+        self.real_chart.layout().setContentsMargins(4, 4, 4, 4)
+        self.real_chart.setBackgroundRoundness(0)
         self.real_chart.addSeries(self.real_series)
         self.real_chart.createDefaultAxes()
         self.real_y_axe = self.real_chart.axes(Qt.Vertical)[0]
@@ -107,6 +113,8 @@ class LockinTab(Frontend):
         self.imag_y_min = 0
 
         self.imag_chart = QChart(flags=Qt.WindowFlags())
+        self.imag_chart.layout().setContentsMargins(4, 4, 4, 4)
+        self.imag_chart.setBackgroundRoundness(0)
         self.imag_chart.addSeries(self.imag_series)
         self.imag_chart.createDefaultAxes()
         self.imag_y_axe = self.imag_chart.axes(Qt.Vertical)[0]

@@ -11,6 +11,7 @@ from PyQt5.QtGui import QImage, QColor
 from Backend.lockin_options import LockinBackend
 from Backend.platina_backend import PlatinaBackend
 from Model.operation import Operation
+from Model.result_point import ResultPoint
 from Model.scaler import lin_list, square_list
 from View.localization import locale
 from magic_numbers import pixel_to_counts_factor, spectrum_n
@@ -30,11 +31,13 @@ class ExperimentWorker(QThread):
     qimage = QImage(1, 1, QImage.Format_RGB32)
     points: list
 
-    def __init__(self, operation_list: list, platina: PlatinaBackend, lockin: LockinBackend, parent=None):
+    def __init__(self, operation_list: list, platina: PlatinaBackend, lockin: LockinBackend, focus_backend,
+                 parent=None):
         QThread.__init__(self, parent)
         self.exiting = False
         self.operation_list = operation_list
         self.platina = platina
+        self.focus_backend = focus_backend
         self.lockin = lockin
 
         # Initialization of the color spectrum and the image
@@ -54,6 +57,15 @@ class ExperimentWorker(QThread):
 
     def run(self):
         try:
+            # Result File creation
+            time = datetime.now()
+            results_filename = time.isoformat().replace(":", "-").replace("T", " ").split(".")[0] + ".dat"
+            directory = 'Results'
+            if os.path.isdir(directory):
+                results_filename = os.path.join(directory, results_filename)
+            results_file = open(results_filename, "w+")
+
+            # Result list initiation
             self.results = []
             operation_list = deepcopy(self.operation_list)
             point_list = []
@@ -63,13 +75,9 @@ class ExperimentWorker(QThread):
             self.total = len(point_list)
             operation_end = 0
             operation_index = -1
-            time = datetime.now()
-            results_filename = time.isoformat().replace(":", "-").replace("T", " ").split(".")[0] + ".dat"
-            directory = 'Results'
-            if os.path.isdir(directory):
-                results_filename = os.path.join(directory, results_filename)
-            results_file = open(results_filename, "w+")
             for i in range(0, self.total):
+
+                # Operation change code
                 if i >= operation_end:
                     operation_index += 1
                     self.current_operation = operation_list[operation_index]
@@ -83,17 +91,28 @@ class ExperimentWorker(QThread):
                     self.create_colors()
 
                 self.step = i
+
+                # Move platina to point
                 point = point_list[i]
                 x_count = point.x * pixel_to_counts_factor
                 y_count = point.y * pixel_to_counts_factor
                 self.platina.move_to(x_count, y_count)
                 while not self.platina.stopped(time):
-                    sleep(0.01)
+                    sleep(0.001)
+
+                while not self.focus_backend.focus:
+                    sleep(0.001)
+
+                # Measurement
                 value = self.lockin.get_amplitude()
-                result = [x_count, y_count, point.frequency, value, point.display_x, point.display_y]
+                result = ResultPoint(x_count, y_count, point.frequency, value, self.lockin.get_phase(),
+                                     self.lockin.get_real_part(), self.lockin.get_imaginary_part(), point.display_x,
+                                     point.display_y, datetime.now() - time)
                 self.results.append(result)
                 self.load_pixel(point.display_x, point.display_y, value)
-                results_file.write(str(result))
+
+                # Log Result
+                results_file.write(result.to_file())
                 results_file.write("\n")
             self.step += 1
             print(datetime.now() - time)
@@ -184,3 +203,6 @@ class ProgressBarController:
 
     def qimage(self):
         return self.exp_worker.qimage
+
+    def results(self) -> list:
+        return self.exp_worker.results

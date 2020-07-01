@@ -4,11 +4,14 @@ from PyQt5.QtWidgets import QErrorMessage, QPushButton
 from lantz.qt import Frontend, wrap_driver_cls
 
 from Backend.camera_backend import CameraBackend
+from Backend.focus_backend import FocusBackend
 from Backend.platina_backend import PlatinaBackend
 from Model.MotorDriver import Motor
 from View.frontend.camera_control_ui import ImageDrawerFt
 from View.frontend.camera_only import CameraOnlyWindow
 from View.frontend.camera_selector_frontend import CameraSelectorFrontend
+from View.frontend.daq_selector import DaqSelectorFrontend
+from View.frontend.focus_frontend import FocusFrontend
 from View.frontend.motor_frontend import DualMotorFrontend
 from View.frontend.platina_frontend import MotorSelector, MotorAlreadyOpenException
 from View.frontend.select_lockin import LockinSelector
@@ -25,7 +28,8 @@ class MainFrontend(Frontend):
     camera_popped = False
     camera_open = True
 
-    # First screen
+    # First
+    daq_selector: DaqSelectorFrontend
     camera_selector: CameraSelectorFrontend
     motor_selector: MotorSelector
     lockin_selector: LockinSelector
@@ -35,6 +39,7 @@ class MainFrontend(Frontend):
     camera_bc: CameraBackend
     point_gen_ft: ImageDrawerFt
     tab_frontend: TabsFrontend
+    focus_frontend: FocusFrontend
 
     def setupUi(self):
         super().setupUi()
@@ -43,16 +48,26 @@ class MainFrontend(Frontend):
     def connect_backend(self):
         super().connect_backend()
 
+        # DAQ
+        self.daq_selector = DaqSelectorFrontend()
+        self.widget.main_lt.addWidget(self.daq_selector)
+
+        # Camera
+        self.camera_selector = CameraSelectorFrontend()
+        self.widget.main_lt.addWidget(self.camera_selector)
+
+        # Motor
         q_motor = wrap_driver_cls(Motor)
         motor_x = q_motor()
         motor_y = q_motor()
-        backend = PlatinaBackend(motor_x, motor_y)
-        self.camera_selector = CameraSelectorFrontend()
-        self.widget.main_lt.addWidget(self.camera_selector)
-        self.motor_selector = MotorSelector(backend=backend)
+        motor_backend = PlatinaBackend(motor_x, motor_y)
+        self.motor_selector = MotorSelector(backend=motor_backend)
         self.widget.main_lt.addWidget(self.motor_selector)
+
+        # Lockin
         self.lockin_selector = LockinSelector()
         self.widget.main_lt.addWidget(self.lockin_selector)
+
         self.widget.change_bt.clicked.connect(self.change_screen)
 
     def change_screen(self):
@@ -93,7 +108,12 @@ class MainFrontend(Frontend):
             self.widget.bt_lt.insertWidget(1, self.widget.camera_open_bt)
             self.widget.camera_open_bt.clicked.connect(self.toggle_open)
 
-            self.tab_frontend = TabsFrontend(self.image_ft.image, lockin, motor_interface)
+            focus_backend = FocusBackend(self.daq_selector.daq())
+            self.widget.main_lt.removeWidget(self.daq_selector)
+            self.daq_selector.close()
+            self.focus_frontend = FocusFrontend(backend=focus_backend)
+            self.focus_frontend.show()
+            self.tab_frontend = TabsFrontend(self.image_ft.image, lockin, motor_interface, focus_backend)
             self.point_gen_ft = self.tab_frontend.point_gen_ft
             self.widget.main_lt.addWidget(self.tab_frontend)
         except:
