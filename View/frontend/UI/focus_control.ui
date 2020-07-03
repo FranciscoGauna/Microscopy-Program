@@ -284,7 +284,7 @@
        <item>
         <layout class="QHBoxLayout" name="focus_symbol_lt">
          <item>
-          <widget class="QCheckBox" name="focus_light">
+          <widget class="QCheckBox" name="focus_light_status">
            <property name="text">
             <string>CheckBox</string>
            </property>
