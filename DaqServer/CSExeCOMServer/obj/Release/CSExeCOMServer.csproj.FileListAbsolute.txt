@@ -1,9 +1,0 @@
-C:\Users\Francisco\Source\DaqServer\Release\CSExeCOMClient.vbs
-C:\Users\Francisco\Source\DaqServer\Release\CSExeCOMServer.exe
-C:\Users\Francisco\Source\DaqServer\Release\CSExeCOMServer.pdb
-C:\Users\Francisco\Source\DaqServer\CSExeCOMServer\obj\Release\CSExeCOMServer.csproj.CoreCompileInputs.cache
-C:\Users\Francisco\Source\DaqServer\CSExeCOMServer\obj\Release\CSExeCOMServer.exe
-C:\Users\Francisco\Source\DaqServer\CSExeCOMServer\obj\Release\CSExeCOMServer.pdb
-C:\Users\Francisco\Source\DaqServer\CSExeCOMServer\obj\Release\Interop.DAQCOMLib.dll
-C:\Users\Francisco\Source\DaqServer\CSExeCOMServer\obj\Release\CSExeCOMServer.csproj.ResolveComReference.cache
-C:\Users\Francisco\Source\DaqServer\Release\CSExeCOMServer.exe.config

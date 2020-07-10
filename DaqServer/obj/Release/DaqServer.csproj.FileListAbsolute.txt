@@ -1,0 +1,9 @@
+C:\Users\Fedacking\source\piton\Microscopy-Program\DaqServer\bin\Release\DaqServer.exe.config
+C:\Users\Fedacking\source\piton\Microscopy-Program\DaqServer\bin\Release\DaqServer.exe
+C:\Users\Fedacking\source\piton\Microscopy-Program\DaqServer\bin\Release\DaqServer.pdb
+C:\Users\Fedacking\source\piton\Microscopy-Program\DaqServer\obj\Release\DaqServer.csprojAssemblyReference.cache
+C:\Users\Fedacking\source\piton\Microscopy-Program\DaqServer\obj\Release\Interop.DAQCOMLib.dll
+C:\Users\Fedacking\source\piton\Microscopy-Program\DaqServer\obj\Release\DaqServer.csproj.ResolveComReference.cache
+C:\Users\Fedacking\source\piton\Microscopy-Program\DaqServer\obj\Release\DaqServer.csproj.CoreCompileInputs.cache
+C:\Users\Fedacking\source\piton\Microscopy-Program\DaqServer\obj\Release\DaqServer.exe
+C:\Users\Fedacking\source\piton\Microscopy-Program\DaqServer\obj\Release\DaqServer.pdb

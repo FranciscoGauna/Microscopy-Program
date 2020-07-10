@@ -13,7 +13,7 @@ class ComDAQ(Driver):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        program_id = comtypes.GUID("{DB9935C1-19C5-4ed2-ADD2-9A57E19F53A3}")
+        program_id = comtypes.GUID("{DB9935C1-19C5-4ed2-ADD2-9A57E19F53A4}")
         self.lib = comtypes.client.CreateObject(program_id)
         print(self.lib.HelloWorld())
         print(self.lib.NewMethod())
