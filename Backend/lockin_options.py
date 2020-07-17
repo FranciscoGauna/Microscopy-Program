@@ -1,5 +1,5 @@
 from lantz.qt import Backend, InstrumentSlot
-from Model.AnfatecDriver import AnfatecAMU24
+from Drivers.Lockin.anfatec_driver import AnfatecAMU24
 
 
 class LockinBackend(Backend):

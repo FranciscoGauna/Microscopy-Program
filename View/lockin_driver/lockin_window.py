@@ -1,5 +1,5 @@
 from View.lockin_driver.option_panel import OptionsPanel
-from Model.AnfatecDriver import AnfatecAMU24
+from Drivers.Lockin.anfatec_driver import AnfatecAMU24
 from PyQt5.QtWidgets import QMainWindow, QHBoxLayout, QVBoxLayout, QWidget
 from View.lockin_driver.lcd_panel import LCDPanel
 from View.lockin_driver.pll_panel import PllPanel

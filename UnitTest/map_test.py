@@ -1,10 +1,8 @@
 from Backend.lockin_options import LockinBackend
 from Backend.platina_backend import PlatinaBackend
-from Model.AnfatecDriver import VirtualLockin
-from Model.MotorDriver import Motor
-from View.frontend.experiment_tab import ExperimentTab
+from Drivers.Lockin.anfatec_driver import VirtualLockin
+from Drivers.Motor.MotorDriver import Motor
 from View.frontend.point_list import OperationList
-from Model.run_experiment import ExperimentWorker
 
 
 class TestLockin(VirtualLockin):

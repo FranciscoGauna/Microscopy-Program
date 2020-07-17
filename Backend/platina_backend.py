@@ -1,9 +1,7 @@
 from datetime import timedelta, datetime
-from time import sleep
 
 from lantz.qt import Backend
-from lantz.core import Feat
-from Model.MotorDriver import Motor, get_available_motors
+from Drivers.Motor.MotorDriver import Motor, get_available_motors
 
 
 class PlatinaBackend(Backend):

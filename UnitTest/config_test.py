@@ -1,4 +1,4 @@
-from Model.MotorDriver import Motor, get_available_motors
+from Drivers.Motor.MotorDriver import Motor, get_available_motors
 
 motor = Motor()
 

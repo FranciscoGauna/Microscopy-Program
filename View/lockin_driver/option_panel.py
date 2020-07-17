@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QVBoxLayout, QLabel, QWidget, QButtonGroup, QRadioButton, QComboBox
 from View.localization import locale
-from Model.AnfatecDriver import Coupling
+from Drivers.Lockin.anfatec_driver import Coupling
 
 
 class OptionsPanel:

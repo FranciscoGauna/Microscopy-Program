@@ -6,15 +6,15 @@ from lantz.qt import Frontend, wrap_driver_cls
 from Backend.camera_backend import CameraBackend
 from Backend.focus_backend import FocusBackend
 from Backend.platina_backend import PlatinaBackend
-from Model.MotorDriver import Motor
+from Drivers.Motor.MotorDriver import Motor
 from View.frontend.camera_control_ui import ImageDrawerFt
 from View.frontend.camera_only import CameraOnlyWindow
-from View.frontend.camera_selector_frontend import CameraSelectorFrontend
-from View.frontend.daq_selector import DaqSelectorFrontend
+from Drivers.camera_selector import CameraSelectorFrontend
+from Drivers.daq_selector import DaqSelectorFrontend
 from View.frontend.focus_frontend import FocusFrontend
 from View.frontend.motor_frontend import DualMotorFrontend
-from View.frontend.platina_frontend import MotorSelector, MotorAlreadyOpenException
-from View.frontend.select_lockin import LockinSelector
+from Drivers.motor_selector import MotorSelector, MotorAlreadyOpenException
+from Drivers.lockin_selector import LockinSelector
 from View.localization import locale
 from View.main_tabs import TabsFrontend
 

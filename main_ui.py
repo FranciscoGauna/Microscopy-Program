@@ -1,4 +1,4 @@
-from Model.AnfatecDriver import AnfatecAMU24
+from Drivers.Lockin.anfatec_driver import AnfatecAMU24
 from Backend.lockin_options import LockinBackend
 from View.lockin_window import LockinControlUi
 from lantz.core.log import log_to_screen, INFO

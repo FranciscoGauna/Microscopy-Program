@@ -1,5 +1,5 @@
-from Model.AnfatecDriver import AnfatecAMU24
-from Model.MotorDriver import Motor
+from Drivers.Lockin.anfatec_driver import AnfatecAMU24
+from Drivers.Motor.MotorDriver import Motor
 from Model.point import Point
 from Backend.platina_backend import PlatinaBackend
 from lantz import Q_

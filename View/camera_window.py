@@ -8,15 +8,12 @@ from View.frontend.camera_only import CameraOnlyWindow
 from View.localization import locale
 from View.frontend.point_list import OperationList
 from View.frontend.FrequencyStepFrontend import FrequencyStepFrontend
-from View.frontend.platina_frontend import MotorSelector
 from View.widgets.custom_image import ImageWidget
 from Backend.camera_backend import CameraBackend
 from Backend.rect_backend import RectangleController
 from Backend.points_backend import PointController
 from Backend.lines_backend import LineController
 from Backend.frequency_backend import FrequencyController
-from Backend.platina_backend import PlatinaBackend
-from Model.MotorDriver import Motor
 
 
 class CameraControlUi(Frontend):

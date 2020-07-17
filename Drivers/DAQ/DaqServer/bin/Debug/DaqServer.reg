@@ -1,0 +1,27 @@
+REGEDIT4
+
+[HKEY_CLASSES_ROOT\CSExeCOMServer.DAQLibrary]
+@="CSExeCOMServer.DAQLibrary"
+
+[HKEY_CLASSES_ROOT\CSExeCOMServer.DAQLibrary\CLSID]
+@="{DB9935C1-19C5-4ED2-ADD2-9A57E19F53A6}"
+
+[HKEY_CLASSES_ROOT\CLSID\{DB9935C1-19C5-4ED2-ADD2-9A57E19F53A6}]
+@="CSExeCOMServer.DAQLibrary"
+
+[HKEY_CLASSES_ROOT\CLSID\{DB9935C1-19C5-4ED2-ADD2-9A57E19F53A6}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="CSExeCOMServer.DAQLibrary"
+"Assembly"="DaqServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4ee000a53006bb3f"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{DB9935C1-19C5-4ED2-ADD2-9A57E19F53A6}\InprocServer32\1.0.0.0]
+"Class"="CSExeCOMServer.DAQLibrary"
+"Assembly"="DaqServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4ee000a53006bb3f"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{DB9935C1-19C5-4ED2-ADD2-9A57E19F53A6}\ProgId]
+@="CSExeCOMServer.DAQLibrary"
+
+[HKEY_CLASSES_ROOT\CLSID\{DB9935C1-19C5-4ED2-ADD2-9A57E19F53A6}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]

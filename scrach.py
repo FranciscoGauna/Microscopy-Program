@@ -1,4 +1,4 @@
-from Model.AnfatecDriver import VirtualLockin
+from Drivers.Lockin.anfatec_driver import VirtualLockin
 
 lock = VirtualLockin()
 

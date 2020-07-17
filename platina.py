@@ -1,6 +1,6 @@
-from Model.MotorDriver import Motor
+from Drivers.Motor.MotorDriver import Motor
 from Backend.platina_backend import PlatinaBackend
-from View.frontend.platina_frontend import MotorSelector
+from Drivers.motor_selector import MotorSelector
 from lantz.core.log import log_to_screen, INFO
 from lantz.qt import start_gui_app, wrap_driver_cls
 

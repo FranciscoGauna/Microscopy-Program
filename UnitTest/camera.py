@@ -1,6 +1,6 @@
 import cv2
 from random import shuffle
-from Model.MotorDriver import get_available_motors, Motor
+from Drivers.Motor.MotorDriver import get_available_motors, Motor
 from time import sleep
 from os.path import exists
 

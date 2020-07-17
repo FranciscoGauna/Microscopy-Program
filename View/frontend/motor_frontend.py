@@ -1,11 +1,8 @@
 from PyQt5.QtCore import QTimer
-from PyQt5.QtWidgets import QFileDialog, QSpinBox
 from lantz.qt import Frontend
-from lantz.qt.connect import connect_feat
-from Model.MotorDriver import Motor, get_available_motors
+from Drivers.Motor.MotorDriver import Motor
 from Backend.platina_backend import PlatinaBackend
 from View.localization import locale
-from pathlib import Path
 
 
 class MotorFrontend(Frontend):

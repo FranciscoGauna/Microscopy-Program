@@ -1,4 +1,4 @@
-from Model.AnfatecDriver import AnfatecAMU24
+from Drivers.Lockin.anfatec_driver import AnfatecAMU24
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QLCDNumber, QComboBox, QVBoxLayout, QHBoxLayout, QLabel
 from View.localization import locale
