@@ -8,7 +8,7 @@ from View.pyqt_utils import delete_items_of_layout
 
 class PllPanel:
     """This class is used for building and managing a panel that interacts with the pll and lockin values, providing an
-     appropiate interface for situations where the pll is on or off
+     appropriate interface for situations where the pll is on or off
      This class should be saved in a internal variable of the window, or it will get garbage collected, and the timers
      and update methods will not work"""
     def __init__(self, lockin):

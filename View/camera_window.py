@@ -16,7 +16,7 @@ from Backend.lines_backend import LineController
 from Backend.frequency_backend import FrequencyController
 
 
-class CameraControlUi(Frontend):
+class CameraWindow(Frontend):
     backend: CameraBackend
     gui = ('frontend', 'UI', 'camera_button.ui')
     timer = QTimer()

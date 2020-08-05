@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>321</width>
+    <height>35</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <widget class="QRadioButton" name="camera_rb">
+    <widget class="QCheckBox" name="camera_cb">
      <property name="text">
       <string>RadioButton</string>
      </property>

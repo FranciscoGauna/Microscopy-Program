@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtWidgets import QApplication
 newApp = QApplication(sys.argv)
 from Backend.camera_backend import CameraBackend
-from View.camera_window import CameraControlUi
+from View.camera_window import CameraWindow
 from lantz.qt import start_gui_app
 import cv2
 
@@ -16,7 +16,7 @@ if not ret:
     raise Exception("The camera isn't plugged in")
 
 app = CameraBackend(cap)
-start_gui_app(app, CameraControlUi)
+start_gui_app(app, CameraWindow)
 
 cap.release()
 cv2.destroyAllWindows()

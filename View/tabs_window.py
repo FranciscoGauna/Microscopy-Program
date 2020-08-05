@@ -9,6 +9,7 @@ from View.frontend.experiment_tab import ExperimentTab
 from View.frontend.lockin_options import LockinOptions
 from View.frontend.lockin_pll import LockinPll
 from View.frontend.lockin_tab import LockinTab
+from View.frontend.motor_frontend import DualMotorFrontend
 from View.frontend.offset_frontend import OffsetFrontend
 from View.frontend.point_list import OperationList
 from Model.run_experiment import ExperimentWorker
@@ -26,7 +27,7 @@ class TabsFrontend(Frontend):
     lockin_options: LockinOptions
     lockin_pll: LockinPll
 
-    def __init__(self, image, lockin, motor_interface, focus_backend):
+    def __init__(self, image, lockin, motor_backend, focus_backend):
         super().__init__()
 
         lockin_backend = LockinBackend(lockin=lockin)
@@ -34,7 +35,7 @@ class TabsFrontend(Frontend):
 
         self.widget.lockin_tab_lt.addWidget(self.lockin_tab)
 
-        self.widget.motor_tab_lt.addWidget(motor_interface, 1, 1)
+        self.widget.motor_tab_lt.addWidget(DualMotorFrontend(backend=motor_backend), 1, 1)
 
         freq_backend = FrequencyController()
         self.frequency_ft = FrequencyStepFrontend(backend=freq_backend)
@@ -48,8 +49,8 @@ class TabsFrontend(Frontend):
         self.widget.top_c_lt.addWidget(self.offset_ft)
         self.widget.bot_c_lt.addWidget(self.operation_list_ft)
 
-        experiment_worker = ExperimentWorker(self.operation_list_ft.operation_list, motor_interface.backend,
-                                             lockin_backend, focus_backend)
+        experiment_worker = ExperimentWorker(self.operation_list_ft.operation_list, motor_backend, lockin_backend,
+                                             focus_backend)
         experiment_backend = ExperimentBackend(worker=experiment_worker)
         self.experiment_tab = ExperimentTab(backend=experiment_backend)
         self.widget.experiment_lt.addWidget(self.experiment_tab)

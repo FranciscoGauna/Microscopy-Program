@@ -33,6 +33,16 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="load_conf_bt">
+       <property name="styleSheet">
+        <string notr="true">background-color: Pale gray;</string>
+       </property>
+       <property name="text">
+        <string>PushButton</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
   </layout>
