@@ -1,4 +1,6 @@
 import math
+import sys
+import traceback
 from datetime import datetime
 
 from PyQt5.QtCore import Qt, QTimer
@@ -6,7 +8,7 @@ from PyQt5.QtGui import QPainter, QColor, QBrush
 from lantz.qt import Frontend
 from PyQt5.QtChart import QLineSeries, QChart, QChartView, QValueAxis
 
-from Backend.lockin_options import LockinBackend
+from Backend.lockin_backend import LockinBackend
 from View.frontend.lockin_tab_options import LockinTabOptions
 from View.localization import locale
 from magic_numbers import max_point_chart, chart_volt_resolution, update_timedelta_chart
@@ -134,107 +136,111 @@ class LockinTab(Frontend):
         self.timer.start()
 
     def expand_line_series(self):
-        x = (datetime.now() - self.start_time).total_seconds()
+        try:
+            x = (datetime.now() - self.start_time).total_seconds()
 
-        amp_point = None
-        y = self.backend.get_amplitude() * chart_volt_resolution
-        if self.amp_series.count() > max_point_chart:
-            amp_point = self.amp_series.at(0)
-            self.amp_series.remove(0)
-        if self.widget.amp_cb.isChecked():
-            if amp_point is not None and amp_point.y() == self.amp_y_max:
-                self.amp_y_max = find_max_series(self.amp_series)
-            elif amp_point is not None and amp_point.y() == self.amp_y_min:
-                self.amp_y_min = find_min_series(self.amp_series)
-            if y > self.amp_y_max:
-                self.amp_y_max = y
-            elif y < self.amp_y_min:
-                self.amp_y_min = y
-            self.widget.amp_max_sb.setValue(self.amp_y_max)
-            self.widget.amp_min_sb.setValue(self.amp_y_min)
-        else:
-            self.amp_y_max = self.widget.amp_max_sb.value()
-            self.amp_y_min = self.widget.amp_min_sb.value()
-        self.amp_series.append(x, y)
-        axe = self.amp_chart.axes(Qt.Horizontal)[0]
-        axe.setRange(self.amp_series.at(0).x(), self.amp_series.at(len(self.amp_series) - 1).x())
-        self.amp_y_axe.setRange(self.amp_y_min, self.amp_y_max)
-        self.amp_chart_view.repaint()
+            amp_point = None
+            y = self.backend.get_amplitude() * chart_volt_resolution
+            if self.amp_series.count() > max_point_chart:
+                amp_point = self.amp_series.at(0)
+                self.amp_series.remove(0)
+            if self.widget.amp_cb.isChecked():
+                if amp_point is not None and amp_point.y() == self.amp_y_max:
+                    self.amp_y_max = find_max_series(self.amp_series)
+                elif amp_point is not None and amp_point.y() == self.amp_y_min:
+                    self.amp_y_min = find_min_series(self.amp_series)
+                if y > self.amp_y_max:
+                    self.amp_y_max = y
+                elif y < self.amp_y_min:
+                    self.amp_y_min = y
+                self.widget.amp_max_sb.setValue(self.amp_y_max)
+                self.widget.amp_min_sb.setValue(self.amp_y_min)
+            else:
+                self.amp_y_max = self.widget.amp_max_sb.value()
+                self.amp_y_min = self.widget.amp_min_sb.value()
+            self.amp_series.append(x, y)
+            axe = self.amp_chart.axes(Qt.Horizontal)[0]
+            axe.setRange(self.amp_series.at(0).x(), self.amp_series.at(len(self.amp_series) - 1).x())
+            self.amp_y_axe.setRange(self.amp_y_min, self.amp_y_max)
+            self.amp_chart_view.repaint()
 
-        phase_point = None
-        y = self.backend.get_phase()
-        self.phase_series.append(x, y)
-        if self.phase_series.count() > max_point_chart:
-            phase_point = self.phase_series.at(0)
-            self.phase_series.remove(0)
-        if self.widget.phase_cb.isChecked():
-            if phase_point is not None and phase_point.y() == self.phase_y_max:
-                self.phase_y_max = find_max_series(self.phase_series)
-            elif phase_point is not None and phase_point.y() == self.phase_y_min:
-                self.phase_y_min = find_min_series(self.phase_series)
-            if y > self.phase_y_max:
-                self.phase_y_max = y
-            elif y < self.phase_y_min:
-                self.phase_y_min = y
-            self.widget.phase_max_sb.setValue(self.phase_y_max)
-            self.widget.phase_min_sb.setValue(self.phase_y_min)
-        else:
-            self.phase_y_max = self.widget.phase_max_sb.value()
-            self.phase_y_min = self.widget.phase_min_sb.value()
-        axe = self.phase_chart.axes(Qt.Horizontal)[0]
-        axe.setRange(self.phase_series.at(0).x(), self.phase_series.at(len(self.phase_series) - 1).x())
-        self.phase_y_axe.setRange(self.phase_y_min, self.phase_y_max)
-        self.phase_chart_view.repaint()
+            phase_point = None
+            y = self.backend.get_phase()
+            self.phase_series.append(x, y)
+            if self.phase_series.count() > max_point_chart:
+                phase_point = self.phase_series.at(0)
+                self.phase_series.remove(0)
+            if self.widget.phase_cb.isChecked():
+                if phase_point is not None and phase_point.y() == self.phase_y_max:
+                    self.phase_y_max = find_max_series(self.phase_series)
+                elif phase_point is not None and phase_point.y() == self.phase_y_min:
+                    self.phase_y_min = find_min_series(self.phase_series)
+                if y > self.phase_y_max:
+                    self.phase_y_max = y
+                elif y < self.phase_y_min:
+                    self.phase_y_min = y
+                self.widget.phase_max_sb.setValue(self.phase_y_max)
+                self.widget.phase_min_sb.setValue(self.phase_y_min)
+            else:
+                self.phase_y_max = self.widget.phase_max_sb.value()
+                self.phase_y_min = self.widget.phase_min_sb.value()
+            axe = self.phase_chart.axes(Qt.Horizontal)[0]
+            axe.setRange(self.phase_series.at(0).x(), self.phase_series.at(len(self.phase_series) - 1).x())
+            self.phase_y_axe.setRange(self.phase_y_min, self.phase_y_max)
+            self.phase_chart_view.repaint()
 
-        real_point = None
-        y = self.backend.get_real_part() * chart_volt_resolution
-        self.real_series.append(x, y)
-        if self.real_series.count() > max_point_chart:
-            real_point = self.real_series.at(0)
-            self.real_series.remove(0)
-        if self.widget.real_cb.isChecked():
-            if real_point is not None and real_point.y() == self.real_y_max:
-                self.real_y_max = find_max_series(self.real_series)
-            elif real_point is not None and real_point.y() == self.real_y_min:
-                self.real_y_min = find_min_series(self.real_series)
-            if y > self.real_y_max:
-                self.real_y_max = y
-            elif y < self.real_y_min:
-                self.real_y_min = y
-            self.widget.real_max_sb.setValue(self.real_y_max)
-            self.widget.real_min_sb.setValue(self.real_y_min)
-        else:
-            self.real_y_max = self.widget.real_max_sb.value()
-            self.real_y_min = self.widget.real_min_sb.value()
-        axe = self.real_chart.axes(Qt.Horizontal)[0]
-        axe.setRange(self.real_series.at(0).x(), self.real_series.at(len(self.real_series) - 1).x())
-        self.real_y_axe.setRange(self.real_y_min, self.real_y_max)
-        self.real_chart_view.repaint()
+            real_point = None
+            y = self.backend.get_real_part() * chart_volt_resolution
+            self.real_series.append(x, y)
+            if self.real_series.count() > max_point_chart:
+                real_point = self.real_series.at(0)
+                self.real_series.remove(0)
+            if self.widget.real_cb.isChecked():
+                if real_point is not None and real_point.y() == self.real_y_max:
+                    self.real_y_max = find_max_series(self.real_series)
+                elif real_point is not None and real_point.y() == self.real_y_min:
+                    self.real_y_min = find_min_series(self.real_series)
+                if y > self.real_y_max:
+                    self.real_y_max = y
+                elif y < self.real_y_min:
+                    self.real_y_min = y
+                self.widget.real_max_sb.setValue(self.real_y_max)
+                self.widget.real_min_sb.setValue(self.real_y_min)
+            else:
+                self.real_y_max = self.widget.real_max_sb.value()
+                self.real_y_min = self.widget.real_min_sb.value()
+            axe = self.real_chart.axes(Qt.Horizontal)[0]
+            axe.setRange(self.real_series.at(0).x(), self.real_series.at(len(self.real_series) - 1).x())
+            self.real_y_axe.setRange(self.real_y_min, self.real_y_max)
+            self.real_chart_view.repaint()
 
-        imag_point = None
-        y = self.backend.get_imaginary_part() * chart_volt_resolution
-        self.imag_series.append(x, y)
-        if self.imag_series.count() > max_point_chart:
-            imag_point = self.imag_series.at(0)
-            self.imag_series.remove(0)
-        if self.widget.imag_cb.isChecked():
-            if imag_point is not None and imag_point.y() == self.imag_y_max:
-                self.imag_y_max = find_max_series(self.imag_series)
-            elif imag_point is not None and imag_point.y() == self.imag_y_min:
-                self.imag_y_min = find_min_series(self.imag_series)
-            if y > self.imag_y_max:
-                self.imag_y_max = y
-            elif y < self.imag_y_min:
-                self.imag_y_min = y
-            self.widget.imag_max_sb.setValue(self.imag_y_max)
-            self.widget.imag_min_sb.setValue(self.imag_y_min)
-        else:
-            self.imag_y_max = self.widget.imag_max_sb.value()
-            self.imag_y_min = self.widget.imag_min_sb.value()
-        axe = self.imag_chart.axes(Qt.Horizontal)[0]
-        axe.setRange(self.imag_series.at(0).x(), self.imag_series.at(len(self.imag_series) - 1).x())
-        self.imag_y_axe.setRange(self.imag_y_min, self.imag_y_max)
-        self.imag_chart_view.repaint()
+            imag_point = None
+            y = self.backend.get_imaginary_part() * chart_volt_resolution
+            self.imag_series.append(x, y)
+            if self.imag_series.count() > max_point_chart:
+                imag_point = self.imag_series.at(0)
+                self.imag_series.remove(0)
+            if self.widget.imag_cb.isChecked():
+                if imag_point is not None and imag_point.y() == self.imag_y_max:
+                    self.imag_y_max = find_max_series(self.imag_series)
+                elif imag_point is not None and imag_point.y() == self.imag_y_min:
+                    self.imag_y_min = find_min_series(self.imag_series)
+                if y > self.imag_y_max:
+                    self.imag_y_max = y
+                elif y < self.imag_y_min:
+                    self.imag_y_min = y
+                self.widget.imag_max_sb.setValue(self.imag_y_max)
+                self.widget.imag_min_sb.setValue(self.imag_y_min)
+            else:
+                self.imag_y_max = self.widget.imag_max_sb.value()
+                self.imag_y_min = self.widget.imag_min_sb.value()
+            axe = self.imag_chart.axes(Qt.Horizontal)[0]
+            axe.setRange(self.imag_series.at(0).x(), self.imag_series.at(len(self.imag_series) - 1).x())
+            self.imag_y_axe.setRange(self.imag_y_min, self.imag_y_max)
+            self.imag_chart_view.repaint()
+        except:
+            traceback.print_exc()
+            sys.exit()
 
 
 def find_max_series(serie: QLineSeries):

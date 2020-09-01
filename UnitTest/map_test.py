@@ -1,4 +1,4 @@
-from Backend.lockin_options import LockinBackend
+from Backend.lockin_backend import LockinBackend
 from Backend.platina_backend import PlatinaBackend
 from Drivers.Lockin.anfatec_driver import VirtualLockin
 from Drivers.Motor.MotorDriver import Motor

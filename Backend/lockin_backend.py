@@ -3,7 +3,11 @@ from Drivers.Lockin.anfatec_driver import AnfatecAMU24
 
 
 class LockinBackend(Backend):
-    lockin: AnfatecAMU24 = InstrumentSlot
+    lockin: AnfatecAMU24
+
+    def __init__(self, lockin, **instruments_and_backends):
+        self.lockin = lockin
+        super().__init__(**instruments_and_backends)
 
     def set_lockin_tc(self, num):
         self.lockin.time_constant = num
@@ -30,29 +34,28 @@ class LockinBackend(Backend):
         return self.lockin.coupling
 
     def get_amplitude(self):
-        self.log_debug('Updating Amplitude')
-        return self.lockin.amplitude.magnitude
+        return self.lockin.amplitude().magnitude
 
     def get_phase(self):
-        self.log_debug('Updating Amplitude')
-        return self.lockin.phase.magnitude
+        return self.lockin.phase().magnitude
 
     def get_real_part(self):
-        self.log_debug('Updating Amplitude')
-        return self.lockin.real_part_x()
+        return self.lockin.real_part_x().magnitude
 
     def get_imaginary_part(self):
-        self.log_debug('Updating Amplitude')
-        return self.lockin.imaginary_part_y()
+        return self.lockin.imaginary_part_y().magnitude
 
     def pll(self):
-        return self.lockin.pll
+        return self.lockin.reference_internal
 
     def toggle_pll(self):
-        self.lockin.pll = not self.lockin.pll
+        self.lockin.reference_internal = not self.lockin.reference_internal
 
     def overload(self):
-        return self.lockin.overloaded
+        try:
+            return self.lockin.overloaded
+        except:
+            return False
 
     def ext_frequency(self):
-        return self.lockin.pll_frequency()
+        return self.lockin.frequency.magnitude

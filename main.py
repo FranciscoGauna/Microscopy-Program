@@ -15,7 +15,8 @@ from View.program_window import ProgramWindow
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-l", "--locale", dest='locale', action='store', help="Indicates in which language should be launched the program")
+    parser.add_argument("-l", "--locale", dest='locale', action='store', help="Indicates in which language should be "
+                                                                              "launched the program. Examples: en es")
     args = parser.parse_args()
     try:
         config_file["DEFAULT"]["env"]

@@ -6,7 +6,7 @@ from PyQt5.QtChart import QChart, QChartView, QLineSeries, QValueAxis, QBarSerie
 from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QSizePolicy
 
-from Backend.lockin_options import LockinBackend
+from Backend.lockin_backend import LockinBackend
 from View.localization import locale
 
 max_points = 1000

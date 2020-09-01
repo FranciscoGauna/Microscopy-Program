@@ -55,18 +55,20 @@ class ProgramWindow(Frontend):
 
             try:
                 motor_backend = self.selector_frontend.dual_motor_backend()
-            except MotorAlreadyOpenException:
+                lockin = self.selector_frontend.lockin()
+                daq = self.selector_frontend.daq()
+                camera = self.selector_frontend.camera()
+            except Exception as e:
                 error_dialog = QMessageBox()
-                error_dialog.setText(locale.get("same_motor_exception", "str_same_motor_exception"))
+                error_dialog.setText(str(e))
                 error_dialog.exec()
                 self.initialized = False
                 return
 
-            self.camera_bc = CameraBackend(self.selector_frontend.camera())
+            self.camera_bc = CameraBackend(camera)
             self.image_ft = CameraOnlyWindow(backend=self.camera_bc)
 
-            lockin = self.selector_frontend.lockin()
-            focus_backend = FocusBackend(self.selector_frontend.daq())
+            focus_backend = FocusBackend(daq)
 
             self.tab_frontend = TabsFrontend(self.image_ft.image, lockin, motor_backend, focus_backend)
             self.point_gen_ft = self.tab_frontend.point_gen_ft
@@ -77,7 +79,7 @@ class ProgramWindow(Frontend):
             self.selector_frontend.close()
 
             # Create window for focus control
-            self.focus_frontend = FocusFrontend(backend=focus_backend)
+            self.focus_frontend = FocusFrontend(self, backend=focus_backend)
             self.focus_frontend.show()
 
             # Setup buttons for camera control
@@ -99,9 +101,10 @@ class ProgramWindow(Frontend):
         self.is_closing = True
         if self.image_ft is not None:
             self.image_ft.close()
+        if hasattr(self, "focus_frontend"):
+            self.focus_frontend.close()
         self.deleteLater()
         event.accept()
-
 
     def toggle_camera(self):
         if self.camera_open:

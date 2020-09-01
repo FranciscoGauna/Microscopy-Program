@@ -1,9 +1,12 @@
+import sys
+import traceback
+
 from lantz.qt import Frontend
 from lantz.qt.connect import connect_feat
 from PyQt5.QtCore import QTimer
 
 from Drivers.Lockin.anfatec_driver import Coupling
-from Backend.lockin_options import LockinBackend
+from Backend.lockin_backend import LockinBackend
 from View.localization import locale
 
 
@@ -19,13 +22,8 @@ class LockinTabOptions(Frontend):
         self.widget.h_label.setText(locale.get("harmonic", "str_harmonic"))
 
         self.widget.ig_label.setText(locale.get("input_gain", "str_input_gain"))
-        self.widget.ig_0.setText(locale.get("1_time", "str_1_time"))
-        self.widget.ig_1.setText(locale.get("10_times", "str_10_times"))
-        self.widget.ig_2.setText(locale.get("100_times", "str_100_times"))
 
         self.widget.coupling_label.setText(locale.get("coupling", "str_coupling"))
-        self.widget.coupling_0.setText(locale.get("dc_coupling", "str_dc_coupling"))
-        self.widget.coupling_1.setText(locale.get("ac_coupling", "str_ac_coupling"))
 
         self.widget.pll_check.setText(locale.get("external_reference", "str_external_reference"))
 
@@ -43,29 +41,31 @@ class LockinTabOptions(Frontend):
         super().connect_backend()
 
         connect_feat(self.widget.h_spinbox, self.backend.lockin, "harmonic")
-        connect_feat(self.widget.roll_off_cb, self.backend.lockin, "lockin_roll_off")
-        connect_feat(self.widget.tc_cb, self.backend.lockin, "time_constant")
+        connect_feat(self.widget.roll_off_cb, self.backend.lockin, "filter_db_per_oct")
+        connect_feat(self.widget.tc_cb, self.backend.lockin, "time_constants")
+        connect_feat(self.widget.ig_cb, self.backend.lockin, "sensitivity")
+        connect_feat(self.widget.coupling_cb, self.backend.lockin, "input_coupling")
 
-        ig_rb = {1: self.widget.ig_0,
-                 10: self.widget.ig_1,
-                 100: self.widget.ig_2}
-        ig_rb[self.backend.get_input_gain()].setChecked(True)
-        self.widget.ig_0.pressed.connect(lambda: self.backend.set_input_gain(1))
-        self.widget.ig_1.pressed.connect(lambda: self.backend.set_input_gain(10))
-        self.widget.ig_2.pressed.connect(lambda: self.backend.set_input_gain(100))
+        #ig_rb = {1: self.widget.ig_0,
+                 #10: self.widget.ig_1,
+                 #100: self.widget.ig_2}
+        #ig_rb[self.backend.get_input_gain()].setChecked(True)
+        #self.widget.ig_0.pressed.connect(lambda: self.backend.set_input_gain(1))
+        #self.widget.ig_1.pressed.connect(lambda: self.backend.set_input_gain(10))
+        #self.widget.ig_2.pressed.connect(lambda: self.backend.set_input_gain(100))
 
-        coupling_rb = {Coupling.dc: self.widget.coupling_0,
-                       Coupling.ac: self.widget.coupling_1}
-        coupling_rb[self.backend.get_coupling()].setChecked(True)
-        self.widget.coupling_0.pressed.connect(lambda: self.backend.set_coupling(Coupling.dc))
-        self.widget.coupling_1.pressed.connect(lambda: self.backend.set_coupling(Coupling.ac))
+        #coupling_rb = {Coupling.dc: self.widget.coupling_0,
+        #               Coupling.ac: self.widget.coupling_1}
+        #coupling_rb[self.backend.get_coupling()].setChecked(True)
+        #self.widget.coupling_0.pressed.connect(lambda: self.backend.set_coupling(Coupling.dc))
+        #self.widget.coupling_1.pressed.connect(lambda: self.backend.set_coupling(Coupling.ac))
 
         self.widget.pll_check.toggled.connect(self.change_panel)
         self.widget.pll_check.setChecked(self.backend.pll())
 
-        connect_feat(self.widget.frec_input, self.backend.lockin, "lockin_frequency")
-        connect_feat(self.widget.amp_input, self.backend.lockin, "lockin_amplitude")
-        connect_feat(self.widget.phase_input, self.backend.lockin, "lockin_phase")
+        connect_feat(self.widget.frec_input, self.backend.lockin, "frequency")
+        connect_feat(self.widget.amp_input, self.backend.lockin, "sine_output_amplitude")
+        connect_feat(self.widget.phase_input, self.backend.lockin, "reference_phase_shift")
 
         self.timer.setInterval(1000)
         self.timer.timeout.connect(self.check_ext_f)
@@ -80,12 +80,20 @@ class LockinTabOptions(Frontend):
         self.backend.toggle_pll()
 
     def check_overload(self):
-        if self.backend.overload():
-            self.widget.overload_label.setText(locale.get("overload", "str_overload"))
-            self.widget.overload_label.setStyleSheet("background-color: red;")
-        else:
-            self.widget.overload_label.setText("")
-            self.widget.overload_label.setStyleSheet("")
+        try:
+            if self.backend.overload():
+                self.widget.overload_label.setText(locale.get("overload", "str_overload"))
+                self.widget.overload_label.setStyleSheet("background-color: red;")
+            else:
+                self.widget.overload_label.setText("")
+                self.widget.overload_label.setStyleSheet("")
+        except:
+            traceback.print_exc()
+            sys.exit()
 
     def check_ext_f(self):
-        self.widget.ext_f_display.setValue(self.backend.ext_frequency())
+        try:
+            self.widget.ext_f_display.setValue(self.backend.ext_frequency())
+        except:
+            traceback.print_exc()
+            sys.exit()

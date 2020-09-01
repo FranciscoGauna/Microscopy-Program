@@ -11,6 +11,10 @@ class FocusFrontend(Frontend):
     gui = ("UI", "focus_control.ui")
     backend: FocusBackend
 
+    def __init__(self, main_window, backend=None):
+        super().__init__(backend=backend)
+        self.main_window = main_window
+
     def setupUi(self):
         self.widget.control_focus_cb.setText(locale.get("control_focus", "str_control_focus"))
 
@@ -64,3 +68,9 @@ class FocusFrontend(Frontend):
         chart_view = QChartView()
         chart_view.setChart(chart)
         self.widget.reflectance_chart_lt.addWidget(chart_view)
+
+    def closeEvent(self, event):
+        if not self.main_window.is_closing:
+            self.main_window.close()
+        event.accept()
+

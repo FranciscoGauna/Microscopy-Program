@@ -6,9 +6,11 @@ locale_en = {
     "normal": "Normal",
     "low_noise": "Low Noise",
 }
+
 locale_es = {
     "box_gain": "Ganancia"
 }
+
 _local_meta_dict = {
     "en": locale_en,
     "es": locale_es

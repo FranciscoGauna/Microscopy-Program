@@ -2,7 +2,7 @@ from lantz.qt import Frontend
 from PyQt5.QtCore import QTimer
 from lantz.qt.connect import connect_feat
 
-from Backend.lockin_options import LockinBackend
+from Backend.lockin_backend import LockinBackend
 from View.localization import locale
 
 

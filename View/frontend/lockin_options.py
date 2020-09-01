@@ -2,7 +2,7 @@ from lantz.qt import Frontend
 from lantz.qt.connect import connect_feat
 
 from Drivers.Lockin.anfatec_driver import Coupling
-from Backend.lockin_options import LockinBackend
+from Backend.lockin_backend import LockinBackend
 from View.localization import locale
 
 

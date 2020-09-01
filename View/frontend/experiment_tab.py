@@ -46,7 +46,7 @@ class ExperimentTab(Frontend):
 
     def connect_backend(self):
         # Progress bar control
-        connect_feat(self.widget.time_constant_cb, self.backend.lockin_backend().lockin, "time_constant")
+        connect_feat(self.widget.time_constant_cb, self.backend.lockin_backend().lockin, "time_constants")
 
         # Chart
         self.amp_chart = AmpChart(self.widget.chart_lt, self.backend)

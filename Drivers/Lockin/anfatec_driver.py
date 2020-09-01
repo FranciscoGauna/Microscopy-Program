@@ -186,7 +186,7 @@ class AnfatecAMU24(foreign.LibraryDriver):
         , you should use the method export_settings and add it to the kwargs"""
         # Popeo las variables que usa el programa
         pll = kwargs.pop("pll", False)
-        time_constant = (kwargs.pop("time_constant", "5 ms"))
+        time_constants = (kwargs.pop("time_constants", "5 ms"))
         roll_off = (kwargs.pop("roll_off", "12dB/oct"))
         input_gain = kwargs.pop("input_gain", 1)
         harmonic = kwargs.pop("harmonic", 1)
@@ -207,7 +207,7 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self.lib._SetLockInFreq.restype = foreign.TYPES["f64"]
 
         self.pll = pll
-        self.time_constant = time_constant
+        self.time_constant = time_constants
         self.lockin_roll_off = roll_off
         self.input_gain = input_gain
         self.harmonic = harmonic
@@ -287,15 +287,15 @@ class AnfatecAMU24(foreign.LibraryDriver):
 
     @Feat(values={"0.25 ms": 0, "0.5 ms": 1, "1 ms": 2, "2 ms": 3, "5 ms": 4,  "10 ms": 5,  "20 ms": 6,  "50 ms": 7,
                   "100 ms": 8,  "200 ms": 9, "500 ms": 10,  "1000 ms": 11,  "2000 ms": 12, "5000 ms": 13})
-    def time_constant(self):
+    def time_constants(self):
         """This function sets the time constant that the lockin uses for integration,
          and it should be an integer between 0 and 13, with the following value
         assigned to each number: 0 = 0.25ms, 1 = 0.5ms, 2 = 1ms, 3 = 2ms, 4 = 5ms, ... 13 = 5s"""
         # 0 = 0.25ms, 1 = 0.5ms, 2 = 1ms, 3 = 2ms, 4 = 5ms, ... 13 = 5s
         return self._time_constant
 
-    @time_constant.setter
-    def time_constant(self, num):
+    @time_constants.setter
+    def time_constants(self, num):
         """This function sets the time constant that the lockin uses for integration,
         and it should be an integer between 0 and 13, with the following value
         assigned to each number: 0 = 0.25ms, 1 = 0.5ms, 2 = 1ms, 3 = 2ms, 4 = 5ms, ... 13 = 5s"""

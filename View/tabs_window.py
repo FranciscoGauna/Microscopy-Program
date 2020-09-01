@@ -2,7 +2,7 @@ from lantz.qt import Frontend
 
 from Backend.experiment_backend import ExperimentBackend
 from Backend.frequency_backend import FrequencyController
-from Backend.lockin_options import LockinBackend
+from Backend.lockin_backend import LockinBackend
 from View.frontend.FrequencyStepFrontend import FrequencyStepFrontend
 from View.frontend.camera_control_ui import ImageDrawerFt
 from View.frontend.experiment_tab import ExperimentTab

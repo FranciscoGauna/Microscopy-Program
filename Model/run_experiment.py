@@ -8,7 +8,7 @@ from datetime import datetime
 from PyQt5.QtCore import QThread, QTimer
 from PyQt5.QtGui import QImage, QColor
 
-from Backend.lockin_options import LockinBackend
+from Backend.lockin_backend import LockinBackend
 from Backend.platina_backend import PlatinaBackend
 from Model.operation import Operation
 from Model.result_point import ResultPoint
