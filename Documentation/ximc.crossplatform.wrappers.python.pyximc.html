@@ -1,0 +1,3662 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module ximc.crossplatform.wrappers.python.pyximc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="ximc.html"><font color="#ffffff">ximc</font></a>.<a href="ximc.crossplatform.html"><font color="#ffffff">crossplatform</font></a>.<a href="ximc.crossplatform.wrappers.html"><font color="#ffffff">wrappers</font></a>.<a href="ximc.crossplatform.wrappers.python.html"><font color="#ffffff">python</font></a>.pyximc</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cfedacking%5Csource%5Cpiton%5Cmicroscopy-program%5Cximc%5Ccrossplatform%5Cwrappers%5Cpython%5Cpyximc.py">c:\users\fedacking\source\piton\microscopy-program\ximc\crossplatform\wrappers\python\pyximc.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="platform.html">platform</a><br>
+</td><td width="25%" valign=top><a href="ctypes.util.html">ctypes.util</a><br>
+</td><td width="25%" valign=top><a href="ctypes.wintypes.html">ctypes.wintypes</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="_ctypes.html#Structure">_ctypes.Structure</a>(_ctypes._CData)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#accessories_settings_t">accessories_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#analog_data_t">analog_data_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#brake_settings_t">brake_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#calibration_settings_t">calibration_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#calibration_t">calibration_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#chart_data_t">chart_data_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#command_add_sync_in_action_calb_t">command_add_sync_in_action_calb_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#command_add_sync_in_action_t">command_add_sync_in_action_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#command_change_motor_t">command_change_motor_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#control_settings_calb_t">control_settings_calb_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#control_settings_t">control_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#controller_name_t">controller_name_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#ctp_settings_t">ctp_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#debug_read_t">debug_read_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#debug_write_t">debug_write_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#device_enumeration_t">device_enumeration_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#device_information_t">device_information_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#device_network_information_t">device_network_information_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#edges_settings_calb_t">edges_settings_calb_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#edges_settings_t">edges_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#emf_settings_t">emf_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#encoder_information_t">encoder_information_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#encoder_settings_t">encoder_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#engine_advansed_setup_t">engine_advansed_setup_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#engine_settings_calb_t">engine_settings_calb_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#engine_settings_t">engine_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#entype_settings_t">entype_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#extended_settings_t">extended_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#extio_settings_t">extio_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#feedback_settings_t">feedback_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#gear_information_t">gear_information_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#gear_settings_t">gear_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#get_position_calb_t">get_position_calb_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#get_position_t">get_position_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#globally_unique_identifier_t">globally_unique_identifier_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#hallsensor_information_t">hallsensor_information_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#hallsensor_settings_t">hallsensor_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#home_settings_calb_t">home_settings_calb_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#home_settings_t">home_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#init_random_t">init_random_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#joystick_settings_t">joystick_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#measurements_t">measurements_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#motor_information_t">motor_information_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#motor_settings_t">motor_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#move_settings_calb_t">move_settings_calb_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#move_settings_t">move_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#nonvolatile_memory_t">nonvolatile_memory_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#pid_settings_t">pid_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#power_settings_t">power_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#secure_settings_t">secure_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#serial_number_t">serial_number_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#set_position_calb_t">set_position_calb_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#set_position_t">set_position_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#stage_information_t">stage_information_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#stage_name_t">stage_name_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#stage_settings_t">stage_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#status_calb_t">status_calb_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#status_t">status_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#sync_in_settings_calb_t">sync_in_settings_calb_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#sync_in_settings_t">sync_in_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#sync_out_settings_calb_t">sync_out_settings_calb_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#sync_out_settings_t">sync_out_settings_t</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#uart_settings_t">uart_settings_t</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#BackEMFFlags">BackEMFFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#BorderFlags">BorderFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#BrakeFlags">BrakeFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#ControlFlags">ControlFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#ControllerFlags">ControllerFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#CtpFlags">CtpFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#DriverType">DriverType</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#EncodeStatus">EncodeStatus</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#EncoderSettingsFlags">EncoderSettingsFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#EnderFlags">EnderFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#EngineFlags">EngineFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#EngineType">EngineType</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#EnumerateFlags">EnumerateFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#ExtioModeFlags">ExtioModeFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#ExtioSetupFlags">ExtioSetupFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#FeedbackFlags">FeedbackFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#FeedbackType">FeedbackType</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#GPIOFlags">GPIOFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#HomeFlags">HomeFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#JoyFlags">JoyFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#LSFlags">LSFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#MBSettingsFlags">MBSettingsFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#MicrostepMode">MicrostepMode</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#MotorTypeFlags">MotorTypeFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#MoveState">MoveState</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#MvcmdStatus">MvcmdStatus</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#PositionFlags">PositionFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#PowerFlags">PowerFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#PowerState">PowerState</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#Result">Result</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#SecureFlags">SecureFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#StateFlags">StateFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#SyncInFlags">SyncInFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#SyncOutFlags">SyncOutFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#TSSettingsFlags">TSSettingsFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#UARTSetupFlags">UARTSetupFlags</a>
+</font></dt><dt><font face="helvetica, arial"><a href="ximc.crossplatform.wrappers.python.pyximc.html#WindStatus">WindStatus</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BackEMFFlags">class <strong>BackEMFFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>BACK_EMF_INDUCTANCE_AUTO</strong> = 1</dl>
+
+<dl><dt><strong>BACK_EMF_KM_AUTO</strong> = 4</dl>
+
+<dl><dt><strong>BACK_EMF_RESISTANCE_AUTO</strong> = 2</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BorderFlags">class <strong>BorderFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>BORDERS_SWAP_MISSET_DETECTION</strong> = 8</dl>
+
+<dl><dt><strong>BORDER_IS_ENCODER</strong> = 1</dl>
+
+<dl><dt><strong>BORDER_STOP_LEFT</strong> = 2</dl>
+
+<dl><dt><strong>BORDER_STOP_RIGHT</strong> = 4</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BrakeFlags">class <strong>BrakeFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>BRAKE_ENABLED</strong> = 1</dl>
+
+<dl><dt><strong>BRAKE_ENG_PWROFF</strong> = 2</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ControlFlags">class <strong>ControlFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>CONTROL_BTN_LEFT_PUSHED_OPEN</strong> = 4</dl>
+
+<dl><dt><strong>CONTROL_BTN_RIGHT_PUSHED_OPEN</strong> = 8</dl>
+
+<dl><dt><strong>CONTROL_MODE_BITS</strong> = 3</dl>
+
+<dl><dt><strong>CONTROL_MODE_JOY</strong> = 1</dl>
+
+<dl><dt><strong>CONTROL_MODE_LR</strong> = 2</dl>
+
+<dl><dt><strong>CONTROL_MODE_OFF</strong> = 0</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ControllerFlags">class <strong>ControllerFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>EEPROM_PRECEDENCE</strong> = 1</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="CtpFlags">class <strong>CtpFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>CTP_ALARM_ON_ERROR</strong> = 4</dl>
+
+<dl><dt><strong>CTP_BASE</strong> = 2</dl>
+
+<dl><dt><strong>CTP_ENABLED</strong> = 1</dl>
+
+<dl><dt><strong>CTP_ERROR_CORRECTION</strong> = 16</dl>
+
+<dl><dt><strong>REV_SENS_INV</strong> = 8</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="DriverType">class <strong>DriverType</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>DRIVER_TYPE_DISCRETE_FET</strong> = 1</dl>
+
+<dl><dt><strong>DRIVER_TYPE_EXTERNAL</strong> = 3</dl>
+
+<dl><dt><strong>DRIVER_TYPE_INTEGRATE</strong> = 2</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="EncodeStatus">class <strong>EncodeStatus</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>ENC_STATE_ABSENT</strong> = 0</dl>
+
+<dl><dt><strong>ENC_STATE_MALFUNC</strong> = 2</dl>
+
+<dl><dt><strong>ENC_STATE_OK</strong> = 4</dl>
+
+<dl><dt><strong>ENC_STATE_REVERS</strong> = 3</dl>
+
+<dl><dt><strong>ENC_STATE_UNKNOWN</strong> = 1</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="EncoderSettingsFlags">class <strong>EncoderSettingsFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>ENCSET_DIFFERENTIAL_OUTPUT</strong> = 1</dl>
+
+<dl><dt><strong>ENCSET_INDEXCHANNEL_PRESENT</strong> = 16</dl>
+
+<dl><dt><strong>ENCSET_PUSHPULL_OUTPUT</strong> = 4</dl>
+
+<dl><dt><strong>ENCSET_REVOLUTIONSENSOR_ACTIVE_HIGH</strong> = 256</dl>
+
+<dl><dt><strong>ENCSET_REVOLUTIONSENSOR_PRESENT</strong> = 64</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="EnderFlags">class <strong>EnderFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>ENDER_SW1_ACTIVE_LOW</strong> = 2</dl>
+
+<dl><dt><strong>ENDER_SW2_ACTIVE_LOW</strong> = 4</dl>
+
+<dl><dt><strong>ENDER_SWAP</strong> = 1</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="EngineFlags">class <strong>EngineFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>ENGINE_ACCEL_ON</strong> = 16</dl>
+
+<dl><dt><strong>ENGINE_ANTIPLAY</strong> = 8</dl>
+
+<dl><dt><strong>ENGINE_CURRENT_AS_RMS</strong> = 2</dl>
+
+<dl><dt><strong>ENGINE_LIMIT_CURR</strong> = 64</dl>
+
+<dl><dt><strong>ENGINE_LIMIT_RPM</strong> = 128</dl>
+
+<dl><dt><strong>ENGINE_LIMIT_VOLT</strong> = 32</dl>
+
+<dl><dt><strong>ENGINE_MAX_SPEED</strong> = 4</dl>
+
+<dl><dt><strong>ENGINE_REVERSE</strong> = 1</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="EngineType">class <strong>EngineType</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>ENGINE_TYPE_2DC</strong> = 2</dl>
+
+<dl><dt><strong>ENGINE_TYPE_BRUSHLESS</strong> = 5</dl>
+
+<dl><dt><strong>ENGINE_TYPE_DC</strong> = 1</dl>
+
+<dl><dt><strong>ENGINE_TYPE_NONE</strong> = 0</dl>
+
+<dl><dt><strong>ENGINE_TYPE_STEP</strong> = 3</dl>
+
+<dl><dt><strong>ENGINE_TYPE_TEST</strong> = 4</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="EnumerateFlags">class <strong>EnumerateFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>#&nbsp;---------------------------<br>
+#&nbsp;BEGIN&nbsp;OF&nbsp;GENERATED&nbsp;code<br>
+#&nbsp;---------------------------<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>ENUMERATE_ALL_COM</strong> = 2</dl>
+
+<dl><dt><strong>ENUMERATE_NETWORK</strong> = 4</dl>
+
+<dl><dt><strong>ENUMERATE_PROBE</strong> = 1</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ExtioModeFlags">class <strong>ExtioModeFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>EXTIO_SETUP_MODE_IN_ALARM</strong> = 5</dl>
+
+<dl><dt><strong>EXTIO_SETUP_MODE_IN_BITS</strong> = 15</dl>
+
+<dl><dt><strong>EXTIO_SETUP_MODE_IN_HOME</strong> = 4</dl>
+
+<dl><dt><strong>EXTIO_SETUP_MODE_IN_MOVR</strong> = 3</dl>
+
+<dl><dt><strong>EXTIO_SETUP_MODE_IN_NOP</strong> = 0</dl>
+
+<dl><dt><strong>EXTIO_SETUP_MODE_IN_PWOF</strong> = 2</dl>
+
+<dl><dt><strong>EXTIO_SETUP_MODE_IN_STOP</strong> = 1</dl>
+
+<dl><dt><strong>EXTIO_SETUP_MODE_OUT_ALARM</strong> = 48</dl>
+
+<dl><dt><strong>EXTIO_SETUP_MODE_OUT_BITS</strong> = 240</dl>
+
+<dl><dt><strong>EXTIO_SETUP_MODE_OUT_MOTOR_FOUND</strong> = 80</dl>
+
+<dl><dt><strong>EXTIO_SETUP_MODE_OUT_MOTOR_ON</strong> = 64</dl>
+
+<dl><dt><strong>EXTIO_SETUP_MODE_OUT_MOVING</strong> = 32</dl>
+
+<dl><dt><strong>EXTIO_SETUP_MODE_OUT_OFF</strong> = 0</dl>
+
+<dl><dt><strong>EXTIO_SETUP_MODE_OUT_ON</strong> = 16</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ExtioSetupFlags">class <strong>ExtioSetupFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>EXTIO_SETUP_INVERT</strong> = 2</dl>
+
+<dl><dt><strong>EXTIO_SETUP_OUTPUT</strong> = 1</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="FeedbackFlags">class <strong>FeedbackFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>FEEDBACK_ENC_REVERSE</strong> = 1</dl>
+
+<dl><dt><strong>FEEDBACK_ENC_TYPE_AUTO</strong> = 0</dl>
+
+<dl><dt><strong>FEEDBACK_ENC_TYPE_BITS</strong> = 192</dl>
+
+<dl><dt><strong>FEEDBACK_ENC_TYPE_DIFFERENTIAL</strong> = 128</dl>
+
+<dl><dt><strong>FEEDBACK_ENC_TYPE_SINGLE_ENDED</strong> = 64</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="FeedbackType">class <strong>FeedbackType</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>FEEDBACK_EMF</strong> = 4</dl>
+
+<dl><dt><strong>FEEDBACK_ENCODER</strong> = 1</dl>
+
+<dl><dt><strong>FEEDBACK_ENCODER_MEDIATED</strong> = 6</dl>
+
+<dl><dt><strong>FEEDBACK_NONE</strong> = 5</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="GPIOFlags">class <strong>GPIOFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>STATE_BRAKE</strong> = 512</dl>
+
+<dl><dt><strong>STATE_BUTTON_LEFT</strong> = 8</dl>
+
+<dl><dt><strong>STATE_BUTTON_RIGHT</strong> = 4</dl>
+
+<dl><dt><strong>STATE_DIG_SIGNAL</strong> = 65535</dl>
+
+<dl><dt><strong>STATE_ENC_A</strong> = 8192</dl>
+
+<dl><dt><strong>STATE_ENC_B</strong> = 16384</dl>
+
+<dl><dt><strong>STATE_GPIO_LEVEL</strong> = 32</dl>
+
+<dl><dt><strong>STATE_GPIO_PINOUT</strong> = 16</dl>
+
+<dl><dt><strong>STATE_LEFT_EDGE</strong> = 2</dl>
+
+<dl><dt><strong>STATE_REV_SENSOR</strong> = 1024</dl>
+
+<dl><dt><strong>STATE_RIGHT_EDGE</strong> = 1</dl>
+
+<dl><dt><strong>STATE_SYNC_INPUT</strong> = 2048</dl>
+
+<dl><dt><strong>STATE_SYNC_OUTPUT</strong> = 4096</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="HomeFlags">class <strong>HomeFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>HOME_DIR_FIRST</strong> = 1</dl>
+
+<dl><dt><strong>HOME_DIR_SECOND</strong> = 2</dl>
+
+<dl><dt><strong>HOME_HALF_MV</strong> = 8</dl>
+
+<dl><dt><strong>HOME_MV_SEC_EN</strong> = 4</dl>
+
+<dl><dt><strong>HOME_STOP_FIRST_BITS</strong> = 48</dl>
+
+<dl><dt><strong>HOME_STOP_FIRST_LIM</strong> = 48</dl>
+
+<dl><dt><strong>HOME_STOP_FIRST_REV</strong> = 16</dl>
+
+<dl><dt><strong>HOME_STOP_FIRST_SYN</strong> = 32</dl>
+
+<dl><dt><strong>HOME_STOP_SECOND_BITS</strong> = 192</dl>
+
+<dl><dt><strong>HOME_STOP_SECOND_LIM</strong> = 192</dl>
+
+<dl><dt><strong>HOME_STOP_SECOND_REV</strong> = 64</dl>
+
+<dl><dt><strong>HOME_STOP_SECOND_SYN</strong> = 128</dl>
+
+<dl><dt><strong>HOME_USE_FAST</strong> = 256</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="JoyFlags">class <strong>JoyFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>JOY_REVERSE</strong> = 1</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="LSFlags">class <strong>LSFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>LS_ON_SW1_AVAILABLE</strong> = 1</dl>
+
+<dl><dt><strong>LS_ON_SW2_AVAILABLE</strong> = 2</dl>
+
+<dl><dt><strong>LS_SHORTED</strong> = 16</dl>
+
+<dl><dt><strong>LS_SW1_ACTIVE_LOW</strong> = 4</dl>
+
+<dl><dt><strong>LS_SW2_ACTIVE_LOW</strong> = 8</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="MBSettingsFlags">class <strong>MBSettingsFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>MB_AVAILABLE</strong> = 1</dl>
+
+<dl><dt><strong>MB_POWERED_HOLD</strong> = 2</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="MicrostepMode">class <strong>MicrostepMode</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>MICROSTEP_MODE_FRAC_128</strong> = 8</dl>
+
+<dl><dt><strong>MICROSTEP_MODE_FRAC_16</strong> = 5</dl>
+
+<dl><dt><strong>MICROSTEP_MODE_FRAC_2</strong> = 2</dl>
+
+<dl><dt><strong>MICROSTEP_MODE_FRAC_256</strong> = 9</dl>
+
+<dl><dt><strong>MICROSTEP_MODE_FRAC_32</strong> = 6</dl>
+
+<dl><dt><strong>MICROSTEP_MODE_FRAC_4</strong> = 3</dl>
+
+<dl><dt><strong>MICROSTEP_MODE_FRAC_64</strong> = 7</dl>
+
+<dl><dt><strong>MICROSTEP_MODE_FRAC_8</strong> = 4</dl>
+
+<dl><dt><strong>MICROSTEP_MODE_FULL</strong> = 1</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="MotorTypeFlags">class <strong>MotorTypeFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>MOTOR_TYPE_BLDC</strong> = 3</dl>
+
+<dl><dt><strong>MOTOR_TYPE_DC</strong> = 2</dl>
+
+<dl><dt><strong>MOTOR_TYPE_STEP</strong> = 1</dl>
+
+<dl><dt><strong>MOTOR_TYPE_UNKNOWN</strong> = 0</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="MoveState">class <strong>MoveState</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>MOVE_STATE_ANTIPLAY</strong> = 4</dl>
+
+<dl><dt><strong>MOVE_STATE_MOVING</strong> = 1</dl>
+
+<dl><dt><strong>MOVE_STATE_TARGET_SPEED</strong> = 2</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="MvcmdStatus">class <strong>MvcmdStatus</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>MVCMD_ERROR</strong> = 64</dl>
+
+<dl><dt><strong>MVCMD_HOME</strong> = 6</dl>
+
+<dl><dt><strong>MVCMD_LEFT</strong> = 3</dl>
+
+<dl><dt><strong>MVCMD_LOFT</strong> = 7</dl>
+
+<dl><dt><strong>MVCMD_MOVE</strong> = 1</dl>
+
+<dl><dt><strong>MVCMD_MOVR</strong> = 2</dl>
+
+<dl><dt><strong>MVCMD_NAME_BITS</strong> = 63</dl>
+
+<dl><dt><strong>MVCMD_RIGHT</strong> = 4</dl>
+
+<dl><dt><strong>MVCMD_RUNNING</strong> = 128</dl>
+
+<dl><dt><strong>MVCMD_SSTP</strong> = 8</dl>
+
+<dl><dt><strong>MVCMD_STOP</strong> = 5</dl>
+
+<dl><dt><strong>MVCMD_UKNWN</strong> = 0</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="PositionFlags">class <strong>PositionFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>SETPOS_IGNORE_ENCODER</strong> = 2</dl>
+
+<dl><dt><strong>SETPOS_IGNORE_POSITION</strong> = 1</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="PowerFlags">class <strong>PowerFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>POWER_OFF_ENABLED</strong> = 2</dl>
+
+<dl><dt><strong>POWER_REDUCT_ENABLED</strong> = 1</dl>
+
+<dl><dt><strong>POWER_SMOOTH_CURRENT</strong> = 4</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="PowerState">class <strong>PowerState</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>PWR_STATE_MAX</strong> = 5</dl>
+
+<dl><dt><strong>PWR_STATE_NORM</strong> = 3</dl>
+
+<dl><dt><strong>PWR_STATE_OFF</strong> = 1</dl>
+
+<dl><dt><strong>PWR_STATE_REDUCT</strong> = 4</dl>
+
+<dl><dt><strong>PWR_STATE_UNKNOWN</strong> = 0</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Result">class <strong>Result</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>Error</strong> = -1</dl>
+
+<dl><dt><strong>NoDevice</strong> = -4</dl>
+
+<dl><dt><strong>NotImplemented</strong> = -2</dl>
+
+<dl><dt><strong>Ok</strong> = 0</dl>
+
+<dl><dt><strong>ValueError</strong> = -3</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SecureFlags">class <strong>SecureFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>ALARM_ENGINE_RESPONSE</strong> = 128</dl>
+
+<dl><dt><strong>ALARM_FLAGS_STICKING</strong> = 16</dl>
+
+<dl><dt><strong>ALARM_ON_BORDERS_SWAP_MISSET</strong> = 8</dl>
+
+<dl><dt><strong>ALARM_ON_DRIVER_OVERHEATING</strong> = 1</dl>
+
+<dl><dt><strong>ALARM_WINDING_MISMATCH</strong> = 64</dl>
+
+<dl><dt><strong>H_BRIDGE_ALERT</strong> = 4</dl>
+
+<dl><dt><strong>LOW_UPWR_PROTECTION</strong> = 2</dl>
+
+<dl><dt><strong>USB_BREAK_RECONNECT</strong> = 32</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="StateFlags">class <strong>StateFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>STATE_ALARM</strong> = 64</dl>
+
+<dl><dt><strong>STATE_BORDERS_SWAP_MISSET</strong> = 32768</dl>
+
+<dl><dt><strong>STATE_CONTR</strong> = 63</dl>
+
+<dl><dt><strong>STATE_CONTROLLER_OVERHEAT</strong> = 512</dl>
+
+<dl><dt><strong>STATE_CTP_ERROR</strong> = 128</dl>
+
+<dl><dt><strong>STATE_CURRENT_MOTOR0</strong> = 0</dl>
+
+<dl><dt><strong>STATE_CURRENT_MOTOR1</strong> = 262144</dl>
+
+<dl><dt><strong>STATE_CURRENT_MOTOR2</strong> = 524288</dl>
+
+<dl><dt><strong>STATE_CURRENT_MOTOR3</strong> = 786432</dl>
+
+<dl><dt><strong>STATE_CURRENT_MOTOR_BITS</strong> = 786432</dl>
+
+<dl><dt><strong>STATE_EEPROM_CONNECTED</strong> = 16</dl>
+
+<dl><dt><strong>STATE_ENCODER_FAULT</strong> = 2097152</dl>
+
+<dl><dt><strong>STATE_ENGINE_RESPONSE_ERROR</strong> = 8388608</dl>
+
+<dl><dt><strong>STATE_ERRC</strong> = 1</dl>
+
+<dl><dt><strong>STATE_ERRD</strong> = 2</dl>
+
+<dl><dt><strong>STATE_ERRV</strong> = 4</dl>
+
+<dl><dt><strong>STATE_EXTIO_ALARM</strong> = 16777216</dl>
+
+<dl><dt><strong>STATE_H_BRIDGE_FAULT</strong> = 131072</dl>
+
+<dl><dt><strong>STATE_IS_HOMED</strong> = 32</dl>
+
+<dl><dt><strong>STATE_LOW_POWER_VOLTAGE</strong> = 65536</dl>
+
+<dl><dt><strong>STATE_LOW_USB_VOLTAGE</strong> = 8192</dl>
+
+<dl><dt><strong>STATE_OVERLOAD_POWER_CURRENT</strong> = 2048</dl>
+
+<dl><dt><strong>STATE_OVERLOAD_POWER_VOLTAGE</strong> = 1024</dl>
+
+<dl><dt><strong>STATE_OVERLOAD_USB_CURRENT</strong> = 16384</dl>
+
+<dl><dt><strong>STATE_OVERLOAD_USB_VOLTAGE</strong> = 4096</dl>
+
+<dl><dt><strong>STATE_POWER_OVERHEAT</strong> = 256</dl>
+
+<dl><dt><strong>STATE_SECUR</strong> = 28573632</dl>
+
+<dl><dt><strong>STATE_WINDING_RES_MISMATCH</strong> = 1048576</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SyncInFlags">class <strong>SyncInFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>SYNCIN_ENABLED</strong> = 1</dl>
+
+<dl><dt><strong>SYNCIN_GOTOPOSITION</strong> = 4</dl>
+
+<dl><dt><strong>SYNCIN_INVERT</strong> = 2</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SyncOutFlags">class <strong>SyncOutFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>SYNCOUT_ENABLED</strong> = 1</dl>
+
+<dl><dt><strong>SYNCOUT_INVERT</strong> = 4</dl>
+
+<dl><dt><strong>SYNCOUT_IN_STEPS</strong> = 8</dl>
+
+<dl><dt><strong>SYNCOUT_ONPERIOD</strong> = 64</dl>
+
+<dl><dt><strong>SYNCOUT_ONSTART</strong> = 16</dl>
+
+<dl><dt><strong>SYNCOUT_ONSTOP</strong> = 32</dl>
+
+<dl><dt><strong>SYNCOUT_STATE</strong> = 2</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TSSettingsFlags">class <strong>TSSettingsFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TS_AVAILABLE</strong> = 8</dl>
+
+<dl><dt><strong>TS_TYPE_BITS</strong> = 7</dl>
+
+<dl><dt><strong>TS_TYPE_SEMICONDUCTOR</strong> = 2</dl>
+
+<dl><dt><strong>TS_TYPE_THERMOCOUPLE</strong> = 1</dl>
+
+<dl><dt><strong>TS_TYPE_UNKNOWN</strong> = 0</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="UARTSetupFlags">class <strong>UARTSetupFlags</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>UART_PARITY_BITS</strong> = 3</dl>
+
+<dl><dt><strong>UART_PARITY_BIT_EVEN</strong> = 0</dl>
+
+<dl><dt><strong>UART_PARITY_BIT_MARK</strong> = 3</dl>
+
+<dl><dt><strong>UART_PARITY_BIT_ODD</strong> = 1</dl>
+
+<dl><dt><strong>UART_PARITY_BIT_SPACE</strong> = 2</dl>
+
+<dl><dt><strong>UART_PARITY_BIT_USE</strong> = 4</dl>
+
+<dl><dt><strong>UART_STOP_BIT</strong> = 8</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="WindStatus">class <strong>WindStatus</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>WIND_A_STATE_ABSENT</strong> = 0</dl>
+
+<dl><dt><strong>WIND_A_STATE_MALFUNC</strong> = 2</dl>
+
+<dl><dt><strong>WIND_A_STATE_OK</strong> = 3</dl>
+
+<dl><dt><strong>WIND_A_STATE_UNKNOWN</strong> = 1</dl>
+
+<dl><dt><strong>WIND_B_STATE_ABSENT</strong> = 0</dl>
+
+<dl><dt><strong>WIND_B_STATE_MALFUNC</strong> = 32</dl>
+
+<dl><dt><strong>WIND_B_STATE_OK</strong> = 48</dl>
+
+<dl><dt><strong>WIND_B_STATE_UNKNOWN</strong> = 16</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="accessories_settings_t">class <strong>accessories_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#accessories_settings_t">accessories_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>LimitSwitchesSettings</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MBRatedCurrent</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MBRatedVoltage</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MBSettings</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MBTorque</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MagneticBrakeInfo</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>TSGrad</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>TSMax</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>TSMin</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>TSSettings</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>TemperatureSensorInfo</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="analog_data_t">class <strong>analog_data_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#analog_data_t">analog_data_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>A1Voltage</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>A1Voltage_ADC</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>A2Voltage</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>A2Voltage_ADC</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>ACurrent</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>ACurrent_ADC</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>B1Voltage</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>B1Voltage_ADC</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>B2Voltage</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>B2Voltage_ADC</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>BCurrent</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>BCurrent_ADC</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>FullCurrent</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>FullCurrent_ADC</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>H5</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>H5_ADC</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Joy</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Joy_ADC</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>L</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>L5</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>L5_ADC</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Pot</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Pot_ADC</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>R</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SupVoltage</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SupVoltage_ADC</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Temp</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Temp_ADC</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>deprecated</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="brake_settings_t">class <strong>brake_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#brake_settings_t">brake_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>BrakeFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>t1</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>t2</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>t3</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>t4</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="calibration_settings_t">class <strong>calibration_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#calibration_settings_t">calibration_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>CSS1_A</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>CSS1_B</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>CSS2_A</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>CSS2_B</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>FullCurrent_A</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>FullCurrent_B</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="calibration_t">class <strong>calibration_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#calibration_t">calibration_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>A</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MicrostepMode</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="chart_data_t">class <strong>chart_data_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#chart_data_t">chart_data_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>DutyCycle</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Joy</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Pot</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>WindingCurrentA</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>WindingCurrentB</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>WindingCurrentC</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>WindingVoltageA</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>WindingVoltageB</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>WindingVoltageC</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="command_add_sync_in_action_calb_t">class <strong>command_add_sync_in_action_calb_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#command_add_sync_in_action_calb_t">command_add_sync_in_action_calb_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Position</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Time</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="command_add_sync_in_action_t">class <strong>command_add_sync_in_action_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#command_add_sync_in_action_t">command_add_sync_in_action_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Position</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Time</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>uPosition</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="command_change_motor_t">class <strong>command_change_motor_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#command_change_motor_t">command_change_motor_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Motor</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="control_settings_calb_t">class <strong>control_settings_calb_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#control_settings_calb_t">control_settings_calb_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>DeltaPosition</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Flags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MaxClickTime</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MaxSpeed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Timeout</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="control_settings_t">class <strong>control_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#control_settings_t">control_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>DeltaPosition</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Flags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MaxClickTime</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MaxSpeed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Timeout</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>uDeltaPosition</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>uMaxSpeed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="controller_name_t">class <strong>controller_name_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#controller_name_t">controller_name_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>ControllerName</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>CtrlFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ctp_settings_t">class <strong>ctp_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#ctp_settings_t">ctp_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>CTPFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>CTPMinError</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="debug_read_t">class <strong>debug_read_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#debug_read_t">debug_read_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>DebugData</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="debug_write_t">class <strong>debug_write_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#debug_write_t">debug_write_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>DebugData</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="device_enumeration_t">class <strong>device_enumeration_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#device_enumeration_t">device_enumeration_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="device_information_t">class <strong>device_information_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#device_information_t">device_information_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Major</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Manufacturer</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>ManufacturerId</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Minor</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>ProductDescription</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Release</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="device_network_information_t">class <strong>device_network_information_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#device_network_information_t">device_network_information_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>axis_state</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>ipv4</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>locked_time</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>locker_nodename</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>locker_username</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>nodename</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="edges_settings_calb_t">class <strong>edges_settings_calb_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#edges_settings_calb_t">edges_settings_calb_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>BorderFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>EnderFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>LeftBorder</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>RightBorder</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="edges_settings_t">class <strong>edges_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#edges_settings_t">edges_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>BorderFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>EnderFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>LeftBorder</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>RightBorder</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>uLeftBorder</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>uRightBorder</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="emf_settings_t">class <strong>emf_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#emf_settings_t">emf_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>BackEMFFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Km</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>L</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>R</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="encoder_information_t">class <strong>encoder_information_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#encoder_information_t">encoder_information_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Manufacturer</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>PartNumber</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="encoder_settings_t">class <strong>encoder_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#encoder_settings_t">encoder_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>EncoderSettings</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MaxCurrentConsumption</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MaxOperatingFrequency</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>PPR</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SupplyVoltageMax</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SupplyVoltageMin</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="engine_advansed_setup_t">class <strong>engine_advansed_setup_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#engine_advansed_setup_t">engine_advansed_setup_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>stepcloseloop_Kp_high</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>stepcloseloop_Kp_low</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>stepcloseloop_Kw</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="engine_settings_calb_t">class <strong>engine_settings_calb_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#engine_settings_calb_t">engine_settings_calb_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Antiplay</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>EngineFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MicrostepMode</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>NomCurrent</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>NomSpeed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>NomVoltage</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>StepsPerRev</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="engine_settings_t">class <strong>engine_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#engine_settings_t">engine_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Antiplay</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>EngineFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MicrostepMode</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>NomCurrent</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>NomSpeed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>NomVoltage</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>StepsPerRev</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>uNomSpeed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="entype_settings_t">class <strong>entype_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#entype_settings_t">entype_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>DriverType</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>EngineType</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="extended_settings_t">class <strong>extended_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#extended_settings_t">extended_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Param1</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="extio_settings_t">class <strong>extio_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#extio_settings_t">extio_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>EXTIOModeFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>EXTIOSetupFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="feedback_settings_t">class <strong>feedback_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#feedback_settings_t">feedback_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>CountsPerTurn</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>FeedbackFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>FeedbackType</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>IPS</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="gear_information_t">class <strong>gear_information_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#gear_information_t">gear_information_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Manufacturer</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>PartNumber</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="gear_settings_t">class <strong>gear_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#gear_settings_t">gear_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Efficiency</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>InputInertia</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MaxOutputBacklash</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>RatedInputSpeed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>RatedInputTorque</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>ReductionIn</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>ReductionOut</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="get_position_calb_t">class <strong>get_position_calb_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#get_position_calb_t">get_position_calb_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>EncPosition</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Position</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="get_position_t">class <strong>get_position_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#get_position_t">get_position_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>EncPosition</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Position</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>uPosition</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="globally_unique_identifier_t">class <strong>globally_unique_identifier_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#globally_unique_identifier_t">globally_unique_identifier_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>UniqueID0</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>UniqueID1</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>UniqueID2</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>UniqueID3</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="hallsensor_information_t">class <strong>hallsensor_information_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#hallsensor_information_t">hallsensor_information_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Manufacturer</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>PartNumber</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="hallsensor_settings_t">class <strong>hallsensor_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#hallsensor_settings_t">hallsensor_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>MaxCurrentConsumption</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MaxOperatingFrequency</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>PPR</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SupplyVoltageMax</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SupplyVoltageMin</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="home_settings_calb_t">class <strong>home_settings_calb_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#home_settings_calb_t">home_settings_calb_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>FastHome</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>HomeDelta</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>HomeFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SlowHome</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="home_settings_t">class <strong>home_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#home_settings_t">home_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>FastHome</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>HomeDelta</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>HomeFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SlowHome</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>uFastHome</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>uHomeDelta</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>uSlowHome</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="init_random_t">class <strong>init_random_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#init_random_t">init_random_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>key</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="joystick_settings_t">class <strong>joystick_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#joystick_settings_t">joystick_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>DeadZone</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>ExpFactor</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>JoyCenter</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>JoyFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>JoyHighEnd</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>JoyLowEnd</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="measurements_t">class <strong>measurements_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#measurements_t">measurements_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Error</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Length</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Speed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="motor_information_t">class <strong>motor_information_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#motor_information_t">motor_information_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Manufacturer</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>PartNumber</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="motor_settings_t">class <strong>motor_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#motor_settings_t">motor_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>DetentTorque</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MaxCurrent</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MaxCurrentTime</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MaxSpeed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MechanicalTimeConstant</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MotorType</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>NoLoadCurrent</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>NoLoadSpeed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>NominalCurrent</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>NominalPower</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>NominalSpeed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>NominalTorque</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>NominalVoltage</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Phases</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Poles</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>ReservedField</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>RotorInertia</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SpeedConstant</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SpeedTorqueGradient</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>StallTorque</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>TorqueConstant</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>WindingInductance</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>WindingResistance</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="move_settings_calb_t">class <strong>move_settings_calb_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#move_settings_calb_t">move_settings_calb_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Accel</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>AntiplaySpeed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Decel</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Speed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="move_settings_t">class <strong>move_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#move_settings_t">move_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Accel</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>AntiplaySpeed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Decel</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Speed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>uAntiplaySpeed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>uSpeed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="nonvolatile_memory_t">class <strong>nonvolatile_memory_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#nonvolatile_memory_t">nonvolatile_memory_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>UserData</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="pid_settings_t">class <strong>pid_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#pid_settings_t">pid_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>KdU</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Kdf</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>KiU</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Kif</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>KpU</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Kpf</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="power_settings_t">class <strong>power_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#power_settings_t">power_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>CurrReductDelay</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>CurrentSetTime</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>HoldCurrent</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>PowerFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>PowerOffDelay</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="secure_settings_t">class <strong>secure_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#secure_settings_t">secure_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>CriticalIpwr</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>CriticalIusb</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>CriticalT</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>CriticalUpwr</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>CriticalUusb</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Flags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>LowUpwrOff</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MinimumUusb</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="serial_number_t">class <strong>serial_number_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#serial_number_t">serial_number_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Key</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Major</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Minor</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Release</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SN</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="set_position_calb_t">class <strong>set_position_calb_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#set_position_calb_t">set_position_calb_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>EncPosition</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>PosFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Position</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="set_position_t">class <strong>set_position_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#set_position_t">set_position_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>EncPosition</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>PosFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Position</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>uPosition</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="stage_information_t">class <strong>stage_information_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#stage_information_t">stage_information_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Manufacturer</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>PartNumber</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="stage_name_t">class <strong>stage_name_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#stage_name_t">stage_name_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>PositionerName</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="stage_settings_t">class <strong>stage_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#stage_settings_t">stage_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>HorizontalLoadCapacity</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>LeadScrewPitch</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MaxCurrentConsumption</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MaxSpeed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SupplyVoltageMax</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SupplyVoltageMin</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>TravelRange</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Units</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>VerticalLoadCapacity</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="status_calb_t">class <strong>status_calb_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#status_calb_t">status_calb_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>CmdBufFreeSpace</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>CurPosition</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>CurSpeed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>CurT</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>EncPosition</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>EncSts</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Flags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>GPIOFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Ipwr</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Iusb</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MoveSts</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MvCmdSts</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>PWRSts</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Upwr</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Uusb</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>WindSts</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="status_t">class <strong>status_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#status_t">status_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>CmdBufFreeSpace</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>CurPosition</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>CurSpeed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>CurT</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>EncPosition</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>EncSts</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Flags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>GPIOFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Ipwr</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Iusb</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MoveSts</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>MvCmdSts</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>PWRSts</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Upwr</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Uusb</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>WindSts</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>uCurPosition</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>uCurSpeed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="sync_in_settings_calb_t">class <strong>sync_in_settings_calb_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#sync_in_settings_calb_t">sync_in_settings_calb_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>ClutterTime</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Position</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Speed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SyncInFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="sync_in_settings_t">class <strong>sync_in_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#sync_in_settings_t">sync_in_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>ClutterTime</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Position</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>Speed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SyncInFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>uPosition</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>uSpeed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="sync_out_settings_calb_t">class <strong>sync_out_settings_calb_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#sync_out_settings_calb_t">sync_out_settings_calb_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Accuracy</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SyncOutFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SyncOutPeriod</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SyncOutPulseSteps</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="sync_out_settings_t">class <strong>sync_out_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#sync_out_settings_t">sync_out_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Accuracy</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SyncOutFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SyncOutPeriod</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>SyncOutPulseSteps</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>uAccuracy</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="uart_settings_t">class <strong>uart_settings_t</strong></a>(<a href="_ctypes.html#Structure">_ctypes.Structure</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="_ctypes.html#Structure">Structure</a>&nbsp;base&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ximc.crossplatform.wrappers.python.pyximc.html#uart_settings_t">uart_settings_t</a></dd>
+<dd><a href="_ctypes.html#Structure">_ctypes.Structure</a></dd>
+<dd>_ctypes._CData</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>Speed</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>UARTSetupFlags</strong></dt>
+<dd><tt>Structure/Union&nbsp;member</tt></dd>
+</dl>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-FormatError"><strong>FormatError</strong></a>(...)</dt><dd><tt><a href="#-FormatError">FormatError</a>([integer])&nbsp;-&gt;&nbsp;string<br>
+&nbsp;<br>
+Convert&nbsp;a&nbsp;win32&nbsp;error&nbsp;code&nbsp;into&nbsp;a&nbsp;string.&nbsp;If&nbsp;the&nbsp;error&nbsp;code&nbsp;is&nbsp;not<br>
+given,&nbsp;the&nbsp;return&nbsp;value&nbsp;of&nbsp;a&nbsp;call&nbsp;to&nbsp;GetLastError()&nbsp;is&nbsp;used.</tt></dd></dl>
+ <dl><dt><a name="-POINTER"><strong>POINTER</strong></a>(...)</dt></dl>
+ <dl><dt><a name="-addressof"><strong>addressof</strong></a>(...)</dt><dd><tt><a href="#-addressof">addressof</a>(C&nbsp;instance)&nbsp;-&gt;&nbsp;integer<br>
+Return&nbsp;the&nbsp;address&nbsp;of&nbsp;the&nbsp;C&nbsp;instance&nbsp;internal&nbsp;buffer</tt></dd></dl>
+ <dl><dt><a name="-alignment"><strong>alignment</strong></a>(...)</dt><dd><tt><a href="#-alignment">alignment</a>(C&nbsp;type)&nbsp;-&gt;&nbsp;integer<br>
+<a href="#-alignment">alignment</a>(C&nbsp;instance)&nbsp;-&gt;&nbsp;integer<br>
+Return&nbsp;the&nbsp;alignment&nbsp;requirements&nbsp;of&nbsp;a&nbsp;C&nbsp;instance</tt></dd></dl>
+ <dl><dt><a name="-byref"><strong>byref</strong></a>(...)</dt><dd><tt><a href="#-byref">byref</a>(C&nbsp;instance[,&nbsp;offset=0])&nbsp;-&gt;&nbsp;byref-<a href="builtins.html#object">object</a><br>
+Return&nbsp;a&nbsp;pointer&nbsp;lookalike&nbsp;to&nbsp;a&nbsp;C&nbsp;instance,&nbsp;only&nbsp;usable<br>
+as&nbsp;function&nbsp;argument</tt></dd></dl>
+ <dl><dt><a name="-get_errno"><strong>get_errno</strong></a>(...)</dt></dl>
+ <dl><dt><a name="-get_last_error"><strong>get_last_error</strong></a>(...)</dt></dl>
+ <dl><dt><a name="-pointer"><strong>pointer</strong></a>(...)</dt></dl>
+ <dl><dt><a name="-resize"><strong>resize</strong></a>(...)</dt><dd><tt>Resize&nbsp;the&nbsp;memory&nbsp;buffer&nbsp;of&nbsp;a&nbsp;ctypes&nbsp;instance</tt></dd></dl>
+ <dl><dt><a name="-set_errno"><strong>set_errno</strong></a>(...)</dt></dl>
+ <dl><dt><a name="-set_last_error"><strong>set_last_error</strong></a>(...)</dt></dl>
+ <dl><dt><a name="-sizeof"><strong>sizeof</strong></a>(...)</dt><dd><tt><a href="#-sizeof">sizeof</a>(C&nbsp;type)&nbsp;-&gt;&nbsp;integer<br>
+<a href="#-sizeof">sizeof</a>(C&nbsp;instance)&nbsp;-&gt;&nbsp;integer<br>
+Return&nbsp;the&nbsp;size&nbsp;in&nbsp;bytes&nbsp;of&nbsp;a&nbsp;C&nbsp;instance</tt></dd></dl>
+ <dl><dt><a name="-ximc_shared_lib"><strong>ximc_shared_lib</strong></a>()</dt><dd><tt>#&nbsp;use&nbsp;cdecl&nbsp;on&nbsp;unix&nbsp;and&nbsp;stdcall&nbsp;on&nbsp;windows</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>DEFAULT_MODE</strong> = 0<br>
+<strong>GetLastError</strong> = &lt;_FuncPtr object&gt;<br>
+<strong>RTLD_GLOBAL</strong> = 0<br>
+<strong>RTLD_LOCAL</strong> = 0<br>
+<strong>cdll</strong> = &lt;ctypes.LibraryLoader object&gt;<br>
+<strong>lib</strong> = &lt;WinDLL 'libximc.dll', handle 180000000&gt;<br>
+<strong>memmove</strong> = &lt;CFunctionType object&gt;<br>
+<strong>memset</strong> = &lt;CFunctionType object&gt;<br>
+<strong>oledll</strong> = &lt;ctypes.LibraryLoader object&gt;<br>
+<strong>pydll</strong> = &lt;ctypes.LibraryLoader object&gt;<br>
+<strong>pythonapi</strong> = &lt;PyDLL 'python dll', handle 7fffcc3a0000&gt;<br>
+<strong>windll</strong> = &lt;ctypes.LibraryLoader object&gt;</td></tr></table>
+</body></html>

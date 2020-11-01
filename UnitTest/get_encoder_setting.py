@@ -2,68 +2,74 @@ import os
 import sys
 from ctypes import byref
 
-cur_dir = os.path.abspath(os.path.dirname(__file__))
-ximc_dir = os.path.join(cur_dir, "..", "ximc")
-ximc_package_dir = os.path.join(ximc_dir, "crossplatform", "wrappers", "python")
-sys.path.append(ximc_package_dir)  # add ximc.py wrapper to python path
 
-arch_dir = "win64"
-libdir = os.path.join(ximc_dir, arch_dir)
-os.environ["Path"] = libdir + ";" + os.environ["Path"]  # add dll
+def test():
+    cur_dir = os.path.abspath(os.path.dirname(__file__))
+    ximc_dir = os.path.join(cur_dir, "..", "ximc")
+    ximc_package_dir = os.path.join(ximc_dir, "crossplatform", "wrappers", "python")
+    sys.path.append(ximc_package_dir)  # add ximc.py wrapper to python path
 
-from ximc.crossplatform.wrappers.python.pyximc import lib, EnumerateFlags, controller_name_t, Result, status_t, GPIOFlags, engine_settings_t, EngineFlags, feedback_settings_t, FeedbackType
+    arch_dir = "win64"
+    libdir = os.path.join(ximc_dir, arch_dir)
+    os.environ["Path"] = libdir + ";" + os.environ["Path"]  # add dll
 
-lib.set_bindy_key(os.path.join(ximc_dir, "win32", "keyfile.sqlite").encode("utf-8"))
+    from ximc.crossplatform.wrappers.python.pyximc import lib, EnumerateFlags, controller_name_t, Result, status_t, GPIOFlags, engine_settings_t, EngineFlags, feedback_settings_t, FeedbackType
 
-probe_flags = EnumerateFlags.ENUMERATE_PROBE + EnumerateFlags.ENUMERATE_NETWORK
-enum_hints = b"addr=192.168.0.1,172.16.2.3"
+    lib.set_bindy_key(os.path.join(ximc_dir, "win32", "keyfile.sqlite").encode("utf-8"))
 
-# Set up device
-motors = {}
-dev_enum = lib.enumerate_devices(probe_flags, enum_hints)
-dev_count = lib.get_device_count(dev_enum)
-controller_name = controller_name_t()
-for dev_ind in range(0, dev_count):
-    enum_name = lib.get_device_name(dev_enum, dev_ind)
-    result = lib.get_enumerate_device_controller_name(dev_enum, dev_ind, byref(controller_name))
-    if result == Result.Ok:
-        motors[str(controller_name.ControllerName)] = enum_name
+    probe_flags = EnumerateFlags.ENUMERATE_PROBE + EnumerateFlags.ENUMERATE_NETWORK
+    enum_hints = b"addr=192.168.0.1,172.16.2.3"
 
-device_id = lib.open_device(motors[list(motors.keys())[0]])
+    # Set up device
+    motors = {}
+    dev_enum = lib.enumerate_devices(probe_flags, enum_hints)
+    dev_count = lib.get_device_count(dev_enum)
+    controller_name = controller_name_t()
+    for dev_ind in range(0, dev_count):
+        enum_name = lib.get_device_name(dev_enum, dev_ind)
+        result = lib.get_enumerate_device_controller_name(dev_enum, dev_ind, byref(controller_name))
+        if result == Result.Ok:
+            motors[str(controller_name.ControllerName)] = enum_name
 
-engine_settings = engine_settings_t()
-result = lib.get_engine_settings(device_id, byref(engine_settings))
-if result != Result.Ok:
-    raise Exception
-if engine_settings.EngineFlags % 2 == 0:
-    print("not reversed ?")
-    print(EngineFlags.ENGINE_REVERSE)
-    print(engine_settings.EngineFlags)
-    raise Exception
+    device_id = lib.open_device(motors[list(motors.keys())[0]])
 
-status = status_t()
-result = lib.get_status(device_id, byref(status))
-if result != Result.Ok:
-    raise Exception
-feedback_settings = feedback_settings_t()
-result = lib.get_feedback_settings(device_id, byref(feedback_settings))
-if result != Result.Ok:
-    raise Exception
-if feedback_settings.FeedbackType != FeedbackType.FEEDBACK_ENCODER:
-    raise Exception
+    engine_settings = engine_settings_t()
+    result = lib.get_engine_settings(device_id, byref(engine_settings))
+    if result != Result.Ok:
+        raise Exception
+    if engine_settings.EngineFlags % 2 == 0:
+        print("not reversed ?")
+        print(EngineFlags.ENGINE_REVERSE)
+        print(engine_settings.EngineFlags)
+        raise Exception
 
-result = lib.command_left(device_id)
-if result != Result.Ok:
-    raise Exception
-
-stopped = False
-while not stopped:
+    status = status_t()
     result = lib.get_status(device_id, byref(status))
     if result != Result.Ok:
         raise Exception
-    if status.GPIOFlags == GPIOFlags.STATE_LEFT_EDGE:
-        stopped = True
-        print("end")
-        result = lib.command_stop(device_id)
+    feedback_settings = feedback_settings_t()
+    result = lib.get_feedback_settings(device_id, byref(feedback_settings))
+    if result != Result.Ok:
+        raise Exception
+    if feedback_settings.FeedbackType != FeedbackType.FEEDBACK_ENCODER:
+        raise Exception
+
+    result = lib.command_left(device_id)
+    if result != Result.Ok:
+        raise Exception
+
+    stopped = False
+    while not stopped:
+        result = lib.get_status(device_id, byref(status))
         if result != Result.Ok:
             raise Exception
+        if status.GPIOFlags == GPIOFlags.STATE_LEFT_EDGE:
+            stopped = True
+            print("end")
+            result = lib.command_stop(device_id)
+            if result != Result.Ok:
+                raise Exception
+
+
+if __name__ == "__main__":
+    test()

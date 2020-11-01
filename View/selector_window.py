@@ -27,7 +27,7 @@ class SelectorWindow(Frontend):
         self.widget.layout().addWidget(self.daq_selector)
         self.widget.layout().addWidget(self.motor_selector)
         self.widget.layout().addWidget(self.lockin_selector)
-        # self.widget.layout().addWidget(self.fungen_selector) TODO
+        self.widget.layout().addWidget(self.fungen_selector)
 
     def camera(self):
         return self.camera_selector.camera()

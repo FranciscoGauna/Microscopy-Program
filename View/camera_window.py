@@ -17,6 +17,10 @@ from Backend.frequency_backend import FrequencyController
 
 
 class CameraWindow(Frontend):
+    """
+    This Class represents the camera window.  This windows is responsible for drawing the video taken by the camera
+    and putting in the
+    """
     backend: CameraBackend
     gui = ('frontend', 'UI', 'camera_button.ui')
     timer = QTimer()
@@ -31,6 +35,10 @@ class CameraWindow(Frontend):
     rect_controller: RectangleController
 
     def setupUi(self):
+        """
+        This method setups all of the elements of the gui, giving them names and changing it's appearance.
+        :return:
+        """
         self.widget.draw_tabs.setTabText(0, locale.get("point", "str_point"))
         self.widget.draw_tabs.setTabText(1, locale.get("line", "str_line"))
         self.widget.draw_tabs.setTabText(2, locale.get("rect", "str_rect"))
@@ -58,6 +66,10 @@ class CameraWindow(Frontend):
         self.widget.add_rect_button.setText(locale.get("add_rect", "str_add_rect"))
 
     def connect_backend(self):
+        """
+        This method connects the widgets of the
+        :return:
+        """
         self.point_list_frontend = OperationList(backend=[])
 
         freq_backend = FrequencyController()

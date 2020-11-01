@@ -2,10 +2,7 @@ import comtypes
 import comtypes.client
 
 from lantz import Driver
-
-
-class VirtualDAQ(Driver):
-    pass
+from lantz.qt import Backend
 
 
 class ComDAQ(Driver):
@@ -19,3 +16,14 @@ class ComDAQ(Driver):
         print(self.lib.NewMethod)
         print(self.lib.DeviceList)
         print(self.lib.Echo("test"))
+
+
+class ComDaqBackend(Backend):
+    daq: ComDAQ
+
+    def __init__(self):
+        super().__init__()
+        self.daq = ComDAQ()
+
+    def focus(self):
+        return True

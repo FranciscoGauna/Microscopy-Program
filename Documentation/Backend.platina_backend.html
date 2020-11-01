@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module Backend.platina_backend</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="Backend.html"><font color="#ffffff">Backend</font></a>.platina_backend</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cfedacking%5Csource%5Cpiton%5Cmicroscopy-program%5Cbackend%5Cplatina_backend.py">c:\users\fedacking\source\piton\microscopy-program\backend\platina_backend.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="lantz.qt.app.html#Backend">lantz.qt.app.Backend</a>(<a href="lantz.core.driver.html#Base">lantz.core.driver.Base</a>, <a href="lantz.qt.app.html#ThreadLogMixin">lantz.qt.app.ThreadLogMixin</a>, lantz.qt.utils.qt.SuperQClass)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="Backend.platina_backend.html#PlatinaBackend">PlatinaBackend</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="PlatinaBackend">class <strong>PlatinaBackend</strong></a>(<a href="lantz.qt.app.html#Backend">lantz.qt.app.Backend</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#PlatinaBackend">PlatinaBackend</a>(*args,&nbsp;**kw)<br>
+&nbsp;<br>
+Base&nbsp;class&nbsp;for&nbsp;all&nbsp;lantz&nbsp;objects.<br>
+&nbsp;<br>
+Provides:<br>
+-&nbsp;Observables<br>
+-&nbsp;Async&nbsp;capabilities&nbsp;for&nbsp;actions<br>
+-&nbsp;Logging<br>
+-&nbsp;Feat&nbsp;cache<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+name&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;easy&nbsp;to&nbsp;remember&nbsp;identifier&nbsp;given&nbsp;to&nbsp;the&nbsp;instance&nbsp;for&nbsp;logging<br>
+&nbsp;&nbsp;&nbsp;&nbsp;purposes<br>
+&nbsp;<br>
+Returns<br>
+-------<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="Backend.platina_backend.html#PlatinaBackend">PlatinaBackend</a></dd>
+<dd><a href="lantz.qt.app.html#Backend">lantz.qt.app.Backend</a></dd>
+<dd><a href="lantz.core.driver.html#Base">lantz.core.driver.Base</a></dd>
+<dd><a href="pimpmyclass.mixins.html#ObservableMixin">pimpmyclass.mixins.ObservableMixin</a></dd>
+<dd><a href="pimpmyclass.mixins.html#AsyncMixin">pimpmyclass.mixins.AsyncMixin</a></dd>
+<dd><a href="pimpmyclass.mixins.html#LockMixin">pimpmyclass.mixins.LockMixin</a></dd>
+<dd><a href="pimpmyclass.mixins.html#LogMixin">pimpmyclass.mixins.LogMixin</a></dd>
+<dd><a href="pimpmyclass.mixins.html#BaseLogMixin">pimpmyclass.mixins.BaseLogMixin</a></dd>
+<dd><a href="pimpmyclass.mixins.html#CacheMixin">pimpmyclass.mixins.CacheMixin</a></dd>
+<dd><a href="pimpmyclass.mixins.html#StorageMixin">pimpmyclass.mixins.StorageMixin</a></dd>
+<dd><a href="lantz.qt.app.html#ThreadLogMixin">lantz.qt.app.ThreadLogMixin</a></dd>
+<dd>lantz.qt.utils.qt.SuperQClass</dd>
+<dd><a href="PyQt5.QtCore.html#QObject">PyQt5.QtCore.QObject</a></dd>
+<dd><a href="PyQt5.sip.html#wrapper">sip.wrapper</a></dd>
+<dd><a href="PyQt5.sip.html#simplewrapper">sip.simplewrapper</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="PlatinaBackend-__init__"><strong>__init__</strong></a>(self, motor_x: Drivers.Motor.MotorDriver.Motor, motor_y: Drivers.Motor.MotorDriver.Motor)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="PlatinaBackend-motor_x"><strong>motor_x</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PlatinaBackend-motor_x_name"><strong>motor_x_name</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PlatinaBackend-motor_y"><strong>motor_y</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PlatinaBackend-motor_y_name"><strong>motor_y_name</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PlatinaBackend-move_to"><strong>move_to</strong></a>(self, x, y)</dt></dl>
+
+<dl><dt><a name="PlatinaBackend-set_motor_x"><strong>set_motor_x</strong></a>(self, motor, conf=None)</dt></dl>
+
+<dl><dt><a name="PlatinaBackend-set_motor_y"><strong>set_motor_y</strong></a>(self, motor, conf=None)</dt></dl>
+
+<dl><dt><a name="PlatinaBackend-stopped"><strong>stopped</strong></a>(self, debug_time=datetime.datetime(2020, 10, 28, 17, 53, 21, 174567))</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>backends</strong> = {}</dl>
+
+<dl><dt><strong>flocks</strong> = {}</dl>
+
+<dl><dt><strong>instruments</strong> = {}</dl>
+
+<dl><dt><strong>motors</strong> = {'virtual': 'virtual'}</dl>
+
+</td></tr></table></td></tr></table>
+</body></html>

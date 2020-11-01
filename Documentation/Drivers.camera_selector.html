@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module Drivers.camera_selector</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="Drivers.html"><font color="#ffffff">Drivers</font></a>.camera_selector</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cfedacking%5Csource%5Cpiton%5Cmicroscopy-program%5Cdrivers%5Ccamera_selector.py">c:\users\fedacking\source\piton\microscopy-program\drivers\camera_selector.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="cv2.cv2.html">cv2.cv2</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="lantz.qt.app.html#Frontend">lantz.qt.app.Frontend</a>(<a href="pimpmyclass.mixins.html#LogMixin">pimpmyclass.mixins.LogMixin</a>, <a href="lantz.qt.app.html#ThreadLogMixin">lantz.qt.app.ThreadLogMixin</a>, <a href="PyQt5.QtWidgets.html#QMainWindow">PyQt5.QtWidgets.QMainWindow</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="Drivers.camera_selector.html#CameraSelector">CameraSelector</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="CameraSelector">class <strong>CameraSelector</strong></a>(<a href="lantz.qt.app.html#Frontend">lantz.qt.app.Frontend</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#CameraSelector">CameraSelector</a>(parent=None,&nbsp;backend=None)<br>
+&nbsp;<br>
+This&nbsp;class&nbsp;provides&nbsp;the&nbsp;interface&nbsp;for&nbsp;the&nbsp;user&nbsp;and&nbsp;the&nbsp;program&nbsp;to&nbsp;select&nbsp;if&nbsp;you&nbsp;want&nbsp;to&nbsp;use&nbsp;a&nbsp;virtual&nbsp;camera<br>
+or&nbsp;real&nbsp;camera.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="Drivers.camera_selector.html#CameraSelector">CameraSelector</a></dd>
+<dd><a href="lantz.qt.app.html#Frontend">lantz.qt.app.Frontend</a></dd>
+<dd><a href="pimpmyclass.mixins.html#LogMixin">pimpmyclass.mixins.LogMixin</a></dd>
+<dd><a href="pimpmyclass.mixins.html#BaseLogMixin">pimpmyclass.mixins.BaseLogMixin</a></dd>
+<dd><a href="lantz.qt.app.html#ThreadLogMixin">lantz.qt.app.ThreadLogMixin</a></dd>
+<dd><a href="PyQt5.QtWidgets.html#QMainWindow">PyQt5.QtWidgets.QMainWindow</a></dd>
+<dd><a href="PyQt5.QtWidgets.html#QWidget">PyQt5.QtWidgets.QWidget</a></dd>
+<dd><a href="PyQt5.QtCore.html#QObject">PyQt5.QtCore.QObject</a></dd>
+<dd><a href="PyQt5.sip.html#wrapper">sip.wrapper</a></dd>
+<dd><a href="PyQt5.QtGui.html#QPaintDevice">PyQt5.QtGui.QPaintDevice</a></dd>
+<dd><a href="PyQt5.sip.html#simplewrapper">sip.simplewrapper</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="CameraSelector-camera"><strong>camera</strong></a>(self) -&gt; cv2.VideoCapture</dt><dd><tt>@brief:&nbsp;This&nbsp;method&nbsp;returns&nbsp;a&nbsp;camera&nbsp;object&nbsp;with&nbsp;the&nbsp;methods&nbsp;read,&nbsp;get&nbsp;and&nbsp;set,&nbsp;that&nbsp;recreate&nbsp;the<br>
+functionality&nbsp;of&nbsp;cv2.VideoCapture</tt></dd></dl>
+
+<dl><dt><a name="CameraSelector-setupUi"><strong>setupUi</strong></a>(self)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>frontends</strong> = {}</dl>
+
+<dl><dt><strong>gui</strong> = ('Camera', 'camera_selector.ui')</dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>config_file</strong> = &lt;configparser.ConfigParser object&gt;<br>
+<strong>locale</strong> = {}</td></tr></table>
+</body></html>

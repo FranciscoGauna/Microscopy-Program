@@ -46,20 +46,6 @@ class LockinTabOptions(Frontend):
         connect_feat(self.widget.ig_cb, self.backend.lockin, "sensitivity")
         connect_feat(self.widget.coupling_cb, self.backend.lockin, "input_coupling")
 
-        #ig_rb = {1: self.widget.ig_0,
-                 #10: self.widget.ig_1,
-                 #100: self.widget.ig_2}
-        #ig_rb[self.backend.get_input_gain()].setChecked(True)
-        #self.widget.ig_0.pressed.connect(lambda: self.backend.set_input_gain(1))
-        #self.widget.ig_1.pressed.connect(lambda: self.backend.set_input_gain(10))
-        #self.widget.ig_2.pressed.connect(lambda: self.backend.set_input_gain(100))
-
-        #coupling_rb = {Coupling.dc: self.widget.coupling_0,
-        #               Coupling.ac: self.widget.coupling_1}
-        #coupling_rb[self.backend.get_coupling()].setChecked(True)
-        #self.widget.coupling_0.pressed.connect(lambda: self.backend.set_coupling(Coupling.dc))
-        #self.widget.coupling_1.pressed.connect(lambda: self.backend.set_coupling(Coupling.ac))
-
         self.widget.pll_check.toggled.connect(self.change_panel)
         self.widget.pll_check.setChecked(self.backend.pll())
 
@@ -73,11 +59,15 @@ class LockinTabOptions(Frontend):
         self.timer.start()
 
     def change_panel(self):
-        if self.widget.pll_check.isChecked():
-            self.widget.pll_spanel.setCurrentWidget(self.widget.on_widget)
-        else:
-            self.widget.pll_spanel.setCurrentWidget(self.widget.off_widget)
-        self.backend.toggle_pll()
+        try:
+            if self.widget.pll_check.isChecked():
+                self.widget.pll_spanel.setCurrentWidget(self.widget.on_widget)
+            else:
+                self.widget.pll_spanel.setCurrentWidget(self.widget.off_widget)
+            self.backend.toggle_pll()
+        except:
+            traceback.print_exc()
+            sys.exit()
 
     def check_overload(self):
         try:

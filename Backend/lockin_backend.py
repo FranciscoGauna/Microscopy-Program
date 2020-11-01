@@ -34,16 +34,16 @@ class LockinBackend(Backend):
         return self.lockin.coupling
 
     def get_amplitude(self):
-        return self.lockin.amplitude().magnitude
+        return self.lockin.amplitude.magnitude
 
     def get_phase(self):
-        return self.lockin.phase().magnitude
+        return self.lockin.phase.magnitude
 
     def get_real_part(self):
-        return self.lockin.real_part_x().magnitude
+        return self.lockin.real_part_x.magnitude
 
     def get_imaginary_part(self):
-        return self.lockin.imaginary_part_y().magnitude
+        return self.lockin.imaginary_part_y.magnitude
 
     def pll(self):
         return self.lockin.reference_internal

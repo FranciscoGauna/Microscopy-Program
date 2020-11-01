@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module View.frontend.camera_control_ui</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="View.html"><font color="#ffffff">View</font></a>.<a href="View.frontend.html"><font color="#ffffff">frontend</font></a>.camera_control_ui</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cfedacking%5Csource%5Cpiton%5Cmicroscopy-program%5Cview%5Cfrontend%5Ccamera_control_ui.py">c:\users\fedacking\source\piton\microscopy-program\view\frontend\camera_control_ui.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="lantz.qt.app.html#Frontend">lantz.qt.app.Frontend</a>(<a href="pimpmyclass.mixins.html#LogMixin">pimpmyclass.mixins.LogMixin</a>, <a href="lantz.qt.app.html#ThreadLogMixin">lantz.qt.app.ThreadLogMixin</a>, <a href="PyQt5.QtWidgets.html#QMainWindow">PyQt5.QtWidgets.QMainWindow</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="View.frontend.camera_control_ui.html#ImageDrawerFt">ImageDrawerFt</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ImageDrawerFt">class <strong>ImageDrawerFt</strong></a>(<a href="lantz.qt.app.html#Frontend">lantz.qt.app.Frontend</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#ImageDrawerFt">ImageDrawerFt</a>(point_list,&nbsp;frequency_frontend,&nbsp;image,&nbsp;*args,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Mixin&nbsp;class&nbsp;to&nbsp;be&nbsp;inherited&nbsp;by&nbsp;a&nbsp;class&nbsp;requiring&nbsp;logging&nbsp;to&nbsp;Python&nbsp;std&nbsp;logging.<br>
+&nbsp;<br>
+Derived&nbsp;classes&nbsp;can&nbsp;specify&nbsp;the&nbsp;logger_name&nbsp;by&nbsp;overriding&nbsp;the&nbsp;logger&nbsp;name&nbsp;variable.<br>
+&nbsp;<br>
+Optionally,&nbsp;an&nbsp;instance&nbsp;of&nbsp;logging.Logger&nbsp;can&nbsp;be&nbsp;attached&nbsp;after&nbsp;instantiation<br>
+using&nbsp;the&nbsp;logger&nbsp;attribute.<br>
+&nbsp;<br>
+Extra&nbsp;information&nbsp;to&nbsp;each&nbsp;log&nbsp;record&nbsp;can&nbsp;be&nbsp;added&nbsp;permanently&nbsp;using&nbsp;the<br>
+logger&nbsp;extra&nbsp;attribute.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="View.frontend.camera_control_ui.html#ImageDrawerFt">ImageDrawerFt</a></dd>
+<dd><a href="lantz.qt.app.html#Frontend">lantz.qt.app.Frontend</a></dd>
+<dd><a href="pimpmyclass.mixins.html#LogMixin">pimpmyclass.mixins.LogMixin</a></dd>
+<dd><a href="pimpmyclass.mixins.html#BaseLogMixin">pimpmyclass.mixins.BaseLogMixin</a></dd>
+<dd><a href="lantz.qt.app.html#ThreadLogMixin">lantz.qt.app.ThreadLogMixin</a></dd>
+<dd><a href="PyQt5.QtWidgets.html#QMainWindow">PyQt5.QtWidgets.QMainWindow</a></dd>
+<dd><a href="PyQt5.QtWidgets.html#QWidget">PyQt5.QtWidgets.QWidget</a></dd>
+<dd><a href="PyQt5.QtCore.html#QObject">PyQt5.QtCore.QObject</a></dd>
+<dd><a href="PyQt5.sip.html#wrapper">sip.wrapper</a></dd>
+<dd><a href="PyQt5.QtGui.html#QPaintDevice">PyQt5.QtGui.QPaintDevice</a></dd>
+<dd><a href="PyQt5.sip.html#simplewrapper">sip.simplewrapper</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ImageDrawerFt-__init__"><strong>__init__</strong></a>(self, point_list, frequency_frontend, image, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="ImageDrawerFt-connect_backend"><strong>connect_backend</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ImageDrawerFt-connect_image"><strong>connect_image</strong></a>(self, image: View.widgets.custom_image.ImageWidget)</dt></dl>
+
+<dl><dt><a name="ImageDrawerFt-draw_line"><strong>draw_line</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ImageDrawerFt-draw_point"><strong>draw_point</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ImageDrawerFt-draw_rectangle"><strong>draw_rectangle</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ImageDrawerFt-get_pos"><strong>get_pos</strong></a>(self, event)</dt></dl>
+
+<dl><dt><a name="ImageDrawerFt-setupUi"><strong>setupUi</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ImageDrawerFt-update_offset"><strong>update_offset</strong></a>(self, new_x_o, new_y_o)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__annotations__</strong> = {'frequency_frontend': &lt;class 'View.frontend.FrequencyStepFrontend.FrequencyStepFrontend'&gt;, 'image': &lt;class 'View.widgets.custom_image.ImageWidget'&gt;, 'line_controller': &lt;class 'Backend.lines_backend.LineController'&gt;, 'offset_ft': &lt;class 'View.frontend.offset_frontend.OffsetFrontend'&gt;, 'operation_frontend': &lt;class 'View.frontend.point_list.OperationList'&gt;, 'point_controller': &lt;class 'Backend.points_backend.PointController'&gt;, 'rect_controller': &lt;class 'Backend.rect_backend.RectangleController'&gt;}</dl>
+
+<dl><dt><strong>flag_click_override</strong> = False</dl>
+
+<dl><dt><strong>flag_first_line</strong> = False</dl>
+
+<dl><dt><strong>flag_first_rect</strong> = False</dl>
+
+<dl><dt><strong>frontends</strong> = {}</dl>
+
+<dl><dt><strong>gui</strong> = ('UI', 'camera_control.ui')</dl>
+
+<dl><dt><strong>old_paint_event</strong> = None</dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>locale</strong> = {}</td></tr></table>
+</body></html>

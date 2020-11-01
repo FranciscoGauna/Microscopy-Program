@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module Model.operation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="Model.html"><font color="#ffffff">Model</font></a>.operation</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cfedacking%5Csource%5Cpiton%5Cmicroscopy-program%5Cmodel%5Coperation.py">c:\users\fedacking\source\piton\microscopy-program\model\operation.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="abc.html#ABC">abc.ABC</a>(<a href="builtins.html#object">builtins.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="Model.operation.html#Operation">Operation</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="Model.operation.html#LineOperation">LineOperation</a>
+</font></dt><dt><font face="helvetica, arial"><a href="Model.operation.html#PointOperation">PointOperation</a>
+</font></dt><dt><font face="helvetica, arial"><a href="Model.operation.html#RectOperation">RectOperation</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="LineOperation">class <strong>LineOperation</strong></a>(<a href="Model.operation.html#Operation">Operation</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#LineOperation">LineOperation</a>(x_1,&nbsp;x_2,&nbsp;y_1,&nbsp;y_2,&nbsp;line_amount,&nbsp;start_f,&nbsp;end_f,&nbsp;amount_f,&nbsp;scale,&nbsp;repeat,&nbsp;order)<br>
+&nbsp;<br>
+Helper&nbsp;class&nbsp;that&nbsp;provides&nbsp;a&nbsp;standard&nbsp;way&nbsp;to&nbsp;create&nbsp;an&nbsp;<a href="abc.html#ABC">ABC</a>&nbsp;using<br>
+inheritance.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="Model.operation.html#LineOperation">LineOperation</a></dd>
+<dd><a href="Model.operation.html#Operation">Operation</a></dd>
+<dd><a href="abc.html#ABC">abc.ABC</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="LineOperation-__init__"><strong>__init__</strong></a>(self, x_1, x_2, y_1, y_2, line_amount, start_f, end_f, amount_f, scale, repeat, order)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="LineOperation-height"><strong>height</strong></a>(self) -&gt; int</dt></dl>
+
+<dl><dt><a name="LineOperation-to_points"><strong>to_points</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="LineOperation-total"><strong>total</strong></a>(self) -&gt; int</dt></dl>
+
+<dl><dt><a name="LineOperation-width"><strong>width</strong></a>(self) -&gt; int</dt></dl>
+
+<dl><dt><a name="LineOperation-x_range"><strong>x_range</strong></a>(self) -&gt; str</dt></dl>
+
+<dl><dt><a name="LineOperation-y_range"><strong>y_range</strong></a>(self) -&gt; str</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset()</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Operation">class <strong>Operation</strong></a>(<a href="abc.html#ABC">abc.ABC</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Helper&nbsp;class&nbsp;that&nbsp;provides&nbsp;a&nbsp;standard&nbsp;way&nbsp;to&nbsp;create&nbsp;an&nbsp;<a href="abc.html#ABC">ABC</a>&nbsp;using<br>
+inheritance.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="Model.operation.html#Operation">Operation</a></dd>
+<dd><a href="abc.html#ABC">abc.ABC</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Operation-f_range"><strong>f_range</strong></a>(self) -&gt; str</dt></dl>
+
+<dl><dt><a name="Operation-height"><strong>height</strong></a>(self) -&gt; int</dt></dl>
+
+<dl><dt><a name="Operation-to_points"><strong>to_points</strong></a>(self) -&gt; List[Model.point.Point]</dt></dl>
+
+<dl><dt><a name="Operation-total"><strong>total</strong></a>(self) -&gt; int</dt></dl>
+
+<dl><dt><a name="Operation-type_localized"><strong>type_localized</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Operation-update_offset"><strong>update_offset</strong></a>(self, x_o, y_o)</dt></dl>
+
+<dl><dt><a name="Operation-width"><strong>width</strong></a>(self) -&gt; int</dt></dl>
+
+<dl><dt><a name="Operation-x_range"><strong>x_range</strong></a>(self) -&gt; str</dt></dl>
+
+<dl><dt><a name="Operation-y_range"><strong>y_range</strong></a>(self) -&gt; str</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset({'height', 'to_points', 'total', 'width', 'x_range', 'y_range'})</dl>
+
+<dl><dt><strong>__annotations__</strong> = {'amount_f': &lt;class 'int'&gt;, 'amount_repeat': &lt;class 'int'&gt;, 'end_f': &lt;class 'float'&gt;, 'order': &lt;class 'str'&gt;, 'scale': &lt;class 'str'&gt;, 'start_f': &lt;class 'float'&gt;, 'type': &lt;class 'str'&gt;, 'x1': &lt;class 'float'&gt;, 'x2': &lt;class 'float'&gt;, 'x_amount': &lt;class 'int'&gt;, ...}</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="PointOperation">class <strong>PointOperation</strong></a>(<a href="Model.operation.html#Operation">Operation</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#PointOperation">PointOperation</a>(x,&nbsp;y,&nbsp;start_f,&nbsp;end_f,&nbsp;amount_f,&nbsp;scale,&nbsp;repeat)<br>
+&nbsp;<br>
+Helper&nbsp;class&nbsp;that&nbsp;provides&nbsp;a&nbsp;standard&nbsp;way&nbsp;to&nbsp;create&nbsp;an&nbsp;<a href="abc.html#ABC">ABC</a>&nbsp;using<br>
+inheritance.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="Model.operation.html#PointOperation">PointOperation</a></dd>
+<dd><a href="Model.operation.html#Operation">Operation</a></dd>
+<dd><a href="abc.html#ABC">abc.ABC</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="PointOperation-__init__"><strong>__init__</strong></a>(self, x, y, start_f, end_f, amount_f, scale, repeat)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="PointOperation-height"><strong>height</strong></a>(self) -&gt; int</dt></dl>
+
+<dl><dt><a name="PointOperation-to_points"><strong>to_points</strong></a>(self) -&gt; List[Model.point.Point]</dt></dl>
+
+<dl><dt><a name="PointOperation-total"><strong>total</strong></a>(self) -&gt; int</dt></dl>
+
+<dl><dt><a name="PointOperation-width"><strong>width</strong></a>(self) -&gt; int</dt></dl>
+
+<dl><dt><a name="PointOperation-x_range"><strong>x_range</strong></a>(self) -&gt; str</dt></dl>
+
+<dl><dt><a name="PointOperation-y_range"><strong>y_range</strong></a>(self) -&gt; str</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset()</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RectOperation">class <strong>RectOperation</strong></a>(<a href="Model.operation.html#Operation">Operation</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#RectOperation">RectOperation</a>(x_1,&nbsp;x_2,&nbsp;y_1,&nbsp;y_2,&nbsp;x_amount,&nbsp;y_amount,&nbsp;start_f,&nbsp;end_f,&nbsp;amount_f,&nbsp;scale,&nbsp;repeat,&nbsp;order)<br>
+&nbsp;<br>
+Helper&nbsp;class&nbsp;that&nbsp;provides&nbsp;a&nbsp;standard&nbsp;way&nbsp;to&nbsp;create&nbsp;an&nbsp;<a href="abc.html#ABC">ABC</a>&nbsp;using<br>
+inheritance.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="Model.operation.html#RectOperation">RectOperation</a></dd>
+<dd><a href="Model.operation.html#Operation">Operation</a></dd>
+<dd><a href="abc.html#ABC">abc.ABC</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="RectOperation-__init__"><strong>__init__</strong></a>(self, x_1, x_2, y_1, y_2, x_amount, y_amount, start_f, end_f, amount_f, scale, repeat, order)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="RectOperation-height"><strong>height</strong></a>(self) -&gt; int</dt></dl>
+
+<dl><dt><a name="RectOperation-to_points"><strong>to_points</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RectOperation-total"><strong>total</strong></a>(self) -&gt; int</dt></dl>
+
+<dl><dt><a name="RectOperation-width"><strong>width</strong></a>(self) -&gt; int</dt></dl>
+
+<dl><dt><a name="RectOperation-x_range"><strong>x_range</strong></a>(self) -&gt; str</dt></dl>
+
+<dl><dt><a name="RectOperation-y_range"><strong>y_range</strong></a>(self) -&gt; str</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset()</dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>List</strong> = typing.List<br>
+<strong>locale</strong> = {}</td></tr></table>
+</body></html>

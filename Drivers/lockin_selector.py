@@ -31,10 +31,10 @@ class LockinSelector(Frontend):
             driver.initialize()
             driver.resource = ResourceDummy()
             driver.send = driver.query
-            driver.amplitude = lambda: driver.analog_value['r']
-            driver.phase = lambda: driver.analog_value['t']
-            driver.real_part_x = lambda: driver.analog_value['x']
-            driver.imaginary_part_y = lambda: driver.analog_value['y']
+            driver.amplitude = driver.analog_value['r']
+            driver.phase = driver.analog_value['t']
+            driver.real_part_x = driver.analog_value['x']
+            driver.imaginary_part_y = driver.analog_value['y']
             return driver
         except AttributeError:
             raise Exception(locale.get("config_missing", "str_config_missing"))
@@ -43,8 +43,8 @@ class LockinSelector(Frontend):
         try:
             #driver = wrap_driver_cls(LI5655).via_gpib(self.conf["CONNECTION"]["gpib_address"])
             driver = LI5655("dummy")
-            driver.initialize()
             driver.resource = ResourceDummy()
+            driver.initialize()
             return driver
         except AttributeError:
             raise Exception(locale.get("config_missing", "str_config_missing"))

@@ -17,10 +17,27 @@
    <string notr="true">background-color: lightgray;</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0">
+    <widget class="QComboBox" name="daq_cb">
+     <property name="styleSheet">
+      <string notr="true">background-color: Pale gray;</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0">
-    <widget class="QCheckBox" name="daq_cb">
+    <widget class="QLabel" name="daq_lb">
      <property name="text">
-      <string>RadioButton</string>
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QPushButton" name="load_conf_bt">
+     <property name="styleSheet">
+      <string notr="true">background-color: Pale gray;</string>
+     </property>
+     <property name="text">
+      <string>PushButton</string>
      </property>
     </widget>
    </item>

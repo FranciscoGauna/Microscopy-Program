@@ -3,7 +3,6 @@ from PyQt5.QtGui import QDoubleValidator
 from PyQt5.QtWidgets import QVBoxLayout, QCheckBox, QLabel, QLineEdit, QHBoxLayout
 from lantz import Q_
 from View.localization import locale
-from View.pyqt_utils import delete_items_of_layout
 
 
 class PllPanel:

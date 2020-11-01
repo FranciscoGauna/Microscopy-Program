@@ -20,14 +20,14 @@
    <item row="0" column="0">
     <layout class="QVBoxLayout" name="main_lt">
      <item>
-      <widget class="QLabel" name="lockin_lb">
+      <widget class="QLabel" name="fungen_lb">
        <property name="text">
         <string>TextLabel</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="lockin_cb">
+      <widget class="QComboBox" name="fungen_cb">
        <property name="styleSheet">
         <string notr="true">background-color: Pale gray;</string>
        </property>

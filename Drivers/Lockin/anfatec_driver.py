@@ -107,29 +107,29 @@ class VirtualLockin(foreign.Driver):
 
     @Feat(values={"0.25 ms": 0, "0.5 ms": 1, "1 ms": 2, "2 ms": 3, "5 ms": 4,  "10 ms": 5,  "20 ms": 6,  "50 ms": 7,
                   "100 ms": 8,  "200 ms": 9, "500 ms": 10,  "1000 ms": 11,  "2000 ms": 12, "5000 ms": 13})
-    def time_constant(self):
+    def time_constants(self):
         """This function sets the time constant that the lockin uses for integration,
          and it should be an integer between 0 and 13, with the following value
         assigned to each number: 0 = 0.25ms, 1 = 0.5ms, 2 = 1ms, 3 = 2ms, 4 = 5ms, ... 13 = 5s"""
         # 0 = 0.25ms, 1 = 0.5ms, 2 = 1ms, 3 = 2ms, 4 = 5ms, ... 13 = 5s
         return self._time_constant
 
-    @time_constant.setter
-    def time_constant(self, num):
+    @time_constants.setter
+    def time_constants(self, num):
         """This function sets the time constant that the lockin uses for integration,
         and it should be an integer between 0 and 13, with the following value
         assigned to each number: 0 = 0.25ms, 1 = 0.5ms, 2 = 1ms, 3 = 2ms, 4 = 5ms, ... 13 = 5s"""
         self._time_constant = num
 
     @Feat(values={"6dB/oct": 0, "12dB/oct": 1, "24dB/oct": 2})
-    def lockin_roll_off(self):
+    def filter_db_per_oct(self):
         """This function returns the roll off which is used for the low pass filter
         ,
         assigned to each number: 0 = 6dB/oct, 1 = 12dB/oct, 2 = 24dB/oct"""
         return self._roll_off
 
-    @lockin_roll_off.setter
-    def lockin_roll_off(self, num):
+    @filter_db_per_oct.setter
+    def filter_db_per_oct(self, num):
         """This function sets the roll off which is used for the low pass filter
         , and it should be an integer between 0 and 2, with the following value.
         assigned to each number: 0 = 6dB/oct, 1 = 12dB/oct, 2 = 24dB/oct"""
@@ -251,12 +251,12 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self.lib._SetLockInPhase(foreign.TYPES["f64"](float))
 
     @Feat(values={1, 10, 100})
-    def input_gain(self):
+    def sensitivity(self):
         """This function returns the input gain. It is a multiplier of either 1, 10 or 100"""
         return self._input_gain
 
-    @input_gain.setter
-    def input_gain(self, num):
+    @sensitivity.setter
+    def sensitivity(self, num):
         """This function sets the input gain. It is a multiplier of either 1, 10 or 100"""
         self._input_gain = num
         self.lib._SetLockInHardGain(foreign.TYPES["L"](num))

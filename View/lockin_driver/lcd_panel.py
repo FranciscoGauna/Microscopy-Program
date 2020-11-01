@@ -6,7 +6,7 @@ from View.localization import locale
 
 class LCDPanel:
 
-    def __init__(self, lockin: AnfatecAMU24()):
+    def __init__(self, lockin: AnfatecAMU24):
         self.display = QLCDNumber()
         self.timer = QTimer()
         self.combo_box = self.channel_combo()
