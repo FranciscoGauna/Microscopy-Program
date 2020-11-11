@@ -25,5 +25,10 @@ class Point:
         self.n = n
 
     def __str__(self):
+        """
+        This function can be used to store the points in a tab separated values file.
+
+        :return: string the string reptresentation of the point in a tabulated form
+        """
         return "x: " + str(trunc(self.x)) + "\ty: " + str(trunc(self.y)) + "\tfrequency: " + str(trunc(self.frequency))\
                + "\t\trepeat: " + str(self.n)
