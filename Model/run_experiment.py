@@ -69,6 +69,8 @@ class ExperimentWorker(QThread):
             self.results = []
             operation_list = deepcopy(self.operation_list)
             point_list = []
+
+
             for operation in operation_list:
                 point_list.extend(operation.to_points())
 
@@ -97,11 +99,20 @@ class ExperimentWorker(QThread):
                 x_count = point.x * pixel_to_counts_factor
                 y_count = point.y * pixel_to_counts_factor
                 self.platina.move_to(x_count, y_count)
+
+                # Waits until it's stopped to measure
                 while not self.platina.stopped(time):
                     sleep(0.001)
 
+                # Waits until it's in focus
+                # It's not necessary to put it in focus
                 while not self.focus_backend.focus:
                     sleep(0.001)
+
+                self.lockin.frequency = point.frequency
+                # Wait (10 * integration time) when in focus
+
+                # Average results
 
                 # Measurement
                 value = self.lockin.get_amplitude()
@@ -112,6 +123,7 @@ class ExperimentWorker(QThread):
                 self.load_pixel(point.display_x, point.display_y, value)
 
                 # Log Result
+                # In case if it fails it's already logged
                 results_file.write(result.to_file())
                 results_file.write("\n")
             self.step += 1
