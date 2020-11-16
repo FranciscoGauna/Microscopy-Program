@@ -6,6 +6,9 @@ from lantz.qt import Backend, InstrumentSlot
 
 
 class FocusBackend(Backend):
+    """
+    This class exists to administer the focus daq and provide a simpler and cleaner interface to the Focus Frontend
+    """
     focus = True
 
     def __init__(self, daq, *args, **kwargs):
@@ -24,7 +27,9 @@ class FocusBackend(Backend):
 
 
 class FocusCheck(QThread):
-
+    """
+    This thread exists to continually refresh the focus status of the sample, and update the focus if it's incorrect.
+    """
     def __init__(self, target):
         QThread.__init__(self)
         self.target = target

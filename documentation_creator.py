@@ -132,7 +132,7 @@ td:first-child + td + td + td {
 </body></html>"""
     for module in modules:
         name = getattr(module, '__name__', None)
-        start += """<tr> <td sortable-data="2""" + name + """.html"><table class="ellipsis"><tbody><tr><td><a class="file" href="file:///C:/Users/Fedacking/source/piton/Microscopy-Program/Documentation/ReferenceDatabase/""" + name + """.html"><img src="ReferenceDatabase/a" alt="File:">""" + name + """.html</a></td></tr></tbody></table></td> </tr> """
+        start += """<tr> <td sortable-data=\"""" + name + """.html"><table class="ellipsis"><tbody><tr><td><a class="file" href="ReferenceDatabase/""" + name + """.html"><img src="ReferenceDatabase/a" alt="File:">""" + name + """.html</a></td></tr></tbody></table></td> </tr> """
     start += end
     index_file = open("Documentation Reference.html", "w+")
     index_file.write(start)
