@@ -34,22 +34,8 @@
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt><a href="#FrequencyController">FrequencyController</a>(*args,&nbsp;**kw)<br>
 &nbsp;<br>
-Base&nbsp;class&nbsp;for&nbsp;all&nbsp;lantz&nbsp;objects.<br>
-&nbsp;<br>
-Provides:<br>
--&nbsp;Observables<br>
--&nbsp;Async&nbsp;capabilities&nbsp;for&nbsp;actions<br>
--&nbsp;Logging<br>
--&nbsp;Feat&nbsp;cache<br>
-&nbsp;<br>
-Parameters<br>
-----------<br>
-name&nbsp;:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;easy&nbsp;to&nbsp;remember&nbsp;identifier&nbsp;given&nbsp;to&nbsp;the&nbsp;instance&nbsp;for&nbsp;logging<br>
-&nbsp;&nbsp;&nbsp;&nbsp;purposes<br>
-&nbsp;<br>
-Returns<br>
--------<br>&nbsp;</tt></td></tr>
+This&nbsp;class&nbsp;administers&nbsp;the&nbsp;logic&nbsp;for&nbsp;the&nbsp;Frequency&nbsp;controller&nbsp;widget&nbsp;and&nbsp;is&nbsp;an&nbsp;useful&nbsp;interface&nbsp;for&nbsp;the&nbsp;frontend<br>
+to&nbsp;connect&nbsp;the&nbsp;feats&nbsp;to&nbsp;widgets.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="Backend.frequency_backend.html#FrequencyController">FrequencyController</a></dd>
@@ -74,9 +60,10 @@ Methods defined here:<br>
 <strong>amount_f_changed</strong> = &lt;unbound PYQT_SIGNAL amount_f_changed(PyQt_PyObject,PyQt_PyObject)&gt;
 <strong>amount_repeat_changed</strong> = &lt;unbound PYQT_SIGNAL amount_repeat_changed(PyQt_PyObject,PyQt_PyObject)&gt;
 <strong>end_f_changed</strong> = &lt;unbound PYQT_SIGNAL end_f_changed(PyQt_PyObject,PyQt_PyObject)&gt;
-<dl><dt><a name="FrequencyController-int_scale"><strong>int_scale</strong></a>(self)</dt></dl>
+<dl><dt><a name="FrequencyController-int_scale"><strong>int_scale</strong></a>(self)</dt><dd><tt>Getter&nbsp;for&nbsp;the&nbsp;scale&nbsp;without&nbsp;using&nbsp;a&nbsp;property&nbsp;wrapper.</tt></dd></dl>
 
-<dl><dt><a name="FrequencyController-point_order_backend"><strong>point_order_backend</strong></a>(self)</dt></dl>
+<dl><dt><a name="FrequencyController-point_order_backend"><strong>point_order_backend</strong></a>(self)</dt><dd><tt>Getter&nbsp;for&nbsp;the&nbsp;point&nbsp;order.&nbsp;:return:&nbsp;either&nbsp;"pos"&nbsp;for&nbsp;operations&nbsp;that&nbsp;are&nbsp;ordered&nbsp;by&nbsp;position&nbsp;first&nbsp;or&nbsp;"freq"<br>
+for&nbsp;operations&nbsp;that&nbsp;are&nbsp;ordered&nbsp;by&nbsp;frequncy&nbsp;first.&nbsp;Useful&nbsp;when&nbsp;you&nbsp;need&nbsp;to&nbsp;use&nbsp;a&nbsp;function&nbsp;and&nbsp;not&nbsp;a&nbsp;wrapper</tt></dd></dl>
 
 <strong>point_order_changed</strong> = &lt;unbound PYQT_SIGNAL point_order_changed(PyQt_PyObject,PyQt_PyObject)&gt;
 <strong>scale_changed</strong> = &lt;unbound PYQT_SIGNAL scale_changed(PyQt_PyObject,PyQt_PyObject)&gt;

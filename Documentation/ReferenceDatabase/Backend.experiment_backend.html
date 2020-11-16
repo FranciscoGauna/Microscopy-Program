@@ -34,7 +34,7 @@
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt><a href="#ExperimentBackend">ExperimentBackend</a>(*args,&nbsp;**kw)<br>
 &nbsp;<br>
-Experiment&nbsp;<a href="lantz.qt.app.html#Backend">Backend</a>&nbsp;is&nbsp;a&nbsp;class&nbsp;that<br>&nbsp;</tt></td></tr>
+Experiment&nbsp;<a href="lantz.qt.app.html#Backend">Backend</a>&nbsp;is&nbsp;a&nbsp;class&nbsp;that&nbsp;administers&nbsp;and&nbsp;gives&nbsp;an&nbsp;interface&nbsp;to&nbsp;access&nbsp;the&nbsp;Experiment&nbsp;Worker<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="Backend.experiment_backend.html#ExperimentBackend">ExperimentBackend</a></dd>
@@ -56,9 +56,12 @@ Experiment&nbsp;<a href="lantz.qt.app.html#Backend">Backend</a>&nbsp;is&nbsp;a&n
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="ExperimentBackend-lockin_backend"><strong>lockin_backend</strong></a>(self)</dt></dl>
+<dl><dt><a name="ExperimentBackend-lockin_backend"><strong>lockin_backend</strong></a>(self) -&gt; Drivers.Lockin.anfatec_driver.VirtualLockin</dt><dd><tt>Returns&nbsp;the&nbsp;Lockin&nbsp;Driver&nbsp;that&nbsp;the&nbsp;experiment&nbsp;worker&nbsp;is&nbsp;associated&nbsp;with<br>
+:return:&nbsp;Lockin&nbsp;Driver</tt></dd></dl>
 
-<dl><dt><a name="ExperimentBackend-results"><strong>results</strong></a>(self)</dt></dl>
+<dl><dt><a name="ExperimentBackend-results"><strong>results</strong></a>(self) -&gt; list</dt><dd><tt>This&nbsp;returns&nbsp;a&nbsp;reference&nbsp;to&nbsp;the&nbsp;list&nbsp;the&nbsp;experiment&nbsp;worker&nbsp;uses&nbsp;to&nbsp;store&nbsp;the&nbsp;current&nbsp;results<br>
+&nbsp;<br>
+:return:&nbsp;List&nbsp;of&nbsp;ResultPoint</tt></dd></dl>
 
 <hr>
 Data descriptors defined here:<br>
