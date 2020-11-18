@@ -10,7 +10,7 @@ class Point:
         :param x: X coordinate in the camera that represented this point
         :param y: Y coordinate in the camera that represented this point
         :param freq: Frequeency at wich the point should be measured
-        :param n: Amount of times the point should be re read to average the results
+        :param n: Amount of times the point should be re read to average the results. Must be bigger than 0
         :param display_x: X coordinate where the point should be represented in a map of the operation
         :param display_y: Y coordinate where the point should be represented in a map of the operation
         """

@@ -34,18 +34,7 @@
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt><a href="#SDG5122">SDG5122</a>(resource_name,&nbsp;name=None,&nbsp;**kwargs)<br>
 &nbsp;<br>
-Base&nbsp;class&nbsp;for&nbsp;message&nbsp;based&nbsp;drivers&nbsp;using&nbsp;PyVISA&nbsp;as&nbsp;underlying&nbsp;library.<br>
-&nbsp;<br>
-Notice&nbsp;that&nbsp;PyVISA&nbsp;can&nbsp;communicate&nbsp;using&nbsp;different&nbsp;backends.&nbsp;For&nbsp;example:<br>
--&nbsp;@ni:&nbsp;Using&nbsp;NI-VISA&nbsp;for&nbsp;communication.&nbsp;Backend&nbsp;bundled&nbsp;with&nbsp;PyVISA.<br>
--&nbsp;@py:&nbsp;Using&nbsp;PySerial,&nbsp;PyUSB&nbsp;and&nbsp;linux-gpib&nbsp;for&nbsp;communication.&nbsp;Available&nbsp;with&nbsp;PyVISA-py&nbsp;package.<br>
--&nbsp;@sim:&nbsp;Simulated&nbsp;devices.&nbsp;Available&nbsp;with&nbsp;PyVISA-sim&nbsp;package.<br>
-&nbsp;<br>
-Parameters<br>
-----------<br>
-&nbsp;<br>
-Returns<br>
--------<br>&nbsp;</tt></td></tr>
+Class&nbsp;that&nbsp;administers&nbsp;and&nbsp;provides&nbsp;an&nbsp;interface&nbsp;to&nbsp;connect&nbsp;with&nbsp;the&nbsp;function&nbsp;generator&nbsp;<a href="#SDG5122">SDG5122</a>&nbsp;from&nbsp;Siglent<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="Drivers.FunGen.sdg5122_driver.html#SDG5122">SDG5122</a></dd>
@@ -67,8 +56,8 @@ Methods defined here:<br>
 
 <dl><dt><a name="SDG5122-initialize"><strong>initialize</strong></a>(self)</dt></dl>
 
-<dl><dt><a name="SDG5122-refresh_state"><strong>refresh_state</strong></a>(self)</dt><dd><tt>#&nbsp;Example&nbsp;command:&nbsp;BSWV?<br>
-#&nbsp;Return:&nbsp;BSWV&nbsp;WVTP,SINE,FRQ,100HZ,PERI,0.01S,AMP,2V,OFST,0V,HLEV,1V,LLEV,-1V,PHSE,0</tt></dd></dl>
+<dl><dt><a name="SDG5122-refresh_state"><strong>refresh_state</strong></a>(self)</dt><dd><tt>Refreshes&nbsp;the&nbsp;state&nbsp;of&nbsp;the&nbsp;data&nbsp;stored&nbsp;about&nbsp;the&nbsp;device.<br>
+:return:&nbsp;none</tt></dd></dl>
 
 <dl><dt><a name="SDG5122-reset_async"><strong>reset_async</strong></a> = async_func(self, *args, **kwargs)</dt><dd><tt>(Async)</tt></dd></dl>
 

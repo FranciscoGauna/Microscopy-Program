@@ -27,7 +27,7 @@ class LockinSelector(Frontend):
     def SR830_GPIB(self):
         try:
             driver = SR830("dummy")
-            #driver = wrap_driver_cls(SR830).via_gpib(self.conf["CONNECTION"]["gpib_address"])
+            # driver = wrap_driver_cls(SR830).via_gpib(self.conf["CONNECTION"]["gpib_address"])
             driver.initialize()
             driver.resource = ResourceDummy()
             driver.send = driver.query

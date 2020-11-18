@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1002</width>
-    <height>720</height>
+    <width>1092</width>
+    <height>798</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -89,6 +89,13 @@
        </item>
        <item>
         <widget class="QLineEdit" name="current_le"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="time_remaining_lb">
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>

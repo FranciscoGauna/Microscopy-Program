@@ -5,6 +5,9 @@ from lantz.core.messagebased import MessageBasedDriver
 
 
 class SDG5122(MessageBasedDriver):
+    """
+    Class that administers and provides an interface to connect with the function generator SDG5122 from Siglent
+    """
 
     DEFAULTS = {
         'COMMON': {
@@ -62,6 +65,10 @@ class SDG5122(MessageBasedDriver):
     # Example command: BSWV?
     # Return: BSWV WVTP,SINE,FRQ,100HZ,PERI,0.01S,AMP,2V,OFST,0V,HLEV,1V,LLEV,-1V,PHSE,0
     def refresh_state(self):
+        """
+        Refreshes the state of the data stored about the device.
+        :return: none
+        """
         result_1 = self.query('1:BSWV?')[5:].split(',')
         result_2 = self.query('2:BSWV?')[5:].split(',')
         result_1 = [(result_1[i*2], result_1[i*2+1]) for i in range(len(result_1)//2)]
@@ -77,6 +84,12 @@ class SDG5122(MessageBasedDriver):
 
     @Feat(read_once=True)
     def idn(self):
+        """
+        The ❊IDN? query returns the SR830's device identification string. This
+        string is in the format
+        "Stanford_Research_Systems,SR830,s/n00111,ver1.000".
+        :return: Identification string
+        """
         return self.query('*IDN?')
 
     @Action()
@@ -110,10 +123,10 @@ class SDG5122(MessageBasedDriver):
     @function.setter
     def function(self, channel, value):
         """
-        Returns the function of the specified channel to value (specified in
+        Sets the function of the specified channel to value (specified in
         WAVEFORMS).
         """
-        return self.write('{}:BSWV WVTP, {}'.format(channel, value))
+        self.write('{}:BSWV WVTP, {}'.format(channel, value))
 
     @DictFeat(keys=CHANNELS, units="V", limits=(-10., 10.))
     def voltage_low(self, channel):
@@ -127,7 +140,7 @@ class SDG5122(MessageBasedDriver):
         """
         Sets the high voltage level for the specified channel.
         """
-        return self.write('{}:BSWV LLEV, {}'.format(channel, value))
+        self.write('{}:BSWV LLEV, {}'.format(channel, value))
 
     @DictFeat(keys=CHANNELS, units="V", limits=(-10., 10.))
     def voltage_high(self, channel):
@@ -141,7 +154,7 @@ class SDG5122(MessageBasedDriver):
         """
         Sets the high voltage level for the specified channel.
         """
-        return self.write('{}:BSWV HLEV, {}'.format(channel, value))
+        self.write('{}:BSWV HLEV, {}'.format(channel, value))
 
     @DictFeat(keys=CHANNELS, units="V", limits=(0., 20.))
     def voltage_amplitude(self, channel):
@@ -156,7 +169,7 @@ class SDG5122(MessageBasedDriver):
         """
         Sets the peak-to-peak voltage amplitude of the specified output channel.
         """
-        return self.write('{}:BSWV AMP, {}'.format(channel, value))
+        self.write('{}:BSWV AMP, {}'.format(channel, value))
 
     @DictFeat(keys=CHANNELS, units="V", limits=(-10., 10.))
     def voltage_offset(self, channel):

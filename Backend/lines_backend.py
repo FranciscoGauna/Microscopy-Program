@@ -21,6 +21,11 @@ class LineController(Backend):
         self.freq_backend = freq_backend
 
     def add_line(self, point_list):
+        """
+
+        :param point_list: the list of points to be extended
+        :return:
+        """
         try:
             operation = LineOperation(self._x_start, self._x_end, self._y_start, self._y_end, self._line_steps,
                                       self.freq_backend.start_f, self.freq_backend.end_f, self.freq_backend.amount_f,

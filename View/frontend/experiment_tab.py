@@ -34,6 +34,7 @@ class ExperimentTab(Frontend):
 
         self.widget.progress_lb.setText(locale.get("progress", "str_progress"))
         self.widget.current_lb.setText(locale.get("current_point", "str_current_point"))
+        self.widget.time_remaining_lb.setText(locale.get("time_remaining", "str_time_remaining"))
 
         self.widget.chart_lb.setText(locale.get("amplitude", "str_amplitude"))
 
@@ -56,7 +57,7 @@ class ExperimentTab(Frontend):
         self.widget.map_view.setScene(self.scene)
         self.progress_bar_controller = ProgressBarController(self.widget.exp_bar, self.widget.start_bt,
                                                              self.backend.worker,
-                                                             self.widget.current_le)
+                                                             self.widget.current_le, self.widget.time_remaining_lb)
 
         self.widget.zoom_in_bt.clicked.connect(self.view_zoom_in)
         self.widget.zoom_out_bt.clicked.connect(self.view_zoom_out)

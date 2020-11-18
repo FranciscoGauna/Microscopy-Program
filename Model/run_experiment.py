@@ -31,7 +31,7 @@ class ExperimentWorker(QThread):
     qimage = QImage(1, 1, QImage.Format_RGB32)
     points: list
 
-    def __init__(self, operation_list: list, platina: PlatinaBackend, lockin: LockinBackend, focus_backend,
+    def __init__(self, operation_list: list, platina: PlatinaBackend, lockin: LockinBackend, focus_backend, fungen,
                  parent=None):
         QThread.__init__(self, parent)
         self.exiting = False
@@ -39,6 +39,7 @@ class ExperimentWorker(QThread):
         self.platina = platina
         self.focus_backend = focus_backend
         self.lockin = lockin
+        self.fungen = fungen
 
         # Initialization of the color spectrum and the image
         self.spectrum_n = spectrum_n
@@ -56,6 +57,14 @@ class ExperimentWorker(QThread):
         self.wait()
 
     def run(self):
+        """
+        This method runs the experiment. It's the principal loop of the program.
+        The loop creates a file, to store theresults
+        Transforms every operation into a list of points
+        Traverses the list to record the data
+        Stores the position of the data
+        :return: none
+        """
         try:
             # Result File creation
             time = datetime.now()
@@ -70,7 +79,7 @@ class ExperimentWorker(QThread):
             operation_list = deepcopy(self.operation_list)
             point_list = []
 
-
+            # Fills the point list with the points for every operation
             for operation in operation_list:
                 point_list.extend(operation.to_points())
 
@@ -110,17 +119,40 @@ class ExperimentWorker(QThread):
                     sleep(0.001)
 
                 self.lockin.frequency = point.frequency
-                # Wait (10 * integration time) when in focus
+                wait_time = (1/self.lockin.frequency) * 10
+                sleep(wait_time)
 
                 # Average results
+                amplitude = self.lockin.get_amplitude()
+                phase = self.lockin.get_phase()
+                real = self.lockin.get_real_part()
+                imag = self.lockin.get_imaginary_part()
+                for i in range(1, point.n):
+                    sleep(wait_time)
+                    amplitude += self.lockin.get_amplitude()
+                    phase = self.lockin.get_phase()
+                    real = self.lockin.get_real_part()
+                    imag = self.lockin.get_imaginary_part()
+                amplitude /= point.n
+                phase /= point.n
+                real /= point.n
+                imag /= point.n
 
-                # Measurement
-                value = self.lockin.get_amplitude()
-                result = ResultPoint(x_count, y_count, point.frequency, value, self.lockin.get_phase(),
-                                     self.lockin.get_real_part(), self.lockin.get_imaginary_part(), point.display_x,
-                                     point.display_y, datetime.now() - time)
+                # Save Measurement
+                result = ResultPoint(
+                    x_count,
+                    y_count,
+                    point.frequency,
+                    amplitude,
+                    phase,
+                    real,
+                    imag,
+                    point.display_x,
+                    point.display_y,
+                    datetime.now() - time
+                )
                 self.results.append(result)
-                self.load_pixel(point.display_x, point.display_y, value)
+                self.load_pixel(point.display_x, point.display_y, self.lockin.get_phase())
 
                 # Log Result
                 # In case if it fails it's already logged
@@ -180,7 +212,7 @@ class ProgressBarController:
     gui = ("UI", "exp_progress.ui")
     timer = QTimer()
 
-    def __init__(self, progress_bar, exp_button, exp_worker: ExperimentWorker, current_le):
+    def __init__(self, progress_bar, exp_button, exp_worker: ExperimentWorker, current_le, time_remaining_lb):
         self.exp_worker = exp_worker
         self.exp_button = exp_button
         self.progress_bar = progress_bar
@@ -189,6 +221,7 @@ class ProgressBarController:
         self.exp_button.setText(locale.get("run_exp", "str_run_exp"))
         self.progress_bar.setRange(0, self.exp_worker.total)
         self.exp_button.pressed.connect(self.start)
+        self.tr_lb = time_remaining_lb
 
     def start(self):
         if self.exp_worker.isRunning():
@@ -210,6 +243,7 @@ class ProgressBarController:
             self.progress_bar.setRange(0, self.exp_worker.total)
             if len(self.exp_worker.results) > 0:
                 self.current_le.setText(str(self.exp_worker.results[-1]))
+                self.tr_lb.setText(str(self.exp_worker.results[-1].time * self.exp_worker.total / self.exp_worker.step))
         except:
             traceback.print_exc()
 

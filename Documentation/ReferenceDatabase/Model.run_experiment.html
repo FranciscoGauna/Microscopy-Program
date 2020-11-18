@@ -47,7 +47,7 @@
 <font color="#000000" face="helvetica, arial"><a name="ExperimentWorker">class <strong>ExperimentWorker</strong></a>(<a href="PyQt5.QtCore.html#QThread">PyQt5.QtCore.QThread</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt><a href="#ExperimentWorker">ExperimentWorker</a>(operation_list:&nbsp;list,&nbsp;platina:&nbsp;Backend.platina_backend.PlatinaBackend,&nbsp;lockin:&nbsp;Backend.lockin_backend.LockinBackend,&nbsp;focus_backend,&nbsp;parent=None)<br>
+<td colspan=2><tt><a href="#ExperimentWorker">ExperimentWorker</a>(operation_list:&nbsp;list,&nbsp;platina:&nbsp;Backend.platina_backend.PlatinaBackend,&nbsp;lockin:&nbsp;Backend.lockin_backend.LockinBackend,&nbsp;focus_backend,&nbsp;fungen,&nbsp;parent=None)<br>
 &nbsp;<br>
 <a href="PyQt5.QtCore.html#QThread">QThread</a>(parent:&nbsp;QObject&nbsp;=&nbsp;None)<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
@@ -63,7 +63,7 @@
 Methods defined here:<br>
 <dl><dt><a name="ExperimentWorker-__del__"><strong>__del__</strong></a>(self)</dt></dl>
 
-<dl><dt><a name="ExperimentWorker-__init__"><strong>__init__</strong></a>(self, operation_list: list, platina: Backend.platina_backend.PlatinaBackend, lockin: Backend.lockin_backend.LockinBackend, focus_backend, parent=None)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+<dl><dt><a name="ExperimentWorker-__init__"><strong>__init__</strong></a>(self, operation_list: list, platina: Backend.platina_backend.PlatinaBackend, lockin: Backend.lockin_backend.LockinBackend, focus_backend, fungen, parent=None)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
 
 <dl><dt><a name="ExperimentWorker-create_colors"><strong>create_colors</strong></a>(self)</dt></dl>
 
@@ -73,7 +73,12 @@ Methods defined here:<br>
 
 <dl><dt><a name="ExperimentWorker-recalculate_colors"><strong>recalculate_colors</strong></a>(self)</dt></dl>
 
-<dl><dt><a name="ExperimentWorker-run"><strong>run</strong></a>(self)</dt><dd><tt><a href="#ExperimentWorker-run">run</a>(self)</tt></dd></dl>
+<dl><dt><a name="ExperimentWorker-run"><strong>run</strong></a>(self)</dt><dd><tt>This&nbsp;method&nbsp;runs&nbsp;the&nbsp;experiment.&nbsp;It's&nbsp;the&nbsp;principal&nbsp;loop&nbsp;of&nbsp;the&nbsp;program.<br>
+The&nbsp;loop&nbsp;creates&nbsp;a&nbsp;file,&nbsp;to&nbsp;store&nbsp;theresults<br>
+Transforms&nbsp;every&nbsp;operation&nbsp;into&nbsp;a&nbsp;list&nbsp;of&nbsp;points<br>
+Traverses&nbsp;the&nbsp;list&nbsp;to&nbsp;record&nbsp;the&nbsp;data<br>
+Stores&nbsp;the&nbsp;position&nbsp;of&nbsp;the&nbsp;data<br>
+:return:&nbsp;none</tt></dd></dl>
 
 <hr>
 Data and other attributes defined here:<br>
@@ -100,12 +105,12 @@ Data and other attributes defined here:<br>
 <font color="#000000" face="helvetica, arial"><a name="ProgressBarController">class <strong>ProgressBarController</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt><a href="#ProgressBarController">ProgressBarController</a>(progress_bar,&nbsp;exp_button,&nbsp;exp_worker:&nbsp;Model.run_experiment.<a href="#ExperimentWorker">ExperimentWorker</a>,&nbsp;current_le)<br>
+<td colspan=2><tt><a href="#ProgressBarController">ProgressBarController</a>(progress_bar,&nbsp;exp_button,&nbsp;exp_worker:&nbsp;Model.run_experiment.<a href="#ExperimentWorker">ExperimentWorker</a>,&nbsp;current_le,&nbsp;time_remaining_lb)<br>
 &nbsp;<br>
 <br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
-<dl><dt><a name="ProgressBarController-__init__"><strong>__init__</strong></a>(self, progress_bar, exp_button, exp_worker: Model.run_experiment.ExperimentWorker, current_le)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+<dl><dt><a name="ProgressBarController-__init__"><strong>__init__</strong></a>(self, progress_bar, exp_button, exp_worker: Model.run_experiment.ExperimentWorker, current_le, time_remaining_lb)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
 
 <dl><dt><a name="ProgressBarController-load_value"><strong>load_value</strong></a>(self)</dt></dl>
 

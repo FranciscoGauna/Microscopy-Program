@@ -58,6 +58,7 @@ class ProgramWindow(Frontend):
                 lockin = self.selector_frontend.lockin()
                 daq = self.selector_frontend.daq()
                 camera = self.selector_frontend.camera()
+                fungen = self.selector_frontend.fungen()
             except Exception as e:
                 error_dialog = QMessageBox()
                 error_dialog.setText(str(e))
@@ -70,7 +71,7 @@ class ProgramWindow(Frontend):
 
             focus_backend = FocusBackend(daq)
 
-            self.tab_frontend = TabsFrontend(self.image_ft.image, lockin, motor_backend, focus_backend)
+            self.tab_frontend = TabsFrontend(self.image_ft.image, lockin, motor_backend, focus_backend, fungen)
             self.point_gen_ft = self.tab_frontend.point_gen_ft
             self.widget.main_lt.addWidget(self.tab_frontend)
 

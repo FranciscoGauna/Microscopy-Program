@@ -27,7 +27,7 @@ class TabsFrontend(Frontend):
     lockin_options: LockinOptions
     lockin_pll: LockinPll
 
-    def __init__(self, image, lockin, motor_backend, focus_backend):
+    def __init__(self, image, lockin, motor_backend, focus_backend, fungen):
         super().__init__()
 
         lockin_backend = LockinBackend(lockin=lockin)
@@ -50,7 +50,7 @@ class TabsFrontend(Frontend):
         self.widget.bot_c_lt.addWidget(self.operation_list_ft)
 
         experiment_worker = ExperimentWorker(self.operation_list_ft.operation_list, motor_backend, lockin_backend,
-                                             focus_backend)
+                                             focus_backend, fungen)
         experiment_backend = ExperimentBackend(worker=experiment_worker)
         self.experiment_tab = ExperimentTab(backend=experiment_backend)
         self.widget.experiment_lt.addWidget(self.experiment_tab)
