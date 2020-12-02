@@ -5,10 +5,14 @@ locale_en = {
     "high_reserve": "High Reserve",
     "normal": "Normal",
     "low_noise": "Low Noise",
+    "fungen_models": "Function Generators",
+    "load_conf": "Load Configuration",
 }
 
 locale_es = {
-    "box_gain": "Ganancia"
+    "box_gain": "Ganancia",
+    "fungen_models": "Generador de Funciones",
+    "load_conf": "Cargar Configuracion",
 }
 
 _local_meta_dict = {
