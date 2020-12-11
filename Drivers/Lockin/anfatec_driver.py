@@ -32,6 +32,7 @@ class VirtualLockin(foreign.Driver):
 
         self._time_constant = 0
         self._roll_off = 0
+        self._input_gain = 1
 
         self.pll = pll
         self.time_constant = time_constant
@@ -74,12 +75,12 @@ class VirtualLockin(foreign.Driver):
         self._lockin_phase = float
 
     @Feat(values={1, 10, 100})
-    def input_gain(self):
+    def sensitivity(self):
         """This function returns the input gain. It is a multiplier of either 1, 10 or 100"""
         return self._input_gain
 
-    @input_gain.setter
-    def input_gain(self, num):
+    @sensitivity.setter
+    def sensitivity(self, num):
         """This function sets the input gain. It is a multiplier of either 1, 10 or 100"""
         self._input_gain = num
 

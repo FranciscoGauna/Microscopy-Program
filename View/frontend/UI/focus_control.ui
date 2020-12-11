@@ -222,7 +222,7 @@
          <item>
           <layout class="QVBoxLayout" name="dial_lt">
            <item>
-            <widget class="QPushButton" name="pushButton">
+            <widget class="QPushButton" name="stop_button">
              <property name="text">
               <string>PushButton</string>
              </property>
