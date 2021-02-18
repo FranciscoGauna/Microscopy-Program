@@ -57,16 +57,12 @@ namespace CSExeCOMServer {
     public interface IDAQLibrary{
         #region Properties
 
-        float FloatProperty { get; set; }
-
         #endregion
 
         #region Methods
-        string HelloWorld();
-        string NewMethod();
+        void SetDevice(string device_id);
+        void OpenDevice();
         string[] DeviceList();
-
-        string Echo(string value);
 
         void GetProcessThreadID(out uint processId, out uint threadId);
 
@@ -132,33 +128,38 @@ namespace CSExeCOMServer {
 
         #region Properties
 
-        private float fField = 0;
-
-        public float FloatProperty {
-            get { return this.fField; }
-            set {
-                bool cancel = false;
-                // Raise the event FloatPropertyChanging
-                if (null != FloatPropertyChanging)
-                    FloatPropertyChanging(value, ref cancel);
-                if (!cancel) this.fField = value;
-            }
-        }
+        private string device_name = "";
+        private Device device;
+        private DigitalIO digital_ios;
+        private bool opened = false;
 
         #endregion
 
         #region Methods
-        public string HelloWorld() {
-            string result = "Hello World";
-            return result;
+
+        public void SetDevice(string device_id) {
+            device_name = device_id;
         }
 
-        public string NewMethod() {
-            return "NewMethod";
+        public bool OpenDevice() {
+            DaqSystem daq_system = new DaqSystem();
+            Acq acquire = daq_system.Add();
+            AvailableDevices available_devices = acquire.AvailableDevices;
+            if (opened) return true;
+
+            for (int i = 1; i < available_devices.Count + 1; i++) {
+                if (available_devices[i].Name == device_name) {
+                    device = (Device)available_devices.CreateFromIndex(i);
+                    return opened = true;
+                }
+            }
+
+            return false;
         }
 
-        public string Echo(string value) {
-            return value + "echo";
+        public bool SetAnalogInput() {
+            device.AnalogInputs.Add(AnalogInputType.aitDirect, DeviceBaseChannel.dbcDaqChannel3, DeviceModulePosition.dmpPosition0).AddToScanList();
+            return true;
         }
 
         public string[] DeviceList() {

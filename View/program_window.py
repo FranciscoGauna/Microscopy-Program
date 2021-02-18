@@ -69,7 +69,7 @@ class ProgramWindow(Frontend):
             self.camera_bc = CameraBackend(camera)
             self.image_ft = CameraOnlyWindow(backend=self.camera_bc)
 
-            focus_backend = FocusBackend(daq)
+            focus_backend = FocusBackend(daq, motor_backend)
 
             self.tab_frontend = TabsFrontend(self.image_ft.image, lockin, motor_backend, focus_backend, fungen)
             self.point_gen_ft = self.tab_frontend.point_gen_ft

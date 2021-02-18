@@ -6,6 +6,7 @@ from lantz.qt.connect import connect_feat
 from Backend.focus_backend import FocusBackend
 from View.localization import locale
 
+
 class FocusFrontend(Frontend):
     gui = ("UI", "focus_control.ui")
     backend: FocusBackend
@@ -42,6 +43,12 @@ class FocusFrontend(Frontend):
         self.widget.focus_light_status.setFocusPolicy(Qt.NoFocus)
 
     def connect_backend(self):
+
+
+        connect_feat(self.widget.fc_current_sd, self.backend, "fc_current")
+        connect_feat(self.widget.fc_current_sb, self.backend, "fc_current")
+        connect_feat(self.widget.probe_current_sd, self.backend, "probe_current")
+        connect_feat(self.widget.probe_current_sb, self.backend, "probe_current")
 
         self.backend.set_widget(self.widget.focus_light_status)
 

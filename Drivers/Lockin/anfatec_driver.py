@@ -18,15 +18,15 @@ class VirtualLockin(foreign.Driver):
     def __init__(self, *args, **kwargs):
         """Instanciates a new copy of the driver. -if you want to load the settings of a previous instance of this class
         , you should use the method export_settings and add it to the kwargs"""
-        pll = kwargs.pop("pll", False)
+        reference_internal = kwargs.pop("pll", False)
         time_constant = (kwargs.pop("time_constant", "5 ms"))
         roll_off = (kwargs.pop("roll_off", "12dB/oct"))
         input_gain = kwargs.pop("input_gain", 1)
         harmonic = kwargs.pop("harmonic", 1)
-        coupling = kwargs.pop("coupling", Coupling.dc)
-        lockin_phase = Q_(kwargs.pop("lockin_phase", 0), "deg")
-        lockin_amplitude = Q_(kwargs.pop("lockin_amplitude", 1), "V")
-        lockin_frequency = Q_(kwargs.pop("lockin_frequency", 10000), "hertz")
+        input_coupling = kwargs.pop("coupling", Coupling.dc)
+        reference_phase_shift = Q_(kwargs.pop("lockin_phase", 0), "deg")
+        sine_output_amplitude = Q_(kwargs.pop("lockin_amplitude", 1), "V")
+        frequency = Q_(kwargs.pop("lockin_frequency", 10000), "hertz")
 
         super().__init__(*args, **kwargs)
 
@@ -34,43 +34,43 @@ class VirtualLockin(foreign.Driver):
         self._roll_off = 0
         self._input_gain = 1
 
-        self.pll = pll
+        self.reference_internal = reference_internal
         self.time_constant = time_constant
         self.lockin_roll_off = roll_off
         self.input_gain = input_gain
         self.harmonic = harmonic
-        self.coupling = coupling
-        self.lockin_phase = lockin_phase
-        self.lockin_amplitude = lockin_amplitude
-        self.lockin_frequency = lockin_frequency
+        self.input_coupling = input_coupling
+        self.reference_phase_shift = reference_phase_shift
+        self.sine_output_amplitude = sine_output_amplitude
+        self.frequency = frequency
 
     @Feat(units="Hz")
-    def lockin_frequency(self):
+    def frequency(self):
         """This Function returns the center frequency of the lockin in Hz."""
         return self._lockin_frequency
 
-    @lockin_frequency.setter
-    def lockin_frequency(self, float):
+    @frequency.setter
+    def frequency(self, float):
         """This Function sets the center frequency of the lockin to a value in Hz. It will only be used if the PLL is off."""
         self._lockin_frequency = float
 
     @Feat(units="V")
-    def lockin_amplitude(self):
+    def sine_output_amplitude(self):
         """This Function returns the amplitude in V of the reference output"""
         return self._lockin_amplitude
 
-    @lockin_amplitude.setter
-    def lockin_amplitude(self, value):
+    @sine_output_amplitude.setter
+    def sine_output_amplitude(self, value):
         """This Function sets the amplitude in V of the reference output and gives no value back"""
         self._lockin_amplitude = value
 
     @Feat(units="deg")
-    def lockin_phase(self):
+    def reference_phase_shift(self):
         """This function returns the phase offset between the input and the reference output in degrees"""
         return self._lockin_phase
 
-    @lockin_phase.setter
-    def lockin_phase(self, float):
+    @reference_phase_shift.setter
+    def reference_phase_shift(self, float):
         """This function sets the phase offset between the input and the reference output in degrees"""
         self._lockin_phase = float
 
@@ -85,12 +85,12 @@ class VirtualLockin(foreign.Driver):
         self._input_gain = num
 
     @Feat(values={Coupling.ac, Coupling.dc})
-    def coupling(self):
+    def input_coupling(self):
         """This function returns the coupling gain. It returns an instance of the Coupling Enum Class"""
         return self._coupling
 
-    @coupling.setter
-    def coupling(self, coupling: Coupling):
+    @input_coupling.setter
+    def input_coupling(self, coupling: Coupling):
         """This function sets the coupling gain. It requires an instance of the Coupling Enum Class"""
         if not isinstance(coupling, Coupling):
             raise TypeError()
@@ -147,13 +147,13 @@ class VirtualLockin(foreign.Driver):
         return gauss(50, 10)
 
     @Feat()
-    def pll(self):
+    def reference_internal(self):
         """Returns the value of pll. If true, the lockin uses the frequency of the external reference and if false it
         uses the internal value, assigned in lockin_frequency"""
         return self._pll
 
-    @pll.setter
-    def pll(self, flag: bool):
+    @reference_internal.setter
+    def reference_internal(self, flag: bool):
         """Sets what frequency to use. If true, the lockin uses the frequency of the external reference and if false it
         uses the internal value, assigned in lockin_frequency"""
         self._pll = flag
@@ -161,19 +161,17 @@ class VirtualLockin(foreign.Driver):
         if flag:
             num = 1
 
-    def pll_frequency(self):
-        """Returns the fequency of the pll if the pll is on. Otherwise returns 0"""
-        return 0.0
-
     @Feat()
     def overloaded(self):
         """Overloaded returns true when the lockin is overloaded and false when it is working correctly"""
         return False
 
+    @Feat(units="V")
     def real_part_x(self):
         """Real Part x returns the value of the x channel , which measures from the input signal"""
         return 0
 
+    @Feat(units="V")
     def imaginary_part_y(self):
         """Imaginaty part y returns the value of the x channel , which measures from the input signal"""
         return 0
