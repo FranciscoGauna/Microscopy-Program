@@ -1,5 +1,7 @@
 Results/*
 *.pyc
 .idea/
+.idea/*
+.idea\*
 Test/
 ximc
