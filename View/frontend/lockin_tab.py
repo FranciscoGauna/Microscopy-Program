@@ -58,82 +58,85 @@ class LockinTab(Frontend):
         self.widget.imag_cb.setText(locale.get("auto_limits", "str_auto_limits"))
 
     def connect_backend(self):
-        self.lockin_options = LockinTabOptions(backend=self.backend)
+        try:
+            self.lockin_options = LockinTabOptions(backend=self.backend)
 
-        self.widget.top_lt.addWidget(self.lockin_options)
+            self.widget.top_lt.addWidget(self.lockin_options)
 
-        self.amp_series = QLineSeries()
-        self.amp_series.setName(locale.get("amplitude_mv", "str_amplitude_mv"))
-        self.amp_y_max = 0.01
-        self.amp_y_min = 0
+            self.amp_series = QLineSeries()
+            self.amp_series.setName(locale.get("amplitude_mv", "str_amplitude_mv"))
+            self.amp_y_max = 0.01
+            self.amp_y_min = 0
 
-        self.amp_chart = QChart(flags=Qt.WindowFlags())
-        self.amp_chart.layout().setContentsMargins(4, 4, 4, 4)
-        self.amp_chart.setBackgroundRoundness(0)
-        self.amp_chart.addSeries(self.amp_series)
-        self.amp_chart.createDefaultAxes()
-        self.amp_y_axe = self.amp_chart.axes(Qt.Vertical)[0]
-        self.amp_chart_view = QChartView()
-        self.amp_chart_view.setRenderHint(QPainter.Antialiasing)
-        self.amp_chart_view.setChart(self.amp_chart)
+            self.amp_chart = QChart(flags=Qt.WindowFlags())
+            self.amp_chart.layout().setContentsMargins(4, 4, 4, 4)
+            self.amp_chart.setBackgroundRoundness(0)
+            self.amp_chart.addSeries(self.amp_series)
+            self.amp_chart.createDefaultAxes()
+            self.amp_y_axe = self.amp_chart.axes(Qt.Vertical)[0]
+            self.amp_chart_view = QChartView()
+            self.amp_chart_view.setRenderHint(QPainter.Antialiasing)
+            self.amp_chart_view.setChart(self.amp_chart)
 
-        self.phase_series = QLineSeries()
-        self.phase_series.setName(locale.get("phase", "str_phase"))
-        self.phase_y_max = 180
-        self.phase_y_min = -180
-        self.widget.phase_max_sb.setValue(self.phase_y_max)
-        self.widget.phase_min_sb.setValue(self.phase_y_min)
+            self.phase_series = QLineSeries()
+            self.phase_series.setName(locale.get("phase", "str_phase"))
+            self.phase_y_max = 180
+            self.phase_y_min = -180
+            self.widget.phase_max_sb.setValue(self.phase_y_max)
+            self.widget.phase_min_sb.setValue(self.phase_y_min)
 
-        self.phase_chart = QChart(flags=Qt.WindowFlags())
-        self.phase_chart.layout().setContentsMargins(4, 4, 4, 4)
-        self.phase_chart.setBackgroundRoundness(0)
-        self.phase_chart.addSeries(self.phase_series)
-        self.phase_chart.createDefaultAxes()
-        self.phase_y_axe = self.phase_chart.axes(Qt.Vertical)[0]
-        self.phase_chart_view = QChartView()
-        self.phase_chart_view.setRenderHint(QPainter.Antialiasing)
-        self.phase_chart_view.setChart(self.phase_chart)
+            self.phase_chart = QChart(flags=Qt.WindowFlags())
+            self.phase_chart.layout().setContentsMargins(4, 4, 4, 4)
+            self.phase_chart.setBackgroundRoundness(0)
+            self.phase_chart.addSeries(self.phase_series)
+            self.phase_chart.createDefaultAxes()
+            self.phase_y_axe = self.phase_chart.axes(Qt.Vertical)[0]
+            self.phase_chart_view = QChartView()
+            self.phase_chart_view.setRenderHint(QPainter.Antialiasing)
+            self.phase_chart_view.setChart(self.phase_chart)
 
-        self.real_series = QLineSeries()
-        self.real_series.setName(locale.get("real_part_mv", "str_real_part_mv"))
-        self.real_y_max = 0.01
-        self.real_y_min = 0
+            self.real_series = QLineSeries()
+            self.real_series.setName(locale.get("real_part_mv", "str_real_part_mv"))
+            self.real_y_max = 0.01
+            self.real_y_min = 0
 
-        self.real_chart = QChart(flags=Qt.WindowFlags())
-        self.real_chart.layout().setContentsMargins(4, 4, 4, 4)
-        self.real_chart.setBackgroundRoundness(0)
-        self.real_chart.addSeries(self.real_series)
-        self.real_chart.createDefaultAxes()
-        self.real_y_axe = self.real_chart.axes(Qt.Vertical)[0]
-        self.real_chart_view = QChartView()
-        self.real_chart_view.setRenderHint(QPainter.Antialiasing)
-        self.real_chart_view.setChart(self.real_chart)
+            self.real_chart = QChart(flags=Qt.WindowFlags())
+            self.real_chart.layout().setContentsMargins(4, 4, 4, 4)
+            self.real_chart.setBackgroundRoundness(0)
+            self.real_chart.addSeries(self.real_series)
+            self.real_chart.createDefaultAxes()
+            self.real_y_axe = self.real_chart.axes(Qt.Vertical)[0]
+            self.real_chart_view = QChartView()
+            self.real_chart_view.setRenderHint(QPainter.Antialiasing)
+            self.real_chart_view.setChart(self.real_chart)
 
-        self.imag_series = QLineSeries()
-        self.imag_series.setName(locale.get("imaginary_part_mv", "str_imaginary_part_mv"))
-        self.imag_y_max = 0.01
-        self.imag_y_min = 0
+            self.imag_series = QLineSeries()
+            self.imag_series.setName(locale.get("imaginary_part_mv", "str_imaginary_part_mv"))
+            self.imag_y_max = 0.01
+            self.imag_y_min = 0
 
-        self.imag_chart = QChart(flags=Qt.WindowFlags())
-        self.imag_chart.layout().setContentsMargins(4, 4, 4, 4)
-        self.imag_chart.setBackgroundRoundness(0)
-        self.imag_chart.addSeries(self.imag_series)
-        self.imag_chart.createDefaultAxes()
-        self.imag_y_axe = self.imag_chart.axes(Qt.Vertical)[0]
-        self.imag_chart_view = QChartView()
-        self.imag_chart_view.setRenderHint(QPainter.Antialiasing)
-        self.imag_chart_view.setChart(self.imag_chart)
+            self.imag_chart = QChart(flags=Qt.WindowFlags())
+            self.imag_chart.layout().setContentsMargins(4, 4, 4, 4)
+            self.imag_chart.setBackgroundRoundness(0)
+            self.imag_chart.addSeries(self.imag_series)
+            self.imag_chart.createDefaultAxes()
+            self.imag_y_axe = self.imag_chart.axes(Qt.Vertical)[0]
+            self.imag_chart_view = QChartView()
+            self.imag_chart_view.setRenderHint(QPainter.Antialiasing)
+            self.imag_chart_view.setChart(self.imag_chart)
 
-        self.widget.bot_lt.addWidget(self.amp_chart_view, 1, 0)
-        self.widget.bot_lt.addWidget(self.phase_chart_view, 1, 1)
-        self.widget.bot_lt.addWidget(self.real_chart_view, 1, 2)
-        self.widget.bot_lt.addWidget(self.imag_chart_view, 1, 3)
+            self.widget.bot_lt.addWidget(self.amp_chart_view, 1, 0)
+            self.widget.bot_lt.addWidget(self.phase_chart_view, 1, 1)
+            self.widget.bot_lt.addWidget(self.real_chart_view, 1, 2)
+            self.widget.bot_lt.addWidget(self.imag_chart_view, 1, 3)
 
-        self.start_time = datetime.now()
-        self.timer = QTimer()
-        self.timer.setInterval(update_timedelta_chart)
-        self.timer.timeout.connect(self.expand_line_series)
-        self.timer.start()
+            self.start_time = datetime.now()
+            self.timer = QTimer()
+            self.timer.setInterval(update_timedelta_chart)
+            self.timer.timeout.connect(self.expand_line_series)
+            self.timer.start()
+        except:
+            traceback.print_exc()
 
     def expand_line_series(self):
         try:

@@ -3,9 +3,11 @@ import os
 from configparser import ConfigParser
 from pathlib import Path
 
+import visa
 from PyQt5.QtWidgets import QFileDialog
 from lantz.drivers.stanford import SR830
 from lantz.qt import Frontend, wrap_driver_cls
+from lantz.core import messagebased
 
 from Drivers.Lockin.LI5655 import LI5655, ResourceDummy
 from Drivers.Lockin.anfatec_driver import VirtualLockin, AnfatecAMU24
@@ -41,9 +43,8 @@ class LockinSelector(Frontend):
 
     def LI5655_GPIB(self):
         try:
-            #driver = wrap_driver_cls(LI5655).via_gpib(self.conf["CONNECTION"]["gpib_address"])
-            driver = LI5655("dummy")
-            driver.resource = ResourceDummy()
+            messagebased._resource_manager = visa.ResourceManager()
+            driver = wrap_driver_cls(LI5655).via_usb()
             driver.initialize()
             return driver
         except AttributeError:

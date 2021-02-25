@@ -47,39 +47,39 @@ SENS = OrderedDict([
 
 TCONSTANTS = OrderedDict([
     ('0 µs', 0),
-    ('1 µs', "1E-6"),
-    ('2 µs', "2E-6"),
-    ('5 µs', "3E-6"),
-    ('10 µs', "10E-6"),
-    ('20 µs', "20E-6"),
-    ('50 µs', "50E-6"),
-    ('100 µs', "100E-6"),
-    ('200 µs', "200E-6"),
-    ('500 µs', "500E-6"),
-    ('1 ms', "2E-3"),
-    ('2 ms', "2E-3"),
-    ('5 ms', "2E-3"),
-    ('10 ms', "2E-3"),
-    ('20 ms', "2E-3"),
-    ('50 ms', "2E-3"),
-    ('100 ms', "2E-3"),
-    ('200 ms', "2E-3"),
-    ('500 ms', "2E-3"),
-    ('1 s', "1E0"),
-    ('2 s', "2E0"),
-    ('5 s', "5E0"),
-    ('10 s', "10E0"),
-    ('20 s', "20E0"),
-    ('50 s', "50E0"),
-    ('100 s', "100E0"),
-    ('200 s', "200E0"),
-    ('500 s', "500E0"),
-    ('1 ks', "1E3"),
-    ('2 ks', "2E3"),
-    ('5 ks', "5E3"),
-    ('10 ks', "10E3"),
-    ('20 ks', "20E3"),
-    ('50 ks', "50E3"),
+    ('1 µs', "1.000000e-06"),
+    ('2 µs', "2.000000e-06"),
+    ('5 µs', "3.000000e-06"),
+    ('10 µs', "1.000000e-05"),
+    ('20 µs', "2.000000e-05"),
+    ('50 µs', "5.000000e-05"),
+    ('100 µs', "1.000000e-04"),
+    ('200 µs', "2.000000e-04"),
+    ('500 µs', "5.000000e-04"),
+    ('1 ms', "1.000000e-03"),
+    ('2 ms', "2.000000e-03"),
+    ('5 ms', "5.000000e-03"),
+    ('10 ms', "1.000000e-02"),
+    ('20 ms', "2.000000e-02"),
+    ('50 ms', "5.000000e-02"),
+    ('100 ms', "1.000000e-01"),
+    ('200 ms', "2.000000e-01"),
+    ('500 ms', "5.000000e-01"),
+    ('1 s', "1.000000e0"),
+    ('2 s', "2.000000e0"),
+    ('5 s', "5.000000e0"),
+    ('10 s', "1.000000e1"),
+    ('20 s', "2.000000e1"),
+    ('50 s', "5.000000e1"),
+    ('100 s', "1.000000e2"),
+    ('200 s', "2.000000e2"),
+    ('500 s', "5.000000e2"),
+    ('1 ks', "1.000000e3"),
+    ('2 ks', "2.000000e3"),
+    ('5 ks', "5.000000e3"),
+    ('10 ks', "1.000000e4"),
+    ('20 ks', "2.000000e4"),
+    ('50 ks', "5.000000e4"),
 ])
 
 SAMPLE_RATES = OrderedDict([
@@ -102,48 +102,49 @@ SAMPLE_RATES = OrderedDict([
 
 
 class LI5655(MessageBasedDriver):
-
+    MANUFACTURER_ID = '0x0D4A'
+    MODEL_CODE = '0x004D'
     DEFAULTS = {'COMMON': {'write_termination': '\n',
                            'read_termination': '\n'}}
 
     def write(self, command, termination=None, encoding=None):
         self.resource.write(command, termination, encoding)
 
-    def initialize(self):
+    def setup(self):
         self.write(":CALC1:FORM MLIN")
         self.write(":CALC2:FORM PHAS")
         self.write(":CALC3:FORM REAL")
         self.write(":CALC4:FORM IMAG")
 
-    @Feat(values={1, 10, 100})
+    @Feat(values={1: "IE6", 100: "IE8"})
     def sensitivity(self):
         """Detection Sensitivity, or gain.
         """
-        return self.query(':CALC:MULT?')
+        return self.query(':INP:GAIN?')
 
     @sensitivity.setter
     def sensitivity(self, value):
-        self.query(':CALC:MULT {}'.format(value))
+        self.write(':INP:GAIN {}'.format(value))
 
     @Feat(limits=(1, 19999, 1))
     def harmonic(self):
         """Detection harmonic.
         """
-        return self.query(':FREQ:MULT?')
+        return int(self.query(':FREQ:MULT?'))
 
     @harmonic.setter
     def harmonic(self, value):
-        self.query(':FREQ:MULT {}'.format(value))
+        self.write(':FREQ:MULT {}'.format(value))
 
     @Feat(values={6, 12, 18, 24})
     def filter_db_per_oct(self):
         """Time constant.
         """
-        return self.query(':FILT:SLOP?')
+        return int(self.query(':FILT:SLOP?'))
 
     @filter_db_per_oct.setter
     def filter_db_per_oct(self, value):
-        self.query(':FILT:SLOP {}'.format(value))
+        self.write(':FILT:SLOP {}'.format(value))
 
     @Feat(values=TCONSTANTS)
     def time_constants(self):
@@ -153,7 +154,7 @@ class LI5655(MessageBasedDriver):
 
     @time_constants.setter
     def time_constants(self, value):
-        self.query(':FILT:TCON {}'.format(value))
+        self.write(':FILT:TCON {}'.format(value))
 
     @Feat(values={'AC', 'DC'})
     def input_coupling(self):
@@ -173,7 +174,7 @@ class LI5655(MessageBasedDriver):
 
     @reference_internal.setter
     def reference_internal(self, value):
-        self.query(':ROUT2 {}'.format(value))
+        self.write(':ROUT2 {}'.format(value))
 
     @Feat(values={True, False})
     def overloaded(self):
@@ -212,7 +213,7 @@ class LI5655(MessageBasedDriver):
 
     @frequency.setter
     def frequency(self, value):
-        self.query(':SOUR:FREQ {}'.format(value))
+        self.write(':SOUR:FREQ {}'.format(value))
 
     @Feat(units='volt', limits=(0.004, 5., 0.002))
     def sine_output_amplitude(self):

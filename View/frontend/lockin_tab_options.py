@@ -38,25 +38,28 @@ class LockinTabOptions(Frontend):
         super().setupUi()
 
     def connect_backend(self):
-        super().connect_backend()
+        try:
+            super().connect_backend()
 
-        connect_feat(self.widget.h_spinbox, self.backend.lockin, "harmonic")
-        connect_feat(self.widget.roll_off_cb, self.backend.lockin, "filter_db_per_oct")
-        connect_feat(self.widget.tc_cb, self.backend.lockin, "time_constants")
-        connect_feat(self.widget.ig_cb, self.backend.lockin, "sensitivity")
-        connect_feat(self.widget.coupling_cb, self.backend.lockin, "input_coupling")
+            connect_feat(self.widget.h_spinbox, self.backend.lockin, "harmonic")
+            connect_feat(self.widget.roll_off_cb, self.backend.lockin, "filter_db_per_oct")
+            connect_feat(self.widget.tc_cb, self.backend.lockin, "time_constants")
+            connect_feat(self.widget.ig_cb, self.backend.lockin, "sensitivity")
+            connect_feat(self.widget.coupling_cb, self.backend.lockin, "input_coupling")
 
-        self.widget.pll_check.toggled.connect(self.change_panel)
-        self.widget.pll_check.setChecked(self.backend.pll())
+            self.widget.pll_check.toggled.connect(self.change_panel)
+            self.widget.pll_check.setChecked(self.backend.pll())
 
-        connect_feat(self.widget.frec_input, self.backend.lockin, "frequency")
-        connect_feat(self.widget.amp_input, self.backend.lockin, "sine_output_amplitude")
-        connect_feat(self.widget.phase_input, self.backend.lockin, "reference_phase_shift")
+            connect_feat(self.widget.frec_input, self.backend.lockin, "frequency")
+            connect_feat(self.widget.amp_input, self.backend.lockin, "sine_output_amplitude")
+            connect_feat(self.widget.phase_input, self.backend.lockin, "reference_phase_shift")
 
-        self.timer.setInterval(1000)
-        self.timer.timeout.connect(self.check_ext_f)
-        self.timer.timeout.connect(self.check_overload)
-        self.timer.start()
+            self.timer.setInterval(1000)
+            self.timer.timeout.connect(self.check_ext_f)
+            self.timer.timeout.connect(self.check_overload)
+            self.timer.start()
+        except:
+            traceback.print_exc()
 
     def change_panel(self):
         try:
