@@ -12,7 +12,19 @@ class ComDAQ(Driver):
 
         program_id = comtypes.GUID("{DB9935C1-19C5-4ED2-ADD2-9A57E19F53A6}")
         self.lib = comtypes.client.CreateObject(program_id)
-        print(self.lib.DeviceList)
+
+    def __del__(self):
+        del self.lib
+
+    def initialize(self):
+        super().initialize()
+        self.lib.SetDevice("DaqBoard3K0")
+        self.lib.OpenDevice()
+        self.lib.SetAnalogInput()
+        self.lib.SetAnalogOutput()
+
+    def write_analog(self, port, value):
+        print(self.lib.WriteAPort(port, value))
 
 
 class ComDaqBackend(Backend):

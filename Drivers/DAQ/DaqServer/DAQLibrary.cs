@@ -61,8 +61,11 @@ namespace CSExeCOMServer {
 
         #region Methods
         void SetDevice(string device_id);
-        void OpenDevice();
+        bool OpenDevice();
         string[] DeviceList();
+        bool SetAnalogInput();
+        bool SetAnalogOutput();
+        string WriteAPort(int number, float value);
 
         void GetProcessThreadID(out uint processId, out uint threadId);
 
@@ -150,6 +153,7 @@ namespace CSExeCOMServer {
             for (int i = 1; i < available_devices.Count + 1; i++) {
                 if (available_devices[i].Name == device_name) {
                     device = (Device)available_devices.CreateFromIndex(i);
+                    device.Open();
                     return opened = true;
                 }
             }
@@ -159,6 +163,11 @@ namespace CSExeCOMServer {
 
         public bool SetAnalogInput() {
             device.AnalogInputs.Add(AnalogInputType.aitDirect, DeviceBaseChannel.dbcDaqChannel3, DeviceModulePosition.dmpPosition0).AddToScanList();
+            return true;
+        }
+
+        public bool SetAnalogOutput() {
+            device.AnalogOutputs.Add(AnalogOutputType.aotDirect, DeviceBaseChannel.dbcDaqChannel5);
             return true;
         }
 
@@ -176,6 +185,10 @@ namespace CSExeCOMServer {
                 Console.Error.WriteLine(ex.Message);
             }
             return devices;
+        }
+
+        public string WriteAPort(int number, float value) {
+           return device.AnalogOutputs.Count.ToString() + ", " + device.DigitalIOs.Count.ToString();
         }
 
 		public void GetProcessThreadID(out uint processId, out uint threadId) {

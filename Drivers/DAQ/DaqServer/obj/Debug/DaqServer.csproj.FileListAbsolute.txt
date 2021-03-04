@@ -24,3 +24,11 @@ C:\Users\Fedacking\source\piton\Microscopy-Program\Drivers\DAQ\DaqServer\obj\Deb
 C:\Users\Fedacking\source\piton\Microscopy-Program\Drivers\DAQ\DaqServer\obj\Debug\DaqServer.pdb
 C:\Users\Fedacking\source\piton\Microscopy-Program\Drivers\DAQ\DaqServer\bin\Debug\DaqServer.pdb
 C:\Users\Fedacking\source\piton\Microscopy-Program\Drivers\DAQ\DaqServer\obj\Debug\DaqServer.csprojAssemblyReference.cache
+C:\Users\Francisco\Source\Microscopy-Program\Drivers\DAQ\DaqServer\bin\Debug\DaqServer.exe.config
+C:\Users\Francisco\Source\Microscopy-Program\Drivers\DAQ\DaqServer\bin\Debug\DaqServer.exe
+C:\Users\Francisco\Source\Microscopy-Program\Drivers\DAQ\DaqServer\bin\Debug\DaqServer.pdb
+C:\Users\Francisco\Source\Microscopy-Program\Drivers\DAQ\DaqServer\obj\Debug\Interop.DAQCOMLib.dll
+C:\Users\Francisco\Source\Microscopy-Program\Drivers\DAQ\DaqServer\obj\Debug\DaqServer.csproj.ResolveComReference.cache
+C:\Users\Francisco\Source\Microscopy-Program\Drivers\DAQ\DaqServer\obj\Debug\DaqServer.csproj.CoreCompileInputs.cache
+C:\Users\Francisco\Source\Microscopy-Program\Drivers\DAQ\DaqServer\obj\Debug\DaqServer.exe
+C:\Users\Francisco\Source\Microscopy-Program\Drivers\DAQ\DaqServer\obj\Debug\DaqServer.pdb
