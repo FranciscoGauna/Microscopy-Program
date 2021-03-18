@@ -12,7 +12,6 @@ def test():
     driver.setup()
 
     driver.reference_internal = False
-    driver.frequency = 1000
 
     print(driver.real_part_x)
     print(driver.imaginary_part_y)

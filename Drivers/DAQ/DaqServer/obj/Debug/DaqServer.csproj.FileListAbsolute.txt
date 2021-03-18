@@ -32,3 +32,4 @@ C:\Users\Francisco\Source\Microscopy-Program\Drivers\DAQ\DaqServer\obj\Debug\Daq
 C:\Users\Francisco\Source\Microscopy-Program\Drivers\DAQ\DaqServer\obj\Debug\DaqServer.csproj.CoreCompileInputs.cache
 C:\Users\Francisco\Source\Microscopy-Program\Drivers\DAQ\DaqServer\obj\Debug\DaqServer.exe
 C:\Users\Francisco\Source\Microscopy-Program\Drivers\DAQ\DaqServer\obj\Debug\DaqServer.pdb
+C:\Users\Francisco\Source\Microscopy-Program\Drivers\DAQ\DaqServer\obj\Debug\DaqServer.csprojAssemblyReference.cache

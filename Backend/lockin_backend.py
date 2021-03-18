@@ -46,9 +46,11 @@ class LockinBackend(Backend):
         return self.lockin.imaginary_part_y.magnitude
 
     def pll(self):
-        return self.lockin.reference_internal
+        print(self.lockin.reference_internal)
+        return not self.lockin.reference_internal
 
     def toggle_pll(self):
+        print(self.lockin.reference_internal)
         self.lockin.reference_internal = not self.lockin.reference_internal
 
     def overload(self):

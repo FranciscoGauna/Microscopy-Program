@@ -47,8 +47,12 @@ class LockinTabOptions(Frontend):
             connect_feat(self.widget.ig_cb, self.backend.lockin, "sensitivity")
             connect_feat(self.widget.coupling_cb, self.backend.lockin, "input_coupling")
 
-            self.widget.pll_check.toggled.connect(self.change_panel)
             self.widget.pll_check.setChecked(self.backend.pll())
+            if self.widget.pll_check.isChecked():
+                self.widget.pll_spanel.setCurrentWidget(self.widget.on_widget)
+            else:
+                self.widget.pll_spanel.setCurrentWidget(self.widget.off_widget)
+            self.widget.pll_check.toggled.connect(self.change_panel)
 
             connect_feat(self.widget.frec_input, self.backend.lockin, "frequency")
             connect_feat(self.widget.amp_input, self.backend.lockin, "sine_output_amplitude")

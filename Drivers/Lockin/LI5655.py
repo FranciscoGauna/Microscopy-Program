@@ -170,6 +170,7 @@ class LI5655(MessageBasedDriver):
     def reference_internal(self):
         """Reference source.
         """
+        print(self.query(':ROUT2?'))
         return self.query(':ROUT2?')
 
     @reference_internal.setter
@@ -179,7 +180,7 @@ class LI5655(MessageBasedDriver):
     @Feat(values={True, False})
     def overloaded(self):
         self.write(':DATA 1')
-        return self.query(':FETCh?') != 0
+        return int(self.query(':FETCh?')) != 0
 
     @Feat(units='V')
     def amplitude(self):

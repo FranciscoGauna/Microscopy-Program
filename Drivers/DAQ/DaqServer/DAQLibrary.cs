@@ -167,7 +167,7 @@ namespace CSExeCOMServer {
         }
 
         public bool SetAnalogOutput() {
-            device.AnalogOutputs.Add(AnalogOutputType.aotDirect, DeviceBaseChannel.dbcDaqChannel5);
+            device.AnalogOutputs.Add(AnalogOutputType.aotDirect, DeviceBaseChannel.dbcDaqDirectOutput2);
             return true;
         }
 
@@ -188,7 +188,13 @@ namespace CSExeCOMServer {
         }
 
         public string WriteAPort(int number, float value) {
-           return device.AnalogOutputs.Count.ToString() + ", " + device.DigitalIOs.Count.ToString();
+            string result = device.AnalogOutputs.Count.ToString() + ", ";
+            foreach(IAnalogOutput dispositivo in device.AnalogOutputs) {
+                result += dispositivo.Index.ToString();
+                result += ", ";
+                dispositivo.Channels[1].OutputValue = value;
+            }
+            return result;
         }
 
 		public void GetProcessThreadID(out uint processId, out uint threadId) {

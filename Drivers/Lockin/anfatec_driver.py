@@ -18,7 +18,7 @@ class VirtualLockin(foreign.Driver):
     def __init__(self, *args, **kwargs):
         """Instanciates a new copy of the driver. -if you want to load the settings of a previous instance of this class
         , you should use the method export_settings and add it to the kwargs"""
-        reference_internal = kwargs.pop("pll", False)
+        reference_internal = not kwargs.pop("pll", True)
         time_constant = (kwargs.pop("time_constant", "5 ms"))
         roll_off = (kwargs.pop("roll_off", "12dB/oct"))
         input_gain = kwargs.pop("input_gain", 1)
