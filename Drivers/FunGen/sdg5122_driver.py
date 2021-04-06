@@ -18,24 +18,24 @@ class SDG5122(MessageBasedDriver):
 
     _state = {
         1: {
-            "WVTP":"",
-            "FRQ":"",
-            "PERI":"",
-            "AMP":"",
-            "OFST":"",
-            "HLEV":"",
-            "LLEV":"",
-            "PHSE":""
-            },
+            "WVTP": "",
+            "FRQ": "",
+            "PERI": "",
+            "AMP": "",
+            "OFST": "",
+            "HLEV": "",
+            "LLEV": "",
+            "PHSE": ""
+        },
         2: {
-            "WVTP":"",
-            "FRQ":"",
-            "PERI":"",
-            "AMP":"",
-            "OFST":"",
-            "HLEV":"",
-            "LLEV":"",
-            "PHSE":""
+            "WVTP": "",
+            "FRQ": "",
+            "PERI": "",
+            "AMP": "",
+            "OFST": "",
+            "HLEV": "",
+            "LLEV": "",
+            "PHSE": ""
         }
     }
 
@@ -45,10 +45,10 @@ class SDG5122(MessageBasedDriver):
     }
 
     CHANNELS = dict([(1, 1),
-                           (2,2)])
+                     (2, 2)])
 
     TOGGLE = dict([('on', 'ON'),
-                          ('off', 'OFF')])
+                   ('off', 'OFF')])
 
     WAVEFORMS = dict([('arbitrary', 'ARB'),
                       ('dc', 'DC'),
@@ -71,8 +71,8 @@ class SDG5122(MessageBasedDriver):
         """
         result_1 = self.query('1:BSWV?')[5:].split(',')
         result_2 = self.query('2:BSWV?')[5:].split(',')
-        result_1 = [(result_1[i*2], result_1[i*2+1]) for i in range(len(result_1)//2)]
-        result_2 = [(result_2[i*2], result_2[i*2+1]) for i in range(len(result_2)//2)]
+        result_1 = [(result_1[i * 2], result_1[i * 2 + 1]) for i in range(len(result_1) // 2)]
+        result_2 = [(result_2[i * 2], result_2[i * 2 + 1]) for i in range(len(result_2) // 2)]
         self._state[1] = dict(result_1)
         self._state[2] = dict(result_2)
 
@@ -184,4 +184,3 @@ class SDG5122(MessageBasedDriver):
         Sets the offset voltage of the specified output channel.
         """
         self.write('{}:BSWV OFST, {}'.format(channel, value))
-

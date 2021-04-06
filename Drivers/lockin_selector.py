@@ -41,9 +41,14 @@ class LockinSelector(Frontend):
         except AttributeError:
             raise Exception(locale.get("config_missing", "str_config_missing"))
 
-    def LI5655_GPIB(self):
+    def LI5655_USB(self):
+        """
+        This method redefines the resource manager for the Lantz library, because the instance of visa manager doesn't
+        pick up the presence of this driver
+        :return: LI5655 driver class instanced and initialized
+        """
         try:
-            messagebased._resource_manager = visa.ResourceManager()
+            messagebased._resource_manager = visa.ResourceManager() # If this code is missing
             driver = wrap_driver_cls(LI5655).via_usb()
             driver.initialize()
             return driver
@@ -55,8 +60,7 @@ class LockinSelector(Frontend):
         "AnfatecAMU24": AnfatecAMU24,
         "SR830 GPIB": SR830_GPIB,
         "SR844 GPIB": SR830_GPIB,
-        "LI5655": LI5655_GPIB,
-        "LI5660": LI5655_GPIB,
+        "LI5655": LI5655_USB,
     }
 
     def setupUi(self):
