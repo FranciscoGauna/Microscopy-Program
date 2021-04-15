@@ -66,6 +66,7 @@ namespace CSExeCOMServer {
         bool SetAnalogInput();
         bool SetAnalogOutput();
         string WriteAPort(int number, float value);
+        float ReadAPort(int number);
 
         void GetProcessThreadID(out uint processId, out uint threadId);
 
@@ -135,6 +136,7 @@ namespace CSExeCOMServer {
         private Device device;
         private DigitalIO digital_ios;
         private bool opened = false;
+        private Acq acquire;
 
         #endregion
 
@@ -146,8 +148,11 @@ namespace CSExeCOMServer {
 
         public bool OpenDevice() {
             DaqSystem daq_system = new DaqSystem();
-            Acq acquire = daq_system.Add();
+            acquire = daq_system.Add();
             AvailableDevices available_devices = acquire.AvailableDevices;
+            acquire.DataStore.AutoSizeBuffers = false;
+            acquire.DataStore.BufferSizeInScans = 100000;
+            acquire.DataStore.IgnoreDataStoreOverruns = true;
             if (opened) return true;
 
             for (int i = 1; i < available_devices.Count + 1; i++) {
@@ -157,17 +162,20 @@ namespace CSExeCOMServer {
                     return opened = true;
                 }
             }
-
             return false;
         }
 
         public bool SetAnalogInput() {
-            device.AnalogInputs.Add(AnalogInputType.aitDirect, DeviceBaseChannel.dbcDaqChannel3, DeviceModulePosition.dmpPosition0).AddToScanList();
+            device.AnalogInputs.Add(AnalogInputType.aitDirect, DeviceBaseChannel.dbcDaqChannel5).Channels[1].AddToScanList();
             return true;
         }
 
         public bool SetAnalogOutput() {
             device.AnalogOutputs.Add(AnalogOutputType.aotDirect, DeviceBaseChannel.dbcDaqDirectOutput2);
+            acquire.Starts.ItemByType[StartType.sttManual].UseAsAcqStart();
+            acquire.Stops.ItemByType[StopType.sptManual].UseAsAcqStop();
+            acquire.Arm();
+            acquire.Start();
             return true;
         }
 
@@ -197,7 +205,13 @@ namespace CSExeCOMServer {
             return result;
         }
 
-		public void GetProcessThreadID(out uint processId, out uint threadId) {
+        public float ReadAPort(int number) {
+            float[] data = new float[100];
+            int result = acquire.DataStore.FetchData(data, 100);
+            return data[0] + data[1];
+        }
+
+        public void GetProcessThreadID(out uint processId, out uint threadId) {
             processId = NativeMethod.GetCurrentProcessId();
             threadId = NativeMethod.GetCurrentThreadId();
         }

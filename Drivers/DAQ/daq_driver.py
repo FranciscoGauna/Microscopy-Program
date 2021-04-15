@@ -26,6 +26,9 @@ class ComDAQ(Driver):
     def write_analog(self, port, value):
         print(self.lib.WriteAPort(port, value))
 
+    def read_analog(self, port):
+        print(self.lib.ReadAPort(port))
+
 
 class ComDaqBackend(Backend):
     daq: ComDAQ
