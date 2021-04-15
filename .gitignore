@@ -5,3 +5,5 @@ Results/*
 .idea\*
 Test/
 ximc
+.idea/misc.xml
+.idea/Microscopy-Program.iml

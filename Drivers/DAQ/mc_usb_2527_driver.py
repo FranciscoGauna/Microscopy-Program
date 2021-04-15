@@ -5,6 +5,7 @@ from mcculw.ul import a_in, a_out, d_in, d_out
 
 
 class USB2527(Driver):
+    """The Software for this program is InstaCal"""
     board_num: int
 
     def __init__(self, board_num):
@@ -15,7 +16,7 @@ class USB2527(Driver):
         return a_in(self.board_num, channel, ULRange.BIP5VOLTS)
 
     def write_analog_channel(self, channel, value):
-        return a_out(self.board_num, channel, ULRange.BIP5VOLTS, value)
+        a_out(self.board_num, channel, ULRange.BIP5VOLTS, value)
 
     def read_digital_channel(self, channel):
         return d_in(self.board_num, channel)

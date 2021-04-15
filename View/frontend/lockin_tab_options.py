@@ -27,7 +27,7 @@ class LockinTabOptions(Frontend):
 
         self.widget.pll_check.setText(locale.get("external_reference", "str_external_reference"))
 
-        self.widget.ext_f_label.setText(locale.get("reference_frequency", "str_reference_frequency"))
+        self.widget.ext_f_label.setText(locale.get("external_frequency", "str_external_frequency"))
 
         self.widget.frec_label.setText(locale.get("lockin_frequency", "str_lockin_frequency"))
         self.widget.amp_label.setText(locale.get("lockin_amplitude", "str_lockin_amplitude"))
