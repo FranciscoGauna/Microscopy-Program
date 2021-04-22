@@ -63,10 +63,12 @@ namespace CSExeCOMServer {
         void SetDevice(string device_id);
         bool OpenDevice();
         string[] DeviceList();
-        bool SetAnalogInput();
+        bool SetAnalogInput(int channel);
         bool SetAnalogOutput();
+        void StartScanning(int ScanCount, int ScanRate);
+        void StopScanning();
         string WriteAPort(int number, float value);
-        float ReadAPort(int number);
+        string ReadAPort(int number);
 
         void GetProcessThreadID(out uint processId, out uint threadId);
 
@@ -134,9 +136,11 @@ namespace CSExeCOMServer {
 
         private string device_name = "";
         private Device device;
+        private int channels = 0;
         private DigitalIO digital_ios;
         private bool opened = false;
         private Acq acquire;
+        private Config config;
 
         #endregion
 
@@ -146,9 +150,23 @@ namespace CSExeCOMServer {
             device_name = device_id;
         }
 
+        public void StartScanning(int ScanCount, int ScanRate) {
+            config.ScanCount = ScanCount;
+            config.ScanRate = ScanRate;
+            acquire.Starts.ItemByType[StartType.sttImmediate].UseAsAcqStart();
+            acquire.Stops.ItemByType[StopType.sptManual].UseAsAcqStop();
+            acquire.Arm();
+        }
+
+        public void StopScanning() {
+            acquire.Disarm();
+            acquire.Stop();
+        }
+
         public bool OpenDevice() {
             DaqSystem daq_system = new DaqSystem();
             acquire = daq_system.Add();
+            config = acquire.Config;
             AvailableDevices available_devices = acquire.AvailableDevices;
             acquire.DataStore.AutoSizeBuffers = false;
             acquire.DataStore.BufferSizeInScans = 100000;
@@ -165,17 +183,20 @@ namespace CSExeCOMServer {
             return false;
         }
 
-        public bool SetAnalogInput() {
-            device.AnalogInputs.Add(AnalogInputType.aitDirect, DeviceBaseChannel.dbcDaqChannel5).Channels[1].AddToScanList();
-            return true;
+        public bool SetAnalogInput(int channel) {
+            var pAnalogInput = device.AnalogInputs.Add(AnalogInputType.aitDirect, (DeviceBaseChannel)channel);
+            Daq3000DirectAIChannel pDirect = (Daq3000DirectAIChannel)pAnalogInput.Channels[1];
+            pDirect.DifferentialMode = false;
+            var pRange = pDirect.Ranges[1];
+            pDirect.SelectedRange = pRange;
+            pDirect.AddToScanList();
+
+            channels += 1;
+            return true; 
         }
 
         public bool SetAnalogOutput() {
             device.AnalogOutputs.Add(AnalogOutputType.aotDirect, DeviceBaseChannel.dbcDaqDirectOutput2);
-            acquire.Starts.ItemByType[StartType.sttManual].UseAsAcqStart();
-            acquire.Stops.ItemByType[StopType.sptManual].UseAsAcqStop();
-            acquire.Arm();
-            acquire.Start();
             return true;
         }
 
@@ -205,10 +226,18 @@ namespace CSExeCOMServer {
             return result;
         }
 
-        public float ReadAPort(int number) {
-            float[] data = new float[100];
-            int result = acquire.DataStore.FetchData(data, 100);
-            return data[0] + data[1];
+        public string ReadAPort(int number) {
+            Array data = new float[channels];
+            int result = acquire.DataStore.FetchData(ref data, channels);
+            string result_return = "fail";
+            if (result > 0) {
+                result_return = data.GetValue(0).ToString();
+                for (int i = 1; i < result; i++) {
+                    result_return += ";";
+                    result_return += data.GetValue(0).ToString();
+                }
+            }
+            return result_return;
         }
 
         public void GetProcessThreadID(out uint processId, out uint threadId) {

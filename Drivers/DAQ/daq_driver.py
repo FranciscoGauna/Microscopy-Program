@@ -1,3 +1,5 @@
+from time import sleep
+
 import comtypes
 import comtypes.client
 
@@ -14,14 +16,17 @@ class ComDAQ(Driver):
         self.lib = comtypes.client.CreateObject(program_id)
 
     def __del__(self):
+        self.lib.StopScanning()
         del self.lib
 
     def initialize(self):
         super().initialize()
         self.lib.SetDevice("DaqBoard3K0")
         self.lib.OpenDevice()
-        self.lib.SetAnalogInput()
+        self.lib.SetAnalogInput(5   )
         self.lib.SetAnalogOutput()
+        self.lib.StartScanning(100, 1000)
+        sleep(1)
 
     def write_analog(self, port, value):
         print(self.lib.WriteAPort(port, value))
