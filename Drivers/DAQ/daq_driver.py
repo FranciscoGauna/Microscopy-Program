@@ -23,8 +23,9 @@ class ComDAQ(Driver):
         super().initialize()
         self.lib.SetDevice("DaqBoard3K0")
         self.lib.OpenDevice()
-        self.lib.SetAnalogInput(5   )
-        self.lib.SetAnalogOutput()
+        self.lib.SetAnalogInput(5)
+        self.lib.SetAnalogOutput(268435456, 2)
+        self.lib.SetAnalogOutputWave(268435457, 2, 1000 , "sin")
         self.lib.StartScanning(100, 1000)
         sleep(1)
 

@@ -64,7 +64,8 @@ namespace CSExeCOMServer {
         bool OpenDevice();
         string[] DeviceList();
         bool SetAnalogInput(int channel);
-        bool SetAnalogOutput();
+        bool SetAnalogOutput(int channel, float value);
+        bool SetAnalogOutputWave(int channel, float value, float freq, string wave);
         void StartScanning(int ScanCount, int ScanRate);
         void StopScanning();
         string WriteAPort(int number, float value);
@@ -195,8 +196,24 @@ namespace CSExeCOMServer {
             return true; 
         }
 
-        public bool SetAnalogOutput() {
-            device.AnalogOutputs.Add(AnalogOutputType.aotDirect, DeviceBaseChannel.dbcDaqDirectOutput2);
+        public bool SetAnalogOutput(int channel, float value) {
+            var pAnalogOutput = device.AnalogOutputs.Add(AnalogOutputType.aotDirect, (DeviceBaseChannel) channel);
+            pAnalogOutput.Channels[1].OutputChannelMode = AnalogOutputChannelMode.aomVoltage;
+            pAnalogOutput.Channels[1].OutputValue = value;
+            pAnalogOutput.Channels[1].Update();
+            return true;
+        }
+
+        public bool SetAnalogOutputWave(int channel, float value, float freq, string wave) {
+            var pAnalogOutput = device.AnalogOutputs.Add(AnalogOutputType.aotDirect, (DeviceBaseChannel)channel);
+            pAnalogOutput.Channels[1].PredefWaveAmplitude = value;
+            pAnalogOutput.Channels[1].PredefWaveFrequency = value;
+            if (wave == "SQR") {
+                pAnalogOutput.Channels[1].PredefWaveType = WaveformPredefType.wptSquare;
+            } else {
+                pAnalogOutput.Channels[1].PredefWaveType = WaveformPredefType.wptSine;
+            }
+            pAnalogOutput.Channels[1].Update();
             return true;
         }
 
