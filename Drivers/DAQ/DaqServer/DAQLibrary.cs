@@ -69,7 +69,7 @@ namespace CSExeCOMServer {
         void StartScanning(int ScanCount, int ScanRate);
         void StopScanning();
         string WriteAPort(int number, float value);
-        string ReadAPort(int number);
+        string ReadAPort();
 
         void GetProcessThreadID(out uint processId, out uint threadId);
 
@@ -243,7 +243,7 @@ namespace CSExeCOMServer {
             return result;
         }
 
-        public string ReadAPort(int number) {
+        public string ReadAPort() {
             Array data = new float[channels];
             int result = acquire.DataStore.FetchData(ref data, channels);
             string result_return = "fail";

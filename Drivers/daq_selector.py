@@ -17,6 +17,7 @@ from config import config_file
 
 class DaqSelector(Frontend):
     gui = ("DAQ", "daq_selector.ui")
+    conf = ConfigParser()
 
     def usb_2527(self):
         driver = USB2527DaqBackend(self.conf["CONNECTION"]["board_number"])
@@ -55,7 +56,6 @@ class DaqSelector(Frontend):
                                                    "Configuration File (*.cfg);;All Files (*)", options=options)
         if file_name:
             self.widget.load_conf_bt.setText(Path(file_name).name)
-            self.conf = ConfigParser()
             self.conf.read(file_name)
 
     def daq(self) -> VirtualDaqBackend:

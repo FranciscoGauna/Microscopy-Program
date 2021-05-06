@@ -1,4 +1,4 @@
-from time import sleep
+from copy import deepcopy
 
 import comtypes
 import comtypes.client
@@ -27,6 +27,7 @@ class ComDAQ(Driver):
         program_id = comtypes.GUID("{DB9935C1-19C5-4ED2-ADD2-9A57E19F53A6}")
         self.lib = comtypes.client.CreateObject(program_id)
         self._scan_rate = 100
+        self._count = 0
 
     def __del__(self):
         self.lib.StopScanning()
@@ -39,7 +40,7 @@ class ComDAQ(Driver):
 
     def start_scan(self):
         self.started = True
-        self.lib.StartScanning(self._scan_rate, 1000)
+        self.lib.StartScanning(100, self._scan_rate)
 
     @Feat
     def scan_rate(self):
@@ -65,8 +66,13 @@ class ComDAQ(Driver):
         read the analog inputs that were set up before started scannign
         :return:
         """
+        self._count += 1
         results = self.lib.ReadAPort().split(";")
-        return map(float, results)
+        if results[0] == "fail":
+            return []
+        for i in range(0,len(results)):
+            results[i] = float(results[i].replace(",", "."))
+        return results
 
 
 class ComDaqBackend(Backend):
@@ -81,24 +87,32 @@ class ComDaqBackend(Backend):
     time: datetime
     delt: timedelta
 
+    def get_data(self):
+        self.lock.acquire()
+        return_value = deepcopy(self.data)
+        self.lock.release()
+        return return_value
+
     def focus(self):
         return True
 
     def run(self):
+        comtypes.CoInitialize()
+        self.daq = ComDAQ()
+        self.daq.initialize()
+        self.daq.set_analog_input(5)
+        self.delta = timedelta(seconds=(1 / self.daq.scan_rate))
+        self.daq.start_scan()
         while self.started:
             self.lock.acquire()
-            self.data = [x for x in self.daq.read_analog()]
-            self.lock.acquire()
+            self.data = deepcopy(self.daq.read_analog())
+            self.lock.release()
             self.time += self.delta
             pause.until(self.time)
 
     def __init__(self):
         super().__init__()
-        self.daq = ComDAQ()
-        self.daq.initialize()
         self.data = []
         self.timer = threading.Thread(target=self.run)
         self.time = datetime.now()
-        self.delta = timedelta(seconds=(1 / self.daq.scan_rate))
-        self.daq.start_scan()
         self.timer.start()

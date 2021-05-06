@@ -1,17 +1,17 @@
-from Drivers.DAQ.daq_driver import ComDAQ
+from datetime import datetime
+
+from Drivers.DAQ.daq_driver import ComDaqBackend
 from time import sleep
 
 
 def test():
-    driver = ComDAQ()
-    driver.initialize()
-    while 1:
+    backend = ComDaqBackend()
+    print(datetime.now())
+    for i in range(15):
         sleep(1)
-        driver.read_analog(1)
-        dbcDaqDirectOutput0 = 268435456
-        dbcDaqDirectOutput1 = 268435457
-        dbcDaqDirectOutput2 = 268435458
-        dbcDaqDirectOutput3 = 268435459
+        print(backend.data)
+    print(datetime.now())
+    print(backend.daq._count)
 
 
 if __name__ == "__main__":
