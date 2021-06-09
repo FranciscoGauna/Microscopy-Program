@@ -18,7 +18,9 @@
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="comtypes.html">comtypes</a><br>
-</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+</td><td width="25%" valign=top><a href="pause.html">pause</a><br>
+</td><td width="25%" valign=top><a href="threading.html">threading</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -48,16 +50,9 @@
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt><a href="#ComDAQ">ComDAQ</a>(*args,&nbsp;**kwargs)<br>
 &nbsp;<br>
-Base&nbsp;class&nbsp;for&nbsp;all&nbsp;drivers.<br>
-&nbsp;<br>
-Parameters<br>
-----------<br>
-name&nbsp;:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;easy&nbsp;to&nbsp;remember&nbsp;identifier&nbsp;given&nbsp;to&nbsp;the&nbsp;instance&nbsp;for&nbsp;logging<br>
-&nbsp;&nbsp;&nbsp;&nbsp;purposes<br>
-&nbsp;<br>
-Returns<br>
--------<br>&nbsp;</tt></td></tr>
+This&nbsp;class&nbsp;provides&nbsp;a&nbsp;wrapper&nbsp;for&nbsp;the&nbsp;functions&nbsp;on&nbsp;the&nbsp;ddl&nbsp;for&nbsp;the&nbsp;DAQ&nbsp;com&nbsp;server.&nbsp;This&nbsp;is&nbsp;necessary&nbsp;because&nbsp;the<br>
+library&nbsp;is&nbsp;only&nbsp;available&nbsp;in&nbsp;32&nbsp;bits&nbsp;and&nbsp;this&nbsp;allows&nbsp;us&nbsp;to&nbsp;call&nbsp;it&nbsp;in&nbsp;a&nbsp;64&nbsp;process&nbsp;using&nbsp;the&nbsp;processs&nbsp;intercom&nbsp;from<br>
+windows<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="Drivers.DAQ.daq_driver.html#ComDAQ">ComDAQ</a></dd>
@@ -74,7 +69,38 @@ Returns<br>
 </dl>
 <hr>
 Methods defined here:<br>
+<dl><dt><a name="ComDAQ-__del__"><strong>__del__</strong></a>(self)</dt><dd><tt>When&nbsp;the&nbsp;object&nbsp;is&nbsp;deleted&nbsp;it&nbsp;sends&nbsp;the&nbsp;signal&nbsp;to&nbsp;the&nbsp;COMServer&nbsp;stop&nbsp;scanning&nbsp;to&nbsp;the&nbsp;daq.</tt></dd></dl>
+
 <dl><dt><a name="ComDAQ-__init__"><strong>__init__</strong></a>(self, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="ComDAQ-initialize"><strong>initialize</strong></a>(self)</dt><dd><tt>Opens&nbsp;the&nbsp;device,&nbsp;this&nbsp;is&nbsp;important&nbsp;to&nbsp;be&nbsp;run&nbsp;before&nbsp;the&nbsp;execution&nbsp;of&nbsp;the&nbsp;driver.</tt></dd></dl>
+
+<dl><dt><a name="ComDAQ-read_analog"><strong>read_analog</strong></a>(self)</dt><dd><tt>read&nbsp;the&nbsp;analog&nbsp;inputs&nbsp;that&nbsp;were&nbsp;set&nbsp;up&nbsp;before&nbsp;started&nbsp;scannign<br>
+:return:</tt></dd></dl>
+
+<dl><dt><a name="ComDAQ-set_analog_input"><strong>set_analog_input</strong></a>(self, channel)</dt></dl>
+
+<dl><dt><a name="ComDAQ-set_analog_output"><strong>set_analog_output</strong></a>(self, channel)</dt></dl>
+
+<dl><dt><a name="ComDAQ-start_scan"><strong>start_scan</strong></a>(self)</dt><dd><tt>Starts&nbsp;scanning&nbsp;the&nbsp;ports&nbsp;that&nbsp;where&nbsp;set&nbsp;up&nbsp;in&nbsp;the&nbsp;methods&nbsp;'set_analog_input'&nbsp;'set_analog_output'</tt></dd></dl>
+
+<dl><dt><a name="ComDAQ-stop_scan"><strong>stop_scan</strong></a>(self)</dt><dd><tt>Stops&nbsp;the&nbsp;scan&nbsp;and&nbsp;extra&nbsp;thread</tt></dd></dl>
+
+<dl><dt><a name="ComDAQ-write_analog"><strong>write_analog</strong></a>(self, port, value)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>scan_rate</strong></dt>
+<dd><tt>Property&nbsp;that&nbsp;indicates&nbsp;the&nbsp;speed&nbsp;of&nbsp;the&nbsp;scan&nbsp;rate&nbsp;of&nbsp;the&nbsp;device.&nbsp;It's&nbsp;better&nbsp;to&nbsp;put&nbsp;them&nbsp;as&nbsp;high&nbsp;as<br>
+possible&nbsp;to&nbsp;reduce&nbsp;the&nbsp;amount&nbsp;of&nbsp;com&nbsp;communications.</tt></dd>
+</dl>
+<dl><dt><strong>scan_rate_changed</strong></dt>
+<dd><tt>The&nbsp;class&nbsp;signal&nbsp;allows&nbsp;a&nbsp;signal&nbsp;to&nbsp;be&nbsp;set&nbsp;on&nbsp;a&nbsp;class&nbsp;rather&nbsp;than&nbsp;an&nbsp;instance.<br>
+This&nbsp;emulates&nbsp;the&nbsp;behavior&nbsp;of&nbsp;a&nbsp;PyQt&nbsp;signal</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>device_name</strong> = 'DaqBoard3K0'</dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -85,22 +111,7 @@ Methods defined here:<br>
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt><a href="#ComDaqBackend">ComDaqBackend</a>(*args,&nbsp;**kw)<br>
 &nbsp;<br>
-Base&nbsp;class&nbsp;for&nbsp;all&nbsp;lantz&nbsp;objects.<br>
-&nbsp;<br>
-Provides:<br>
--&nbsp;Observables<br>
--&nbsp;Async&nbsp;capabilities&nbsp;for&nbsp;actions<br>
--&nbsp;Logging<br>
--&nbsp;Feat&nbsp;cache<br>
-&nbsp;<br>
-Parameters<br>
-----------<br>
-name&nbsp;:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;easy&nbsp;to&nbsp;remember&nbsp;identifier&nbsp;given&nbsp;to&nbsp;the&nbsp;instance&nbsp;for&nbsp;logging<br>
-&nbsp;&nbsp;&nbsp;&nbsp;purposes<br>
-&nbsp;<br>
-Returns<br>
--------<br>&nbsp;</tt></td></tr>
+This&nbsp;class&nbsp;provides&nbsp;the&nbsp;backend&nbsp;functions&nbsp;necessary&nbsp;to&nbsp;operate&nbsp;the&nbsp;daq&nbsp;inside&nbsp;the&nbsp;program<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="Drivers.DAQ.daq_driver.html#ComDaqBackend">ComDaqBackend</a></dd>
@@ -126,15 +137,23 @@ Methods defined here:<br>
 
 <dl><dt><a name="ComDaqBackend-focus"><strong>focus</strong></a>(self)</dt></dl>
 
+<dl><dt><a name="ComDaqBackend-get_data"><strong>get_data</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ComDaqBackend-run"><strong>run</strong></a>(self)</dt></dl>
+
 <hr>
 Data and other attributes defined here:<br>
-<dl><dt><strong>__annotations__</strong> = {'daq': &lt;class 'Drivers.DAQ.daq_driver.ComDAQ'&gt;}</dl>
+<dl><dt><strong>__annotations__</strong> = {'daq': &lt;class 'Drivers.DAQ.daq_driver.ComDAQ'&gt;, 'data': &lt;class 'list'&gt;, 'delt': &lt;class 'datetime.timedelta'&gt;, 'time': &lt;class 'datetime.datetime'&gt;, 'timer': &lt;class 'threading.Thread'&gt;}</dl>
 
 <dl><dt><strong>backends</strong> = {}</dl>
 
 <dl><dt><strong>flocks</strong> = {}</dl>
 
 <dl><dt><strong>instruments</strong> = {}</dl>
+
+<dl><dt><strong>lock</strong> = &lt;unlocked _thread.lock object&gt;</dl>
+
+<dl><dt><strong>started</strong> = True</dl>
 
 </td></tr></table></td></tr></table>
 </body></html>

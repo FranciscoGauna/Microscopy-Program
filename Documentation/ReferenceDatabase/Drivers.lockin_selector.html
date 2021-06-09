@@ -18,8 +18,10 @@
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="inspect.html">inspect</a><br>
+</td><td width="25%" valign=top><a href="lantz.core.messagebased.html">lantz.core.messagebased</a><br>
 </td><td width="25%" valign=top><a href="os.html">os</a><br>
-</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+</td><td width="25%" valign=top><a href="visa.html">visa</a><br>
+</td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -71,7 +73,9 @@ logger&nbsp;extra&nbsp;attribute.<br>&nbsp;</tt></td></tr>
 Methods defined here:<br>
 <dl><dt><a name="LockinSelector-Anfatec"><strong>Anfatec</strong></a>(self)</dt></dl>
 
-<dl><dt><a name="LockinSelector-LI5655_GPIB"><strong>LI5655_GPIB</strong></a>(self)</dt></dl>
+<dl><dt><a name="LockinSelector-LI5655_USB"><strong>LI5655_USB</strong></a>(self)</dt><dd><tt>This&nbsp;method&nbsp;redefines&nbsp;the&nbsp;resource&nbsp;manager&nbsp;for&nbsp;the&nbsp;Lantz&nbsp;library,&nbsp;because&nbsp;the&nbsp;instance&nbsp;of&nbsp;visa&nbsp;manager&nbsp;doesn't<br>
+pick&nbsp;up&nbsp;the&nbsp;presence&nbsp;of&nbsp;this&nbsp;driver<br>
+:return:&nbsp;LI5655&nbsp;driver&nbsp;class&nbsp;instanced&nbsp;and&nbsp;initialized</tt></dd></dl>
 
 <dl><dt><a name="LockinSelector-SR830_GPIB"><strong>SR830_GPIB</strong></a>(self)</dt></dl>
 
@@ -91,7 +95,7 @@ Data and other attributes defined here:<br>
 
 <dl><dt><strong>gui</strong> = ('Lockin', 'lockin_selector.ui')</dl>
 
-<dl><dt><strong>lockins_available</strong> = {'AnfatecAMU24': &lt;class 'Drivers.Lockin.anfatec_driver.AnfatecAMU24'&gt;, 'LI5655': &lt;function LockinSelector.LI5655_GPIB&gt;, 'LI5660': &lt;function LockinSelector.LI5655_GPIB&gt;, 'SR830 GPIB': &lt;function LockinSelector.SR830_GPIB&gt;, 'SR844 GPIB': &lt;function LockinSelector.SR830_GPIB&gt;, 'Virtual': &lt;function LockinSelector.Virtual&gt;}</dl>
+<dl><dt><strong>lockins_available</strong> = {'AnfatecAMU24': &lt;class 'Drivers.Lockin.anfatec_driver.AnfatecAMU24'&gt;, 'LI5655': &lt;function LockinSelector.LI5655_USB&gt;, 'SR830 GPIB': &lt;function LockinSelector.SR830_GPIB&gt;, 'SR844 GPIB': &lt;function LockinSelector.SR830_GPIB&gt;, 'Virtual': &lt;function LockinSelector.Virtual&gt;}</dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -101,5 +105,5 @@ Data and other attributes defined here:<br>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><strong>config_file</strong> = &lt;configparser.ConfigParser object&gt;<br>
-<strong>locale</strong> = {}</td></tr></table>
+<strong>locale</strong> = &lt;View.localization.Locale object&gt;</td></tr></table>
 </body></html>

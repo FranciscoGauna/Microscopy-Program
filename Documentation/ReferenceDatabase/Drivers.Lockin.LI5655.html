@@ -81,7 +81,7 @@ Returns<br>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="LI5655-initialize"><strong>initialize</strong></a>(self)</dt></dl>
+<dl><dt><a name="LI5655-setup"><strong>setup</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="LI5655-write"><strong>write</strong></a>(self, command, termination=None, encoding=None)</dt><dd><tt>Send&nbsp;command&nbsp;to&nbsp;the&nbsp;instrument.<br>
 &nbsp;<br>
@@ -471,6 +471,10 @@ This&nbsp;emulates&nbsp;the&nbsp;behavior&nbsp;of&nbsp;a&nbsp;PyQt&nbsp;signal</
 Data and other attributes defined here:<br>
 <dl><dt><strong>DEFAULTS</strong> = {'COMMON': {'read_termination': '<font color="#c040c0">\n</font>', 'write_termination': '<font color="#c040c0">\n</font>'}}</dl>
 
+<dl><dt><strong>MANUFACTURER_ID</strong> = '0x0D4A'</dl>
+
+<dl><dt><strong>MODEL_CODE</strong> = '0x004D'</dl>
+
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -516,6 +520,6 @@ Data and other attributes defined here:<br>
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><strong>SAMPLE_RATES</strong> = OrderedDict([('62.5 mHz', 0), ('125 mHz', 1), ('...('256 Hz', 12), ('512 Hz', 13), ('trigger', 14)])<br>
 <strong>SENS</strong> = OrderedDict([('2 nV/fA', 0), ('5 nV/fA', 1), ('1... mV/nA', 24), ('500 mV/nA', 25), ('1 V/uA', 26)])<br>
-<strong>TCONSTANTS</strong> = OrderedDict([('0 µs', 0), ('1 µs', '1E-6'), ('2 ..., '10E3'), ('20 ks', '20E3'), ('50 ks', '50E3')])<br>
+<strong>TCONSTANTS</strong> = OrderedDict([('0 µs', 0), ('1 µs', '1.000000e-06...'20 ks', '2.000000e4'), ('50 ks', '5.000000e4')])<br>
 <strong>ureg</strong> = &lt;pint.registry.UnitRegistry object&gt;</td></tr></table>
 </body></html>
