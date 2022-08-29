@@ -30,20 +30,31 @@ class ComDAQ(Driver):
         self._count = 0
 
     def __del__(self):
-        self.lib.StopScanning()
+        """When the object is deleted it sends the signal to the COMServer stop scanning to the daq."""
+        self.stop_scan()
         del self.lib
 
     def initialize(self):
+        """Opens the device, this is important to be run before the execution of the driver."""
         super().initialize()
         self.lib.SetDevice(self.device_name)
         self.lib.OpenDevice()
 
     def start_scan(self):
+        """Starts scanning the ports that where set up in the methods 'set_analog_input' 'set_analog_output'
+        """
         self.started = True
         self.lib.StartScanning(100, self._scan_rate)
 
+    def stop_scan(self):
+        """Stops the scan and extra thread"""
+        self.started = False
+        self.lib.StopScanning()
+
     @Feat
     def scan_rate(self):
+        """Property that indicates the speed of the scan rate of the device. It's better to put them as high as
+        possible to reduce the amount of com communications."""
         return self._scan_rate
 
     @scan_rate.setter
