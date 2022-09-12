@@ -6,9 +6,7 @@ import threading
 import pause
 from datetime import datetime, timedelta
 
-pause.until(datetime(2015, 8, 12, 2))
-
-from lantz import Driver, Feat
+from lantz import Driver, Feat, errors
 from lantz.qt import Backend
 
 
@@ -21,13 +19,13 @@ class ComDAQ(Driver):
     device_name = "DaqBoard3K0"
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
         self.started = False
         program_id = comtypes.GUID("{DB9935C1-19C5-4ED2-ADD2-9A57E19F53A6}")
         self.lib = comtypes.client.CreateObject(program_id)
-        self._scan_rate = 100
+        self._scan_rate = kwargs.pop('scan_rate', 100)
         self._count = 0
+
+        super().__init__(*args, **kwargs)
 
     def __del__(self):
         """When the object is deleted it sends the signal to the COMServer stop scanning to the daq."""
@@ -38,7 +36,9 @@ class ComDAQ(Driver):
         """Opens the device, this is important to be run before the execution of the driver."""
         super().initialize()
         self.lib.SetDevice(self.device_name)
-        self.lib.OpenDevice()
+        if not self.lib.OpenDevice():
+            raise errors.InstrumentError("The Device is not detected. If it's connected, check the DaqX Configuration "
+                                         "Utility")
 
     def start_scan(self):
         """Starts scanning the ports that where set up in the methods 'set_analog_input' 'set_analog_output'
@@ -48,12 +48,13 @@ class ComDAQ(Driver):
 
     def stop_scan(self):
         """Stops the scan and extra thread"""
+        if self.started:
+            self.lib.StopScanning()
         self.started = False
-        self.lib.StopScanning()
 
-    @Feat
+    @Feat(units='Hz')
     def scan_rate(self):
-        """Property that indicates the speed of the scan rate of the device. It's better to put them as high as
+        """Property that indicates the speed of the scan rate of the device in Hz. It's better to put them as high as
         possible to reduce the amount of com communications."""
         return self._scan_rate
 
@@ -64,10 +65,17 @@ class ComDAQ(Driver):
     def set_analog_input(self, channel):
         if self.started:
             return
-        self.lib.SetAnalogInput(channel)
+        if not self.lib.SetAnalogInput(channel):
+            raise errors.InstrumentError("This channel is not supported, check the documentation for the available "
+                                         "outputs for your card")
 
-    def set_analog_output(self, channel):
-        self.lib.SetAnalogOutput(channel)
+    def set_analog_output(self, channel, value):
+        self.lib.SetAnalogOutput(channel, value)
+
+    def set_analog_wave(self, channel, value, freq, wave="SIN"):
+        if not self.lib.SetAnalogOutputWave(channel, value, freq, wave):
+            raise errors.InstrumentError("This channel is not supported, check the documentation for the available "
+                                         "outputs for your card")
 
     def write_analog(self, port, value):
         print(self.lib.WriteAPort(port, value))
@@ -78,11 +86,9 @@ class ComDAQ(Driver):
         :return:
         """
         self._count += 1
-        results = self.lib.ReadAPort().split(";")
-        if results[0] == "fail":
-            return []
-        for i in range(0,len(results)):
-            results[i] = float(results[i].replace(",", "."))
+        results = self.lib.ReadAPort()
+        if len(results) == 0:
+            return [float("NaN")]
         return results
 
 
@@ -98,32 +104,34 @@ class ComDaqBackend(Backend):
     time: datetime
     delt: timedelta
 
-    def get_data(self):
-        self.lock.acquire()
-        return_value = deepcopy(self.data)
-        self.lock.release()
-        return return_value
+    def __init__(self, scan_rate=100):
+        super().__init__()
+        self.data = []
+        self.daq = ComDAQ(scan_rate=scan_rate)
+        self.daq.initialize()
+        self.daq.set_analog_input(5)
+        self.delta = timedelta(seconds=(1 / self.daq.scan_rate.magnitude))
+        self.timer = threading.Thread(target=self.run)
+        self.time = datetime.now()
+        self.timer.start()
 
     def focus(self):
         return True
 
+    def end(self):
+        self.started = False
+        self.lock.acquire()
+        self.daq.stop_scan()
+        self.lock.release()
+        return
+
     def run(self):
         comtypes.CoInitialize()
-        self.daq = ComDAQ()
-        self.daq.initialize()
-        self.daq.set_analog_input(5)
-        self.delta = timedelta(seconds=(1 / self.daq.scan_rate))
         self.daq.start_scan()
         while self.started:
             self.lock.acquire()
-            self.data = deepcopy(self.daq.read_analog())
+            self.data.extend(self.daq.read_analog())
             self.lock.release()
             self.time += self.delta
             pause.until(self.time)
 
-    def __init__(self):
-        super().__init__()
-        self.data = []
-        self.timer = threading.Thread(target=self.run)
-        self.time = datetime.now()
-        self.timer.start()

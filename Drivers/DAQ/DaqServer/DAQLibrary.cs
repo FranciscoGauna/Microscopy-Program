@@ -30,9 +30,6 @@
 * // the change of FloatProperty.
 * void FloatPropertyChanging(float NewValue, ref bool Cancel);
 * 
-* This source is subject to the Microsoft Public License.
-* See http://www.microsoft.com/en-us/openness/licenses.aspx#MPL.
-* All other rights reserved.
 * 
 * THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, 
 * EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED 
@@ -63,13 +60,16 @@ namespace CSExeCOMServer {
         void SetDevice(string device_id);
         bool OpenDevice();
         string[] DeviceList();
+        string SupportedAnalogOutputs();
+        string AnalogOutputs();
+        string AnalogInputs();
         bool SetAnalogInput(int channel);
         bool SetAnalogOutput(int channel, float value);
         bool SetAnalogOutputWave(int channel, float value, float freq, string wave);
         void StartScanning(int ScanCount, int ScanRate);
         void StopScanning();
         string WriteAPort(int number, float value);
-        string ReadAPort();
+        float[] ReadAPort();
 
         void GetProcessThreadID(out uint processId, out uint threadId);
 
@@ -174,18 +174,80 @@ namespace CSExeCOMServer {
             acquire.DataStore.IgnoreDataStoreOverruns = true;
             if (opened) return true;
 
-            for (int i = 1; i < available_devices.Count + 1; i++) {
+            for (int i = 1; i <= available_devices.Count; i++) {
                 if (available_devices[i].Name == device_name) {
                     device = (Device)available_devices.CreateFromIndex(i);
                     device.Open();
+                    device.Populate();
                     return opened = true;
                 }
             }
+
             return false;
         }
 
+        public string SupportedAnalogOutputs(){
+            string results = "";
+            for (int i = 1; i <= device.SupportedAnalogOutputs.Count; i++){
+                results += device.SupportedAnalogOutputs[i].Name;
+                results += ",";
+                results += device.SupportedAnalogOutputs[i].ChannelCount;
+                results += ",";
+                results += device.SupportedAnalogOutputs[i].AnalogOutputType;
+                results += ";";
+			}
+            return results;
+        }
+
+        public string AnalogOutputs() {
+            string results = "";
+            for (int i = 1; i <= device.AnalogOutputs.Count; i++){
+                results += device.AnalogOutputs[i].Name;
+                results += ",";
+                results += device.AnalogOutputs[i].BaseChannel;
+                results += ",";
+                results += device.AnalogOutputs[i].AnalogOutputType;
+                results += ",";
+                for (int j = 1; j <= device.AnalogOutputs[i].Channels.Count; j++) {
+                    results += device.AnalogOutputs[i].Channels[j].Name;
+                    results += ";";
+                    results += device.AnalogOutputs[i].Channels[j].Maximum;
+                    results += ";";
+                    results += device.AnalogOutputs[i].Channels[j].OutputChannelMode;
+                }
+                results += "\n";
+            }
+            return results;
+        }
+        public string AnalogInputs() {
+            string results = "";
+            for (int i = 1; i <= device.AnalogInputs.Count; i++) {
+                results += device.AnalogInputs[i].Name;
+                results += ",";
+                results += device.AnalogInputs[i].BaseChannel;
+                results += ",";
+                results += device.AnalogInputs[i].AnalogInputType;
+                results += ",";
+                for (int j = 1; j <= device.AnalogInputs[i].Channels.Count; j++) {
+                    results += device.AnalogInputs[i].Channels[j].Name;
+                    results += ";";
+                    results += device.AnalogInputs[i].Channels[j].Ranges;
+                    results += ";";
+                    results += device.AnalogInputs[i].Channels[j].SamplingInterval;
+                }
+                results += "\n";
+            }
+            return results;
+        }
+
         public bool SetAnalogInput(int channel) {
-            var pAnalogInput = device.AnalogInputs.Add(AnalogInputType.aitDirect, (DeviceBaseChannel)channel);
+            IAnalogInput pAnalogInput = null;
+            for (int i = 1; i <= device.AnalogInputs.Count; i++) {
+                if (device.AnalogInputs[i].BaseChannel == (DeviceBaseChannel)channel)
+                    pAnalogInput = device.AnalogInputs[i];
+            }
+            if (pAnalogInput == null)
+                return false;
             Daq3000DirectAIChannel pDirect = (Daq3000DirectAIChannel)pAnalogInput.Channels[1];
             pDirect.DifferentialMode = false;
             var pRange = pDirect.Ranges[1];
@@ -197,23 +259,37 @@ namespace CSExeCOMServer {
         }
 
         public bool SetAnalogOutput(int channel, float value) {
-            var pAnalogOutput = device.AnalogOutputs.Add(AnalogOutputType.aotDirect, (DeviceBaseChannel) channel);
-            pAnalogOutput.Channels[1].OutputChannelMode = AnalogOutputChannelMode.aomVoltage;
+            IAnalogOutput pAnalogOutput = null;
+            for (int i = 1; i <= device.AnalogOutputs.Count; i++) {
+                if (device.AnalogOutputs[i].BaseChannel == (DeviceBaseChannel)channel)
+                    pAnalogOutput = device.AnalogOutputs[i];
+            }
+            if (pAnalogOutput == null)
+                return false;
             pAnalogOutput.Channels[1].OutputValue = value;
             pAnalogOutput.Channels[1].Update();
             return true;
         }
 
         public bool SetAnalogOutputWave(int channel, float value, float freq, string wave) {
-            var pAnalogOutput = device.AnalogOutputs.Add(AnalogOutputType.aotDirect, (DeviceBaseChannel)channel);
+            device.AnalogOutputs.OutputMode = WaveformOutputMode.womPredefined;
+            IAnalogOutput pAnalogOutput = null;
+            for (int i = 1; i <= device.AnalogOutputs.Count; i++) {
+                if (device.AnalogOutputs[i].BaseChannel == (DeviceBaseChannel)channel)
+                    pAnalogOutput = device.AnalogOutputs[i];
+            }
+            if (pAnalogOutput == null)
+                return false;
+            pAnalogOutput.Channels[1].OutputChannelMode = AnalogOutputChannelMode.aomWaveform;
+            pAnalogOutput.Channels[1].OutputValue = value;
             pAnalogOutput.Channels[1].PredefWaveAmplitude = value;
-            pAnalogOutput.Channels[1].PredefWaveFrequency = value;
+            pAnalogOutput.Channels[1].PredefWaveFrequency = freq;
             if (wave == "SQR") {
                 pAnalogOutput.Channels[1].PredefWaveType = WaveformPredefType.wptSquare;
             } else {
                 pAnalogOutput.Channels[1].PredefWaveType = WaveformPredefType.wptSine;
             }
-            pAnalogOutput.Channels[1].Update();
+            pAnalogOutput.Channels[1].UpdateWaveform();
             return true;
         }
 
@@ -243,18 +319,12 @@ namespace CSExeCOMServer {
             return result;
         }
 
-        public string ReadAPort() {
+        public float[] ReadAPort() {
             Array data = new float[channels];
             int result = acquire.DataStore.FetchData(ref data, channels);
-            string result_return = "fail";
-            if (result > 0) {
-                result_return = data.GetValue(0).ToString();
-                for (int i = 1; i < result; i++) {
-                    result_return += ";";
-                    result_return += data.GetValue(0).ToString();
-                }
-            }
-            return result_return;
+            if (result <= 0)
+                return new float[] { Single.NaN };
+            return (float[])data;
         }
 
         public void GetProcessThreadID(out uint processId, out uint threadId) {
