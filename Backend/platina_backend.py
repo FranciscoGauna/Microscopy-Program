@@ -40,9 +40,5 @@ class PlatinaBackend(Backend):
 
     def stopped(self, debug_time=datetime.now()):
         x_stopped = self._motor_x.stopped()
-        #print(datetime.now() - debug_time)
-        #print(x_stopped)
         y_stopped = self._motor_y.stopped()
-        #print(datetime.now() - debug_time)
-        #print(y_stopped)
         return x_stopped and y_stopped
