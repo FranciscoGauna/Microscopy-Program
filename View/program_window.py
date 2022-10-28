@@ -9,8 +9,6 @@ from Backend.platina_backend import PlatinaBackend
 from View.frontend.camera_control_ui import ImageDrawerFt
 from View.frontend.camera_only import CameraOnlyWindow
 from View.frontend.focus_frontend import FocusFrontend
-from View.frontend.motor_frontend import DualMotorFrontend
-from Drivers.motor_selector import MotorAlreadyOpenException
 from View.localization import locale
 from View.selector_window import SelectorWindow
 from View.tabs_window import TabsFrontend

@@ -14,7 +14,7 @@ from config import config_file
 
 
 class FungenSelector(Frontend):
-    gui = ('Fungen', 'fungen_selector.ui')
+    gui = ('ui', 'fungen_selector.ui')
 
     def dg1022(self):
         # driver = DG1022("dummy") Cambiar al posta cuando vamos a pc

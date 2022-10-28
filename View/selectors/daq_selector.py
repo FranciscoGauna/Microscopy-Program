@@ -16,7 +16,7 @@ from config import config_file
 
 
 class DaqSelector(Frontend):
-    gui = ("DAQ", "daq_selector.ui")
+    gui = ("ui", "daq_selector.ui")
     conf = ConfigParser()
 
     def usb_2527(self):

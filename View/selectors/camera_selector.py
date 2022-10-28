@@ -14,7 +14,7 @@ class CameraSelector(Frontend):
         or real camera.
     """
 
-    gui = ("Camera", "camera_selector.ui")
+    gui = ("ui", "camera_selector.ui")
 
     def setupUi(self):
         self.widget.camera_cb.setText(locale.get("virtual_camera", "str_virtual_camera"))
@@ -25,7 +25,7 @@ class CameraSelector(Frontend):
 
     def camera(self) -> cv2.VideoCapture:
         """
-            @brief: This method returns a camera object with the methods read, get and set, that recreate the
+            @brief: This method returns a camera adapter object with the methods read, get and set, that recreate the
             functionality of cv2.VideoCapture
         """
         if self.widget.camera_cb.isChecked():

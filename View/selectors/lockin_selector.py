@@ -16,7 +16,7 @@ from config import config_file
 
 
 class LockinSelector(Frontend):
-    gui = ('Lockin', 'lockin_selector.ui')
+    gui = ('ui', 'lockin_selector.ui')
     conf: ConfigParser
 
     def Virtual(self):

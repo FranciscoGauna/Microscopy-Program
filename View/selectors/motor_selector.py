@@ -8,7 +8,7 @@ from pathlib import Path
 
 class MotorSelector(Frontend):
     backend: PlatinaBackend
-    gui = ("Motor", "motor_selector.ui")
+    gui = ("ui", "motor_selector.ui")
     conf_x = None
     conf_y = None
 

@@ -23,8 +23,7 @@ if __name__ == "__main__":
     except KeyError:
         config_file["DEFAULT"]["env"] = "usr"
     if config_file["DEFAULT"]["env"] == "dev":
-        pass
-        #log_to_screen(DEBUG)
+        log_to_screen(DEBUG)
     if args.locale:
         set_locale(args.locale)
     elif config_file["DEFAULT"]["env"] != "dev":
@@ -33,8 +32,7 @@ if __name__ == "__main__":
         except KeyError:
             set_locale("en")
 
-
-app = MainBackend()
-qapp = QApplication([''])
-qapp.setWindowIcon(QIcon(os.path.join("Assets", "laser.png")))
-start_gui_app(app, ProgramWindow, qapp)
+    app = MainBackend()
+    qapp = QApplication([''])
+    qapp.setWindowIcon(QIcon(os.path.join("Assets", "laser.png")))
+    start_gui_app(app, ProgramWindow, qapp)

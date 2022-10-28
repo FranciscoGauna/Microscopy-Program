@@ -2,11 +2,11 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout
 from lantz.qt import Frontend
 
 from Backend.platina_backend import PlatinaBackend
-from Drivers.camera_selector import CameraSelector
-from Drivers.daq_selector import DaqSelector
-from Drivers.fungen_selector import FungenSelector
-from Drivers.lockin_selector import LockinSelector
-from Drivers.motor_selector import MotorSelector
+from View.selectors.camera_selector import CameraSelector
+from View.selectors.daq_selector import DaqSelector
+from View.selectors.fungen_selector import FungenSelector
+from View.selectors.lockin_selector import LockinSelector
+from View.selectors.motor_selector import MotorSelector
 
 
 class SelectorWindow(Frontend):
