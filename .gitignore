@@ -1,0 +1,13 @@
+Results/*
+*.pyc
+.idea/
+.idea/*
+.idea\*
+Test/
+ximc
+.idea/misc.xml
+.idea/Microscopy-Program.iml
+.idea/vcs.xml
+.idea/modules.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.vs/*
