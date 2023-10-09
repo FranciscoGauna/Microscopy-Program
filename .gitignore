@@ -11,3 +11,4 @@ ximc
 .idea/modules.xml
 .idea/inspectionProfiles/profiles_settings.xml
 .vs/*
+*.dll
