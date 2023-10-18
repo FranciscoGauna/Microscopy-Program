@@ -2,7 +2,7 @@ import pyvisa
 from lantz import MessageBasedDriver, Feat
 from lantz.core.messagebased import get_resource_manager
 
-from dll_wrapper import FTD2XXWrapper
+from .dll_wrapper import FTD2XXWrapper
 
 
 class HP33120AFungen(MessageBasedDriver):
@@ -17,6 +17,7 @@ class HP33120AFungen(MessageBasedDriver):
 
     def __init__(self, resource_name, **kwargs):
         self.PROLOGIX = False
+        self.initialized = False
         super().__init__(resource_name, **kwargs)
         self._shape = ""
         self._freq = 1.0
@@ -27,20 +28,27 @@ class HP33120AFungen(MessageBasedDriver):
     def via_prologix_gpib(cls, address):
         fungen = cls("dummy")
         fungen.PROLOGIX = True
+        fungen.PROLOGIX_ADDR = address
         return fungen
 
     def initialize(self):
+
+        if self.initialized:
+            return
+
         super().initialize()
         if self.PROLOGIX:
             wrap = FTD2XXWrapper()
             # TODO: Fix this, it should know what is the prologix and/or taken an arg for the index
             self.resource = wrap.open(0, "\n", "")
-            self.resource.write("++addr 10")
+            self.resource.write(f"++addr {self.PROLOGIX_ADDR}")
 
             self._shape = self.shape
             self._freq = self.frequency.magnitude
             self._amplitude = self.amplitude.magnitude
             self._offset = self.offset.magnitude
+
+        self.initialized = True
 
     def finalize(self):
         super().finalize()

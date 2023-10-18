@@ -1,5 +1,6 @@
 from ctypes import CDLL, byref, Structure, c_void_p, c_char, POINTER, WinDLL, c_int
 from ctypes.wintypes import DWORD, LPDWORD
+from os import path
 from time import sleep
 from typing import Optional
 
@@ -94,13 +95,14 @@ class FTD2XXDevice:
         return amount.value
 
     def __del__(self):
+        self.write("++clr")
         self.library.FT_Close(self.handle)
 
 
 class FTD2XXWrapper:
     # Download the dll from ft chips
 
-    def __init__(self, dll_location=".\\ftd2xx64.DLL"):
+    def __init__(self, dll_location=path.dirname(path.realpath(__file__)) + ".\\ftd2xx64.DLL"):
         self.library = setup_dll(dll_location)
 
     def list_devices(self) -> list[DeviceInfo]:
