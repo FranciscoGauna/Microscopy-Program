@@ -1,7 +1,7 @@
 from lantz.qt import wrap_driver_cls
 
 from SER.interfaces import Component
-from .component import FunGen, FunGenConfUi
+from .instrument_ui import FunGen, FunGenConfUi
 from .hp33120A_fungen import HP33120AFungen
 
 

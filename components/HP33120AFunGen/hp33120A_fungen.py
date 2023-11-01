@@ -41,6 +41,7 @@ class HP33120AFungen(MessageBasedDriver):
             wrap = FTD2XXWrapper()
             # TODO: Fix this, it should know what is the prologix and/or taken an arg for the index
             self.resource = wrap.open(0, "\n", "")
+            self.resource.set_timeout(100)
             self.resource.write(f"++addr {self.PROLOGIX_ADDR}")
 
             self._shape = self.shape

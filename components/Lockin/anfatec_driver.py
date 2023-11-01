@@ -187,7 +187,7 @@ class AnfatecAMU24(foreign.LibraryDriver):
         pll = kwargs.pop("pll", False)
         time_constants = (kwargs.pop("time_constants", "5 ms"))
         roll_off = (kwargs.pop("roll_off", "12dB/oct"))
-        input_gain = kwargs.pop("input_gain", 1)
+        input_gain = kwargs.pop("input_gain", "High Reserve")
         harmonic = kwargs.pop("harmonic", 1)
         coupling = kwargs.pop("coupling", Coupling.dc)
         lockin_phase = Q_(kwargs.pop("lockin_phase", 0), "deg")
@@ -208,7 +208,7 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self.pll = pll
         self.time_constant = time_constants
         self.lockin_roll_off = roll_off
-        self.input_gain = input_gain
+        self.sensitivity = input_gain
         self.harmonic = harmonic
         self.coupling = coupling
         self.lockin_phase = lockin_phase
@@ -249,7 +249,7 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self._lockin_phase = float
         self.lib._SetLockInPhase(foreign.TYPES["f64"](float))
 
-    @Feat(values={1, 10, 100})
+    @Feat(values={"High Reserve": 1, "Normal": 10, "Low Noise": 100})
     def sensitivity(self):
         """This function returns the input gain. It is a multiplier of either 1, 10 or 100"""
         return self._input_gain
