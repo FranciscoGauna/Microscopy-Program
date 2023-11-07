@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QListWidget
 from PyQt5 import uic
 
 
-# 0 - 1
+# 0 - 1 float values as input
 def relative_luminance(r: float, g: float, b: float, alpha: float) -> float:
     R = r / 12.92 if r <= 0.03928 else pow((r + 0.055) / 1.055, 2.4)
     G = g / 12.92 if g <= 0.03928 else pow((g + 0.055) / 1.055, 2.4)
