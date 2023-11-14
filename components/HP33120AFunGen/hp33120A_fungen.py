@@ -1,5 +1,5 @@
 import pyvisa
-from lantz import MessageBasedDriver, Feat
+from lantz import MessageBasedDriver, Feat, Driver
 from lantz.core.messagebased import get_resource_manager
 
 from .dll_wrapper import FTD2XXWrapper
@@ -103,6 +103,51 @@ class HP33120AFungen(MessageBasedDriver):
         offset = self._offset if offset is None else offset
 
         self.query(f":APPL:{shape} {freq}Hz, {amplitude}V, {offset}V;*IDN?")
+
+
+class VirtualFungen(Driver):
+
+    def __init__(self):
+        self._shape = "SIN"
+        self._freq = 1
+        self._amplitude = 1
+        self._offset = 0
+
+    @Feat()
+    def idn(self):
+        return "VirtualFungen"
+
+    @Feat(values={"SIN", "SQU", "TRI", "RAMP", "NOIS", "DC", "USER"})
+    def shape(self):
+        return self._shape
+
+    @shape.setter
+    def shape(self, value):
+        self._shape = value
+
+    @Feat(units="Hz", limits=(0.0001, 100000.0))
+    def frequency(self):
+        return self._freq
+
+    @frequency.setter
+    def frequency(self, value):
+        self._freq = value
+
+    @Feat(units="V", limits=(0.050, 10))
+    def amplitude(self):
+        return self._amplitude
+
+    @amplitude.setter
+    def amplitude(self, value):
+        self._amplitude = value
+
+    @Feat(units="V", limits=(-5, 5))
+    def offset(self):
+        return self._offset
+
+    @offset.setter
+    def offset(self, value):
+        self._offset = value
 
 
 if __name__ == "__main__":
