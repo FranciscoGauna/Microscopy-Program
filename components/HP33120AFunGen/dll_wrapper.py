@@ -4,6 +4,9 @@ from os import path
 from time import sleep
 from typing import Optional
 
+from lantz.core.log import get_logger
+from pimpmyclass.mixins import LogMixin
+
 
 class DeviceInfo(Structure):
     _fields_ = [
@@ -45,13 +48,14 @@ def setup_dll(dll_name: str) -> WinDLL:
     return library
 
 
-class FTD2XXDevice:
+class FTD2XXDevice(LogMixin):
 
     def __init__(self, library: WinDLL, ft_handle: c_void_p, read_term, write_term):
         self.library = library
         self.handle = ft_handle
         self.read_term = read_term
         self.write_term = write_term
+        self.logger = get_logger("SER.component.FTD2XXDevice")
 
     def set_timeout(self, milliseconds: int):
         assert self.library.FT_SetTimeouts(self.handle, milliseconds, milliseconds) == 0
@@ -79,9 +83,12 @@ class FTD2XXDevice:
                 break
 
             buffer += char.value
+
+        self.log_debug(f"read: {buffer.decode(encoding).rstrip(termination)}")
         return buffer.decode(encoding).rstrip(termination)
 
     def write(self, message: str, termination: str = None, encoding: str = None):
+        self.log_debug(f"write: {message}")
         termination = self.write_term if termination is None else termination
         if encoding is None:
             encoding = "utf-8"

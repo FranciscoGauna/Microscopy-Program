@@ -1,0 +1,1 @@
+{"pll": false, "time_constant": "5 ms", "roll_off": "12dB/oct", "sensitivity": "High Reserve", "harmonic": 1, "coupling": "DC", "lockin_phase": 0, "lockin_amplitude": 1, "lockin_frequency": 10000}

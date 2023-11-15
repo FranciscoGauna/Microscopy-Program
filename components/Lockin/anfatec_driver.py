@@ -8,9 +8,6 @@ from os.path import dirname
 from inspect import getfile
 
 
-class Coupling(Enum):
-    ac = 1
-    dc = 0
 
 
 class VirtualLockin(foreign.Driver):
@@ -18,63 +15,59 @@ class VirtualLockin(foreign.Driver):
     def __init__(self, *args, **kwargs):
         """Instanciates a new copy of the driver. -if you want to load the settings of a previous instance of this class
         , you should use the method export_settings and add it to the kwargs"""
-        reference_internal = not kwargs.pop("pll", True)
-        time_constant = (kwargs.pop("time_constant", "5 ms"))
+        pll = kwargs.pop("pll", False)
+        time_constants = (kwargs.pop("time_constants", "5 ms"))
         roll_off = (kwargs.pop("roll_off", "12dB/oct"))
-        input_gain = kwargs.pop("input_gain", 1)
+        input_gain = kwargs.pop("input_gain", "High Reserve")
         harmonic = kwargs.pop("harmonic", 1)
-        input_coupling = kwargs.pop("coupling", Coupling.dc)
-        reference_phase_shift = Q_(kwargs.pop("lockin_phase", 0), "deg")
-        sine_output_amplitude = Q_(kwargs.pop("lockin_amplitude", 1), "V")
-        frequency = Q_(kwargs.pop("lockin_frequency", 10000), "hertz")
+        coupling = kwargs.pop("coupling", "DC")
+        lockin_phase = Q_(kwargs.pop("lockin_phase", 0), "deg")
+        lockin_amplitude = Q_(kwargs.pop("lockin_amplitude", 1), "V")
+        lockin_frequency = Q_(kwargs.pop("lockin_frequency", 10000), "hertz")
 
         super().__init__(*args, **kwargs)
 
-        self._time_constant = 0
-        self._roll_off = 0
-        self._input_gain = 1
-
-        self.reference_internal = reference_internal
-        self.time_constant = time_constant
+        self.pll = pll
+        self.time_constants = time_constants
         self.lockin_roll_off = roll_off
-        self.input_gain = input_gain
+        self.sensitivity = input_gain
         self.harmonic = harmonic
-        self.input_coupling = input_coupling
-        self.reference_phase_shift = reference_phase_shift
-        self.sine_output_amplitude = sine_output_amplitude
-        self.frequency = frequency
+        self.coupling = coupling
+        self.lockin_phase = lockin_phase
+        self.lockin_amplitude = lockin_amplitude
+        self.lockin_frequency = lockin_frequency
 
     @Feat(units="Hz")
-    def frequency(self):
+    def lockin_frequency(self):
         """This Function returns the center frequency of the lockin in Hz."""
         return self._lockin_frequency
 
-    @frequency.setter
-    def frequency(self, float):
+    @lockin_frequency.setter
+    def lockin_frequency(self, float):
         """This Function sets the center frequency of the lockin to a value in Hz. It will only be used if the PLL is off."""
         self._lockin_frequency = float
 
     @Feat(units="V")
-    def sine_output_amplitude(self):
+    def lockin_amplitude(self):
         """This Function returns the amplitude in V of the reference output"""
         return self._lockin_amplitude
 
-    @sine_output_amplitude.setter
-    def sine_output_amplitude(self, value):
+    @lockin_amplitude.setter
+    def lockin_amplitude(self, value):
         """This Function sets the amplitude in V of the reference output and gives no value back"""
         self._lockin_amplitude = value
 
     @Feat(units="deg")
-    def reference_phase_shift(self):
+    def lockin_phase(self):
         """This function returns the phase offset between the input and the reference output in degrees"""
         return self._lockin_phase
 
-    @reference_phase_shift.setter
-    def reference_phase_shift(self, float):
+    @lockin_phase.setter
+    def lockin_phase(self, float):
         """This function sets the phase offset between the input and the reference output in degrees"""
         self._lockin_phase = float
 
-    @Feat(values={1, 10, 100})
+    @Feat(values={"High Reserve": 1, "Normal": 10, "Low Noise": 100})
     def sensitivity(self):
         """This function returns the input gain. It is a multiplier of either 1, 10 or 100"""
         return self._input_gain
@@ -84,16 +77,14 @@ class VirtualLockin(foreign.Driver):
         """This function sets the input gain. It is a multiplier of either 1, 10 or 100"""
         self._input_gain = num
 
-    @Feat(values={Coupling.ac, Coupling.dc})
-    def input_coupling(self):
-        """This function returns the coupling gain. It returns an instance of the Coupling Enum Class"""
+    @Feat(values={"AC": 1, "DC": 0})
+    def coupling(self):
+        """This function returns the coupling gain"""
         return self._coupling
 
-    @input_coupling.setter
-    def input_coupling(self, coupling: Coupling):
-        """This function sets the coupling gain. It requires an instance of the Coupling Enum Class"""
-        if not isinstance(coupling, Coupling):
-            raise TypeError()
+    @coupling.setter
+    def coupling(self, coupling):
+        """This function sets the coupling gain"""
         self._coupling = coupling
 
     @Feat(values=set(range(0, 16)))
@@ -123,14 +114,14 @@ class VirtualLockin(foreign.Driver):
         self._time_constant = num
 
     @Feat(values={"6dB/oct": 0, "12dB/oct": 1, "24dB/oct": 2})
-    def filter_db_per_oct(self):
+    def lockin_roll_off(self):
         """This function returns the roll off which is used for the low pass filter
         ,
         assigned to each number: 0 = 6dB/oct, 1 = 12dB/oct, 2 = 24dB/oct"""
         return self._roll_off
 
-    @filter_db_per_oct.setter
-    def filter_db_per_oct(self, num):
+    @lockin_roll_off.setter
+    def lockin_roll_off(self, num):
         """This function sets the roll off which is used for the low pass filter
         , and it should be an integer between 0 and 2, with the following value.
         assigned to each number: 0 = 6dB/oct, 1 = 12dB/oct, 2 = 24dB/oct"""
@@ -147,19 +138,20 @@ class VirtualLockin(foreign.Driver):
         return gauss(50, 10)
 
     @Feat()
-    def reference_internal(self):
+    def pll(self):
         """Returns the value of pll. If true, the lockin uses the frequency of the external reference and if false it
         uses the internal value, assigned in lockin_frequency"""
         return self._pll
 
-    @reference_internal.setter
-    def reference_internal(self, flag: bool):
+    @pll.setter
+    def pll(self, flag: bool):
         """Sets what frequency to use. If true, the lockin uses the frequency of the external reference and if false it
         uses the internal value, assigned in lockin_frequency"""
         self._pll = flag
-        num = 0
-        if flag:
-            num = 1
+
+    def pll_frequency(self):
+        """Returns the fequency of the pll if the pll is on. Otherwise returns 0"""
+        return self._lockin_frequency
 
     @Feat()
     def overloaded(self):
@@ -176,6 +168,24 @@ class VirtualLockin(foreign.Driver):
         """Imaginaty part y returns the value of the x channel , which measures from the input signal"""
         return 0
 
+    def export_settings(self) -> dict:
+        """This function returns a dictionary of the values used for the configuration of the lockin. If you want to
+         load a new instance with these setting you should add this dictionary to the kwargs when you instantiante the
+         class"""
+        settings = {
+            "pll": self.pll,
+            "time_constant": self.time_constant,
+            "roll_off": self.lockin_roll_off,
+            "sensitivity": self.sensitivity,
+            "harmonic": self.harmonic,
+            "coupling": self.coupling,
+            "lockin_phase": self._lockin_phase,
+            "lockin_amplitude": self._lockin_amplitude,
+            "lockin_frequency": self._lockin_frequency,
+        }
+
+        return settings
+
 
 class AnfatecAMU24(foreign.LibraryDriver):
     LIBRARY_NAME = "Lockin.dll"
@@ -189,7 +199,7 @@ class AnfatecAMU24(foreign.LibraryDriver):
         roll_off = (kwargs.pop("roll_off", "12dB/oct"))
         input_gain = kwargs.pop("input_gain", "High Reserve")
         harmonic = kwargs.pop("harmonic", 1)
-        coupling = kwargs.pop("coupling", Coupling.dc)
+        coupling = kwargs.pop("coupling", "DC")
         lockin_phase = Q_(kwargs.pop("lockin_phase", 0), "deg")
         lockin_amplitude = Q_(kwargs.pop("lockin_amplitude", 1), "V")
         lockin_frequency = Q_(kwargs.pop("lockin_frequency", 10000), "hertz")
@@ -206,7 +216,7 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self.lib._SetLockInFreq.restype = foreign.TYPES["f64"]
 
         self.pll = pll
-        self.time_constant = time_constants
+        self.time_constants = time_constants
         self.lockin_roll_off = roll_off
         self.sensitivity = input_gain
         self.harmonic = harmonic
@@ -260,18 +270,16 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self._input_gain = num
         self.lib._SetLockInHardGain(foreign.TYPES["L"](num))
 
-    @Feat(values={Coupling.ac, Coupling.dc})
+    @Feat(values={"AC": 1, "DC": 0})
     def coupling(self):
-        """This function returns the coupling gain. It returns an instance of the Coupling Enum Class"""
+        """This function returns the coupling gain."""
         return self._coupling
 
     @coupling.setter
-    def coupling(self, coupling: Coupling):
-        """This function sets the coupling gain. It requires an instance of the Coupling Enum Class"""
-        if not isinstance(coupling, Coupling):
-            raise TypeError()
+    def coupling(self, coupling):
+        """This function sets the coupling gain."""
         self._coupling = coupling
-        self.lib._SetLockInCoupling(foreign.TYPES["L"](coupling.value))
+        self.lib._SetLockInCoupling(foreign.TYPES["L"](coupling))
 
     @Feat(values=set(range(0, 16)))
     def harmonic(self):
@@ -366,12 +374,12 @@ class AnfatecAMU24(foreign.LibraryDriver):
          load a new instance with these setting you should add this dictionary to the kwargs when you instantiante the
          class"""
         settings = {
-            "pll": self._pll,
+            "pll": self.pll,
             "time_constant": self.time_constant,
             "roll_off": self.lockin_roll_off,
-            "input_gain": self._input_gain,
-            "harmonic": self._harmonic,
-            "coupling": self._coupling,
+            "sensitivity": self.sensitivity,
+            "harmonic": self.harmonic,
+            "coupling": self.coupling,
             "lockin_phase": self._lockin_phase,
             "lockin_amplitude": self._lockin_amplitude,
             "lockin_frequency": self._lockin_frequency,

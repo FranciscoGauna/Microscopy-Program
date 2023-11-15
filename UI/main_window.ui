@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>MicrsocopyProgram</class>
+ <widget class="QMainWindow" name="MicrsocopyProgram">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>305</width>
+    <height>192</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -80,7 +80,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>305</width>
      <height>21</height>
     </rect>
    </property>

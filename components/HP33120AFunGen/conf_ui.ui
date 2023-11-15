@@ -6,51 +6,102 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>287</width>
-    <height>93</height>
+    <width>351</width>
+    <height>117</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>GroupBox</string>
   </property>
+  <property name="title">
+   <string>Function Generator</string>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="1">
+   <item row="1" column="0">
     <widget class="QDoubleSpinBox" name="amplitude_sb"/>
    </item>
-   <item row="1" column="3">
-    <widget class="QDoubleSpinBox" name="offset_sb"/>
-   </item>
-   <item row="0" column="3">
-    <widget class="QLabel" name="offset_label">
-     <property name="text">
-      <string>Offset</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
+   <item row="0" column="0">
     <widget class="QLabel" name="amplitude_frequency">
      <property name="text">
       <string>Amplitude</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="QDoubleSpinBox" name="frequency_sb"/>
-   </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="frequency_label">
-     <property name="text">
-      <string>Frequency</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="4">
-    <widget class="QComboBox" name="shape_cb"/>
-   </item>
-   <item row="0" column="4">
+   <item row="0" column="3">
     <widget class="QLabel" name="shape_label">
      <property name="text">
       <string>Shape</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <widget class="QComboBox" name="shape_cb"/>
+   </item>
+   <item row="2" column="2">
+    <widget class="QLabel" name="freq_min_label">
+     <property name="text">
+      <string>Min Frequency</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="freq_amount_label">
+     <property name="text">
+      <string>Frequency Amount</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="QDoubleSpinBox" name="offset_sb"/>
+   </item>
+   <item row="3" column="3">
+    <widget class="QDoubleSpinBox" name="freq_max_sb">
+     <property name="minimum">
+      <double>1.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>100000.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QLabel" name="offset_label">
+     <property name="text">
+      <string>Offset</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="2">
+    <widget class="QDoubleSpinBox" name="freq_min_sb">
+     <property name="minimum">
+      <double>1.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>100000.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QSpinBox" name="freq_amount_sb">
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="maximum">
+      <number>999999</number>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="3">
+    <widget class="QLabel" name="freq_max_label">
+     <property name="text">
+      <string>Max Frequency</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="4">
+    <widget class="QCheckBox" name="log_check">
+     <property name="text">
+      <string>Log</string>
      </property>
     </widget>
    </item>

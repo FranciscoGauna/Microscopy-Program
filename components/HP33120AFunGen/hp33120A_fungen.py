@@ -89,7 +89,13 @@ class HP33120AFungen(MessageBasedDriver):
 
     @Feat(units="V", limits=(-5, 5))
     def offset(self):
-        return float(self.query("VOLTage:OFFSet?"))
+        response = ""
+        try:
+            response = self.query("VOLTage:OFFSet?")
+            return float(response)
+        except Exception as e:
+            self.log_error(f"Reading error: {e}, message read: {response}")
+            return 0.0
 
     @offset.setter
     def offset(self, value):
@@ -148,6 +154,9 @@ class VirtualFungen(Driver):
     @offset.setter
     def offset(self, value):
         self._offset = value
+
+    def apply(self, shape=None, freq=None, amplitude=None, offset=None):
+        pass
 
 
 if __name__ == "__main__":
