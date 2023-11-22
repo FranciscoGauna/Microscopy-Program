@@ -29,6 +29,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         ui_file_path = path.join(path.dirname(path.realpath(__file__)), "main_window.ui")
         uic.loadUi(ui_file_path, self)
+        self.setWindowTitle("Microscopy-Program")
 
         self.experiment_layout = self.experiment_page.layout()
         self.launch_button.pressed.connect(self.switch_window)
