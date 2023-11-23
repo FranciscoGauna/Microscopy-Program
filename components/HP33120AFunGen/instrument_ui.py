@@ -127,10 +127,11 @@ class FunGen(ConfigurableInstrument):
             "min_frequency": self._min_frequency,
             "max_frequency": self._max_frequency,
             "amount_frequency": self._amount_frequency
-        }
+        } | super().get_config()
 
     def set_config(self, config: Dict):
-        # UI Vars
+        super().set_config(config)
+
         self.shape = config["shape"]
         self.amplitude = config["amplitude"]
         self.offset = config["offset"]
