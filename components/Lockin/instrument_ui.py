@@ -39,7 +39,6 @@ class Lockin(ObservableInstrument):
 
         return settings
 
-
     def set_config(self, config: Dict):
         self.lockin.pll = config["pll"]
         self.lockin.time_constants = config["time_constant"]

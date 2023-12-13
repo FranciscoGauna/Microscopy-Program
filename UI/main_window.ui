@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>305</width>
-    <height>192</height>
+    <width>242</width>
+    <height>282</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,19 +22,6 @@
       </property>
       <widget class="QWidget" name="selection_page">
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="3" column="0">
-         <widget class="QComboBox" name="lockin_cb"/>
-        </item>
-        <item row="1" column="0">
-         <widget class="QComboBox" name="fungen_cb"/>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="fungen_label">
-          <property name="text">
-           <string>Function Generator</string>
-          </property>
-         </widget>
-        </item>
         <item row="2" column="0">
          <widget class="QLabel" name="lockin_label">
           <property name="text">
@@ -42,7 +29,7 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
+        <item row="8" column="0">
          <layout class="QHBoxLayout" name="launch_layout">
           <item>
            <spacer name="launch_spacer">
@@ -66,6 +53,39 @@
           </item>
          </layout>
         </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="fungen_label">
+          <property name="text">
+           <string>Function Generator</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="motor_x_label">
+          <property name="text">
+           <string>Motor X</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QComboBox" name="motor_x_cb"/>
+        </item>
+        <item row="6" column="0">
+         <widget class="QLabel" name="motor_y_label">
+          <property name="text">
+           <string>Motor Y</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QComboBox" name="fungen_cb"/>
+        </item>
+        <item row="3" column="0">
+         <widget class="QComboBox" name="lockin_cb"/>
+        </item>
+        <item row="7" column="0">
+         <widget class="QComboBox" name="motor_y_cb"/>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="experiment_page">
@@ -80,7 +100,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>305</width>
+     <width>242</width>
      <height>21</height>
     </rect>
    </property>
