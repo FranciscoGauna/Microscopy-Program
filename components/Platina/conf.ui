@@ -25,7 +25,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QLCDNumber" name="lcdNumber"/>
+    <widget class="QLCDNumber" name="pos_number"/>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -105,7 +105,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="spinBox_2"/>
+        <widget class="QSpinBox" name="init_pos_sb"/>
        </item>
        <item>
         <widget class="QLabel" name="label_8">
@@ -115,7 +115,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="spinBox"/>
+        <widget class="QSpinBox" name="min_pos_sb"/>
        </item>
        <item>
         <widget class="QLabel" name="label_9">
@@ -125,7 +125,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="spinBox_3"/>
+        <widget class="QSpinBox" name="max_pos_sb"/>
        </item>
        <item>
         <widget class="QLabel" name="label_10">
@@ -135,7 +135,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="spinBox_4"/>
+        <widget class="QSpinBox" name="amount_pos_sb"/>
        </item>
       </layout>
      </item>

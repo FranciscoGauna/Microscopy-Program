@@ -18,7 +18,7 @@ probe_flags = EnumerateFlags.ENUMERATE_PROBE + EnumerateFlags.ENUMERATE_NETWORK
 enum_hints = b"addr=192.168.0.1,172.16.2.3"
 
 
-def get_available_motors():
+def get_available_motors() -> dict[str, str]:
     motors = {}
     dev_enum = lib.enumerate_devices(probe_flags, enum_hints)
     dev_count = lib.get_device_count(dev_enum)
@@ -45,6 +45,7 @@ class Motor(Driver):
     _status: status_t
     _status_time = datetime.now()
     _status_interval = timedelta(milliseconds=10)
+    position_struct: get_position_t
 
     def __init__(self):
         super().__init__()
@@ -102,12 +103,16 @@ class Motor(Driver):
         self._update_status()
         return self._status.CurSpeed == 0 and (self._status.MoveSts % 2) == 0
 
+    @Feat
     def position(self):
-        position_struct = get_position_t()
-        result = self._lib.get_position(self._device_id, byref(position_struct))
+        if (datetime.now() - self._status_time) < self._status_interval and hasattr(self, "position_struct"):
+            return self.position_struct.Position
+        self.position_struct = get_position_t()
+        result = self._lib.get_position(self._device_id, byref(self.position_struct))
+        self._status_time = datetime.now()
         if result != Result.Ok:
             raise Exception("Failed Getting Status")
-        return position_struct.EncPosition
+        return self.position_struct.Position
 
     def _setup_feedback_encoder(self, config):
         feedback_settings = feedback_settings_t()

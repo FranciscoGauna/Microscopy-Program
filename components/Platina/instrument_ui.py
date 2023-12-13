@@ -2,10 +2,14 @@ from typing import Dict, Generator, Any
 
 from SER.interfaces import ConfigurationUI, ConfigurableInstrument
 from lantz import Feat
+from lantz.qt import InstrumentSlot
 from lantz.qt.connect import connect_feat
+
+from .motor import Motor
 
 
 class Platina(ConfigurableInstrument):
+    motor: Motor = InstrumentSlot()
 
     def __init__(self, **instruments_and_backends):
         super().__init__(**instruments_and_backends)
@@ -50,7 +54,7 @@ class Platina(ConfigurableInstrument):
         pass
 
 
-class LockinUI(ConfigurationUI):
+class PlatinaUI(ConfigurationUI):
     gui = "conf.ui"
 
     backend: Platina
@@ -58,6 +62,7 @@ class LockinUI(ConfigurationUI):
     def __init__(self, backend):
         super().__init__(backend=backend)
         backend.initialize()
-        connect_feat(self.widget.time_constant_cb, self.backend.lockin, "time_constants")
-        connect_feat(self.widget.input_gain_cb, self.backend.lockin, "sensitivity")
-        connect_feat(self.widget.slope_cb, self.backend.lockin, "lockin_roll_off")
+        connect_feat(self.widget.min_pos_sb, self.backend, "min")
+        connect_feat(self.widget.max_pos_sb, self.backend, "max")
+        connect_feat(self.widget.amount_pos_sb, self.backend, "amount")
+        connect_feat(self.widget.pos_number, self.backend.motor, "position")
