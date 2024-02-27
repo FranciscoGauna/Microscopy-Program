@@ -6,7 +6,9 @@ import configparser
 from ctypes import byref
 from pathlib import Path
 from datetime import datetime, timedelta
+from threading import Thread
 from time import sleep
+
 from lantz import Driver, Feat
 from lantz.core.log import ERROR, DEBUG
 
@@ -44,16 +46,17 @@ class Motor(Driver):
     _motor: str
     _status: status_t
     _status_time = datetime.now()
-    _status_interval = timedelta(milliseconds=10)
+    _status_interval = timedelta(milliseconds=100)
+    _status_thread: Thread
     position_struct: get_position_t
 
     def __init__(self):
         super().__init__()
         self._motor = ""
+        self._status_running = True
 
     def __del__(self):
-        if hasattr(self, "_device_id") and self._device_id != 1:
-            self._lib.close_device(self._device_id)
+        self.close_motor()
 
     def current_motor(self):
         return self._motor
@@ -76,18 +79,28 @@ class Motor(Driver):
         else:
             self.log(ERROR, "No configuration file")
         self._status = status_t()
-        sleep(0.01)
-        self._update_status()
+        self._status_running = True
+        self._status_thread = Thread(target=self._update_status)
+        self._status_thread.start()
+
+    def close_motor(self):
+        self.log_debug(f"Starting Closure motor")
+        self._status_running = False
+        if hasattr(self, "_device_id") and self._device_id != 1:
+            self._lib.close_device(self._device_id)
+        if hasattr(self, "_status_thread"):
+            self._status_thread.join()
+
 
     def _update_status(self):
-        if (datetime.now() - self._status_time) < self._status_interval:
-            sleep(0.01)
-        result = self._lib.get_status(self._device_id, byref(self._status))
-        if result != Result.Ok:
-            raise Exception("Failed Getting Status")
-        if self._status.Flags & StateFlags.STATE_ALARM:
-            raise Exception("Motor Alarm!")
-        self._status_time = datetime.now()
+        while self._status_running:
+            result = self._lib.get_status(self._device_id, byref(self._status))
+            if result != Result.Ok:
+                raise Exception("Failed Getting Status")
+            if self._status.Flags & StateFlags.STATE_ALARM:
+                raise Exception("Motor Alarm!")
+            sleep(self._status_interval.seconds)
+        self.log_debug(f"Stopping updated")
 
     def move_to(self, x_count):
         if self._device_id is None:
