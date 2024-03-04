@@ -2,7 +2,8 @@ from os import path
 from typing import Callable
 
 from PyQt5 import uic
-from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QPushButton, QStackedWidget, QComboBox, QLabel
+from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QPushButton, QStackedWidget, QComboBox, QLabel, \
+    QFileDialog
 from SER import get_main_widget
 from SER.interfaces import ComponentInitialization, Component
 from lantz.qt import wrap_driver_cls
@@ -30,6 +31,10 @@ class MainWindow(QMainWindow):
     lockin_ops: dict[str, Callable[[], Component]]
     motor_x_label: QLabel
     motor_x_cb: QComboBox
+    motor_x_bt: QPushButton
+    motor_y_label: QLabel
+    motor_y_cb: QComboBox
+    motor_y_bt: QPushButton
     motor_ops: dict[str, str]
 
     def __init__(self):
@@ -42,6 +47,8 @@ class MainWindow(QMainWindow):
         self.launch_button.pressed.connect(self.switch_window)
 
         self.load_options()
+        self.motor_x_filename = None
+        self.motor_y_filename = None
 
         self.show()
 
@@ -61,6 +68,21 @@ class MainWindow(QMainWindow):
         self.motor_ops = get_available_motors()
         self.motor_ops["Virtual"] = "virtual"
         self.motor_x_cb.addItems(self.motor_ops.keys())
+        self.motor_y_cb.addItems(self.motor_ops.keys())
+        self.motor_x_bt.pressed.connect(lambda: self.load_motor_configuration("x"))
+
+    def load_motor_configuration(self, target):
+        options = QFileDialog.Options()
+        file_dialog = QFileDialog()
+        file_dialog.setDirectory("components/Platina")  # TODO: see if we need to change this
+        file_name, _ = file_dialog.getOpenFileName(self, "Open File", "",
+                                                   "Config File (*.cfg);;All Files (*)", options=options)
+
+        if target == "x":  # TODO: see if this is too ugly, maybe change to a generic attribute
+            self.motor_x_filename = file_name
+        else:
+            self.motor_y_filename = file_name
+
 
     def switch_window(self):
         fungen_comp = self.fungen_ops[self.fungen_cb.currentText()]()
@@ -70,7 +92,7 @@ class MainWindow(QMainWindow):
 
         x_motor = wrap_driver_cls(Motor)()
         x_motor.open_motor(self.motor_ops[self.motor_x_cb.currentText()])
-        x_motor_comp = PlatinaComponent(motor=x_motor)
+        x_motor_comp = PlatinaComponent(motor=x_motor, filename=self.motor_x_filename)
         x_motor_component = ComponentInitialization(x_motor_comp, 0, 0, 0, "Motor 1")
 
         ser_widget = get_main_widget([fungen_component, x_motor_component],

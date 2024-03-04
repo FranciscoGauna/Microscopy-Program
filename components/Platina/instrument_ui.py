@@ -10,12 +10,22 @@ from .motor import Motor
 
 class Platina(ConfigurableInstrument):
     motor: Motor = InstrumentSlot()
+    conversion_units: str
+    conversion_factor: float
 
     def __init__(self, **instruments_and_backends):
+        filename = instruments_and_backends.pop("filename")
         super().__init__(**instruments_and_backends)
         self._min = 0
         self._max = 1
         self._amount = 2
+
+        with open(filename, "r+") as file:
+            config = self.motor.setup_file(file)
+        self.conversion_units = config["Stage"]["Units"]
+        self.conversion_factor = float(config["Stage"]["Lead_screw_pitch"])
+        self.conversion_factor /= int(config["Engine"]["Encoder_CPT"])
+        print(f"conversion: {self.conversion_factor} {self.conversion_units}")
 
     @Feat
     def min(self):

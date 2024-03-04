@@ -14,7 +14,7 @@ from lantz.core.log import ERROR, DEBUG
 
 from libximc import (lib, EnumerateFlags, controller_name_t, engine_settings_t, Result, status_t, get_position_t,
                      edges_settings_t, feedback_settings_t, EngineFlags, BorderFlags, FeedbackFlags, EnderFlags,
-                     FeedbackType, StateFlags)
+                     FeedbackType, StateFlags, control_settings_t)
 
 probe_flags = EnumerateFlags.ENUMERATE_PROBE + EnumerateFlags.ENUMERATE_NETWORK
 enum_hints = b"addr=192.168.0.1,172.16.2.3"
@@ -41,19 +41,21 @@ class Motor(Driver):
     x: int
     y: int
     virtual = False
+    position_margin = 40  # This is how much out of position we are in move_to_sync before we warn
     _device_id = None
     _lib = lib
     _motor: str
     _status: status_t
-    _status_time = datetime.now()
-    _status_interval = timedelta(milliseconds=100)
+
+    # Status interval: this time indicates how long we wait between statuses.
+    status_interval = timedelta(milliseconds=10)
     _status_thread: Thread
     position_struct: get_position_t
 
     def __init__(self):
         super().__init__()
         self._motor = ""
-        self._status_running = True
+        self._running = True
 
     def __del__(self):
         self.close_motor()
@@ -75,57 +77,97 @@ class Motor(Driver):
             self.log(ERROR, "Failed to open Device")
             raise Exception("Failed Opening Device")
         if file:
-            self._setup_file(file)
+            self.setup_file(file)
         else:
             self.log(ERROR, "No configuration file")
         self._status = status_t()
-        self._status_running = True
+        self._running = True
         self._status_thread = Thread(target=self._update_status)
         self._status_thread.start()
 
     def close_motor(self):
         self.log_debug(f"Starting Closure motor")
-        self._status_running = False
+        self._running = False
         if hasattr(self, "_device_id") and self._device_id != 1:
             self._lib.close_device(self._device_id)
         if hasattr(self, "_status_thread"):
             self._status_thread.join()
 
+    def STOP(self):
+        return self._lib.command_stop(self._device_id) == Result.Ok
 
     def _update_status(self):
-        while self._status_running:
+        while self._running:
             result = self._lib.get_status(self._device_id, byref(self._status))
             if result != Result.Ok:
-                raise Exception("Failed Getting Status")
+                self._running = False
             if self._status.Flags & StateFlags.STATE_ALARM:
-                raise Exception("Motor Alarm!")
-            sleep(self._status_interval.seconds)
+                self._running = False
+                self.STOP()
+            sleep(self.status_interval.total_seconds())
         self.log_debug(f"Stopping updated")
 
     def move_to(self, x_count):
         if self._device_id is None:
             raise ClosedMotorException
+        if not self._running:
+            raise Exception("Motor not running.")
         result = self._lib.command_move(self._device_id, int(x_count), 0)
         self.log(DEBUG, str(result))
-        self._status_time = datetime.now()
         return Result.Ok == result
+
+    def move_to_sync(self, x_count):
+        if self._device_id is None:
+            raise ClosedMotorException
+        if not self._running:
+            raise Exception("Motor not running.")
+        result = self._lib.command_move(self._device_id, int(x_count), 0)
+        self.log(DEBUG, str(result))
+        if Result.Ok != result:
+            return False
+
+        # State machine for checking if we arrived
+        # Maybe should be in _update_status
+        # first check, wait for it to be moving. The move command has a delay before we start moving
+        while self.stopped():
+            sleep(self.status_interval.total_seconds())
+            self.log_debug(f"Waiting for the motor to start - {datetime.now()}: {self._status.EncPosition}")
+
+        # now that we're moving, wait for it to stop
+        while not self.stopped():
+            sleep(self.status_interval.total_seconds())
+            self.log_debug(f"Waiting for the motor to stop - {datetime.now()}: {self._status.EncPosition}")
+
+        # We return false if for some reason we are at the bad position
+        # TODO: Have an if vs encoder
+        if abs(self.position - x_count) > self.position_margin:
+            return False
+
+        return True
 
     def stopped(self):
         if self._motor == "virtual":
             return True
-        self._update_status()
-        return self._status.CurSpeed == 0 and (self._status.MoveSts % 2) == 0
+        if not self._running:
+            raise Exception("Motor not running.")
+        return self._status.CurSpeed == 0 and self._status.MoveSts == 0
+
+    def zero(self):
+        if not self._running:
+            raise Exception("Motor not running.")
+        return self._lib.command_zero(self._device_id) == Result.Ok
 
     @Feat
-    def position(self):
-        if (datetime.now() - self._status_time) < self._status_interval and hasattr(self, "position_struct"):
-            return self.position_struct.Position
-        self.position_struct = get_position_t()
-        result = self._lib.get_position(self._device_id, byref(self.position_struct))
-        self._status_time = datetime.now()
-        if result != Result.Ok:
-            raise Exception("Failed Getting Status")
-        return self.position_struct.Position
+    def position(self) -> int:
+        """Returns the position of the motor stored internally in counts. Note that it uses the last updated status
+        and does not wait for a status refresh"""
+        return self._status.CurPosition
+
+    @Feat
+    def encoder_position(self) -> int:
+        """Returns the position of the motor based on the encoder in counts. Note that it uses the last updated status
+        and does not wait for a status refresh"""
+        return self._status.EncPosition
 
     def _setup_feedback_encoder(self, config):
         feedback_settings = feedback_settings_t()
@@ -210,13 +252,6 @@ class Motor(Driver):
             raise Exception("Failed to set feedback settings")
         self._feedback_settings = edges_settings
 
-    def _setup_file(self, file):
-        config = configparser.ConfigParser()
-        config.read_file(file)
-        self._setup_feedback_encoder(config)
-        self._setup_borders(config)
-        self._setup_engine(config)
-
     def _setup_engine(self, config):
         engine_settings = engine_settings_t()
         result = self._lib.get_engine_settings(self._device_id, byref(engine_settings))
@@ -266,3 +301,25 @@ class Motor(Driver):
         result = self._lib.set_engine_settings(self._device_id, byref(engine_settings))
         if result != Result.Ok:
             raise Exception("Failed to get engine settings")
+
+    def setup_file(self, file):
+        config = configparser.ConfigParser()
+        config.read_file(file)
+        self._setup_feedback_encoder(config)
+        self._setup_borders(config)
+        self._setup_engine(config)
+        return config
+
+    def get_engine_settings(self) -> engine_settings_t:
+        engine_settings = engine_settings_t()
+        result = self._lib.get_engine_settings(self._device_id, byref(engine_settings))
+        if result != Result.Ok:
+            pass  # We should do something here
+        return engine_settings
+
+    def get_control_settings(self) -> control_settings_t:
+        control_settings = control_settings_t()
+        result = self._lib.get_control_settings(self._device_id, byref(control_settings))
+        if result != Result.Ok:
+            pass  # We should do something here
+        return control_settings
