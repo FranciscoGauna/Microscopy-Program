@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>GroupBox</class>
- <widget class="QGroupBox" name="GroupBox">
+ <class>motor_qbox</class>
+ <widget class="QGroupBox" name="motor_qbox">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>455</width>
-    <height>466</height>
+    <height>463</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,17 +18,27 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="pos_label">
      <property name="text">
-      <string>Posicion Actual (cuentas)</string>
+      <string>Posicion Actual</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QLCDNumber" name="pos_number"/>
+    <widget class="QLCDNumber" name="pos_number">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="value" stdset="0">
+      <double>-0.103370000000000</double>
+     </property>
+    </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="parameter_layout">
      <item>
       <widget class="QGroupBox" name="groupBox">
        <property name="title">
@@ -36,57 +46,57 @@
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="1">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+         <widget class="QDoubleSpinBox" name="speed_sb"/>
         </item>
         <item row="5" column="1">
-         <widget class="QCheckBox" name="checkBox">
+         <widget class="QCheckBox" name="backlash_label">
           <property name="text">
            <string>BackLashOn</string>
           </property>
          </widget>
         </item>
         <item row="3" column="1">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_4"/>
+         <widget class="QDoubleSpinBox" name="antiplay_speed_sb"/>
         </item>
         <item row="1" column="1">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+         <widget class="QDoubleSpinBox" name="acceleration_sb"/>
         </item>
         <item row="0" column="0">
-         <widget class="QLabel" name="label_3">
+         <widget class="QLabel" name="speed_label">
           <property name="text">
            <string>Velocidad</string>
           </property>
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QLabel" name="label_4">
+         <widget class="QLabel" name="acceleration_label">
           <property name="text">
            <string>Aceleracion</string>
           </property>
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_3"/>
+         <widget class="QDoubleSpinBox" name="deceleration_sb"/>
         </item>
         <item row="4" column="1">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_5"/>
+         <widget class="QDoubleSpinBox" name="antiplay_sb"/>
         </item>
         <item row="2" column="0">
-         <widget class="QLabel" name="label_5">
+         <widget class="QLabel" name="deceleration_label">
           <property name="text">
            <string>Desaceleracion</string>
           </property>
          </widget>
         </item>
         <item row="3" column="0">
-         <widget class="QLabel" name="label_6">
+         <widget class="QLabel" name="antiplay_speed_label">
           <property name="text">
            <string>Velocidad Antiplay</string>
           </property>
          </widget>
         </item>
         <item row="4" column="0">
-         <widget class="QLabel" name="label_7">
+         <widget class="QLabel" name="antiplay_label">
           <property name="text">
            <string>Antiplay</string>
           </property>
@@ -96,39 +106,29 @@
       </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <layout class="QVBoxLayout" name="position_layout">
        <item>
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>Posicion Del Zero</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QSpinBox" name="init_pos_sb"/>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_8">
+        <widget class="QLabel" name="initial_pos_label">
          <property name="text">
           <string>Posicion Inicial</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="min_pos_sb"/>
+        <widget class="QDoubleSpinBox" name="initial_pos_sb"/>
        </item>
        <item>
-        <widget class="QLabel" name="label_9">
+        <widget class="QLabel" name="final_pos_label">
          <property name="text">
           <string>Posicion Final</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="max_pos_sb"/>
+        <widget class="QDoubleSpinBox" name="final_pos_sb"/>
        </item>
        <item>
-        <widget class="QLabel" name="label_10">
+        <widget class="QLabel" name="amount_pos_label">
          <property name="text">
           <string>Cantidad de Pasos</string>
          </property>
@@ -136,6 +136,13 @@
        </item>
        <item>
         <widget class="QSpinBox" name="amount_pos_sb"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="zero_button">
+         <property name="text">
+          <string>Zero</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>

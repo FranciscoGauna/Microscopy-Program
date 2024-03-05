@@ -37,6 +37,25 @@ class ClosedMotorException(Exception):
     pass
 
 
+class MotorStatus:
+    def __init__(self, interval, device_id, _lib):
+        self.interval = interval
+        self.status = status_t()
+        self.running = True
+        self.lib = _lib
+        self.device_id = device_id
+
+    def update_status(self):
+        while self.running:
+            result = self.lib.get_status(self.device_id, byref(self.status))
+            if result != Result.Ok:
+                self.running = False
+            if self.status.Flags & StateFlags.STATE_ALARM:
+                self.running = False
+                self.lib.command_stop(self.device_id)
+            sleep(self.interval.total_seconds())
+
+
 class Motor(Driver):
     x: int
     y: int
@@ -45,7 +64,7 @@ class Motor(Driver):
     _device_id = None
     _lib = lib
     _motor: str
-    _status: status_t
+    _status: MotorStatus
 
     # Status interval: this time indicates how long we wait between statuses.
     status_interval = timedelta(milliseconds=10)
@@ -55,7 +74,6 @@ class Motor(Driver):
     def __init__(self):
         super().__init__()
         self._motor = ""
-        self._running = True
 
     def __del__(self):
         self.close_motor()
@@ -80,14 +98,13 @@ class Motor(Driver):
             self.setup_file(file)
         else:
             self.log(ERROR, "No configuration file")
-        self._status = status_t()
-        self._running = True
-        self._status_thread = Thread(target=self._update_status)
+        self._status = MotorStatus(self.status_interval, self._device_id, self._lib)
+        self._status_thread = Thread(target=self._status.update_status)
         self._status_thread.start()
 
     def close_motor(self):
         self.log_debug(f"Starting Closure motor")
-        self._running = False
+        self._status.running = False
         if hasattr(self, "_device_id") and self._device_id != 1:
             self._lib.close_device(self._device_id)
         if hasattr(self, "_status_thread"):
@@ -96,21 +113,10 @@ class Motor(Driver):
     def STOP(self):
         return self._lib.command_stop(self._device_id) == Result.Ok
 
-    def _update_status(self):
-        while self._running:
-            result = self._lib.get_status(self._device_id, byref(self._status))
-            if result != Result.Ok:
-                self._running = False
-            if self._status.Flags & StateFlags.STATE_ALARM:
-                self._running = False
-                self.STOP()
-            sleep(self.status_interval.total_seconds())
-        self.log_debug(f"Stopping updated")
-
     def move_to(self, x_count):
         if self._device_id is None:
             raise ClosedMotorException
-        if not self._running:
+        if not self._status.running:
             raise Exception("Motor not running.")
         result = self._lib.command_move(self._device_id, int(x_count), 0)
         self.log(DEBUG, str(result))
@@ -119,7 +125,7 @@ class Motor(Driver):
     def move_to_sync(self, x_count):
         if self._device_id is None:
             raise ClosedMotorException
-        if not self._running:
+        if not self._status.running:
             raise Exception("Motor not running.")
         result = self._lib.command_move(self._device_id, int(x_count), 0)
         self.log(DEBUG, str(result))
@@ -131,12 +137,10 @@ class Motor(Driver):
         # first check, wait for it to be moving. The move command has a delay before we start moving
         while self.stopped():
             sleep(self.status_interval.total_seconds())
-            self.log_debug(f"Waiting for the motor to start - {datetime.now()}: {self._status.EncPosition}")
 
         # now that we're moving, wait for it to stop
         while not self.stopped():
             sleep(self.status_interval.total_seconds())
-            self.log_debug(f"Waiting for the motor to stop - {datetime.now()}: {self._status.EncPosition}")
 
         # We return false if for some reason we are at the bad position
         # TODO: Have an if vs encoder
@@ -148,12 +152,12 @@ class Motor(Driver):
     def stopped(self):
         if self._motor == "virtual":
             return True
-        if not self._running:
+        if not self._status.running:
             raise Exception("Motor not running.")
-        return self._status.CurSpeed == 0 and self._status.MoveSts == 0
+        return self._status.status.CurSpeed == 0 and self._status.status.MoveSts == 0
 
     def zero(self):
-        if not self._running:
+        if not self._status.running:
             raise Exception("Motor not running.")
         return self._lib.command_zero(self._device_id) == Result.Ok
 
@@ -161,13 +165,13 @@ class Motor(Driver):
     def position(self) -> int:
         """Returns the position of the motor stored internally in counts. Note that it uses the last updated status
         and does not wait for a status refresh"""
-        return self._status.CurPosition
+        return self._status.status.CurPosition
 
     @Feat
     def encoder_position(self) -> int:
         """Returns the position of the motor based on the encoder in counts. Note that it uses the last updated status
         and does not wait for a status refresh"""
-        return self._status.EncPosition
+        return self._status.status.EncPosition
 
     def _setup_feedback_encoder(self, config):
         feedback_settings = feedback_settings_t()

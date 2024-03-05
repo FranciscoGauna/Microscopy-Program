@@ -78,10 +78,11 @@ class MainWindow(QMainWindow):
         file_name, _ = file_dialog.getOpenFileName(self, "Open File", "",
                                                    "Config File (*.cfg);;All Files (*)", options=options)
 
-        if target == "x":  # TODO: see if this is too ugly, maybe change to a generic attribute
-            self.motor_x_filename = file_name
-        else:
-            self.motor_y_filename = file_name
+        if file_name:
+            if target == "x":  # TODO: see if this is too ugly, maybe change to a generic attribute
+                self.motor_x_filename = file_name
+            else:
+                self.motor_y_filename = file_name
 
 
     def switch_window(self):
