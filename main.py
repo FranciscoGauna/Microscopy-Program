@@ -1,4 +1,5 @@
 import gc
+from threading import enumerate as threading_enumerate
 from pprint import pprint
 from logging import DEBUG
 
@@ -20,11 +21,5 @@ def main():
 
 if __name__ == '__main__':
     main()
-    objects = gc.get_objects(generation=None)
-    objects = list(filter(lambda x:  isinstance(x, Motor), objects))
-    for i in range(15):
-        refs = gc.get_referrers(objects[0])
-        refs.remove(objects)
-        print(refs)
-        objects = refs
-    print("end")
+    for thread in threading_enumerate()[1:]:
+        pass

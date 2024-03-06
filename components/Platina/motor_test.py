@@ -6,10 +6,7 @@ class C:
     def __init__(self):
         self.a = A()
         self.message = "Hello World"
-        self.thread = Thread(target=self.method)
-
-    def method(self):
-        print(self.message)
+        self.self_reference = self
 
 
 class A:
@@ -33,10 +30,16 @@ class B:
             sleep(0.1)
 
 
-def fun():
+def ends():
+    a = A()
+    sleep(1)
+    print(a.b.counter)
+
+
+def never_ends():
     c = C()
     sleep(1)
     print(c.a.b.counter)
 
 
-fun()
+never_ends()
