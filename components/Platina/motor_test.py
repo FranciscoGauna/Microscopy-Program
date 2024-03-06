@@ -1,12 +1,6 @@
+import objgraph
 from time import sleep
 from threading import Thread
-
-
-class C:
-    def __init__(self):
-        self.a = A()
-        self.message = "Hello World"
-        self.self_reference = self
 
 
 class A:
@@ -34,12 +28,19 @@ def ends():
     a = A()
     sleep(1)
     print(a.b.counter)
+    objgraph.show_refs([a], filename='sample-graph.png')
+    return a.b
 
 
 def never_ends():
-    c = C()
+    a = A()
+    a.self_reference = a
     sleep(1)
-    print(c.a.b.counter)
+    print(a.b.counter)
+    objgraph.show_refs([a], filename='sample-graph.png')
+    return a.b
 
 
-never_ends()
+b = ends()
+print(b.running)
+b.running = False

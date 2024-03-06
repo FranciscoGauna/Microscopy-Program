@@ -22,4 +22,4 @@ def main():
 if __name__ == '__main__':
     main()
     for thread in threading_enumerate()[1:]:
-        pass
+        thread
