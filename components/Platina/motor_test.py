@@ -1,4 +1,3 @@
-import objgraph
 from time import sleep
 from threading import Thread
 
@@ -28,7 +27,6 @@ def ends():
     a = A()
     sleep(1)
     print(a.b.counter)
-    objgraph.show_refs([a], filename='sample-graph.png')
     return a.b
 
 
@@ -37,7 +35,6 @@ def never_ends():
     a.self_reference = a
     sleep(1)
     print(a.b.counter)
-    objgraph.show_refs([a], filename='sample-graph.png')
     return a.b
 
 
