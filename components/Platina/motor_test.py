@@ -1,3 +1,4 @@
+import gc
 from time import sleep
 from threading import Thread
 
@@ -38,6 +39,7 @@ def never_ends():
     return a.b
 
 
-b = ends()
+b = never_ends()
+gc.collect()
 print(b.running)
 b.running = False

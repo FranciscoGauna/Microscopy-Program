@@ -21,5 +21,5 @@ def main():
 
 if __name__ == '__main__':
     main()
-    for thread in threading_enumerate()[1:]:
-        thread
+    # This serves to call all of the dels that may be controlling threads
+    gc.collect()
