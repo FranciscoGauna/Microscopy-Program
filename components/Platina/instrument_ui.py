@@ -1,3 +1,4 @@
+from time import sleep
 from typing import Dict, Generator, Any
 
 from PyQt5.QtGui import QCloseEvent
@@ -18,8 +19,8 @@ class Platina(ConfigurableInstrument):
         filename = instruments_and_backends.pop("filename")
         self.motor = instruments_and_backends.pop("motor")
         super().__init__(**instruments_and_backends)
-        self._min = 0
-        self._max = 1
+        self._initial_point = 0
+        self._final_point = 1
         self._amount = 2
 
         if filename is not None:
@@ -43,20 +44,20 @@ class Platina(ConfigurableInstrument):
         return self.motor.encoder_position * self.conversion_factor
 
     @Feat
-    def min(self):
-        return self._min
+    def initial_point(self):
+        return self._initial_point * self.conversion_factor
 
-    @min.setter
-    def min(self, value):
-        self._min = value
+    @initial_point.setter
+    def initial_point(self, value):
+        self._initial_point = value / self.conversion_factor
 
     @Feat
-    def max(self):
-        return self._max
+    def final_point(self):
+        return self._final_point * self.conversion_factor
 
-    @max.setter
-    def max(self, value):
-        self._max = value
+    @final_point.setter
+    def final_point(self, value):
+        self._final_point = value / self.conversion_factor
 
     @Feat
     def amount(self):
@@ -66,17 +67,38 @@ class Platina(ConfigurableInstrument):
     def amount(self, value):
         self._amount = value
 
-    def configure(self, *args) -> Dict[str, Any]:
-        pass
+    def configure(self, position) -> Dict[str, Any]:
+        # ENCODER: if we adapt it to a motor without encoder feedback we need to add a result indicating the value
+        # of the encoder
+        print(f"Received motor point: {position}")
+        self.motor.move_to_sync(position)
+        sleep(0.1)
+        return {"position": position}
 
     def get_points(self) -> Generator:
-        pass
+        delta = (self._final_point - self._initial_point) / self._amount
+        for i in range(self._amount):
+            print(f"given motor point: {self._initial_point + i * delta}")
+            yield tuple([self._initial_point + i * delta])
 
     def point_amount(self) -> int:
-        pass
+        return self._amount
 
     def variable_documentation(self) -> Dict[str, str]:
-        pass
+        # ENCODER: if we adapt it to a motor without encoder we need to change this text
+        return {"position": "The position sent to the motor. With the encoder, that position should always be accurate"}
+
+    def get_config(self) -> Dict:
+        return {
+            "amount": self._amount,
+            "final_point": self._final_point,
+            "initial_point": self._initial_point
+        }
+
+    def set_config(self, config: Dict):
+        self._amount = config["amount"]
+        self._final_point = config["final_point"]
+        self._initial_point = config["initial_point"]
 
 
 class PlatinaUI(ConfigurationUI):
@@ -87,8 +109,8 @@ class PlatinaUI(ConfigurationUI):
     def __init__(self, backend):
         super().__init__(backend=backend)
         backend.initialize()
-        connect_feat(self.widget.initial_pos_sb, self.backend, "min")
-        connect_feat(self.widget.final_pos_sb, self.backend, "max")
+        connect_feat(self.widget.initial_pos_sb, self.backend, "initial_point")
+        connect_feat(self.widget.final_pos_sb, self.backend, "final_point")
         connect_feat(self.widget.amount_pos_sb, self.backend, "amount")
         connect_feat(self.widget.pos_number, self.backend, "position")
 

@@ -122,7 +122,8 @@ class Motor(Driver):
         self.log(DEBUG, str(result))
         return Result.Ok == result
 
-    def move_to_sync(self, x_count):
+    def move_to_sync(self, x_count, timeout=timedelta(seconds=1)):
+        timeout_time = datetime.now() + timeout
         if self._device_id is None:
             raise ClosedMotorException
         if not self._status.running:
@@ -131,16 +132,22 @@ class Motor(Driver):
         self.log(DEBUG, str(result))
         if Result.Ok != result:
             return False
+        if self._motor == "virtual":
+            return True
 
         # State machine for checking if we arrived
         # Maybe should be in _update_status
         # first check, wait for it to be moving. The move command has a delay before we start moving
         while self.stopped():
             sleep(self.status_interval.total_seconds())
+            if datetime.now() > timeout_time:
+                return False
 
         # now that we're moving, wait for it to stop
         while not self.stopped():
             sleep(self.status_interval.total_seconds())
+            if datetime.now() > timeout_time:
+                return False
 
         # We return false if for some reason we are at the bad position
         # TODO: Have an if vs encoder

@@ -26,14 +26,17 @@
    </item>
    <item>
     <widget class="QLCDNumber" name="pos_number">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>60</height>
+      </size>
+     </property>
      <property name="font">
       <font>
        <weight>75</weight>
        <bold>true</bold>
       </font>
-     </property>
-     <property name="value" stdset="0">
-      <double>-0.103370000000000</double>
      </property>
     </widget>
    </item>
@@ -115,7 +118,17 @@
         </widget>
        </item>
        <item>
-        <widget class="QDoubleSpinBox" name="initial_pos_sb"/>
+        <widget class="QDoubleSpinBox" name="initial_pos_sb">
+         <property name="decimals">
+          <number>3</number>
+         </property>
+         <property name="minimum">
+          <double>-99999.990000000005239</double>
+         </property>
+         <property name="maximum">
+          <double>99999.990000000005239</double>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QLabel" name="final_pos_label">
@@ -125,7 +138,17 @@
         </widget>
        </item>
        <item>
-        <widget class="QDoubleSpinBox" name="final_pos_sb"/>
+        <widget class="QDoubleSpinBox" name="final_pos_sb">
+         <property name="decimals">
+          <number>3</number>
+         </property>
+         <property name="minimum">
+          <double>-99999.990000000005239</double>
+         </property>
+         <property name="maximum">
+          <double>99999.990000000005239</double>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QLabel" name="amount_pos_label">

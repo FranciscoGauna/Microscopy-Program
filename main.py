@@ -13,7 +13,7 @@ from components.Platina import Motor
 def main():
     app = QApplication([])
 
-    # log_to_screen(DEBUG)
+    log_to_screen(DEBUG)
     window = MainWindow()
 
     app.exec()
@@ -21,5 +21,5 @@ def main():
 
 if __name__ == '__main__':
     main()
-    # This serves to call all of the dels that may be controlling threads
+    # This serves to call all the __del__ that may be controlling threads
     gc.collect()
