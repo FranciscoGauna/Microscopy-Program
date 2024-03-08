@@ -1,6 +1,8 @@
+from datetime import datetime
 from time import sleep
 from typing import Dict, Generator, Any
 
+from PyQt5.QtCore import QTimer, Qt
 from PyQt5.QtGui import QCloseEvent
 from SER.interfaces import ConfigurationUI, ConfigurableInstrument
 from lantz import Feat
@@ -11,17 +13,17 @@ from .motor import Motor
 
 
 class Platina(ConfigurableInstrument):
-    motor: Motor
+    motor: Motor = InstrumentSlot()
     conversion_units: str
     conversion_factor: float
 
     def __init__(self, **instruments_and_backends):
         filename = instruments_and_backends.pop("filename")
-        self.motor = instruments_and_backends.pop("motor")
         super().__init__(**instruments_and_backends)
         self._initial_point = 0
         self._final_point = 1
         self._amount = 2
+        self.initialized = False
 
         if filename is not None:
             with open(filename, "r+") as file:
@@ -32,6 +34,10 @@ class Platina(ConfigurableInstrument):
         else:
             self.conversion_units = "counts"
             self.conversion_factor = 1.0
+
+    def initialize(self, register_finalizer=False):
+        super().initialize(register_finalizer)
+        self.initialized = True
 
     def zero(self):
         # ENCODER
@@ -105,6 +111,7 @@ class PlatinaUI(ConfigurationUI):
     gui = "conf.ui"
 
     backend: Platina
+    timer: QTimer
 
     def __init__(self, backend):
         super().__init__(backend=backend)
@@ -113,4 +120,12 @@ class PlatinaUI(ConfigurationUI):
         connect_feat(self.widget.final_pos_sb, self.backend, "final_point")
         connect_feat(self.widget.amount_pos_sb, self.backend, "amount")
         connect_feat(self.widget.pos_number, self.backend, "position")
+        self.widget.zero_button.pressed.connect(self.backend.zero)
+        self.timer = QTimer()
+        self.timer.setInterval(100)  # TODO: remove magic number
+        self.timer.setTimerType(Qt.CoarseTimer)
+        self.timer.timeout.connect(self.key_pressed)
 
+    def key_pressed(self):
+        if not self.backend.initialized:  # We don't want this to move the motor during the experiment run
+            print(f"{datetime.now()}: key_pressed")

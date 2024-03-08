@@ -50,6 +50,11 @@ class MainWindow(QMainWindow):
         self.motor_x_filename = None
         self.motor_y_filename = None
 
+        # Components. We store them if it's necessary to close them specifically if finished before execution
+        self.fungen_comp = None
+        self.lockin_comp = None
+        self.x_motor_comp = None
+
         self.show()
 
     def load_options(self):
@@ -86,15 +91,15 @@ class MainWindow(QMainWindow):
 
 
     def switch_window(self):
-        fungen_comp = self.fungen_ops[self.fungen_cb.currentText()]()
-        fungen_component = ComponentInitialization(fungen_comp, -9000, 0, 1, "Fungen 1")
-        lockin_comp = self.lockin_ops[self.lockin_cb.currentText()]()
-        lockin_component = ComponentInitialization(lockin_comp, -9000, 1, 1, "Lockin")
+        self.fungen_comp = self.fungen_ops[self.fungen_cb.currentText()]()
+        fungen_component = ComponentInitialization(self.fungen_comp, -9000, 0, 1, "Fungen 1")
+        self.lockin_comp = self.lockin_ops[self.lockin_cb.currentText()]()
+        lockin_component = ComponentInitialization(self.lockin_comp, -9000, 1, 1, "Lockin")
 
         x_motor = wrap_driver_cls(Motor)()
         x_motor.open_motor(self.motor_ops[self.motor_x_cb.currentText()])
-        x_motor_comp = PlatinaComponent(motor=x_motor, filename=self.motor_x_filename)
-        x_motor_component = ComponentInitialization(x_motor_comp, 0, 0, 0, "Motor 1")
+        self.x_motor_comp = PlatinaComponent(motor=x_motor, filename=self.motor_x_filename)
+        x_motor_component = ComponentInitialization(self.x_motor_comp, 0, 0, 0, "Motor 1")
 
         ser_widget = get_main_widget([fungen_component, x_motor_component],
                                      [lockin_component],
@@ -102,3 +107,8 @@ class MainWindow(QMainWindow):
 
         self.experiment_layout.addWidget(ser_widget, 0, 0)
         self.stack_widget.setCurrentWidget(self.experiment_page)
+
+    def close_components(self):
+        if self.x_motor_comp is not None:
+            self.x_motor_comp.close_component()
+

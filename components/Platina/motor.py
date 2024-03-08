@@ -75,9 +75,6 @@ class Motor(Driver):
         super().__init__()
         self._motor = ""
 
-    def __del__(self):
-        self.close_motor()
-
     def current_motor(self):
         return self._motor
 

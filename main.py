@@ -17,9 +17,8 @@ def main():
     window = MainWindow()
 
     app.exec()
+    window.close_components()
 
 
 if __name__ == '__main__':
     main()
-    # This serves to call all the __del__ that may be controlling threads
-    gc.collect()
