@@ -2,8 +2,8 @@ from datetime import datetime
 from time import sleep
 from typing import Dict, Generator, Any
 
+from keyboard import is_pressed
 from PyQt5.QtCore import QTimer, Qt
-from PyQt5.QtGui import QCloseEvent
 from SER.interfaces import ConfigurationUI, ConfigurableInstrument
 from lantz import Feat
 from lantz.qt import InstrumentSlot
@@ -43,7 +43,6 @@ class Platina(ConfigurableInstrument):
         # ENCODER
         self.motor.zero()
 
-    @Feat
     def position(self) -> float:
         # ENCODER: We use the encoder position here, we are assuming we have an encoder motor
         # TODO: rethink if we need to change this to an option based on the config file
@@ -115,17 +114,25 @@ class PlatinaUI(ConfigurationUI):
 
     def __init__(self, backend):
         super().__init__(backend=backend)
-        backend.initialize()
         connect_feat(self.widget.initial_pos_sb, self.backend, "initial_point")
         connect_feat(self.widget.final_pos_sb, self.backend, "final_point")
         connect_feat(self.widget.amount_pos_sb, self.backend, "amount")
-        connect_feat(self.widget.pos_number, self.backend, "position")
         self.widget.zero_button.pressed.connect(self.backend.zero)
         self.timer = QTimer()
         self.timer.setInterval(100)  # TODO: remove magic number
         self.timer.setTimerType(Qt.CoarseTimer)
         self.timer.timeout.connect(self.key_pressed)
+        self.timer.start()
 
     def key_pressed(self):
         if not self.backend.initialized:  # We don't want this to move the motor during the experiment run
-            print(f"{datetime.now()}: key_pressed")
+            # Hack, we shouldn't be forcing an update here of the gui
+            self.widget.pos_number.display(self.backend.position())
+            if is_pressed('left') != is_pressed('right'):  # TODO: grab the keys from a config
+                pos = self.backend.motor.encoder_position  # ENCODER: check if it's encoder feedback
+                if is_pressed('left'):
+                    pos -= 100  # TODO: rethink how we put this in a way that makes sense
+                if is_pressed('right'):
+                    pos += 100
+                self.backend.motor.move_to(pos)
+                print(f"moving to pos {pos}")

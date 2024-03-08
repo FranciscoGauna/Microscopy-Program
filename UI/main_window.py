@@ -89,7 +89,6 @@ class MainWindow(QMainWindow):
             else:
                 self.motor_y_filename = file_name
 
-
     def switch_window(self):
         self.fungen_comp = self.fungen_ops[self.fungen_cb.currentText()]()
         fungen_component = ComponentInitialization(self.fungen_comp, -9000, 0, 1, "Fungen 1")
@@ -111,4 +110,3 @@ class MainWindow(QMainWindow):
     def close_components(self):
         if self.x_motor_comp is not None:
             self.x_motor_comp.close_component()
-
