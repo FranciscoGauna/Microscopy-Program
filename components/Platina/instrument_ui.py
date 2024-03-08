@@ -78,7 +78,11 @@ class Platina(ConfigurableInstrument):
         print(f"Received motor point: {position}")
         self.motor.move_to_sync(position)
         sleep(0.1)
-        return {"position": position}
+        return {
+            "position": position,
+            "enc_position": self.motor.encoder_position,
+            "motor_position": self.motor.position
+        }
 
     def get_points(self) -> Generator:
         delta = (self._final_point - self._initial_point) / self._amount
@@ -91,7 +95,11 @@ class Platina(ConfigurableInstrument):
 
     def variable_documentation(self) -> Dict[str, str]:
         # ENCODER: if we adapt it to a motor without encoder we need to change this text
-        return {"position": "The position sent to the motor. With the encoder, that position should always be accurate"}
+        return {
+            "position": "The position sent to the motor. With the encoder, that position should always be accurate",
+            "motor_position": "The position that the motor is reporting internally after completing the move.",
+            "enc_position": "The position that the encoder is reporting internally after completing the move."
+        }
 
     def get_config(self) -> Dict:
         return {
@@ -135,4 +143,3 @@ class PlatinaUI(ConfigurationUI):
                 if is_pressed('right'):
                     pos += 100
                 self.backend.motor.move_to(pos)
-                print(f"moving to pos {pos}")
