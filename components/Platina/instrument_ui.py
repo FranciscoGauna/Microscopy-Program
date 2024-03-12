@@ -75,7 +75,6 @@ class Platina(ConfigurableInstrument):
     def configure(self, position) -> Dict[str, Any]:
         # ENCODER: if we adapt it to a motor without encoder feedback we need to add a result indicating the value
         # of the encoder
-        print(f"Received motor point: {position}")
         self.motor.move_to_sync(position)
         sleep(0.1)
         return {
@@ -87,7 +86,6 @@ class Platina(ConfigurableInstrument):
     def get_points(self) -> Generator:
         delta = (self._final_point - self._initial_point) / self._amount
         for i in range(self._amount):
-            print(f"given motor point: {self._initial_point + i * delta}")
             yield tuple([self._initial_point + i * delta])
 
     def point_amount(self) -> int:

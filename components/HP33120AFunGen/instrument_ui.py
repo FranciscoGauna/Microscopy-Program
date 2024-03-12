@@ -102,9 +102,6 @@ class FunGen(ConfigurableInstrument):
         else:
             delta = math.pow(self._max_frequency / self._min_frequency, (1 / amount))
 
-        print(f"delta: {delta}, self._amount_frequency {self._amount_frequency}, amount {amount}, "
-              f"max {self._max_frequency}, min {self._min_frequency}")
-
         while counter < amount:
             yield self._shape, freq, self._amplitude, self._offset
             counter += 1

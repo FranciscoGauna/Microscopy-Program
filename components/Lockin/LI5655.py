@@ -170,7 +170,6 @@ class LI5655(MessageBasedDriver):
     def reference_internal(self):
         """Reference source.
         """
-        print(self.query(':ROUT2?'))
         return self.query(':ROUT2?')
 
     @reference_internal.setter
