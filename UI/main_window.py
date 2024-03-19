@@ -6,8 +6,11 @@ from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QPushButton, QSta
     QFileDialog
 from SER import get_main_widget
 from SER.interfaces import ComponentInitialization, Component
+from cv2 import VideoCapture
 from lantz.qt import wrap_driver_cls
 
+from components.Camera.instrument_ui import CameraBackend
+from components.CameraPlatina import CameraPlatinaComponent
 from components.HP33120AFunGen import HPFunGen
 from components.Lockin import AnfatecLockin
 from components.Platina import PlatinaComponent
@@ -53,7 +56,7 @@ class MainWindow(QMainWindow):
         # Components. We store them if it's necessary to close them specifically if finished before execution
         self.fungen_comp = None
         self.lockin_comp = None
-        self.x_motor_comp = None
+        self.platina_comp = None
 
         self.show()
 
@@ -97,10 +100,16 @@ class MainWindow(QMainWindow):
 
         x_motor = wrap_driver_cls(Motor)()
         x_motor.open_motor(self.motor_ops[self.motor_x_cb.currentText()])
-        self.x_motor_comp = PlatinaComponent(motor=x_motor, filename=self.motor_x_filename)
-        x_motor_component = ComponentInitialization(self.x_motor_comp, 0, 0, 0, "Motor 1")
+        x_motor_comp = PlatinaComponent(motor=x_motor, filename=self.motor_x_filename)
+        y_motor = wrap_driver_cls(Motor)()
+        y_motor.open_motor(self.motor_ops[self.motor_y_cb.currentText()])
+        y_motor_comp = PlatinaComponent(motor=y_motor, filename=self.motor_y_filename)
+        camera_back = CameraBackend(VideoCapture(0))
+        self.platina_comp = CameraPlatinaComponent(x_motor_comp, y_motor_comp, camera_back)
 
-        ser_widget = get_main_widget([fungen_component, x_motor_component],
+        platina_component = ComponentInitialization(self.platina_comp, 0, 0, 0, "Platina")
+
+        ser_widget = get_main_widget([fungen_component, platina_component],
                                      [lockin_component],
                                      [], [])
 
@@ -108,5 +117,5 @@ class MainWindow(QMainWindow):
         self.stack_widget.setCurrentWidget(self.experiment_page)
 
     def close_components(self):
-        if self.x_motor_comp is not None:
-            self.x_motor_comp.close_component()
+        if self.platina_comp is not None:
+            self.platina_comp.close_component()
