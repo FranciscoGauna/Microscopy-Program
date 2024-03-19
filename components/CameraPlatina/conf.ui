@@ -30,6 +30,24 @@
       <item>
        <widget class="QSpinBox" name="exposure_sb"/>
       </item>
+      <item>
+       <layout class="QHBoxLayout" name="tipe_layout">
+        <item>
+         <widget class="QRadioButton" name="square_rb">
+          <property name="text">
+           <string>Cuadrado</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="line_rb">
+          <property name="text">
+           <string>Linea</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
      </layout>
     </widget>
    </item>

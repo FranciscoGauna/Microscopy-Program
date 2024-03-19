@@ -3,18 +3,16 @@ from typing import Callable
 
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QPushButton, QStackedWidget, QComboBox, QLabel, \
-    QFileDialog
+    QFileDialog, QCheckBox
 from SER import get_main_widget
 from SER.interfaces import ComponentInitialization, Component
 from cv2 import VideoCapture
 from lantz.qt import wrap_driver_cls
 
-from components.Camera.instrument_ui import CameraBackend
-from components.CameraPlatina import CameraPlatinaComponent
+from components.CameraPlatina import CameraPlatinaComponent, CameraBackend, VirtualCamera
 from components.HP33120AFunGen import HPFunGen
 from components.Lockin import AnfatecLockin
 from components.Platina import PlatinaComponent
-from components.Platina.instrument_ui import Platina
 from components.Platina.motor import get_available_motors, Motor
 
 
@@ -39,6 +37,7 @@ class MainWindow(QMainWindow):
     motor_y_cb: QComboBox
     motor_y_bt: QPushButton
     motor_ops: dict[str, str]
+    virtual_camera_cb: QCheckBox
 
     def __init__(self):
         super().__init__()
@@ -105,7 +104,9 @@ class MainWindow(QMainWindow):
         y_motor = wrap_driver_cls(Motor)()
         y_motor.open_motor(self.motor_ops[self.motor_y_cb.currentText()])
         y_motor_comp = PlatinaComponent(motor=y_motor, filename=self.motor_y_filename)
-        camera_back = CameraBackend(VideoCapture(0))
+
+        camera = VirtualCamera() if self.virtual_camera_cb.isChecked() else VideoCapture(0)
+        camera_back = CameraBackend(camera)
         self.platina_comp = CameraPlatinaComponent(x_motor_comp, y_motor_comp, camera_back)
 
         platina_component = ComponentInitialization(self.platina_comp, 0, 0, 0, "Platina")

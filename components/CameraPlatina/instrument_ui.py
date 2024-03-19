@@ -1,33 +1,41 @@
+from concurrent.futures import ThreadPoolExecutor
 from threading import Thread
 from time import sleep
-from typing import Dict
+from typing import Dict, Generator, Any
 
 from PyQt5.QtGui import QImage, QPixmap
-from SER.interfaces import Instrument, ConfigurationUI
+from SER.interfaces import Instrument, ConfigurationUI, ConfigurableInstrument
 from cv2 import cvtColor, COLOR_BGR2RGB
+from lantz import Feat
+from lantz.qt.connect import connect_feat
 
-from components.Camera.instrument_ui import CameraBackend
+from components.CameraPlatina import CameraBackend
 from components.Platina import Platina
 
 
-class CameraPlatinaInstrument(Instrument):
+class CameraPlatinaInstrument(ConfigurableInstrument):
+
     def __init__(self, motor_x: Platina, motor_y: Platina, camera: CameraBackend):
         super(CameraPlatinaInstrument, self).__init__()
         self.motor_x = motor_x
         self.motor_y = motor_y
         self.camera = camera
-
+        self.square = True
+        self.line = False
 
     def get_config(self) -> Dict:
         return {
             "motor_x": self.motor_x.get_config(),
-            "motor_y": self.motor_y.get_config()
+            "motor_y": self.motor_y.get_config(),
+            "square": self.square,
+            "line": self.line
         }
 
     def set_config(self, config: Dict):
         self.motor_x.set_config(config["motor_x"])
         self.motor_y.set_config(config["motor_y"])
-        self.camera.set_config(config["camera"])
+        self.square = config["square"]
+        self.square = config["line"]
 
     def variable_documentation(self) -> Dict[str, str]:
         motor_config = self.motor_x.variable_documentation()
@@ -40,6 +48,54 @@ class CameraPlatinaInstrument(Instrument):
         self.motor_x.motor.close_motor()
         self.motor_y.motor.close_motor()
 
+    def configure(self, x, y) -> Dict[str, Any]:
+        with ThreadPoolExecutor() as executor:
+            futures = [
+                executor.submit(self.motor_x.configure, x),
+                executor.submit(self.motor_y.configure, y)
+            ]
+
+        results = {
+            "motor_x": futures[0].result(),
+            "motor_y": futures[1].result()
+        }
+        return results
+
+    def get_points(self) -> Generator:
+        if self.square:
+            for x in self.motor_x.get_points():
+                for y in self.motor_y.get_points():
+                    yield *x, *y
+        elif self.line:
+            assert self.motor_x.point_amount() == self.motor_y.point_amount()
+            x_iter = self.motor_x.get_points()
+            for y in self.motor_y.get_points():
+                yield *next(x_iter), *y
+
+    def point_amount(self) -> int:
+        if self.square:
+            return self.motor_x.point_amount() * self.motor_y.point_amount()
+        if self.line:
+            return self.motor_x.point_amount()
+
+    @Feat(values={True, False})
+    def square_shape(self):
+        return self.square
+
+    @square_shape.setter
+    def square_shape(self, value):
+        self.square = value
+        self.line = not value
+
+    @Feat(values={True, False})
+    def line_shape(self):
+        return self.line
+
+    @line_shape.setter
+    def line_shape(self, value):
+        self.line = value
+        self.square = not value
+
 
 class CameraPlatinaUI(ConfigurationUI):
     gui = "conf.ui"
@@ -48,8 +104,17 @@ class CameraPlatinaUI(ConfigurationUI):
     def __init__(self, motor_x, motor_y, parent=None, backend=None):
         super().__init__(parent, backend)
 
-        self.widget.layout().addWidget(motor_y.conf_ui.widget)
+        self.motor_x = motor_x
+        self.motor_y = motor_y
+
         self.widget.layout().addWidget(motor_x.conf_ui.widget)
+        self.widget.layout().addWidget(motor_y.conf_ui.widget)
+
+        self.motor_x.conf_ui.widget.setTitle("Motor X")
+        self.motor_y.conf_ui.widget.setTitle("Motor Y")
+
+        self.widget.square_rb.toggle()
+        self.widget.square_rb.toggled.connect(self.toggleSquare)
 
         # Threading stuff
         self.camera_thread = Thread(target=self.take_pictures)
@@ -62,10 +127,14 @@ class CameraPlatinaUI(ConfigurationUI):
             rgb_image = cvtColor(frame, COLOR_BGR2RGB)
             reconvert = QImage(rgb_image.data, rgb_image.shape[1], rgb_image.shape[0], QImage.Format_RGB888)
             reconvert = QPixmap.fromImage(reconvert)
-            pixmap = QPixmap(reconvert)
+            # TODO: move these magic numbers to a place
+            pixmap = QPixmap(reconvert).scaled(480, 320)
             self.widget.image_dp.setPixmap(pixmap)
             # TODO: change update timing
             sleep(0.5)
+
+    def toggleSquare(self):
+        self.backend.square_shape = not self.backend.square_shape
 
     def close_camera_refresh(self):
         self.running = False

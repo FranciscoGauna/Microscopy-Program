@@ -1,8 +1,9 @@
 from SER.interfaces import Component
 
-from components.CameraPlatina.instrument_ui import CameraPlatinaInstrument, CameraPlatinaUI
 from components.Platina import PlatinaComponent
 from components.Platina.motor import Motor
+from .camera import CameraBackend, VirtualCamera
+from .instrument_ui import CameraPlatinaInstrument, CameraPlatinaUI
 
 
 class CameraPlatinaComponent(Component):

@@ -103,7 +103,10 @@ class Motor(Driver):
         self.log_debug(f"Starting Closure motor")
         self._status.running = False
         if hasattr(self, "_device_id") and self._motor != "virtual":
-            self._lib.close_device(self._device_id)
+            try:
+                self._lib.close_device(self._device_id)
+            except Exception as e:
+                self.log_error(f"The motor failed to close with error {e}")
         if hasattr(self, "_status_thread"):
             self._status_thread.join()
 
