@@ -21,8 +21,7 @@ class CameraPlatinaInstrument(Instrument):
     def get_config(self) -> Dict:
         return {
             "motor_x": self.motor_x.get_config(),
-            "motor_y": self.motor_x.get_config(),
-            "camera": self.motor_x.get_config()
+            "motor_y": self.motor_y.get_config()
         }
 
     def set_config(self, config: Dict):
@@ -67,7 +66,6 @@ class CameraPlatinaUI(ConfigurationUI):
             self.widget.image_dp.setPixmap(pixmap)
             # TODO: change update timing
             sleep(0.5)
-
 
     def close_camera_refresh(self):
         self.running = False

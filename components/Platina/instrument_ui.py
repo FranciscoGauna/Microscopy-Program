@@ -13,12 +13,13 @@ from .motor import Motor
 
 
 class Platina(ConfigurableInstrument):
-    motor: Motor = InstrumentSlot()
+    motor: Motor
     conversion_units: str
     conversion_factor: float
 
     def __init__(self, **instruments_and_backends):
         filename = instruments_and_backends.pop("filename")
+        self.motor = instruments_and_backends.pop("motor")
         super().__init__(**instruments_and_backends)
         self._initial_point = 0
         self._final_point = 1
