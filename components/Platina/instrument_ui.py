@@ -104,13 +104,25 @@ class Platina(ConfigurableInstrument):
         return {
             "amount": self._amount,
             "final_point": self._final_point,
-            "initial_point": self._initial_point
+            "initial_point": self._initial_point,
+            "antiplay_enabled": self.motor.antiplay_enabled,
+            "antiplay_steps": self.motor.antiplay_steps,
+            "antiplay_speed": self.motor.antiplay_speed,
+            "speed": self.motor.speed,
+            "accel": self.motor.accel,
+            "decel": self.motor.decel,
         }
 
     def set_config(self, config: Dict):
         self._amount = config["amount"]
         self._final_point = config["final_point"]
         self._initial_point = config["initial_point"]
+        self.motor.antiplay_enabled = bool(config["initial_point"])
+        self.motor.antiplay_steps = int(config["initial_point"])
+        self.motor.antiplay_speed = int(config["initial_point"])
+        self.motor.speed = int(config["speed"])
+        self.motor.accel = int(config["accel"])
+        self.motor.decel = int(config["decel"])
 
 
 class PlatinaUI(ConfigurationUI):
@@ -124,6 +136,12 @@ class PlatinaUI(ConfigurationUI):
         connect_feat(self.widget.initial_pos_sb, self.backend, "initial_point")
         connect_feat(self.widget.final_pos_sb, self.backend, "final_point")
         connect_feat(self.widget.amount_pos_sb, self.backend, "amount")
+        connect_feat(self.widget.backlash_cb, self.backend.motor, "antiplay_enabled")
+        connect_feat(self.widget.antiplay_sb, self.backend.motor, "antiplay_steps")
+        connect_feat(self.widget.speed_sb, self.backend.motor, "speed")
+        connect_feat(self.widget.acceleration_sb, self.backend.motor, "accel")
+        connect_feat(self.widget.deceleration_sb, self.backend.motor, "decel")
+        connect_feat(self.widget.antiplay_speed_sb, self.backend.motor, "antiplay_speed")
         self.widget.zero_button.pressed.connect(self.backend.zero)
         self.timer = QTimer()
         self.timer.setInterval(100)  # TODO: remove magic number

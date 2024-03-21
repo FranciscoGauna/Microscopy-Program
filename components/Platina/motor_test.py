@@ -1,45 +1,6 @@
-import gc
-from time import sleep
-from threading import Thread
+from motor import Motor
 
-
-class A:
-    def __init__(self):
-        self.b = B()
-        self.thread = Thread(target=self.b.increment_counter)
-        self.thread.start()
-
-    def __del__(self):
-        self.b.running = False
-
-
-class B:
-    def __init__(self):
-        self.counter = 0
-        self.running = True
-
-    def increment_counter(self):
-        while self.running:
-            self.counter += 1
-            sleep(0.1)
-
-
-def ends():
-    a = A()
-    sleep(1)
-    print(a.b.counter)
-    return a.b
-
-
-def never_ends():
-    a = A()
-    a.self_reference = a
-    sleep(1)
-    print(a.b.counter)
-    return a.b
-
-
-b = never_ends()
-gc.collect()
-print(b.running)
-b.running = False
+motor = Motor()
+motor.open_motor("virtual")
+motor.antiplay_enabled = False
+motor.close_motor()

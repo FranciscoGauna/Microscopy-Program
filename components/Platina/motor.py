@@ -2,6 +2,7 @@ import os
 import re
 import sys
 import configparser
+import tempfile
 
 from ctypes import byref
 from pathlib import Path
@@ -14,7 +15,7 @@ from lantz.core.log import ERROR, DEBUG
 
 from libximc import (lib, EnumerateFlags, controller_name_t, engine_settings_t, Result, status_t, get_position_t,
                      edges_settings_t, feedback_settings_t, EngineFlags, BorderFlags, FeedbackFlags, EnderFlags,
-                     FeedbackType, StateFlags, control_settings_t)
+                     FeedbackType, StateFlags, control_settings_t, move_settings_t)
 
 probe_flags = EnumerateFlags.ENUMERATE_PROBE + EnumerateFlags.ENUMERATE_NETWORK
 enum_hints = b"addr=192.168.0.1,172.16.2.3"
@@ -82,7 +83,7 @@ class Motor(Driver):
         self._motor = motor
         if motor == "virtual":
             self.virtual = True
-            path = Path(str(Path.cwd()) + "/tmp/file.bin")
+            path = Path(str(tempfile.gettempdir()) + "/file.bin")
             uri = path.as_uri()
             uri = re.sub(r'^file', 'xi-emu', uri).encode()
             self._device_id = self._lib.open_device(uri)
@@ -328,9 +329,85 @@ class Motor(Driver):
             pass  # We should do something here
         return engine_settings
 
+    def set_engine_settings(self, engine_settings: engine_settings_t) -> Result:
+        return self._lib.get_engine_settings(self._device_id, byref(engine_settings))
+
     def get_control_settings(self) -> control_settings_t:
         control_settings = control_settings_t()
         result = self._lib.get_control_settings(self._device_id, byref(control_settings))
         if result != Result.Ok:
             pass  # We should do something here
         return control_settings
+
+    def get_move_settings(self) -> move_settings_t:
+        move_settings = move_settings_t()
+        result = self._lib.get_move_settings(self._device_id, byref(move_settings))
+        if result != Result.Ok:
+            pass  # We should do something here
+        return move_settings
+
+    def set_move_settings(self, move_settings: move_settings_t) -> Result:
+        return self._lib.set_move_settings(self._device_id, byref(move_settings))
+
+    @Feat
+    def antiplay_enabled(self):
+        return self.get_engine_settings().EngineFlags & EngineFlags.ENGINE_ANTIPLAY
+
+    @antiplay_enabled.setter
+    def antiplay_enabled(self, value):
+        engine_settings = self.get_engine_settings()
+        if value:
+            engine_settings.EngineFlags |= EngineFlags.ENGINE_ANTIPLAY
+        else:
+            engine_settings.EngineFlags ^= ~EngineFlags.ENGINE_ANTIPLAY
+        self.set_engine_settings(engine_settings)
+
+    @Feat
+    def antiplay_steps(self):
+        return self.get_engine_settings().Antiplay
+
+    @antiplay_steps.setter
+    def antiplay_steps(self, value):
+        engine_settings = self.get_engine_settings()
+        engine_settings.Antiplay = value
+        self.set_engine_settings(engine_settings)
+
+    @Feat
+    def speed(self):
+        return self.get_move_settings().Speed
+
+    @speed.setter
+    def speed(self, value):
+        move_settings = self.get_move_settings()
+        move_settings.Speed = value
+        self.set_move_settings(move_settings)
+
+    @Feat
+    def accel(self):
+        return self.get_move_settings().Accel
+
+    @accel.setter
+    def accel(self, value):
+        move_settings = self.get_move_settings()
+        move_settings.Accel = value
+        self.set_move_settings(move_settings)
+
+    @Feat
+    def decel(self):
+        return self.get_move_settings().Decel
+
+    @decel.setter
+    def decel(self, value):
+        move_settings = self.get_move_settings()
+        move_settings.Decel = value
+        self.set_move_settings(move_settings)
+
+    @Feat
+    def antiplay_speed(self):
+        return self.get_move_settings().AntiplaySpeed
+
+    @antiplay_speed.setter
+    def antiplay_speed(self, value):
+        move_settings = self.get_move_settings()
+        move_settings.AntiplaySpeed = value
+        self.set_move_settings(move_settings)

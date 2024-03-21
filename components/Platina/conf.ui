@@ -48,21 +48,12 @@
         <string>Parametros</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="1">
-         <widget class="QDoubleSpinBox" name="speed_sb"/>
-        </item>
         <item row="5" column="1">
-         <widget class="QCheckBox" name="backlash_label">
+         <widget class="QCheckBox" name="backlash_cb">
           <property name="text">
            <string>BackLashOn</string>
           </property>
          </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QDoubleSpinBox" name="antiplay_speed_sb"/>
-        </item>
-        <item row="1" column="1">
-         <widget class="QDoubleSpinBox" name="acceleration_sb"/>
         </item>
         <item row="0" column="0">
          <widget class="QLabel" name="speed_label">
@@ -77,12 +68,6 @@
            <string>Aceleracion</string>
           </property>
          </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QDoubleSpinBox" name="deceleration_sb"/>
-        </item>
-        <item row="4" column="1">
-         <widget class="QDoubleSpinBox" name="antiplay_sb"/>
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="deceleration_label">
@@ -101,7 +86,38 @@
         <item row="4" column="0">
          <widget class="QLabel" name="antiplay_label">
           <property name="text">
-           <string>Antiplay</string>
+           <string>Antiplay Steps</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QSpinBox" name="antiplay_sb"/>
+        </item>
+        <item row="3" column="1">
+         <widget class="QSpinBox" name="antiplay_speed_sb">
+          <property name="maximum">
+           <number>99999</number>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QSpinBox" name="deceleration_sb">
+          <property name="maximum">
+           <number>99999</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QSpinBox" name="acceleration_sb">
+          <property name="maximum">
+           <number>99999</number>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QSpinBox" name="speed_sb">
+          <property name="maximum">
+           <number>99999</number>
           </property>
          </widget>
         </item>
