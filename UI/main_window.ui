@@ -22,39 +22,8 @@
       </property>
       <widget class="QWidget" name="selection_page">
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="6" column="0">
-         <widget class="QPushButton" name="motor_x_bt">
-          <property name="text">
-           <string>Load Conf</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="0">
-         <widget class="QPushButton" name="motor_y_conf">
-          <property name="text">
-           <string>Load Conf</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="motor_x_label">
-          <property name="text">
-           <string>Motor X</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="lockin_label">
-          <property name="text">
-           <string>Lock-in Amplifier</string>
-          </property>
-         </widget>
-        </item>
         <item row="5" column="0">
          <widget class="QComboBox" name="motor_x_cb"/>
-        </item>
-        <item row="1" column="0">
-         <widget class="QComboBox" name="fungen_cb"/>
         </item>
         <item row="0" column="0">
          <widget class="QLabel" name="fungen_label">
@@ -66,6 +35,23 @@
         <item row="8" column="0">
          <widget class="QComboBox" name="motor_y_cb"/>
         </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="lockin_label">
+          <property name="text">
+           <string>Lock-in Amplifier</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="motor_x_label">
+          <property name="text">
+           <string>Motor X</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QComboBox" name="fungen_cb"/>
+        </item>
         <item row="7" column="0">
          <widget class="QLabel" name="motor_y_label">
           <property name="text">
@@ -73,10 +59,14 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
-         <widget class="QComboBox" name="lockin_cb"/>
+        <item row="9" column="0">
+         <widget class="QPushButton" name="motor_y_bt">
+          <property name="text">
+           <string>Load Conf</string>
+          </property>
+         </widget>
         </item>
-        <item row="11" column="0">
+        <item row="12" column="0">
          <layout class="QHBoxLayout" name="launch_layout">
           <item>
            <spacer name="launch_spacer">
@@ -100,12 +90,25 @@
           </item>
          </layout>
         </item>
+        <item row="3" column="0">
+         <widget class="QComboBox" name="lockin_cb"/>
+        </item>
         <item row="10" column="0">
-         <widget class="QCheckBox" name="virtual_camera_cb">
+         <widget class="QLabel" name="camera_label">
           <property name="text">
-           <string>Virtual Camera</string>
+           <string>Camera</string>
           </property>
          </widget>
+        </item>
+        <item row="6" column="0">
+         <widget class="QPushButton" name="motor_x_bt">
+          <property name="text">
+           <string>Load Conf</string>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="0">
+         <widget class="QComboBox" name="camera_cb"/>
         </item>
        </layout>
       </widget>
@@ -134,8 +137,7 @@
   <tabstop>motor_x_cb</tabstop>
   <tabstop>motor_x_bt</tabstop>
   <tabstop>motor_y_cb</tabstop>
-  <tabstop>motor_y_conf</tabstop>
-  <tabstop>virtual_camera_cb</tabstop>
+  <tabstop>motor_y_bt</tabstop>
   <tabstop>launch_button</tabstop>
  </tabstops>
  <resources/>

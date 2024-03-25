@@ -37,6 +37,8 @@ class MainWindow(QMainWindow):
     motor_y_cb: QComboBox
     motor_y_bt: QPushButton
     motor_ops: dict[str, str]
+
+    camera_ops: dict[str, Callable[[], VideoCapture]]
     virtual_camera_cb: QCheckBox
 
     def __init__(self):
@@ -77,6 +79,14 @@ class MainWindow(QMainWindow):
         self.motor_x_cb.addItems(self.motor_ops.keys())
         self.motor_y_cb.addItems(self.motor_ops.keys())
         self.motor_x_bt.pressed.connect(lambda: self.load_motor_configuration("x"))
+        self.motor_y_bt.pressed.connect(lambda: self.load_motor_configuration("y"))
+
+        self.camera_ops = {
+            "Virtual": VirtualCamera,
+            "Web Cam": lambda: VideoCapture(0),
+            "Lucam": VirtualCamera  # TODO: change this to the proper camera
+        }
+        self.camera_cb.addItems(self.lockin_ops.keys())
 
     def load_motor_configuration(self, target):
         options = QFileDialog.Options()
@@ -98,14 +108,15 @@ class MainWindow(QMainWindow):
         self.lockin_comp = self.lockin_ops[self.lockin_cb.currentText()]()
         lockin_component = ComponentInitialization(self.lockin_comp, -9000, 1, 1, "Lockin")
 
+        # TODO: grab the keys for moving the motor from a config
         x_motor = wrap_driver_cls(Motor)()
         x_motor.open_motor(self.motor_ops[self.motor_x_cb.currentText()])
         x_motor_comp = PlatinaComponent(motor=x_motor, filename=self.motor_x_filename)
         y_motor = wrap_driver_cls(Motor)()
         y_motor.open_motor(self.motor_ops[self.motor_y_cb.currentText()])
-        y_motor_comp = PlatinaComponent(motor=y_motor, filename=self.motor_y_filename)
+        y_motor_comp = PlatinaComponent(y_motor, self.motor_y_filename, "down", "up")
 
-        camera = VirtualCamera() if self.virtual_camera_cb.isChecked() else VideoCapture(0)
+        camera = self.camera_ops[self.camera_cb.currentText()]()
         camera_back = CameraBackend(camera)
         self.platina_comp = CameraPlatinaComponent(x_motor_comp, y_motor_comp, camera_back)
 

@@ -10,7 +10,8 @@ from lantz import Feat
 from lantz.qt.connect import connect_feat
 
 from components.CameraPlatina import CameraBackend
-from components.CameraPlatina.custom_image import ImageWidget
+from components.CameraPlatina.calibration import CalibrationUI
+from components.CameraPlatina.custom_image import ImageWidget, convert_coordinates
 from components.Platina import Platina, PlatinaComponent
 
 
@@ -102,6 +103,7 @@ class CameraPlatinaInstrument(ConfigurableInstrument):
 class CameraPlatinaUI(ConfigurationUI):
     gui = "conf.ui"
     backend: CameraPlatinaInstrument
+    calibration_dialog: CalibrationUI
 
     def __init__(self, motor_x: PlatinaComponent, motor_y: PlatinaComponent, parent=None, backend=None):
         super().__init__(parent, backend)
@@ -120,13 +122,20 @@ class CameraPlatinaUI(ConfigurationUI):
 
         # TODO: this is kinda fugly, rethink maybe to a bool
         shape = "rectangle" if self.backend.square_shape else "line"
-        self.image_widget = ImageWidget(self.get_pixmap(), self.widget.image_label, self.parse_points, shape)
+        pixmap = self.get_pixmap()
+        self.image_widget = ImageWidget(pixmap, self.widget.image_label, self.parse_points, shape)
         self.widget.group_box.layout().insertWidget(0, self.image_widget)
+
+        self.widget.calibrate_bt.pressed.connect(self.open_calibration)
+        self.calibration_dialog = CalibrationUI(self.get_pos, pixmap)
 
         # Threading stuff
         self.camera_thread = Thread(target=self.take_pictures)
         self.running = True
         self.camera_thread.start()
+
+    def get_pos(self):
+        return self.motor_x.instrument.position(), self.motor_y.instrument.position()
 
     def get_pixmap(self) -> QPixmap:
         frame = self.backend.camera.snap()
@@ -140,6 +149,7 @@ class CameraPlatinaUI(ConfigurationUI):
         while self.running:
             pixmap = self.get_pixmap()
             self.image_widget.set_image(pixmap)
+            self.calibration_dialog.set_image(pixmap)
             # TODO: change update timing
             sleep(0.5)
 
@@ -155,7 +165,12 @@ class CameraPlatinaUI(ConfigurationUI):
         self.camera_thread.join()
 
     def parse_points(self, x1, y1, x2, y2):
+        x1, y1 = convert_coordinates(x1, y1)
+        x2, y2 = convert_coordinates(x2, y2)
         self.motor_x.instrument.initial_point = x1
         self.motor_x.instrument.final_point = x2
         self.motor_y.instrument.initial_point = y1
         self.motor_y.instrument.final_point = y2
+
+    def open_calibration(self):
+        self.calibration_dialog.open()

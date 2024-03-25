@@ -39,15 +39,16 @@ class ClosedMotorException(Exception):
 
 
 class MotorStatus:
-    def __init__(self, interval, device_id, _lib):
+    def __init__(self, interval, device_id, _lib, virtual: bool):
         self.interval = interval
         self.status = status_t()
         self.running = True
         self.lib = _lib
         self.device_id = device_id
+        self.virtual = virtual
 
     def update_status(self):
-        while self.running:
+        while self.running and not self.virtual:
             result = self.lib.get_status(self.device_id, byref(self.status))
             if result != Result.Ok:
                 self.running = False
@@ -60,7 +61,6 @@ class MotorStatus:
 class Motor(Driver):
     x: int
     y: int
-    virtual = False
     position_margin = 40  # This is how much out of position we are in move_to_sync before we warn
     _device_id = None
     _lib = lib
@@ -74,6 +74,7 @@ class Motor(Driver):
 
     def __init__(self):
         super().__init__()
+        self.virtual = False
         self._motor = ""
 
     def current_motor(self):
@@ -96,14 +97,14 @@ class Motor(Driver):
             self.setup_file(file)
         else:
             self.log(ERROR, "No configuration file")
-        self._status = MotorStatus(self.status_interval, self._device_id, self._lib)
+        self._status = MotorStatus(self.status_interval, self._device_id, self._lib, self.virtual)
         self._status_thread = Thread(target=self._status.update_status)
         self._status_thread.start()
 
     def close_motor(self):
         self.log_debug(f"Starting Closure motor")
         self._status.running = False
-        if hasattr(self, "_device_id") and self._motor != "virtual":
+        if hasattr(self, "_device_id") and not self.virtual:
             try:
                 self._lib.close_device(self._device_id)
             except Exception as e:
@@ -114,30 +115,29 @@ class Motor(Driver):
     def STOP(self):
         return self._lib.command_stop(self._device_id) == Result.Ok
 
-    def move_to(self, x_count):
+    def move_to(self, position):
         if self._device_id is None:
             raise ClosedMotorException
         if not self._status.running:
             raise Exception("Motor not running.")
-        result = self._lib.command_move(self._device_id, int(x_count), 0)
+        result = self._lib.command_move(self._device_id, int(position), 0)
         self.log(DEBUG, str(result))
+
+        if self.virtual:
+            self._status.status.CurPosition = position
+            self._status.status.EncPosition = position
         return Result.Ok == result
 
-    def move_to_sync(self, x_count, timeout=timedelta(seconds=1)):
+    def move_to_sync(self, position, timeout=timedelta(seconds=1)):
         timeout_time = datetime.now() + timeout
-        if self._device_id is None:
-            raise ClosedMotorException
-        if not self._status.running:
-            raise Exception("Motor not running.")
-        result = self._lib.command_move(self._device_id, int(x_count), 0)
+        result = self.move_to(position)
         self.log(DEBUG, str(result))
         if Result.Ok != result:
             return False
-        if self._motor == "virtual":
+        if self.virtual:
             return True
 
         # State machine for checking if we arrived
-        # Maybe should be in _update_status
         # first check, wait for it to be moving. The move command has a delay before we start moving
         while self.stopped():
             sleep(self.status_interval.total_seconds())
@@ -152,13 +152,13 @@ class Motor(Driver):
 
         # We return false if for some reason we are at the bad position
         # TODO: Have an if vs encoder
-        if abs(self.position - x_count) > self.position_margin:
+        if abs(self.position - position) > self.position_margin:
             return False
 
         return True
 
     def stopped(self):
-        if self._motor == "virtual":
+        if self.virtual:
             return True
         if not self._status.running:
             raise Exception("Motor not running.")

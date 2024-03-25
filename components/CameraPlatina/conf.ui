@@ -28,7 +28,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QSpinBox" name="exposure_sb"/>
+       <widget class="QPushButton" name="calibrate_bt">
+        <property name="text">
+         <string>Calibrar</string>
+        </property>
+       </widget>
       </item>
       <item>
        <layout class="QHBoxLayout" name="tipe_layout">

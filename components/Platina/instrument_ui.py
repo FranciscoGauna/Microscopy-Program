@@ -132,7 +132,7 @@ class PlatinaUI(ConfigurationUI):
     backend: Platina
     timer: QTimer
 
-    def __init__(self, backend):
+    def __init__(self, backend, move_left_key="left", move_right_key="right"):
         super().__init__(backend=backend)
         connect_feat(self.widget.initial_pos_sb, self.backend, "initial_point")
         connect_feat(self.widget.final_pos_sb, self.backend, "final_point")
@@ -144,6 +144,10 @@ class PlatinaUI(ConfigurationUI):
         connect_feat(self.widget.deceleration_sb, self.backend.motor, "decel")
         connect_feat(self.widget.antiplay_speed_sb, self.backend.motor, "antiplay_speed")
         self.widget.zero_button.pressed.connect(self.backend.zero)
+
+        self.move_left_key = move_left_key
+        self.move_right_key = move_right_key
+
         self.timer = QTimer()
         self.timer.setInterval(100)  # TODO: remove magic number
         self.timer.setTimerType(Qt.CoarseTimer)
@@ -154,10 +158,10 @@ class PlatinaUI(ConfigurationUI):
         if not self.backend.initialized:  # We don't want this to move the motor during the experiment run
             # Hack, we shouldn't be forcing an update here of the gui
             self.widget.pos_number.display(self.backend.position())
-            if is_pressed('left') != is_pressed('right'):  # TODO: grab the keys from a config
+            if is_pressed(self.move_left_key) != is_pressed(self.move_right_key):
                 pos = self.backend.motor.encoder_position  # ENCODER: check if it's encoder feedback
-                if is_pressed('left'):
+                if is_pressed(self.move_left_key):
                     pos -= 100  # TODO: rethink how we put this in a way that makes sense
-                if is_pressed('right'):
+                if is_pressed(self.move_right_key):
                     pos += 100
                 self.backend.motor.move_to(pos)

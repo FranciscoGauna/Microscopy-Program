@@ -7,12 +7,12 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QLabel
 
 # TODO: change where we read the transform unit and translation unit
-transform_matrix = np.identity(1)
-translate_matrix = np.array([0, 0])
+transform_matrix = np.identity(2)
+translate_matrix = np.array((0, 0))
 
 
 def convert_coordinates(x, y):
-    return (np.array([x, y]) * transform_matrix + translate_matrix)[0]
+    return tuple(np.matmul(np.array((x, y)), transform_matrix) + translate_matrix)
 
 
 class ImageWidget(QWidget):
@@ -63,7 +63,7 @@ class ImageWidget(QWidget):
             width = abs(self.x1 - self.x2)
             height = abs(self.y1 - self.y2)
             painter.drawRect(start_x, start_y, width, height)
-        else:
+        else:  # To be explicit, if you put anything else we don't draw anything
             pass
 
     def mouseMoveEvent(self, event: QMouseEvent):
@@ -80,6 +80,4 @@ class ImageWidget(QWidget):
             self.x2 = x
             self.y2 = y
         self.flag_first_click = not self.flag_first_click
-        x1, y1 = convert_coordinates(self.x1, self.y1)
-        x2, y2 = convert_coordinates(self.x1, self.y1)
-        self.set_points(self.x1, self.x2, self.y1, self.y2)
+        self.set_points(self.x1, self.y1, self.x2, self.y2)
