@@ -10,7 +10,8 @@ from lantz import Feat
 from lantz.qt.connect import connect_feat
 
 from components.CameraPlatina import CameraBackend
-from components.Platina import Platina
+from components.CameraPlatina.custom_image import ImageWidget
+from components.Platina import Platina, PlatinaComponent
 
 
 class CameraPlatinaInstrument(ConfigurableInstrument):
@@ -29,13 +30,14 @@ class CameraPlatinaInstrument(ConfigurableInstrument):
             "motor_y": self.motor_y.get_config(),
             "square": self.square,
             "line": self.line
-        }
+        } | super().get_config()
 
     def set_config(self, config: Dict):
+        super().set_config(config)
         self.motor_x.set_config(config["motor_x"])
         self.motor_y.set_config(config["motor_y"])
         self.square = config["square"]
-        self.square = config["line"]
+        self.line = config["line"]
 
     def variable_documentation(self) -> Dict[str, str]:
         motor_config = self.motor_x.variable_documentation()
@@ -101,7 +103,7 @@ class CameraPlatinaUI(ConfigurationUI):
     gui = "conf.ui"
     backend: CameraPlatinaInstrument
 
-    def __init__(self, motor_x, motor_y, parent=None, backend=None):
+    def __init__(self, motor_x: PlatinaComponent, motor_y: PlatinaComponent, parent=None, backend=None):
         super().__init__(parent, backend)
 
         self.motor_x = motor_x
@@ -116,26 +118,44 @@ class CameraPlatinaUI(ConfigurationUI):
         self.widget.square_rb.toggle()
         self.widget.square_rb.toggled.connect(self.toggleSquare)
 
+        # TODO: this is kinda fugly, rethink maybe to a bool
+        shape = "rectangle" if self.backend.square_shape else "line"
+        self.image_widget = ImageWidget(self.get_pixmap(), self.widget.image_label, self.parse_points, shape)
+        self.widget.group_box.layout().insertWidget(0, self.image_widget)
+
         # Threading stuff
         self.camera_thread = Thread(target=self.take_pictures)
         self.running = True
         self.camera_thread.start()
 
+    def get_pixmap(self) -> QPixmap:
+        frame = self.backend.camera.snap()
+        rgb_image = cvtColor(frame, COLOR_BGR2RGB)
+        reconvert = QImage(rgb_image.data, rgb_image.shape[1], rgb_image.shape[0], QImage.Format_RGB888)
+        reconvert = QPixmap.fromImage(reconvert)
+        # TODO: move these magic numbers to a place
+        return QPixmap(reconvert).scaled(480, 320)
+
     def take_pictures(self):
         while self.running:
-            frame = self.backend.camera.snap()
-            rgb_image = cvtColor(frame, COLOR_BGR2RGB)
-            reconvert = QImage(rgb_image.data, rgb_image.shape[1], rgb_image.shape[0], QImage.Format_RGB888)
-            reconvert = QPixmap.fromImage(reconvert)
-            # TODO: move these magic numbers to a place
-            pixmap = QPixmap(reconvert).scaled(480, 320)
-            self.widget.image_dp.setPixmap(pixmap)
+            pixmap = self.get_pixmap()
+            self.image_widget.set_image(pixmap)
             # TODO: change update timing
             sleep(0.5)
 
     def toggleSquare(self):
         self.backend.square_shape = not self.backend.square_shape
+        if self.backend.square_shape:
+            self.image_widget.draw_rect()
+        else:
+            self.image_widget.draw_line()
 
     def close_camera_refresh(self):
         self.running = False
         self.camera_thread.join()
+
+    def parse_points(self, x1, y1, x2, y2):
+        self.motor_x.instrument.initial_point = x1
+        self.motor_x.instrument.final_point = x2
+        self.motor_y.instrument.initial_point = y1
+        self.motor_y.instrument.final_point = y2

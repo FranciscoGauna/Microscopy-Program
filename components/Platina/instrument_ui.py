@@ -111,9 +111,10 @@ class Platina(ConfigurableInstrument):
             "speed": self.motor.speed,
             "accel": self.motor.accel,
             "decel": self.motor.decel,
-        }
+        } | super().get_config()
 
     def set_config(self, config: Dict):
+        super().set_config(config)
         self._amount = config["amount"]
         self._final_point = config["final_point"]
         self._initial_point = config["initial_point"]

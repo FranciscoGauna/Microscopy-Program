@@ -21,9 +21,9 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QLabel" name="image_dp">
+       <widget class="QLabel" name="image_label">
         <property name="text">
-         <string>should display an image</string>
+         <string>(0,0)</string>
         </property>
        </widget>
       </item>

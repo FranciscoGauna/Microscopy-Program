@@ -94,7 +94,7 @@ class MainWindow(QMainWindow):
     def switch_window(self):
         print("switch_window")
         self.fungen_comp = self.fungen_ops[self.fungen_cb.currentText()]()
-        fungen_component = ComponentInitialization(self.fungen_comp, -9000, 0, 1, "Fungen 1")
+        fungen_component = ComponentInitialization(self.fungen_comp, 0, 0, 1, "Fungen 1")
         self.lockin_comp = self.lockin_ops[self.lockin_cb.currentText()]()
         lockin_component = ComponentInitialization(self.lockin_comp, -9000, 1, 1, "Lockin")
 
@@ -109,11 +109,12 @@ class MainWindow(QMainWindow):
         camera_back = CameraBackend(camera)
         self.platina_comp = CameraPlatinaComponent(x_motor_comp, y_motor_comp, camera_back)
 
-        platina_component = ComponentInitialization(self.platina_comp, 0, 0, 0, "Platina")
+        platina_component = ComponentInitialization(self.platina_comp, 1, 0, 0, "Platina")
 
         ser_widget = get_main_widget([fungen_component, platina_component],
                                      [lockin_component],
-                                     [], [])
+                                     [], [],
+                                     coupling_ui_options={"enabled": True, "x": 1, "y": 0})
 
         self.experiment_layout.addWidget(ser_widget, 0, 0)
         self.stack_widget.setCurrentWidget(self.experiment_page)
