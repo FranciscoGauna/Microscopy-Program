@@ -139,8 +139,7 @@ class CameraPlatinaUI(ConfigurationUI):
 
     def get_pixmap(self) -> QPixmap:
         frame = self.backend.camera.snap()
-        rgb_image = cvtColor(frame, COLOR_BGR2RGB)
-        reconvert = QImage(rgb_image.data, rgb_image.shape[1], rgb_image.shape[0], QImage.Format_RGB888)
+        reconvert = QImage(frame.data, frame.shape[1], frame.shape[0], QImage.Format_RGB888)
         reconvert = QPixmap.fromImage(reconvert)
         # TODO: move these magic numbers to a place
         return QPixmap(reconvert).scaled(480, 320)

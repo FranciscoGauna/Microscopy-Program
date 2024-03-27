@@ -10,6 +10,7 @@ from cv2 import VideoCapture
 from lantz.qt import wrap_driver_cls
 
 from components.CameraPlatina import CameraPlatinaComponent, CameraBackend, VirtualCamera
+from components.CameraPlatina.camera import LucamCam
 from components.HP33120AFunGen import HPFunGen
 from components.Lockin import AnfatecLockin
 from components.Platina import PlatinaComponent
@@ -84,9 +85,9 @@ class MainWindow(QMainWindow):
         self.camera_ops = {
             "Virtual": VirtualCamera,
             "Web Cam": lambda: VideoCapture(0),
-            "Lucam": VirtualCamera  # TODO: change this to the proper camera
+            "Lucam": LucamCam  # TODO: change this to the proper camera
         }
-        self.camera_cb.addItems(self.lockin_ops.keys())
+        self.camera_cb.addItems(self.camera_ops.keys())
 
     def load_motor_configuration(self, target):
         options = QFileDialog.Options()
