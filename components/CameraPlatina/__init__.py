@@ -7,8 +7,9 @@ from .instrument_ui import CameraPlatinaInstrument, CameraPlatinaUI
 
 
 class CameraPlatinaComponent(Component):
-
     # Has internal threads we need to close.
+    instrument: CameraPlatinaInstrument
+    conf_ui: CameraPlatinaUI
 
     def __init__(self, motor_x: PlatinaComponent, motor_y: PlatinaComponent, camera):
         self.instrument = CameraPlatinaInstrument(motor_x.instrument, motor_y.instrument, camera)
@@ -16,5 +17,5 @@ class CameraPlatinaComponent(Component):
 
     def close_component(self):
         # TODO: add this to the component base class with a comment
-        self.instrument.close_motors()
         self.conf_ui.close_camera_refresh()
+        self.instrument.close_motors()

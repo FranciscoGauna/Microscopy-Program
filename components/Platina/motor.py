@@ -202,16 +202,14 @@ class Motor(Driver):
             flag = 0
             if "Encoder_reverse" in config["Engine"]:
                 if "true" == config["Engine"]["Encoder_reverse"]:
-                    flag += 1
+                    flag += FeedbackFlags.FEEDBACK_ENC_REVERSE
             if "Feedback_enc_type" in config["Engine"]:
-                if config["Engine"]["Feedback_enc_type"] == "AUTO":
-                    flag = FeedbackFlags.FEEDBACK_ENC_TYPE_AUTO
-                elif config["Engine"]["Feedback_enc_type"] == "SINGLE_ENDED":
+                if config["Engine"]["Feedback_enc_type"] == "SINGLE_ENDED":
                     flag += FeedbackFlags.FEEDBACK_ENC_TYPE_SINGLE_ENDED
                 elif config["Engine"]["Feedback_enc_type"] == "DIFFERENTIAL":
                     flag += FeedbackFlags.FEEDBACK_ENC_TYPE_DIFFERENTIAL
                 else:
-                    raise Exception("Unknown Feedback Encoder Type")
+                    pass
             feedback_settings.FeedbackFlags = flag
         result = self._lib.set_feedback_settings(self._device_id, byref(feedback_settings))
         if result != Result.Ok:

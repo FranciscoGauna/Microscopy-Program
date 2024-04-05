@@ -6,14 +6,6 @@ from PyQt5.QtGui import QPainter, QPen, QPixmap, QMouseEvent
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QLabel
 
-# TODO: change where we read the transform unit and translation unit
-transform_matrix = np.identity(2)
-translate_matrix = np.array((0, 0))
-
-
-def convert_coordinates(x, y):
-    return tuple(np.matmul(np.array((x, y)), transform_matrix) + translate_matrix)
-
 
 class ImageWidget(QWidget):
     pixmap = None
@@ -23,7 +15,8 @@ class ImageWidget(QWidget):
     y1 = 0
     y2 = 0
 
-    def __init__(self, pixmap: QPixmap, line_edit: QLabel, callback: Callable[[int, int, int, int], None], path_type="rectangle"):
+    def __init__(self, pixmap: QPixmap, line_edit: QLabel, callback: Callable[[int, int, int, int], None],
+                 path_type="rectangle"):
         super().__init__()
         self.size = pixmap.width(), pixmap.height()
         self.setFixedSize(*self.size)

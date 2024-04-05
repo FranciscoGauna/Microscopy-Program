@@ -1,7 +1,5 @@
-import gc
-from threading import enumerate as threading_enumerate
 from pprint import pprint
-from logging import DEBUG
+from logging import ERROR
 
 from PyQt5.QtWidgets import QApplication
 from lantz.core.log import log_to_screen
@@ -13,7 +11,7 @@ from components.Platina import Motor
 def main():
     app = QApplication([])
 
-    log_to_screen(DEBUG)
+    log_to_screen(ERROR)
     window = MainWindow()
 
     app.exec()

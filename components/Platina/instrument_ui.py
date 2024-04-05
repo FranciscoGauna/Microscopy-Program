@@ -161,7 +161,7 @@ class PlatinaUI(ConfigurationUI):
             if is_pressed(self.move_left_key) != is_pressed(self.move_right_key):
                 pos = self.backend.motor.encoder_position  # ENCODER: check if it's encoder feedback
                 if is_pressed(self.move_left_key):
-                    pos -= 100  # TODO: rethink how we put this in a way that makes sense
+                    pos -= 50  # TODO: rethink how we put this in a way that makes sense
                 if is_pressed(self.move_right_key):
-                    pos += 100
+                    pos += 50
                 self.backend.motor.move_to(pos)

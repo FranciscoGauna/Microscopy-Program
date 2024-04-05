@@ -10,8 +10,8 @@ from lantz import Feat
 from lantz.qt.connect import connect_feat
 
 from components.CameraPlatina import CameraBackend
-from components.CameraPlatina.calibration import CalibrationUI
-from components.CameraPlatina.custom_image import ImageWidget, convert_coordinates
+from components.CameraPlatina.calibration import CalibrationUI, convert_coordinates
+from components.CameraPlatina.custom_image import ImageWidget
 from components.Platina import Platina, PlatinaComponent
 
 
@@ -146,11 +146,14 @@ class CameraPlatinaUI(ConfigurationUI):
 
     def take_pictures(self):
         while self.running:
-            pixmap = self.get_pixmap()
-            self.image_widget.set_image(pixmap)
-            self.calibration_dialog.set_image(pixmap)
+            try:
+                pixmap = self.get_pixmap()
+                self.image_widget.set_image(pixmap)
+                self.calibration_dialog.set_image(pixmap)
+            except:
+                pass
             # TODO: change update timing
-            sleep(0.5)
+            sleep(0.1)
 
     def toggleSquare(self):
         self.backend.square_shape = not self.backend.square_shape
@@ -164,8 +167,8 @@ class CameraPlatinaUI(ConfigurationUI):
         self.camera_thread.join()
 
     def parse_points(self, x1, y1, x2, y2):
-        x1, y1 = convert_coordinates(x1, y1)
-        x2, y2 = convert_coordinates(x2, y2)
+        x1, y1, _ = convert_coordinates(x1, y1)
+        x2, y2, _ = convert_coordinates(x2, y2)
         self.motor_x.instrument.initial_point = x1
         self.motor_x.instrument.final_point = x2
         self.motor_y.instrument.initial_point = y1

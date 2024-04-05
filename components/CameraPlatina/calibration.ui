@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>550</width>
-    <height>322</height>
+    <width>739</width>
+    <height>524</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,6 +18,13 @@
     <layout class="QHBoxLayout" name="general_layout">
      <item>
       <layout class="QVBoxLayout" name="display_lt">
+       <item>
+        <widget class="QLabel" name="image_label">
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
        <item>
         <widget class="QLabel" name="display_label">
          <property name="sizePolicy">
@@ -35,13 +42,6 @@
      </item>
      <item>
       <layout class="QVBoxLayout" name="points_layout">
-       <item>
-        <widget class="QPushButton" name="zero_bt">
-         <property name="text">
-          <string>Zero</string>
-         </property>
-        </widget>
-       </item>
        <item>
         <widget class="QGroupBox" name="first_point_gb">
          <property name="title">
@@ -125,22 +125,28 @@
           <string>Second Point</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="0" column="0">
-           <widget class="QLabel" name="x2_pos_lb">
-            <property name="text">
-             <string>X Position</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="x2_pixel_lb">
-            <property name="text">
-             <string>X Pixel</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0">
            <widget class="QDoubleSpinBox" name="x2_pos_sb">
+            <property name="minimum">
+             <double>-9999999.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>9999999.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>0.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="y2_pixel_lb">
+            <property name="text">
+             <string>Y Pixel</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QDoubleSpinBox" name="y2_pos_sb">
             <property name="minimum">
              <double>-9999999.000000000000000</double>
             </property>
@@ -166,15 +172,86 @@
             </property>
            </widget>
           </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="x2_pixel_lb">
+            <property name="text">
+             <string>X Pixel</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QSpinBox" name="y2_pixel_sb">
+            <property name="maximum">
+             <number>1080</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="x2_pos_lb">
+            <property name="text">
+             <string>X Position</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="third_point_gb">
+         <property name="title">
+          <string>Third Point</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <widget class="QLabel" name="x3_pos_lb">
+            <property name="text">
+             <string>X Position</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="x3_pixel_lb">
+            <property name="text">
+             <string>X Pixel</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QDoubleSpinBox" name="x3_pos_sb">
+            <property name="minimum">
+             <double>-9999999.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>9999999.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>0.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="x3_pixel_sb">
+            <property name="maximum">
+             <number>1080</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="y3_pos_lb">
+            <property name="text">
+             <string>Y Position</string>
+            </property>
+           </widget>
+          </item>
           <item row="2" column="1">
-           <widget class="QLabel" name="y2_pixel_lb">
+           <widget class="QLabel" name="y3_pixel_lb">
             <property name="text">
              <string>Y Pixel</string>
             </property>
            </widget>
           </item>
           <item row="3" column="0">
-           <widget class="QDoubleSpinBox" name="y2_pos_sb">
+           <widget class="QDoubleSpinBox" name="y3_pos_sb">
             <property name="minimum">
              <double>-9999999.000000000000000</double>
             </property>
@@ -187,7 +264,7 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QSpinBox" name="y2_pixel_sb">
+           <widget class="QSpinBox" name="y3_pixel_sb">
             <property name="maximum">
              <number>1080</number>
             </property>
