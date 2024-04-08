@@ -111,7 +111,7 @@ class Motor(Driver):
             try:
                 device_id = ctypes.c_int()
                 device_id.value = self._device_id
-                self._lib.close_device(device_id)
+                self._lib.close_device(ctypes.byref(device_id))
             except Exception as e:
                 self.log_error(f"The motor failed to close with error {e}")
         if hasattr(self, "_status_thread"):
@@ -144,7 +144,7 @@ class Motor(Driver):
 
         # State machine for checking if we arrived
         # first check, wait for it to be moving. The move command has a delay before we start moving
-        while self.stopped():
+        while self.stopped() and abs(self.position - position) > self.position_margin:
             sleep(self.status_interval.total_seconds())
             if datetime.now() > timeout_time:
                 print("Motor never started moving.")
