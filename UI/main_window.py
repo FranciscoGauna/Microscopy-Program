@@ -125,7 +125,7 @@ class MainWindow(QMainWindow):
 
         ser_widget = get_main_widget([fungen_component, platina_component],
                                      [lockin_component],
-                                     [], [],
+                                     [self.platina_comp.run_ui], [],
                                      coupling_ui_options={"enabled": True, "x": 1, "y": 0})
 
         self.experiment_layout.addWidget(ser_widget, 0, 0)

@@ -1,3 +1,4 @@
+import ctypes
 import os
 import re
 import sys
@@ -11,7 +12,7 @@ from threading import Thread
 from time import sleep
 
 from lantz import Driver, Feat
-from lantz.core.log import ERROR, DEBUG
+from lantz.core.log import ERROR, DEBUG, get_logger
 
 from libximc import (lib, EnumerateFlags, controller_name_t, engine_settings_t, Result, status_t, get_position_t,
                      edges_settings_t, feedback_settings_t, EngineFlags, BorderFlags, FeedbackFlags, EnderFlags,
@@ -74,6 +75,8 @@ class Motor(Driver):
 
     def __init__(self):
         super().__init__()
+        self.logger_name = 'SER.Driver.' + str(self)
+        self.logger = get_logger(self.logger_name)
         self.virtual = False
         self._motor = ""
 
@@ -106,7 +109,9 @@ class Motor(Driver):
         self._status.running = False
         if hasattr(self, "_device_id") and not self.virtual:
             try:
-                self._lib.close_device(self._device_id)
+                device_id = ctypes.c_int()
+                device_id.value = self._device_id
+                self._lib.close_device(device_id)
             except Exception as e:
                 self.log_error(f"The motor failed to close with error {e}")
         if hasattr(self, "_status_thread"):
@@ -124,15 +129,15 @@ class Motor(Driver):
         self.log(DEBUG, str(result))
 
         if self.virtual:
-            self._status.status.CurPosition = position
-            self._status.status.EncPosition = position
+            self._status.status.CurPosition = int(position)
+            self._status.status.EncPosition = int(position)
         return Result.Ok == result
 
     def move_to_sync(self, position, timeout=timedelta(seconds=1)):
         timeout_time = datetime.now() + timeout
         result = self.move_to(position)
         self.log(DEBUG, str(result))
-        if Result.Ok != result:
+        if not result:
             return False
         if self.virtual:
             return True
@@ -142,17 +147,20 @@ class Motor(Driver):
         while self.stopped():
             sleep(self.status_interval.total_seconds())
             if datetime.now() > timeout_time:
+                print("Motor never started moving.")
                 return False
 
         # now that we're moving, wait for it to stop
         while not self.stopped():
             sleep(self.status_interval.total_seconds())
             if datetime.now() > timeout_time:
+                print("Motor never stopped moving.")
                 return False
 
         # We return false if for some reason we are at the bad position
         # TODO: Have an if vs encoder
         if abs(self.position - position) > self.position_margin:
+            print("We reached the wrong position.")
             return False
 
         return True

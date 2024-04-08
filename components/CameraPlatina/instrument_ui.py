@@ -1,16 +1,17 @@
 from concurrent.futures import ThreadPoolExecutor
 from threading import Thread
 from time import sleep
-from typing import Dict, Generator, Any
+from typing import Dict, Generator, Any, List
 
 from PyQt5.QtGui import QImage, QPixmap
-from SER.interfaces import Instrument, ConfigurationUI, ConfigurableInstrument
+from PyQt5.QtWidgets import QLabel
+from SER.interfaces import Instrument, ConfigurationUI, ConfigurableInstrument, ProcessDataUI
 from cv2 import cvtColor, COLOR_BGR2RGB
 from lantz import Feat
 from lantz.qt.connect import connect_feat
 
 from components.CameraPlatina import CameraBackend
-from components.CameraPlatina.calibration import CalibrationUI, convert_coordinates
+from components.CameraPlatina.calibration import CalibrationUI
 from components.CameraPlatina.custom_image import ImageWidget
 from components.Platina import Platina, PlatinaComponent
 
@@ -54,14 +55,19 @@ class CameraPlatinaInstrument(ConfigurableInstrument):
     def configure(self, x, y) -> Dict[str, Any]:
         with ThreadPoolExecutor() as executor:
             futures = [
-                executor.submit(self.motor_x.configure, x),
-                executor.submit(self.motor_y.configure, y)
+                executor.submit(self.motor_x.configure, int(x)),
+                executor.submit(self.motor_y.configure, int(y))
             ]
 
-        results = {
-            "motor_x": futures[0].result(),
-            "motor_y": futures[1].result()
-        }
+        motor_x_results = futures[0].result()
+        motor_y_results = futures[1].result()
+
+        results = {}
+        for k, v in motor_x_results.items():
+            results[f"motor_x_{k}"] = v
+        for k, v in motor_y_results.items():
+            results[f"motor_y_{k}"] = v
+
         return results
 
     def get_points(self) -> Generator:
@@ -98,6 +104,10 @@ class CameraPlatinaInstrument(ConfigurableInstrument):
     def line_shape(self, value):
         self.line = value
         self.square = not value
+
+    def stop(self):
+        self.motor_x.stop()
+        self.motor_y.stop()
 
 
 class CameraPlatinaUI(ConfigurationUI):
@@ -162,13 +172,14 @@ class CameraPlatinaUI(ConfigurationUI):
         else:
             self.image_widget.draw_line()
 
-    def close_camera_refresh(self):
+    def close_camera(self):
         self.running = False
         self.camera_thread.join()
+        self.calibration_dialog.calibration.store_calibration()
 
     def parse_points(self, x1, y1, x2, y2):
-        x1, y1, _ = convert_coordinates(x1, y1)
-        x2, y2, _ = convert_coordinates(x2, y2)
+        x1, y1, _ = self.calibration_dialog.convert_coordinates(x1, y1)
+        x2, y2, _ = self.calibration_dialog.convert_coordinates(x2, y2)
         self.motor_x.instrument.initial_point = x1
         self.motor_x.instrument.final_point = x2
         self.motor_y.instrument.initial_point = y1
@@ -176,3 +187,20 @@ class CameraPlatinaUI(ConfigurationUI):
 
     def open_calibration(self):
         self.calibration_dialog.open()
+
+
+class CameraProcessUI(ProcessDataUI):
+
+    def __init__(self, x, y, image: QLabel):
+        super().__init__(x, y)
+        self.image = image
+        self.initialized = False
+
+    def initialize(self):
+        if not self.initialized:
+            self.setCentralWidget(self.image)
+            self.initialized = True
+
+    def add_data(self, data: List[Dict[str, Dict[str, Any]]]):
+        pass
+

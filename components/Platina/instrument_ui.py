@@ -76,8 +76,8 @@ class Platina(ConfigurableInstrument):
     def configure(self, position) -> Dict[str, Any]:
         # ENCODER: if we adapt it to a motor without encoder feedback we need to add a result indicating the value
         # of the encoder
-        self.motor.move_to_sync(position)
-        sleep(0.1)
+        if not self.motor.move_to_sync(position):
+            self.log_error(f"We failed to move to position: {position}!")
         return {
             "position": position,
             "enc_position": self.motor.encoder_position,
@@ -99,6 +99,10 @@ class Platina(ConfigurableInstrument):
             "motor_position": "The position that the motor is reporting internally after completing the move.",
             "enc_position": "The position that the encoder is reporting internally after completing the move."
         }
+
+    def stop(self):
+        self.motor.STOP()
+        self.motor.close_motor()
 
     def get_config(self) -> Dict:
         return {
