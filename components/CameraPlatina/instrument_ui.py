@@ -9,6 +9,7 @@ from SER.interfaces import Instrument, ConfigurationUI, ConfigurableInstrument, 
 from cv2 import cvtColor, COLOR_BGR2RGB
 from lantz import Feat
 from lantz.qt.connect import connect_feat
+from PIL import Image
 
 from components.CameraPlatina import CameraBackend
 from components.CameraPlatina.calibration import CalibrationUI
@@ -162,7 +163,16 @@ class CameraPlatinaUI(ConfigurationUI):
                 self.calibration_dialog.set_image(pixmap)
             except:
                 pass
-            # TODO: change update timing
+            self.calibration_dialog.update_zero(*self.get_pos())
+            x1, y1 = self.calibration_dialog.invert_coordinates(self.motor_x.instrument.initial_point,
+                                                                self.motor_y.instrument.initial_point)
+            x2, y2 = self.calibration_dialog.invert_coordinates(self.motor_x.instrument.final_point,
+                                                                self.motor_y.instrument.final_point)
+            self.image_widget.x1 = x1
+            self.image_widget.y1 = y1
+            self.image_widget.x2 = x2
+            self.image_widget.y2 = y2
+            # TODO: grab update timing from a config
             sleep(0.1)
 
     def toggleSquare(self):

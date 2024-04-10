@@ -149,6 +149,9 @@ class PlatinaUI(ConfigurationUI):
         connect_feat(self.widget.antiplay_speed_sb, self.backend.motor, "antiplay_speed")
         self.widget.zero_button.pressed.connect(self.backend.zero)
 
+        # TODO: remember to change this to the localization
+        self.widget.pos_label.setText(f"Posicion Actual ({self.backend.conversion_units}):")
+
         self.move_left_key = move_left_key
         self.move_right_key = move_right_key
 

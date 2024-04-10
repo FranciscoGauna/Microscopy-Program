@@ -147,20 +147,20 @@ class Motor(Driver):
         while self.stopped() and abs(self.position - position) > self.position_margin:
             sleep(self.status_interval.total_seconds())
             if datetime.now() > timeout_time:
-                print("Motor never started moving.")
+                self.log_error("Motor never started moving.")
                 return False
 
         # now that we're moving, wait for it to stop
         while not self.stopped():
             sleep(self.status_interval.total_seconds())
             if datetime.now() > timeout_time:
-                print("Motor never stopped moving.")
+                self.log_error("Motor never stopped moving.")
                 return False
 
         # We return false if for some reason we are at the bad position
         # TODO: Have an if vs encoder
         if abs(self.position - position) > self.position_margin:
-            print("We reached the wrong position.")
+            self.log_error("We reached the wrong position.")
             return False
 
         return True

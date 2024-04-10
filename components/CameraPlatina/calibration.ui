@@ -20,6 +20,12 @@
       <layout class="QVBoxLayout" name="display_lt">
        <item>
         <widget class="QLabel" name="image_label">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text">
           <string>TextLabel</string>
          </property>
@@ -50,6 +56,9 @@
          <layout class="QGridLayout" name="gridLayout">
           <item row="1" column="0">
            <widget class="QDoubleSpinBox" name="x1_pos_sb">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
             <property name="minimum">
              <double>-9999999.000000000000000</double>
             </property>
@@ -91,6 +100,9 @@
           </item>
           <item row="1" column="1">
            <widget class="QSpinBox" name="x1_pixel_sb">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
             <property name="minimum">
              <number>-1080</number>
             </property>
@@ -101,6 +113,9 @@
           </item>
           <item row="3" column="0">
            <widget class="QDoubleSpinBox" name="y1_pos_sb">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
             <property name="minimum">
              <double>-9999999.000000000000000</double>
             </property>
@@ -114,6 +129,9 @@
           </item>
           <item row="3" column="1">
            <widget class="QSpinBox" name="y1_pixel_sb">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
             <property name="minimum">
              <number>-1080</number>
             </property>
@@ -133,6 +151,9 @@
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="1" column="0">
            <widget class="QDoubleSpinBox" name="x2_pos_sb">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
             <property name="minimum">
              <double>-9999999.000000000000000</double>
             </property>
@@ -153,6 +174,9 @@
           </item>
           <item row="3" column="0">
            <widget class="QDoubleSpinBox" name="y2_pos_sb">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
             <property name="minimum">
              <double>-9999999.000000000000000</double>
             </property>
@@ -166,6 +190,9 @@
           </item>
           <item row="1" column="1">
            <widget class="QSpinBox" name="x2_pixel_sb">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
             <property name="minimum">
              <number>-1080</number>
             </property>
@@ -190,6 +217,9 @@
           </item>
           <item row="3" column="1">
            <widget class="QSpinBox" name="y2_pixel_sb">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
             <property name="minimum">
              <number>-1080</number>
             </property>
@@ -230,6 +260,9 @@
           </item>
           <item row="1" column="0">
            <widget class="QDoubleSpinBox" name="x3_pos_sb">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
             <property name="minimum">
              <double>-9999999.000000000000000</double>
             </property>
@@ -243,6 +276,9 @@
           </item>
           <item row="1" column="1">
            <widget class="QSpinBox" name="x3_pixel_sb">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
             <property name="minimum">
              <number>-1080</number>
             </property>
@@ -267,6 +303,9 @@
           </item>
           <item row="3" column="0">
            <widget class="QDoubleSpinBox" name="y3_pos_sb">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
             <property name="minimum">
              <double>-9999999.000000000000000</double>
             </property>
@@ -280,6 +319,9 @@
           </item>
           <item row="3" column="1">
            <widget class="QSpinBox" name="y3_pixel_sb">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
             <property name="minimum">
              <number>-1080</number>
             </property>
@@ -318,6 +360,21 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>x1_pos_sb</tabstop>
+  <tabstop>x1_pixel_sb</tabstop>
+  <tabstop>y1_pos_sb</tabstop>
+  <tabstop>y1_pixel_sb</tabstop>
+  <tabstop>x2_pos_sb</tabstop>
+  <tabstop>x2_pixel_sb</tabstop>
+  <tabstop>y2_pos_sb</tabstop>
+  <tabstop>y2_pixel_sb</tabstop>
+  <tabstop>x3_pos_sb</tabstop>
+  <tabstop>x3_pixel_sb</tabstop>
+  <tabstop>y3_pos_sb</tabstop>
+  <tabstop>y3_pixel_sb</tabstop>
+  <tabstop>info_bt</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
