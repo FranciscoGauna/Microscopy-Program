@@ -13,6 +13,7 @@ from components.CameraPlatina import CameraPlatinaComponent, CameraBackend, Virt
 from components.CameraPlatina.camera import LucamCam
 from components.HP33120AFunGen import HPFunGen
 from components.Lockin import AnfatecLockin
+from components.Oven import LinkamOven
 from components.Platina import PlatinaComponent
 from components.Platina.motor import get_available_motors, Motor
 
@@ -39,8 +40,11 @@ class MainWindow(QMainWindow):
     motor_y_bt: QPushButton
     motor_ops: dict[str, str]
 
+    camera_cb: QComboBox
     camera_ops: dict[str, Callable[[], VideoCapture]]
-    virtual_camera_cb: QCheckBox
+
+    oven_cb:QComboBox
+    oven_ops: dict[str, Callable[[], Component]]
 
     def __init__(self):
         super().__init__()
@@ -89,6 +93,12 @@ class MainWindow(QMainWindow):
         }
         self.camera_cb.addItems(self.camera_ops.keys())
 
+        self.oven_ops = {
+            "Virtual": LinkamOven.virtual,
+            "Linkam TMS 94": lambda: LinkamOven.real(15),
+        }
+        self.oven_cb.addItems(self.oven_ops.keys())
+
     def load_motor_configuration(self, target):
         options = QFileDialog.Options()
         file_dialog = QFileDialog()
@@ -123,7 +133,10 @@ class MainWindow(QMainWindow):
 
         platina_component = ComponentInitialization(self.platina_comp, 1, 0, 0, "Platina")
 
-        ser_widget = get_main_widget([fungen_component, platina_component],
+        self.oven_comp = self.oven_ops[self.oven_cb.currentText()]()
+        oven_component = ComponentInitialization(self.oven_comp, -10, 0, 2, "Oven")
+
+        ser_widget = get_main_widget([fungen_component, platina_component, oven_component],
                                      [lockin_component],
                                      [self.platina_comp.run_ui], [],
                                      coupling_ui_options={"enabled": True, "x": 1, "y": 0})

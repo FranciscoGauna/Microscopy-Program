@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>253</width>
-    <height>373</height>
+    <width>255</width>
+    <height>465</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,6 +22,20 @@
       </property>
       <widget class="QWidget" name="selection_page">
        <layout class="QGridLayout" name="gridLayout_3">
+        <item row="10" column="0">
+         <widget class="QLabel" name="camera_label">
+          <property name="text">
+           <string>Camera</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0">
+         <widget class="QLabel" name="motor_y_label">
+          <property name="text">
+           <string>Motor Y</string>
+          </property>
+         </widget>
+        </item>
         <item row="5" column="0">
          <widget class="QComboBox" name="motor_x_cb"/>
         </item>
@@ -32,41 +46,13 @@
           </property>
          </widget>
         </item>
-        <item row="8" column="0">
-         <widget class="QComboBox" name="motor_y_cb"/>
+        <item row="11" column="0">
+         <widget class="QComboBox" name="camera_cb"/>
         </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="lockin_label">
-          <property name="text">
-           <string>Lock-in Amplifier</string>
-          </property>
-         </widget>
+        <item row="3" column="0">
+         <widget class="QComboBox" name="lockin_cb"/>
         </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="motor_x_label">
-          <property name="text">
-           <string>Motor X</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QComboBox" name="fungen_cb"/>
-        </item>
-        <item row="7" column="0">
-         <widget class="QLabel" name="motor_y_label">
-          <property name="text">
-           <string>Motor Y</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="0">
-         <widget class="QPushButton" name="motor_y_bt">
-          <property name="text">
-           <string>Load Conf</string>
-          </property>
-         </widget>
-        </item>
-        <item row="12" column="0">
+        <item row="14" column="0">
          <layout class="QHBoxLayout" name="launch_layout">
           <item>
            <spacer name="launch_spacer">
@@ -90,15 +76,39 @@
           </item>
          </layout>
         </item>
-        <item row="3" column="0">
-         <widget class="QComboBox" name="lockin_cb"/>
-        </item>
-        <item row="10" column="0">
-         <widget class="QLabel" name="camera_label">
+        <item row="12" column="0">
+         <widget class="QLabel" name="oven_label">
           <property name="text">
-           <string>Camera</string>
+           <string>Horno</string>
           </property>
          </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="lockin_label">
+          <property name="text">
+           <string>Lock-in Amplifier</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QComboBox" name="fungen_cb"/>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="motor_x_label">
+          <property name="text">
+           <string>Motor X</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="0">
+         <widget class="QPushButton" name="motor_y_bt">
+          <property name="text">
+           <string>Load Conf</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="0">
+         <widget class="QComboBox" name="motor_y_cb"/>
         </item>
         <item row="6" column="0">
          <widget class="QPushButton" name="motor_x_bt">
@@ -107,8 +117,8 @@
           </property>
          </widget>
         </item>
-        <item row="11" column="0">
-         <widget class="QComboBox" name="camera_cb"/>
+        <item row="13" column="0">
+         <widget class="QComboBox" name="oven_cb"/>
         </item>
        </layout>
       </widget>
@@ -124,7 +134,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>253</width>
+     <width>255</width>
      <height>21</height>
     </rect>
    </property>
