@@ -150,7 +150,7 @@ class VirtualLockin(foreign.Driver):
         self._pll = flag
 
     def pll_frequency(self):
-        """Returns the fequency of the pll if the pll is on. Otherwise returns 0"""
+        """Returns the frequency of the pll if the pll is on. Otherwise, returns 0"""
         return self._lockin_frequency
 
     @Feat()
