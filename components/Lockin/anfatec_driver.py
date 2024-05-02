@@ -8,8 +8,6 @@ from os.path import dirname
 from inspect import getfile
 
 
-
-
 class VirtualLockin(foreign.Driver):
 
     def __init__(self, *args, **kwargs):
