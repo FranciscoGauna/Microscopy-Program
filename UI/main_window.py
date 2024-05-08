@@ -16,6 +16,7 @@ from components.Lockin import AnfatecLockin
 from components.Oven import LinkamOven
 from components.Platina import PlatinaComponent
 from components.Platina.motor import get_available_motors, Motor
+from components.USBDAQ import USB2527DAC
 
 
 class MainWindow(QMainWindow):
@@ -43,8 +44,11 @@ class MainWindow(QMainWindow):
     camera_cb: QComboBox
     camera_ops: dict[str, Callable[[], VideoCapture]]
 
-    oven_cb:QComboBox
+    oven_cb: QComboBox
     oven_ops: dict[str, Callable[[], Component]]
+
+    dac_cb: QComboBox
+    dac_ops: dict[str, Callable[[], Component]]
 
     def __init__(self):
         super().__init__()
@@ -63,6 +67,8 @@ class MainWindow(QMainWindow):
         self.fungen_comp = None
         self.lockin_comp = None
         self.platina_comp = None
+        self.oven_comp = None
+        self.dac_comp = None
 
         self.show()
 
@@ -98,6 +104,12 @@ class MainWindow(QMainWindow):
             "Linkam TMS 94": lambda: LinkamOven.real(15),
         }
         self.oven_cb.addItems(self.oven_ops.keys())
+
+        self.dac_ops = {
+            "Virtual": USB2527DAC.virtual,
+            "USB2527": lambda: USB2527DAC.real(0),
+        }
+        self.dac_cb.addItems(self.dac_ops.keys())
 
     def load_motor_configuration(self, target):
         options = QFileDialog.Options()
@@ -136,10 +148,13 @@ class MainWindow(QMainWindow):
         self.oven_comp = self.oven_ops[self.oven_cb.currentText()]()
         oven_component = ComponentInitialization(self.oven_comp, -10, 0, 2, "Oven")
 
+        self.dac_comp = self.dac_ops[self.dac_cb.currentText()]()
+        dac_component = ComponentInitialization(self.dac_comp, -10, 1, 0, "DAC")
+
         ser_widget = get_main_widget([fungen_component, platina_component, oven_component],
-                                     [lockin_component],
+                                     [lockin_component, dac_component],
                                      [self.platina_comp.run_ui], [],
-                                     coupling_ui_options={"enabled": True, "x": 1, "y": 0})
+                                     coupling_ui_options={"enabled": True, "x": 1, "y": 2})
 
         self.experiment_layout.addWidget(ser_widget, 0, 0)
         self.stack_widget.setCurrentWidget(self.experiment_page)
@@ -147,3 +162,5 @@ class MainWindow(QMainWindow):
     def close_components(self):
         if self.platina_comp is not None:
             self.platina_comp.close_component()
+        if self.dac_comp is not None:
+            self.dac_comp.close_component()

@@ -53,14 +53,18 @@ class USB2527(Driver):
         ul.d_bit_out(self.board_num, port, bit, value)
 
 
-if __name__ == "__main__":
-    device = USB2527(0)
-    device.configure_digital_port(DigitalPortType.FIRSTPORTA, DigitalIODirection.OUT)
-    device.write_digital_input(DigitalPortType.FIRSTPORTA, 2, True)
+class VirtualDAC(Driver):
+    def read_analog_input(self, channel, input_range=ULRange.BIP10VOLTS) -> float:
+        return 0
 
-    for i in range(50):
-        device.write_digital_input(DigitalPortType.FIRSTPORTA, 0, True)
-        sleep(0.1)
-        device.write_digital_input(DigitalPortType.FIRSTPORTA, 0, False)
-        sleep(0.1)
-    
+    def write_analog_input(self, channel, value):
+        pass
+
+    def configure_digital_port(self, port: DigitalPortType, write: DigitalIODirection):
+        pass
+
+    def read_digital_input(self, port: DigitalPortType, bit):
+        return 0
+
+    def write_digital_input(self, port: DigitalPortType, bit, value: bool):
+        pass

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GroupBox</class>
+ <widget class="QGroupBox" name="GroupBox">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>286</width>
+    <height>284</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>GroupBox</string>
+  </property>
+  <property name="title">
+   <string>Control de Foco</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="8" column="0">
+    <widget class="QLabel" name="z_focus_lb">
+     <property name="text">
+      <string>Valor de Enfocado</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="1">
+    <widget class="QDoubleSpinBox" name="sum_min_sb"/>
+   </item>
+   <item row="9" column="0">
+    <widget class="QDoubleSpinBox" name="z_focus_sb"/>
+   </item>
+   <item row="11" column="0">
+    <widget class="QDoubleSpinBox" name="motor_speed_sb"/>
+   </item>
+   <item row="13" column="1">
+    <widget class="QDoubleSpinBox" name="fe_offset_sb"/>
+   </item>
+   <item row="6" column="0">
+    <widget class="QSlider" name="laser_potency_sb">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <widget class="QLabel" name="range_focus_lb">
+     <property name="text">
+      <string>Rango de Enfocado</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="0">
+    <widget class="QLabel" name="motor_speed_lb">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>Velocidad Motor</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="laser_potency_lb">
+     <property name="text">
+      <string>Potencia laser (0%)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="0">
+    <widget class="QLabel" name="sum_offset_lb">
+     <property name="text">
+      <string>Offset Suma (V)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <widget class="QDoubleSpinBox" name="range_focus_sb"/>
+   </item>
+   <item row="12" column="1">
+    <widget class="QLabel" name="fe_offset_lb">
+     <property name="text">
+      <string>Offset FE (V)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="0">
+    <widget class="QDoubleSpinBox" name="sum_offset_sb"/>
+   </item>
+   <item row="10" column="1">
+    <widget class="QLabel" name="sum_min_lb">
+     <property name="text">
+      <string>Minimo Suma</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QCheckBox" name="focus_control_cb">
+     <property name="text">
+      <string>Controlar Foco</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QCheckBox" name="focus_display_cb">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>Enfocado</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QCheckBox" name="laser_on_cb">
+     <property name="text">
+      <string>Prender Laser</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QPushButton" name="set_range_bt">
+     <property name="text">
+      <string>Setear Valor de Foco</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="QPushButton" name="graphs_bt">
+     <property name="text">
+      <string>Graficos</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
