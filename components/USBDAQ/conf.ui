@@ -34,10 +34,14 @@
     <widget class="QDoubleSpinBox" name="motor_speed_sb"/>
    </item>
    <item row="13" column="1">
-    <widget class="QDoubleSpinBox" name="fe_offset_sb"/>
+    <widget class="QDoubleSpinBox" name="fe_offset_sb">
+     <property name="minimum">
+      <double>1.000000000000000</double>
+     </property>
+    </widget>
    </item>
    <item row="6" column="0">
-    <widget class="QSlider" name="laser_potency_sb">
+    <widget class="QSlider" name="laser_potency_slider">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -56,7 +60,7 @@
       <bool>true</bool>
      </property>
      <property name="text">
-      <string>Velocidad Motor</string>
+      <string>Velocidad Motor (pasos/s)</string>
      </property>
     </widget>
    </item>

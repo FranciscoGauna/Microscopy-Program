@@ -3,6 +3,7 @@ import random
 from typing import List, Dict, Any
 
 import matplotlib
+from pyqtgraph import PlotWidget
 
 from PyQt5 import QtCore, QtWidgets
 from SER.interfaces import ProcessDataUI
@@ -21,16 +22,16 @@ class PlotCanvas(FigureCanvasQTAgg):
         super(PlotCanvas, self).__init__(fig)
 
     def update_plot(self, x_data, y_data):
-        self.canvas.axes.cla()  # Clear the canvas.
-        self.canvas.axes.plot(x_data, y_data, 'r')
+        self.axes.cla()  # Clear the canvas.
+        self.axes.plot(x_data, y_data, 'r')
         # Trigger the canvas to update and redraw.
-        self.canvas.draw()
+        self.draw()
 
 
 class LineMapper(ProcessDataUI):
     x_data: List
     y_data: List
-    canvas: PlotCanvas
+    canvas: PlotWidget
 
     def __init__(self, x_variable: tuple[str, str, str], y_variable: tuple[str, str, str], max_points=50,
                  x=0, y=0, parent=None, backend=None):
@@ -38,21 +39,25 @@ class LineMapper(ProcessDataUI):
         self.x_device, self.x_var_name, self.x_display_name = x_variable
         self.y_device, self.y_var_name, self.y_display_name = y_variable
         self.max_points = max_points
+        self.initialize()
 
     def initialize(self):
         self.x_data = []
         self.y_data = []
-        self.canvas = PlotCanvas()
+        # Here is the plot widget from pyqtgraph
+        self.canvas = PlotWidget()
         self.setCentralWidget(self.canvas)
 
     def add_data(self, data: List[Dict[str, Dict[str, Any]]]):
+        item = self.canvas.getPlotItem()
+        item.clear()
         for datum in data:
             if self.x_device in datum and self.y_device in datum:
                 self.x_data.append(datum[self.x_device][self.x_var_name])
                 self.y_data.append(datum[self.y_device][self.y_var_name])
 
-        if len(self.x_data) > self.max_points:
+        while len(self.x_data) > self.max_points:
             self.x_data.pop(0)
             self.y_data.pop(0)
 
-        self.canvas.update_plot(self.x_data, self.y_data)
+        item.plot(self.x_data, self.y_data)
