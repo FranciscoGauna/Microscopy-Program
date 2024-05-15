@@ -145,7 +145,7 @@ class DACInstrument(ObservableInstrument):
     def check_if_should_run(self, timeout=10):
         end_time = datetime.now() + timedelta(seconds=timeout)
         while self.checking_focus:
-            if self.focus() or self.status.abcd_sum < self._min_sum:  # TODO: add a timeout?
+            if self.focus() or self.status.abcd_sum < self._min_sum:
                 self.checking_focus = False
             if datetime.now() > end_time:
                 self.checking_focus = False

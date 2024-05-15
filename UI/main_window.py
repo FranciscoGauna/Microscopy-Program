@@ -95,7 +95,7 @@ class MainWindow(QMainWindow):
         self.camera_ops = {
             "Virtual": VirtualCamera,
             "Web Cam": lambda: VideoCapture(0),
-            "Lucam": LucamCam  # TODO: change this to the proper camera
+            "Lucam": LucamCam
         }
         self.camera_cb.addItems(self.camera_ops.keys())
 

@@ -13,57 +13,58 @@ class VirtualLockin(foreign.Driver):
     def __init__(self, *args, **kwargs):
         """Instanciates a new copy of the driver. -if you want to load the settings of a previous instance of this class
         , you should use the method export_settings and add it to the kwargs"""
-        pll = kwargs.pop("pll", False)
+        reference_on = kwargs.pop("reference_on", False)
         time_constants = (kwargs.pop("time_constants", "5 ms"))
         roll_off = (kwargs.pop("roll_off", "12dB/oct"))
         input_gain = kwargs.pop("input_gain", "High Reserve")
         harmonic = kwargs.pop("harmonic", 1)
         coupling = kwargs.pop("coupling", "DC")
-        lockin_phase = Q_(kwargs.pop("lockin_phase", 0), "deg")
-        lockin_amplitude = Q_(kwargs.pop("lockin_amplitude", 1), "V")
-        lockin_frequency = Q_(kwargs.pop("lockin_frequency", 10000), "hertz")
+        reference_phase = Q_(kwargs.pop("reference_phase", 0), "deg")
+        reference_amplitude = Q_(kwargs.pop("reference_amplitude", 1), "V")
+        reference_frequency = Q_(kwargs.pop("reference_frequency", 10000), "hertz")
 
         super().__init__(*args, **kwargs)
 
-        self.pll = pll
+        self.reference_on = reference_on
         self.time_constants = time_constants
-        self.lockin_roll_off = roll_off
+        self.filter_slope = roll_off
         self.sensitivity = input_gain
         self.harmonic = harmonic
         self.coupling = coupling
-        self.lockin_phase = lockin_phase
-        self.lockin_amplitude = lockin_amplitude
-        self.lockin_frequency = lockin_frequency
+        self.reference_phase = reference_phase
+        self.reference_amplitude = reference_amplitude
+        self.reference_frequency = reference_frequency
 
     @Feat(units="Hz")
-    def lockin_frequency(self):
+    def reference_frequency(self):
         """This Function returns the center frequency of the lockin in Hz."""
-        return self._lockin_frequency
+        return self._reference_frequency
 
-    @lockin_frequency.setter
-    def lockin_frequency(self, float):
-        """This Function sets the center frequency of the lockin to a value in Hz. It will only be used if the PLL is off."""
-        self._lockin_frequency = float
+    @reference_frequency.setter
+    def reference_frequency(self, float):
+        """This Function sets the center frequency of the lockin to a value in Hz.
+        It will only be used if the internal reference is off."""
+        self._reference_frequency = float
 
     @Feat(units="V")
-    def lockin_amplitude(self):
+    def reference_amplitude(self):
         """This Function returns the amplitude in V of the reference output"""
-        return self._lockin_amplitude
+        return self._reference_amplitude
 
-    @lockin_amplitude.setter
-    def lockin_amplitude(self, value):
+    @reference_amplitude.setter
+    def reference_amplitude(self, value):
         """This Function sets the amplitude in V of the reference output and gives no value back"""
-        self._lockin_amplitude = value
+        self._reference_amplitude = value
 
     @Feat(units="deg")
-    def lockin_phase(self):
+    def reference_phase(self):
         """This function returns the phase offset between the input and the reference output in degrees"""
-        return self._lockin_phase
+        return self._reference_phase
 
-    @lockin_phase.setter
-    def lockin_phase(self, float):
+    @reference_phase.setter
+    def reference_phase(self, float):
         """This function sets the phase offset between the input and the reference output in degrees"""
-        self._lockin_phase = float
+        self._reference_phase = float
 
     @Feat(values={"High Reserve": 1, "Normal": 10, "Low Noise": 100})
     def sensitivity(self):
@@ -112,14 +113,13 @@ class VirtualLockin(foreign.Driver):
         self._time_constant = num
 
     @Feat(values={"6dB/oct": 0, "12dB/oct": 1, "24dB/oct": 2})
-    def lockin_roll_off(self):
-        """This function returns the roll off which is used for the low pass filter
-        ,
+    def filter_slope(self):
+        """This function returns the roll off which is used for the low pass filter,
         assigned to each number: 0 = 6dB/oct, 1 = 12dB/oct, 2 = 24dB/oct"""
         return self._roll_off
 
-    @lockin_roll_off.setter
-    def lockin_roll_off(self, num):
+    @filter_slope.setter
+    def filter_slope(self, num):
         """This function sets the roll off which is used for the low pass filter
         , and it should be an integer between 0 and 2, with the following value.
         assigned to each number: 0 = 6dB/oct, 1 = 12dB/oct, 2 = 24dB/oct"""
@@ -136,20 +136,17 @@ class VirtualLockin(foreign.Driver):
         return gauss(50, 10)
 
     @Feat()
-    def pll(self):
-        """Returns the value of pll. If true, the lockin uses the frequency of the external reference and if false it
-        uses the internal value, assigned in lockin_frequency"""
-        return self._pll
+    def reference_on(self):
+        """Returns a bool indicating if the internal reference is used.
+        If true, the lockin uses the frequency of the external reference and if false it
+        uses the internal value, assigned in reference_frequency"""
+        return self._reference_on
 
-    @pll.setter
-    def pll(self, flag: bool):
+    @reference_on.setter
+    def reference_on(self, flag: bool):
         """Sets what frequency to use. If true, the lockin uses the frequency of the external reference and if false it
-        uses the internal value, assigned in lockin_frequency"""
-        self._pll = flag
-
-    def pll_frequency(self):
-        """Returns the frequency of the pll if the pll is on. Otherwise, returns 0"""
-        return self._lockin_frequency
+        uses the internal value, assigned in reference_frequency"""
+        self._reference_on = flag
 
     @Feat()
     def overloaded(self):
@@ -171,15 +168,15 @@ class VirtualLockin(foreign.Driver):
          load a new instance with these setting you should add this dictionary to the kwargs when you instantiante the
          class"""
         settings = {
-            "pll": self.pll,
+            "reference_on": self.reference_on,
             "time_constant": self.time_constant,
-            "roll_off": self.lockin_roll_off,
+            "roll_off": self.filter_slope,
             "sensitivity": self.sensitivity,
             "harmonic": self.harmonic,
             "coupling": self.coupling,
-            "lockin_phase": self._lockin_phase,
-            "lockin_amplitude": self._lockin_amplitude,
-            "lockin_frequency": self._lockin_frequency,
+            "reference_phase": self._reference_phase,
+            "reference_amplitude": self._reference_amplitude,
+            "reference_frequency": self._reference_frequency,
         }
 
         return settings
@@ -192,15 +189,15 @@ class AnfatecAMU24(foreign.LibraryDriver):
         """Instanciates a new copy of the driver. -if you want to load the settings of a previous instance of this class
         , you should use the method export_settings and add it to the kwargs"""
         # Popeo las variables que usa el programa
-        pll = kwargs.pop("pll", False)
+        reference_on = kwargs.pop("reference_on", False)
         time_constants = (kwargs.pop("time_constants", "5 ms"))
         roll_off = (kwargs.pop("roll_off", "12dB/oct"))
         input_gain = kwargs.pop("input_gain", "High Reserve")
         harmonic = kwargs.pop("harmonic", 1)
         coupling = kwargs.pop("coupling", "DC")
-        lockin_phase = Q_(kwargs.pop("lockin_phase", 0), "deg")
-        lockin_amplitude = Q_(kwargs.pop("lockin_amplitude", 1), "V")
-        lockin_frequency = Q_(kwargs.pop("lockin_frequency", 10000), "hertz")
+        reference_phase = Q_(kwargs.pop("reference_phase", 0), "deg")
+        reference_amplitude = Q_(kwargs.pop("reference_amplitude", 1), "V")
+        reference_frequency = Q_(kwargs.pop("reference_frequency", 10000), "hertz")
 
         super().__init__(library_name="Lockin.dll", library_folder=dirname(getfile(AnfatecAMU24)), *args, **kwargs)
 
@@ -213,48 +210,48 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self.lib._SetLockInFreq.restype = foreign.TYPES["f64"]
         self.lib._SetLockInFreq.restype = foreign.TYPES["f64"]
 
-        self.pll = pll
+        self.reference_on = reference_on
         self.time_constants = time_constants
-        self.lockin_roll_off = roll_off
+        self.filter_slope = roll_off
         self.sensitivity = input_gain
         self.harmonic = harmonic
         self.coupling = coupling
-        self.lockin_phase = lockin_phase
-        self.lockin_amplitude = lockin_amplitude
-        self.lockin_frequency = lockin_frequency
+        self.reference_phase = reference_phase
+        self.reference_amplitude = reference_amplitude
+        self.reference_frequency = reference_frequency
 
     @Feat(units="Hz")
-    def lockin_frequency(self):
+    def reference_frequency(self):
         """This Function returns the center frequency of the lockin in Hz."""
-        return self._lockin_frequency
+        return self._reference_frequency
 
-    @lockin_frequency.setter
-    def lockin_frequency(self, float):
-        """This Function sets the center frequency of the lockin to a value in Hz. It will only be used if the PLL is
-        off."""
-        self._lockin_frequency = float
+    @reference_frequency.setter
+    def reference_frequency(self, float):
+        """This Function sets the center frequency of the lockin to a value in Hz.
+        It will only be used if the internal reference is off."""
+        self._reference_frequency = float
         self.lib._SetLockInFreq(foreign.TYPES["f64"](float))
 
     @Feat(units="V")
-    def lockin_amplitude(self):
+    def reference_amplitude(self):
         """This Function returns the amplitude in V of the reference output"""
-        return self._lockin_amplitude
+        return self._reference_amplitude
 
-    @lockin_amplitude.setter
-    def lockin_amplitude(self, value):
+    @reference_amplitude.setter
+    def reference_amplitude(self, value):
         """This Function sets the amplitude in V of the reference output and gives no value back"""
         self.lib._SetLockInAmpl(foreign.TYPES["f64"](value))
-        self._lockin_amplitude = value
+        self._reference_amplitude = value
 
     @Feat(units="deg")
-    def lockin_phase(self):
+    def reference_phase(self):
         """This function returns the phase offset between the input and the reference output in degrees"""
-        return self._lockin_phase
+        return self._reference_phase
 
-    @lockin_phase.setter
-    def lockin_phase(self, float):
+    @reference_phase.setter
+    def reference_phase(self, float):
         """This function sets the phase offset between the input and the reference output in degrees"""
-        self._lockin_phase = float
+        self._reference_phase = float
         self.lib._SetLockInPhase(foreign.TYPES["f64"](float))
 
     @Feat(values={"High Reserve": 1, "Normal": 10, "Low Noise": 100})
@@ -308,14 +305,14 @@ class AnfatecAMU24(foreign.LibraryDriver):
         self.lib._SetLockInTimeConst(foreign.TYPES["L"](num))
 
     @Feat(values={"6dB/oct": 0, "12dB/oct": 1, "24dB/oct": 2})
-    def lockin_roll_off(self):
+    def filter_slope(self):
         """This function returns the roll off which is used for the low pass filter
         ,
         assigned to each number: 0 = 6dB/oct, 1 = 12dB/oct, 2 = 24dB/oct"""
         return self._roll_off
 
-    @lockin_roll_off.setter
-    def lockin_roll_off(self, num):
+    @filter_slope.setter
+    def filter_slope(self, num):
         """This function sets the roll off which is used for the low pass filter
         , and it should be an integer between 0 and 2, with the following value.
         assigned to each number: 0 = 6dB/oct, 1 = 12dB/oct, 2 = 24dB/oct"""
@@ -333,26 +330,20 @@ class AnfatecAMU24(foreign.LibraryDriver):
         return self.lib._GetLockInChannel(3)
 
     @Feat()
-    def pll(self):
-        """Returns the value of pll. If true, the lockin uses the frequency of the external reference and if false it
-        uses the internal value, assigned in lockin_frequency"""
-        return self._pll
-
-    @pll.setter
-    def pll(self, flag: bool):
+    def reference_on(self):
         """Sets what frequency to use. If true, the lockin uses the frequency of the external reference and if false it
-        uses the internal value, assigned in lockin_frequency"""
-        self._pll = flag
+        uses the internal value, assigned in reference_frequency"""
+        return self._reference_on
+
+    @reference_on.setter
+    def reference_on(self, flag: bool):
+        """Sets what frequency to use. If true, the lockin uses the frequency of the external reference and if false it
+        uses the internal value, assigned in reference_frequency"""
+        self._reference_on = flag
         num = 0
         if flag:
             num = 1
         self.lib._SetLockInPllOn(foreign.TYPES["l"](num))
-
-    def pll_frequency(self):
-        """Returns the fequency of the pll if the pll is on. Otherwise returns 0"""
-        if self._pll:
-            return self.lib._SetLockInFreq(foreign.TYPES["f64"](10.0))
-        return 0.0
 
     @Feat()
     def overloaded(self):
@@ -372,15 +363,15 @@ class AnfatecAMU24(foreign.LibraryDriver):
          load a new instance with these setting you should add this dictionary to the kwargs when you instantiante the
          class"""
         settings = {
-            "pll": self.pll,
+            "reference_on": self.reference_on,
             "time_constant": self.time_constant,
-            "roll_off": self.lockin_roll_off,
+            "roll_off": self.filter_slope,
             "sensitivity": self.sensitivity,
             "harmonic": self.harmonic,
             "coupling": self.coupling,
-            "lockin_phase": self._lockin_phase,
-            "lockin_amplitude": self._lockin_amplitude,
-            "lockin_frequency": self._lockin_frequency,
+            "reference_phase": self._reference_phase,
+            "reference_amplitude": self._reference_amplitude,
+            "reference_frequency": self._reference_frequency,
         }
 
         return settings

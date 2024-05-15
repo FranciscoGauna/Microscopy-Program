@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-    lantz.drivers.stanford.sr830
+    lantz.drivers.stanford.LI5655
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     :copyright: 2015 by Lantz Authors, see AUTHORS for more details.
@@ -137,13 +137,13 @@ class LI5655(MessageBasedDriver):
         self.write(':FREQ:MULT {}'.format(value))
 
     @Feat(values={6, 12, 18, 24})
-    def filter_db_per_oct(self):
+    def filter_slope(self):
         """Time constant.
         """
         return int(self.query(':FILT:SLOP?'))
 
-    @filter_db_per_oct.setter
-    def filter_db_per_oct(self, value):
+    @filter_slope.setter
+    def filter_slope(self, value):
         self.write(':FILT:SLOP {}'.format(value))
 
     @Feat(values=TCONSTANTS)
@@ -157,23 +157,23 @@ class LI5655(MessageBasedDriver):
         self.write(':FILT:TCON {}'.format(value))
 
     @Feat(values={'AC', 'DC'})
-    def input_coupling(self):
+    def coupling(self):
         """Input coupling.
         """
         return self.query(':INP:COUP?')
 
-    @input_coupling.setter
-    def input_coupling(self, value):
+    @coupling.setter
+    def coupling(self, value):
         self.query(':INP:COUP {}'.format(value))
 
     @Feat(values={True: 'IOSC', False: 'RINP'})
-    def reference_internal(self):
+    def reference_on(self):
         """Reference source.
         """
         return self.query(':ROUT2?')
 
-    @reference_internal.setter
-    def reference_internal(self, value):
+    @reference_on.setter
+    def reference_on(self, value):
         self.write(':ROUT2 {}'.format(value))
 
     @Feat(values={True, False})
@@ -206,33 +206,33 @@ class LI5655(MessageBasedDriver):
         return self.query(':FETCh?')
 
     @Feat(units='Hz', limits=(0.001, 102000, 0.00001))
-    def frequency(self):
-        """Reference frequency.
+    def reference_frequency(self):
+        """Reference reference_frequency.
         """
         return float(self.query(':SOUR:FREQ?'))
 
-    @frequency.setter
-    def frequency(self, value):
+    @reference_frequency.setter
+    def reference_frequency(self, value):
         self.write(':SOUR:FREQ {}'.format(value))
 
     @Feat(units='volt', limits=(0.004, 5., 0.002))
-    def sine_output_amplitude(self):
+    def reference_amplitude(self):
         """Amplitude of the sine output.
         """
         return self.query(':SOUR:VOLT?')
 
-    @sine_output_amplitude.setter
-    def sine_output_amplitude(self, value):
+    @reference_amplitude.setter
+    def reference_amplitude(self, value):
         self.query(':SOUR:VOLT {}'.format(value))
 
     @Feat(units='degrees', limits=(-360, 729.99, 0.01))
-    def reference_phase_shift(self):
+    def reference_phase(self):
         """Phase shift of the reference.
         """
         return self.query(':PHAS?')
 
-    @reference_phase_shift.setter
-    def reference_phase_shift(self, value):
+    @reference_phase.setter
+    def reference_phase(self, value):
         self.query(':PHAS {}'.format(value))
 
 

@@ -1,4 +1,5 @@
 from lantz.qt import wrap_driver_cls
+from lantz.drivers.rigol.dg1022 import DG1022
 
 from SER.interfaces import Component
 from .instrument_ui import FunGen, FunGenConfUi

@@ -12,8 +12,6 @@ class Lockin(ObservableInstrument):
     lockin: AnfatecAMU24 = InstrumentSlot()
 
     def observe(self) -> Dict[str, Any]:
-        # TODO: remove this
-        self.lockin.lockin_frequency = 1000
         tc_time = float(self.lockin.time_constants.strip(" ms"))
         sleep(tc_time / 500)
         return {
@@ -26,29 +24,29 @@ class Lockin(ObservableInstrument):
          load a new instance with these setting you should add this dictionary to the kwargs when you instantiante the
          class"""
         settings = {
-            "pll": self.lockin.pll,
+            "reference_on": self.lockin.reference_on,
             "time_constant": self.lockin.time_constants,
-            "roll_off": self.lockin.lockin_roll_off,
+            "filter_slope": self.lockin.filter_slope,
             "sensitivity": self.lockin.sensitivity,
             "harmonic": self.lockin.harmonic,
             "coupling": self.lockin.coupling,
-            "lockin_phase": self.lockin.lockin_phase.magnitude,
-            "lockin_amplitude": self.lockin.lockin_amplitude.magnitude,
-            "lockin_frequency": self.lockin.lockin_frequency.magnitude,
+            "reference_phase": self.lockin.reference_phase.magnitude,
+            "reference_amplitude": self.lockin.reference_amplitude.magnitude,
+            "reference_frequency": self.lockin.reference_frequency.magnitude,
         }
 
         return settings
 
     def set_config(self, config: Dict):
-        self.lockin.pll = config["pll"]
+        self.lockin.reference_on = config["reference_on"]
         self.lockin.time_constants = config["time_constant"]
-        self.lockin.lockin_roll_off = config["roll_off"]
+        self.lockin.filter_slope = config["filter_slope"]
         self.lockin.sensitivity = config["sensitivity"]
         self.lockin.harmonic = config["harmonic"]
         self.lockin.coupling = config["coupling"]
-        self.lockin.lockin_phase = config["lockin_phase"]
-        self.lockin.lockin_amplitude = config["lockin_amplitude"]
-        self.lockin.lockin_frequency = config["lockin_frequency"]
+        self.lockin.reference_phase = config["reference_phase"]
+        self.lockin.reference_amplitude = config["reference_amplitude"]
+        self.lockin.reference_frequency = config["reference_frequency"]
 
     def variable_documentation(self) -> Dict[str, str]:
         return {
@@ -69,6 +67,6 @@ class LockinUI(ConfigurationUI):
         backend.initialize()
         connect_feat(self.widget.time_constant_cb, self.backend.lockin, "time_constants")
         connect_feat(self.widget.input_gain_cb, self.backend.lockin, "sensitivity")
-        connect_feat(self.widget.slope_cb, self.backend.lockin, "lockin_roll_off")
+        connect_feat(self.widget.slope_cb, self.backend.lockin, "filter_slope")
         connect_feat(self.widget.harmonic_sb, self.backend.lockin, "harmonic")
-        connect_feat(self.widget.pll_check, self.backend.lockin, "pll")
+        connect_feat(self.widget.pll_check, self.backend.lockin, "reference_on")
