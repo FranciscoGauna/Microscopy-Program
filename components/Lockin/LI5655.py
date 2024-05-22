@@ -166,7 +166,7 @@ class LI5655(MessageBasedDriver):
     def coupling(self, value):
         self.write(':INP:COUP {}'.format(value))
 
-    @Feat(values={True: 'IOSC', False: 'RINP'})
+    @Feat(values={True: 'RINP', False: 'IOSC'})
     def reference_on(self):
         """Reference source.
         """

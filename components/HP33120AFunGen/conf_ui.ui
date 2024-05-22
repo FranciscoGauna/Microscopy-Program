@@ -105,6 +105,20 @@
      </property>
     </widget>
    </item>
+   <item row="1" column="4">
+    <widget class="QSpinBox" name="spinBox">
+     <property name="minimum">
+      <number>1</number>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="4">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Repeat</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>

@@ -277,7 +277,7 @@ class DACGraphs(QDialog):
         self.sum_graph = LinePlotter(("timestamp", "time", "Time"),
                                      ("dac", "abcd_sum", "Reflectancia"), max_points=500)
         self.reflectance_graph = LinePlotter(("timestamp", "time", "Time"),
-                                             ("dac", "probe_reflectance", "Error de Foco"), max_points=500, scatter=True)
+                                             ("dac", "probe_reflectance", "Error de Foco"), max_points=500, scatter=False)
         self.error_focus_layout.addWidget(self.error_focus_graph)
         self.sum_layout.addWidget(self.sum_graph)
         self.reflectance_layout.addWidget(self.reflectance_graph)

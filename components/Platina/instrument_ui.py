@@ -2,6 +2,7 @@ from datetime import datetime
 from time import sleep
 from typing import Dict, Generator, Any
 
+from PyQt5.QtWidgets import QDoubleSpinBox
 from keyboard import is_pressed
 from PyQt5.QtCore import QTimer, Qt
 from SER.interfaces import ConfigurationUI, ConfigurableInstrument
@@ -148,6 +149,9 @@ class PlatinaUI(ConfigurationUI):
         connect_feat(self.widget.deceleration_sb, self.backend.motor, "decel")
         connect_feat(self.widget.antiplay_speed_sb, self.backend.motor, "antiplay_speed")
         self.widget.zero_button.pressed.connect(self.backend.zero)
+        self.widget.stop_bt.pressed.connect(self.stop)
+        self.widget.move_to_bt.pressed.connect(self.move_to)
+        self.widget.last_position_bt.pressed.connect(self.back)
 
         # TODO: remember to change this to the localization
         self.widget.pos_label.setText(f"Posicion Actual ({self.backend.conversion_units}):")
@@ -172,3 +176,14 @@ class PlatinaUI(ConfigurationUI):
                 if is_pressed(self.move_right_key):
                     pos += 50
                 self.backend.motor.move_to(pos)
+
+    def stop(self):
+        self.backend.motor.STOP()
+
+    def move_to(self):
+        pos = self.widget.move_to_sb.value() / self.backend.conversion_factor
+        self.widget.last_position_sb.setValue(self.backend.position())
+        self.backend.motor.move_to(pos)
+
+    def back(self):
+        self.widget.move_to_sb.setValue(self.widget.last_position_sb.value())

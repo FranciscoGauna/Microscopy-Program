@@ -1,9 +1,11 @@
+from datetime import datetime
 from typing import Union
 from time import sleep
 
 from lantz.core.foreign import Driver
 from mcculw import ul
 from mcculw.enums import ULRange, DigitalPortType, DigitalIODirection
+import mcculw.enums
 
 
 class USB2527(Driver):
@@ -68,3 +70,12 @@ class VirtualDAC(Driver):
 
     def write_digital_input(self, port: DigitalPortType, bit, value: bool):
         pass
+
+
+if __name__ == "__main__":
+    device = USB2527(0)
+    for i in range(10):
+        start_time = datetime.now()
+        device.read_analog_input(0)
+        print(datetime.now() - start_time)
+        sleep(1)

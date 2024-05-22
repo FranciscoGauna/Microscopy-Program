@@ -12,6 +12,7 @@ from lantz.qt import wrap_driver_cls
 from components.CameraPlatina import CameraPlatinaComponent, CameraBackend, VirtualCamera
 from components.CameraPlatina.camera import LucamCam
 from components.HP33120AFunGen import HPFunGen
+from components.LinePlotter import LinePlotter
 from components.Lockin import AnfatecLockin
 from components.Oven import LinkamOven
 from components.Platina import PlatinaComponent
@@ -153,9 +154,14 @@ class MainWindow(QMainWindow):
         self.dac_comp = self.dac_ops[self.dac_cb.currentText()]()
         dac_component = ComponentInitialization(self.dac_comp, -10, 1, 0, "DAC")
 
+        self.amplitude_graph = LinePlotter(("Fungen 1", "frequency", "Freq"),
+                                           ("Lockin", "amplitude", "Amplitude"), scatter=True, x=0)
+        self.phase_graph = LinePlotter(("Fungen 1", "frequency", "Freq"),
+                                       ("Lockin", "phase", "Phase"), scatter=True, x=1)
+
         ser_widget = get_main_widget([fungen_component, platina_component, oven_component],
                                      [lockin_component, dac_component],
-                                     [self.platina_comp.run_ui], [],
+                                     [self.platina_comp.run_ui, self.amplitude_graph, self.phase_graph], [],
                                      coupling_ui_options={"enabled": True, "x": 1, "y": 2})
 
         self.experiment_layout.addWidget(ser_widget, 0, 0)
