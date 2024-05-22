@@ -1,4 +1,5 @@
 from random import randrange, gauss
+from time import sleep
 
 from lantz import Feat
 from lantz.core import foreign
@@ -128,6 +129,7 @@ class VirtualLockin(foreign.Driver):
     @Feat(units='V')
     def amplitude(self):
         """Returns the value of the amplitude channel, which measures from the input signal"""
+        sleep(1)
         return randrange(200)
 
     @Feat(units='degrees')

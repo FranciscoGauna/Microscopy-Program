@@ -119,7 +119,7 @@ class Platina(ConfigurableInstrument):
 
     def set_config(self, config: Dict):
         super().set_config(config)
-        self._amount = config["amount"]
+        self.amount = config["amount"]
         self._final_point = config["final_point"]
         self._initial_point = config["initial_point"]
         self.motor.antiplay_enabled = bool(config["initial_point"])

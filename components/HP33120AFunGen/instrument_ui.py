@@ -11,18 +11,22 @@ from SER.interfaces import ConfigurableInstrument, ConfigurationUI
 
 
 class FunGen(ConfigurableInstrument):
-    fungen: HP33120AFungen = InstrumentSlot()
+    fungen: HP33120AFungen
 
-    def __init__(self, **instruments_and_backends):
+    def __init__(self, fungen, **instruments_and_backends):
+        self.fungen = fungen
         super().__init__(**instruments_and_backends)
 
         self._shape = "SIN"
         self._amplitude = 2.5
-        self._offset = 0.0
-        self._amount_frequency = 2
+        self._offset = 2.5
+        self._amount_frequency = 1
         self._min_frequency = 1.0
         self._max_frequency = 2.0
         self._log = False
+
+    def initialize(self, register_finalizer=False):
+        self.fungen.initialize()
 
     def configure(self, shape, freq, amplitude, offset) -> Dict[str, Any]:
         self.fungen.apply(shape, freq, amplitude, offset)

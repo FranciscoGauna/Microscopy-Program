@@ -12,7 +12,7 @@ from collections import OrderedDict
 import numpy as np
 from lantz import Action, Feat, DictFeat, ureg
 from lantz import MessageBasedDriver
-
+from lantz.core import messagebased
 
 SENS = OrderedDict([
         ('2 nV/fA', 0),
@@ -46,7 +46,7 @@ SENS = OrderedDict([
         ])
 
 TCONSTANTS = OrderedDict([
-    ('0 µs', 0),
+    ('0 µs', "0"),
     ('1 µs', "1.000000e-06"),
     ('2 µs', "2.000000e-06"),
     ('5 µs', "3.000000e-06"),
@@ -65,21 +65,21 @@ TCONSTANTS = OrderedDict([
     ('100 ms', "1.000000e-01"),
     ('200 ms', "2.000000e-01"),
     ('500 ms', "5.000000e-01"),
-    ('1 s', "1.000000e0"),
-    ('2 s', "2.000000e0"),
-    ('5 s', "5.000000e0"),
-    ('10 s', "1.000000e1"),
-    ('20 s', "2.000000e1"),
-    ('50 s', "5.000000e1"),
-    ('100 s', "1.000000e2"),
-    ('200 s', "2.000000e2"),
-    ('500 s', "5.000000e2"),
-    ('1 ks', "1.000000e3"),
-    ('2 ks', "2.000000e3"),
-    ('5 ks', "5.000000e3"),
-    ('10 ks', "1.000000e4"),
-    ('20 ks', "2.000000e4"),
-    ('50 ks', "5.000000e4"),
+    ('1 s', "1.000000e+00"),
+    ('2 s', "2.000000e+00"),
+    ('5 s', "5.000000e+00"),
+    ('10 s', "1.000000e+01"),
+    ('20 s', "2.000000e+01"),
+    ('50 s', "5.000000e+01"),
+    ('100 s', "1.000000e+02"),
+    ('200 s', "2.000000e+02"),
+    ('500 s', "5.000000e+02"),
+    ('1 ks', "1.000000e+03"),
+    ('2 ks', "2.000000e+03"),
+    ('5 ks', "5.000000e+03"),
+    ('10 ks', "1.000000e+04"),
+    ('20 ks', "2.000000e+04"),
+    ('50 ks', "5.000000e+04"),
 ])
 
 SAMPLE_RATES = OrderedDict([
@@ -164,7 +164,7 @@ class LI5655(MessageBasedDriver):
 
     @coupling.setter
     def coupling(self, value):
-        self.query(':INP:COUP {}'.format(value))
+        self.write(':INP:COUP {}'.format(value))
 
     @Feat(values={True: 'IOSC', False: 'RINP'})
     def reference_on(self):
@@ -223,7 +223,7 @@ class LI5655(MessageBasedDriver):
 
     @reference_amplitude.setter
     def reference_amplitude(self, value):
-        self.query(':SOUR:VOLT {}'.format(value))
+        self.write(':SOUR:VOLT {}'.format(value))
 
     @Feat(units='degrees', limits=(-360, 729.99, 0.01))
     def reference_phase(self):
@@ -233,7 +233,7 @@ class LI5655(MessageBasedDriver):
 
     @reference_phase.setter
     def reference_phase(self, value):
-        self.query(':PHAS {}'.format(value))
+        self.write(':PHAS {}'.format(value))
 
 
 class ResourceDummy:
@@ -277,3 +277,10 @@ class ResourceDummy:
 
     def read(self, termination=None, encoding=None):
         return self.response
+
+
+if __name__ == "__main__":
+    messagebased._resource_manager = messagebased.visa.ResourceManager()
+    driver = LI5655.via_usb(manufacturer_id=LI5655.MANUFACTURER_ID, model_code=LI5655.MODEL_CODE)
+    driver.initialize()
+    print(driver.amplitude)

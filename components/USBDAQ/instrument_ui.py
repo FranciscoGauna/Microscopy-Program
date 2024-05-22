@@ -1,4 +1,5 @@
 import math
+import random
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta
 from os import path
@@ -16,7 +17,7 @@ from lantz.qt.connect import connect_feat
 from mcculw.enums import DigitalPortType, DigitalIODirection
 
 from .USB2527 import USB2527
-from ..LineMapper import LineMapper
+from ..LinePlotter import LinePlotter
 
 
 class DACInstrument(ObservableInstrument):
@@ -176,10 +177,26 @@ class DACInstrument(ObservableInstrument):
         }
 
     def get_config(self) -> Dict:
-        return {}
+        return {
+            "laser_on": self.laser_on,
+            "check_focus": self.check_focus,
+            "focus_value": self.focus_value,
+            "focus_threshold": self.focus_threshold,
+            "motor_speed": self.motor_speed,
+            "min_sum": self.min_sum,
+            "offset_sum": self.offset_sum,
+            "offset_fe": self.offset_fe,
+        }
 
     def set_config(self, config: Dict):
-        pass
+        self.laser_on = config["laser_on"]
+        self.check_focus = config["check_focus"]
+        self.focus_value = config["focus_value"]
+        self.focus_threshold = config["focus_threshold"]
+        self.motor_speed = config["motor_speed"]
+        self.min_sum = config["min_sum"]
+        self.offset_sum = config["offset_sum"]
+        self.offset_fe = config["offset_fe"]
 
     def observe(self, *args) -> Dict[str, Any]:
         return {
@@ -235,17 +252,17 @@ class DACStatus:
     def read_status(self):
         self.abcd_sum = self.dac.read_analog_input(0)
         self.probe_reflectance = self.dac.read_analog_input(2)
-        self.focus_error = self.dac.read_analog_input(3)
         self.a = self.dac.read_analog_input(7)
         self.b = self.dac.read_analog_input(6)
         self.c = self.dac.read_analog_input(5)
         self.d = self.dac.read_analog_input(4)
+        self.focus_error = (self.a + self.c) - (self.b + self.d)
 
 
 class DACGraphs(QDialog):
-    error_focus_graph: LineMapper
-    sum_graph: LineMapper
-    reflectance_graph: LineMapper
+    error_focus_graph: LinePlotter
+    sum_graph: LinePlotter
+    reflectance_graph: LinePlotter
     error_focus_layout: QVBoxLayout
     sum_layout: QVBoxLayout
     reflectance_layout: QVBoxLayout
@@ -255,12 +272,12 @@ class DACGraphs(QDialog):
         ui_file_path = path.join(path.dirname(path.realpath(__file__)), "graphs.ui")
         uic.loadUi(ui_file_path, self)
 
-        self.error_focus_graph = LineMapper(("timestamp", "time", "Time"),
-                                            ("dac", "focus_error", "Suma"), max_points=500)
-        self.sum_graph = LineMapper(("timestamp", "time", "Time"),
-                                    ("dac", "abcd_sum", "Reflectancia"), max_points=500)
-        self.reflectance_graph = LineMapper(("timestamp", "time", "Time"),
-                                            ("dac", "probe_reflectance", "Error de Foco"), max_points=500)
+        self.error_focus_graph = LinePlotter(("timestamp", "time", "Time"),
+                                             ("dac", "focus_error", "Suma"), max_points=500)
+        self.sum_graph = LinePlotter(("timestamp", "time", "Time"),
+                                     ("dac", "abcd_sum", "Reflectancia"), max_points=500)
+        self.reflectance_graph = LinePlotter(("timestamp", "time", "Time"),
+                                             ("dac", "probe_reflectance", "Error de Foco"), max_points=500, scatter=True)
         self.error_focus_layout.addWidget(self.error_focus_graph)
         self.sum_layout.addWidget(self.sum_graph)
         self.reflectance_layout.addWidget(self.reflectance_graph)
@@ -317,11 +334,10 @@ class DACUI(ConfigurationUI):
         self.widget.laser_potency_lb.setText(f"Potencia laser ({self.backend.laser_potency}%)")
         if self.widget.focus_display_cb.isChecked() != self.backend.focus():
             self.widget.focus_display_cb.toggle()
-        ef = (self.backend.status.a + self.backend.status.c) - (self.backend.status.b + self.backend.status.d)
         self.graphs.update_with_data(
             self.backend.status.focus_error,
             self.backend.status.abcd_sum,
-            ef,
+            self.backend.status.probe_reflectance,
         )
         if is_pressed(self.move_left_key) != is_pressed(self.move_right_key):
             self.backend.sens(is_pressed(self.move_left_key))

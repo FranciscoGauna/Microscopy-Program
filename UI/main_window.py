@@ -75,13 +75,15 @@ class MainWindow(QMainWindow):
     def load_options(self):
         self.fungen_ops = {
             "Virtual": HPFunGen.virtual,
-            "HP 33120A": lambda: HPFunGen.via_prologix_gpib(10)
+            "HP 33120A": lambda: HPFunGen.via_prologix_gpib(10),
+            "Rigol": HPFunGen.rigol
         }
         self.fungen_cb.addItems(self.fungen_ops.keys())
 
         self.lockin_ops = {
             "Virtual": AnfatecLockin.virtual,
-            "Anfatec": AnfatecLockin.real
+            "Anfatec": AnfatecLockin.real,
+            "LI5655": AnfatecLockin.LI5655
         }
         self.lockin_cb.addItems(self.lockin_ops.keys())
 

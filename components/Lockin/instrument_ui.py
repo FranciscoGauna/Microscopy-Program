@@ -4,16 +4,19 @@ from typing import Dict, Any
 from SER.interfaces import ObservableInstrument, ConfigurationUI
 from lantz.qt import InstrumentSlot
 from lantz.qt.connect import connect_feat
+from pint import get_application_registry
 
 from .anfatec_driver import AnfatecAMU24
 
+ureg = get_application_registry()
+Quantity = ureg.Quantity
 
 class Lockin(ObservableInstrument):
     lockin: AnfatecAMU24 = InstrumentSlot()
 
     def observe(self) -> Dict[str, Any]:
-        tc_time = float(self.lockin.time_constants.strip(" ms"))
-        sleep(tc_time / 500)
+        tc_time = Quantity(self.lockin.time_constants).to("s").magnitude
+        sleep(tc_time * 100)
         return {
             "amplitude": self.lockin.amplitude.magnitude,
             "phase": self.lockin.phase.magnitude
