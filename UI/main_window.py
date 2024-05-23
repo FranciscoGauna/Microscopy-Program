@@ -172,3 +172,5 @@ class MainWindow(QMainWindow):
             self.platina_comp.close_component()
         if self.dac_comp is not None:
             self.dac_comp.close_component()
+        if self.lockin_comp is not None:
+            self.lockin_comp.close_component()

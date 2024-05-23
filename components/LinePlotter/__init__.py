@@ -17,6 +17,7 @@ class LinePlotter(ProcessDataUI):
         super().__init__(x, y, parent, backend)
         self.x_device, self.x_var_name, self.x_display_name = x_variable
         self.y_device, self.y_var_name, self.y_display_name = y_variable
+        # TODO: include display name
         self.max_points = max_points
         self.scatter = scatter
         self.initialize()

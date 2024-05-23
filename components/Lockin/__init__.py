@@ -8,6 +8,8 @@ from .anfatec_driver import AnfatecAMU24, VirtualLockin
 
 
 class AnfatecLockin(Component):
+    conf_ui: LockinUI
+
     def __init__(self, lockin):
         self.instrument = Lockin(lockin=lockin)
         self.conf_ui = LockinUI(backend=self.instrument)
@@ -24,3 +26,6 @@ class AnfatecLockin(Component):
     def LI5655(cls):
         messagebased._resource_manager = messagebased.visa.ResourceManager()
         return cls(wrap_driver_cls(LI5655).via_usb(manufacturer_id=LI5655.MANUFACTURER_ID, model_code=LI5655.MODEL_CODE))
+
+    def close_component(self):
+        self.conf_ui.close_graphs()

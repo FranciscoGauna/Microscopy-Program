@@ -1,18 +1,33 @@
+import threading
+from datetime import datetime
+from os import path
 from time import sleep
 from typing import Dict, Any
 
+from PyQt5 import uic
+from PyQt5.QtCore import Qt, QTimer
+from PyQt5.QtWidgets import QDialog, QVBoxLayout
 from SER.interfaces import ObservableInstrument, ConfigurationUI
 from lantz.qt import InstrumentSlot
 from lantz.qt.connect import connect_feat
 from pint import get_application_registry
+from pyqtgraph import HistogramLUTWidget
 
 from .anfatec_driver import AnfatecAMU24
+from ..BarPlotter import BarPlotter
+from ..LinePlotter import LinePlotter
 
 ureg = get_application_registry()
 Quantity = ureg.Quantity
 
+
 class Lockin(ObservableInstrument):
     lockin: AnfatecAMU24 = InstrumentSlot()
+    initialized = False
+
+    def initialize(self, register_finalizer=False, is_experiment=True):
+        self.initialized = is_experiment
+        self.lockin.initialize()
 
     def observe(self) -> Dict[str, Any]:
         tc_time = Quantity(self.lockin.time_constants).to("s").magnitude
@@ -65,11 +80,58 @@ class LockinUI(ConfigurationUI):
 
     backend: Lockin
 
-    def __init__(self, backend):
+    def __init__(self, backend: Lockin):
         super().__init__(backend=backend)
-        backend.initialize()
+        backend.initialize(is_experiment=False)
         connect_feat(self.widget.time_constant_cb, self.backend.lockin, "time_constants")
         connect_feat(self.widget.input_gain_cb, self.backend.lockin, "sensitivity")
         connect_feat(self.widget.slope_cb, self.backend.lockin, "filter_slope")
         connect_feat(self.widget.harmonic_sb, self.backend.lockin, "harmonic")
         connect_feat(self.widget.pll_check, self.backend.lockin, "reference_on")
+
+        self.dialog = LockinGraphs(backend)
+        self.widget.graphs_bt.pressed.connect(self.dialog.show)
+
+    def close_graphs(self):
+        self.dialog.close_graphs()
+
+
+class LockinGraphs(QDialog):
+    amplitude_graph: LinePlotter
+    phase_graph: BarPlotter
+    amplitude_layout: QVBoxLayout
+    phase_layout: QVBoxLayout
+
+    def __init__(self, lockin: Lockin):
+        super().__init__()
+        ui_file_path = path.join(path.dirname(path.realpath(__file__)), "graphs.ui")
+        uic.loadUi(ui_file_path, self)
+
+        self.amplitude_graph = LinePlotter(("timestamp", "time", "Time"),
+                                           ("lockin", "amplitude", "Amplitude"), max_points=500)
+        self.phase_graph = BarPlotter(("timestamp", "time", "Time"),
+                                      ("lockin", "phase", "Phase"), max_points=500, histogram=True)
+        self.amplitude_layout.addWidget(self.amplitude_graph)
+        self.phase_layout.addWidget(self.phase_graph)
+        self.lockin = lockin
+        self.time = datetime.now()
+        self.running = True
+        self.timer = threading.Thread(target=self.update_with_data)
+        self.timer.start()
+
+    def close_graphs(self):
+        self.running = False
+        self.timer.join()
+
+    def update_with_data(self):
+        while not self.lockin.initialized and self.running:
+            data = [{
+                "timestamp": {"time": (datetime.now() - self.time).total_seconds()},
+                "lockin": {
+                    "amplitude": self.lockin.lockin.amplitude.magnitude,
+                    "phase": self.lockin.lockin.phase.magnitude
+                }
+            }]
+            self.amplitude_graph.add_data(data)
+            self.phase_graph.add_data(data)
+            sleep(0.1)

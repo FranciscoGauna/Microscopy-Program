@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>455</width>
-    <height>463</height>
+    <height>461</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,6 +37,9 @@
        <weight>75</weight>
        <bold>true</bold>
       </font>
+     </property>
+     <property name="digitCount">
+      <number>9</number>
      </property>
     </widget>
    </item>
@@ -91,7 +94,11 @@
          </widget>
         </item>
         <item row="4" column="1">
-         <widget class="QSpinBox" name="antiplay_sb"/>
+         <widget class="QSpinBox" name="antiplay_sb">
+          <property name="maximum">
+           <number>9999999</number>
+          </property>
+         </widget>
         </item>
         <item row="3" column="1">
          <widget class="QSpinBox" name="antiplay_speed_sb">
@@ -139,7 +146,7 @@
           <number>3</number>
          </property>
          <property name="minimum">
-          <double>-99999.990000000005239</double>
+          <double>-9999999.990000000223517</double>
          </property>
          <property name="maximum">
           <double>99999.990000000005239</double>
@@ -159,10 +166,10 @@
           <number>3</number>
          </property>
          <property name="minimum">
-          <double>-99999.990000000005239</double>
+          <double>-9999999.990000000223517</double>
          </property>
          <property name="maximum">
-          <double>99999.990000000005239</double>
+          <double>9999999.990000000223517</double>
          </property>
         </widget>
        </item>
@@ -199,10 +206,10 @@
          <number>3</number>
         </property>
         <property name="minimum">
-         <double>-99999.990000000005239</double>
+         <double>-9999999.990000000223517</double>
         </property>
         <property name="maximum">
-         <double>99999.990000000005239</double>
+         <double>9999999.990000000223517</double>
         </property>
        </widget>
       </item>
@@ -226,10 +233,10 @@
          <number>3</number>
         </property>
         <property name="minimum">
-         <double>-99999.990000000005239</double>
+         <double>-9999999.990000000223517</double>
         </property>
         <property name="maximum">
-         <double>99999.990000000005239</double>
+         <double>9999999.990000000223517</double>
         </property>
        </widget>
       </item>
