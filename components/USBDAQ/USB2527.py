@@ -3,7 +3,10 @@ from typing import Union
 from time import sleep
 
 from lantz.core.foreign import Driver
-from mcculw import ul
+try:
+    from mcculw import ul
+except FileNotFoundError:
+    pass
 from mcculw.enums import ULRange, DigitalPortType, DigitalIODirection
 import mcculw.enums
 

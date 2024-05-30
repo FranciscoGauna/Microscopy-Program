@@ -12,3 +12,4 @@ ximc
 .idea/inspectionProfiles/profiles_settings.xml
 .vs/*
 *.dll
+venv/*

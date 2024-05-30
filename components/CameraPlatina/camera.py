@@ -1,7 +1,11 @@
 from os import path
 
 import cv2
-from lucam import Lucam
+try:
+    from lucam import Lucam
+except FileNotFoundError:
+    # We can't use it in case
+    pass
 from lantz.qt import Backend
 from lantz.core import Feat
 
