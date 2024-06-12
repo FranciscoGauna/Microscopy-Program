@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>255</width>
-    <height>465</height>
+    <height>473</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -67,7 +67,7 @@
           <item>
            <widget class="QPushButton" name="launch_button">
             <property name="text">
-             <string>launch</string>
+             <string>Lanzar</string>
             </property>
            </widget>
           </item>
@@ -83,14 +83,14 @@
         <item row="6" column="0">
          <widget class="QPushButton" name="motor_x_bt">
           <property name="text">
-           <string>Load Conf</string>
+           <string>Cargar Configuracion</string>
           </property>
          </widget>
         </item>
         <item row="0" column="0">
          <widget class="QLabel" name="fungen_label">
           <property name="text">
-           <string>Function Generator</string>
+           <string>Generador de Funciones</string>
           </property>
          </widget>
         </item>
@@ -116,7 +116,7 @@
         <item row="2" column="0">
          <widget class="QLabel" name="lockin_label">
           <property name="text">
-           <string>Lock-in Amplifier</string>
+           <string>Amplificador Lock-in</string>
           </property>
          </widget>
         </item>
