@@ -1,0 +1,43 @@
+appdirs==1.4.4
+contourpy==1.2.1
+cycler==0.12.1
+flexcache==0.3
+flexparser==0.3.1
+fonttools==4.53.0
+keyboard==0.13.5
+kiwisolver==1.4.5
+lantz-drivers @ git+https://github.com/lantzproject/lantz-drivers.git@bd1ed2e51b42ca5e37f4e4188d0a22435e33bf6b
+lantz-qt @ git+https://github.com/lantzproject/lantz-qt.git@830be406bc4b8c783825ef1910cc45ed86770799
+lantzdev @ git+https://github.com/lantzproject/lantz-core.git@7562731f01c694dcdfa3b2124476632950b64040
+libximc==2.14.23
+lucam==2022.9.27
+matplotlib==3.9.0
+mcculw==1.0.0
+mistune==3.0.2
+numpy==1.26.4
+opencv-python==4.10.0.82
+packaging==24.1
+pandas==2.2.2
+pillow==10.3.0
+pimpmyclass==0.4.3
+Pint==0.24
+pyparsing==3.1.2
+PyQt5==5.15.10
+PyQt5-Qt5==5.15.2
+PyQt5-sip==12.13.0
+pyqtgraph==0.13.7
+pyserial==3.5
+PySignal==1.1.1
+python-dateutil==2.9.0.post0
+pytz==2024.1
+pyusb==1.2.1
+PyVISA==1.14.1
+PyVISA-py==0.7.2
+PyYAML==6.0.1
+scipy==1.13.1
+SER @ git+https://github.com/FranciscoGauna/SER.git@8b8a141938de024e427e374a47ac84c7e449f802
+Serialize==0.2.1
+six==1.16.0
+stringparser==0.7
+typing_extensions==4.12.2
+tzdata==2024.1

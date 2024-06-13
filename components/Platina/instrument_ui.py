@@ -1,13 +1,9 @@
-from datetime import datetime
-from time import sleep
 from typing import Dict, Generator, Any
 
-from PyQt5.QtWidgets import QDoubleSpinBox
 from keyboard import is_pressed
 from PyQt5.QtCore import QTimer, Qt
 from SER.interfaces import ConfigurationUI, ConfigurableInstrument
 from lantz import Feat
-from lantz.qt import InstrumentSlot
 from lantz.qt.connect import connect_feat
 
 from .motor import Motor

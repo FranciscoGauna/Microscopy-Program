@@ -8,3 +8,4 @@ mcculw
 pyqtgraph
 SER @ git+https://github.com/FranciscoGauna/SER.git#egg=SER
 lantz.drivers @ git+https://github.com/lantzproject/lantz-drivers.git#egg=lantz.drivers
+PyVISA-py

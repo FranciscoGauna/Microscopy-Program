@@ -5,13 +5,11 @@ from time import sleep
 from typing import Dict, Any
 
 from PyQt5 import uic
-from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtWidgets import QDialog, QVBoxLayout
 from SER.interfaces import ObservableInstrument, ConfigurationUI
 from lantz.qt import InstrumentSlot
 from lantz.qt.connect import connect_feat
 from pint import get_application_registry
-from pyqtgraph import HistogramLUTWidget
 
 from .anfatec_driver import AnfatecAMU24
 from ..BarPlotter import BarPlotter
