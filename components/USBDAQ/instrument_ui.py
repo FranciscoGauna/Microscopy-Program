@@ -250,6 +250,7 @@ class DACStatus:
             sleep(0.01)
 
     def read_status(self):
+        # Note: if you're going to use a specific different version of the setup, this is where it gets changed
         self.abcd_sum = self.dac.read_analog_input(0)
         self.probe_reflectance = self.dac.read_analog_input(2)
         self.a = self.dac.read_analog_input(7)
