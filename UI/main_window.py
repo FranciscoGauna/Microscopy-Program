@@ -128,7 +128,6 @@ class MainWindow(QMainWindow):
                 self.motor_y_filename = file_name
 
     def switch_window(self):
-        print("switch_window")
         self.fungen_comp = self.fungen_ops[self.fungen_cb.currentText()]()
         fungen_component = ComponentInitialization(self.fungen_comp, 0, 0, 1, "Fungen 1")
         self.lockin_comp = self.lockin_ops[self.lockin_cb.currentText()]()
