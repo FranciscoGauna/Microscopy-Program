@@ -77,7 +77,7 @@ class MainWindow(QMainWindow):
         self.fungen_ops = {
             "Virtual": HPFunGen.virtual,
             "HP 33120A": lambda: HPFunGen.via_prologix_gpib(10),
-            "Rigol": HPFunGen.rigol
+            "Rigol DG1022": HPFunGen.rigol
         }
         self.fungen_cb.addItems(self.fungen_ops.keys())
 

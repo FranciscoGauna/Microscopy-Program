@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>255</width>
-    <height>473</height>
+    <height>555</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,7 +35,7 @@
         <item row="9" column="0">
          <widget class="QPushButton" name="motor_y_bt">
           <property name="text">
-           <string>Load Conf</string>
+           <string>Cargar Configuracion</string>
           </property>
          </widget>
         </item>
@@ -145,7 +145,7 @@
      <x>0</x>
      <y>0</y>
      <width>255</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
