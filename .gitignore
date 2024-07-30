@@ -13,3 +13,4 @@ ximc
 .vs/*
 *.dll
 venv/*
+devices.ini

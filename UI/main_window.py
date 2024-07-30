@@ -1,5 +1,6 @@
 from os import path
 from typing import Callable
+from configparser import ConfigParser
 
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QPushButton, QStackedWidget, QComboBox, QLabel, \
@@ -18,6 +19,21 @@ from components.Oven import LinkamOven
 from components.Platina import PlatinaComponent
 from components.Platina.motor import get_available_motors, Motor
 from components.USBDAQ import USB2527DAC
+
+# Reconsider moving this to a different file
+config = ConfigParser()
+
+# Default config, if it doesn't find a file it saves this one
+config["HP33120AFungen"] = {"PROLOGIX ADDR": "10"}
+config["Web Cam"] = {"Index": "0"}
+config["Linkam TMS 94"] = {"Port": "15"}
+config["USB2527DAC"] = {"Board Num": "0"}
+
+if path.exists("devices.ini"):
+    config.read("devices.ini")
+else:
+    with open("devices.ini", "w") as f:
+        config.write(f)
 
 
 class MainWindow(QMainWindow):
@@ -76,7 +92,7 @@ class MainWindow(QMainWindow):
     def load_options(self):
         self.fungen_ops = {
             "Virtual": HPFunGen.virtual,
-            "HP 33120A": lambda: HPFunGen.via_prologix_gpib(10),
+            "HP 33120A": lambda: HPFunGen.via_prologix_gpib(int(config["HP33120AFungen"]["PROLOGIX ADDR"])),
             "Rigol DG1022": HPFunGen.rigol
         }
         self.fungen_cb.addItems(self.fungen_ops.keys())
@@ -97,20 +113,20 @@ class MainWindow(QMainWindow):
 
         self.camera_ops = {
             "Virtual": VirtualCamera,
-            "Web Cam": lambda: VideoCapture(0),
+            "Web Cam": lambda: VideoCapture(int(config["Web Cam"]["Index"])),
             "Lucam": LucamCam
         }
         self.camera_cb.addItems(self.camera_ops.keys())
 
         self.oven_ops = {
             "Virtual": LinkamOven.virtual,
-            "Linkam TMS 94": lambda: LinkamOven.real(15),
+            "Linkam TMS 94": lambda: LinkamOven.real(int(config["Linkam TMS 94"]["Port"])),
         }
         self.oven_cb.addItems(self.oven_ops.keys())
 
         self.dac_ops = {
             "Virtual": USB2527DAC.virtual,
-            "USB2527": lambda: USB2527DAC.real(0),
+            "USB2527": lambda: USB2527DAC.real(int(config["USB2527DAC"]["Board Num"])),
         }
         self.dac_cb.addItems(self.dac_ops.keys())
 
