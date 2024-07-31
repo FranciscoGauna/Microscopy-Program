@@ -30,6 +30,14 @@ Camara: [`LgCam Software` de Lumenera](https://www.lumenera.com/support/industri
 DAQ: [`MCCDAQ` de Diligent](https://cloud.digilent.com/myproducts/ULxforWindows?pc=1&tab=2)
 
 ## Utilización
+
+Nota: ver tambien documentacion del [SER](https://github.com/FranciscoGauna/SER)
+para mas detalles sobre la utilizacion de este software. Esta documentacion
+se enfoca en los detalles pertinentes a los dispositivos asociados al 
+setup experimental asociado con el microscopio fototermico del 
+laboratorio de haces dirigidos en la Faculta de Ingenieria de la
+Universidad de Buenos Aires.
+
 ### Seleccionar Dispositivos
 
 Esta pantalla permite seleccionar que instancia de dispositivos se quieren 
@@ -144,12 +152,23 @@ primero. Ejemplo: si la el horno está acoplado en 1 con los valores
 100Hz y 1000Hz los puntos son (40°, 100Hz) -> (40°, 1000Hz)
  -> (50°, 100Hz) -> (50°, 1000Hz).
 
-
-
 ### Ver Corrida
+
+Esta pantalla permite monitorear el progreso de la corrida del experimento.
+Los graficos muestran los valores de fase (°/log(Hz)) y 
+amplitud (log(V)/log(Hz)). El boton de "Parar" aborta la ejecuccion del
+programa.
+
 ![Ver Corrida](Documentation/running_page.png 
 "Corrida")
 
 ### Tabla de Datos
+
+Esta pantalla permite ver los datos finales del experimento. Arriba a la 
+izquierda se puede guardar la informacion de las variables, indicando
+que significa cada valor y su unidad. Arriba a la derecha se puede
+guardar la tabla de datos, tanto en formato matlab como formato
+csv (comma separated values).
+
 ![Tabla de Datos Final](Documentation/data_page.png 
 "Datos")
