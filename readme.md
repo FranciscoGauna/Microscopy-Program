@@ -11,13 +11,15 @@ Se puede descargar del siguiente link https://www.anaconda.com/download.
 
 ### Biblioteca
 
-Para instalar las bibliotecas de python es solo necesario hacer el comando `pip install -r requirements.txt`. 
-Proveo también el archivo `frozenreqs.txt` que contienen la version específica de las bibliotecas de python
+Para instalar las bibliotecas de python es solo necesario hacer el comando
+`pip install -r requirements.txt`. Proveo también el archivo `frozenreqs.txt`
+que contienen la version específica de las bibliotecas de python
 con las cuales se testeó y utilizo el programa.
 
 ### Dispositivos Externos
 
-El funcionamiento del Microscopy-Program depende de drivers de dispositivos externos. Listo los drivers utilizados.
+El funcionamiento del Microscopy-Program depende de drivers de dispositivos externos. 
+Listo los drivers utilizados.
 
 Lock-in AMU 2.4: [`AMU 2.4 Lockin.dll` de Anfatec](https://www.anfatec.de/products/3_lockin/amu/24/pci-bus_lockin_amplifier_amu24.html)
 
@@ -90,55 +92,55 @@ indicando que opciones se pueden modificar.
 ![Configurar Corrida](Documentation/configure_page.png 
 "Configuración")
 
-Camara: La camara tiene un cuadrado mostrando continuamente fotos del
-dispositivo. Se puede ademas clickear en la pantalla para asignar 
+Cámara: La cámara tiene un cuadrado mostrando continuamente fotos del
+dispositivo. Se puede además clickear en la pantalla para asignar 
 la ruta de movimiento de la platina. Este movimiento se puede calibrar
-con el boton calibrar. La seleccion de cuadrado/linea indica si el motor
-x y el motor y se mueven en paralelo o simultaneo respectivamente.
+con el botón calibrar. La selección de cuadrado/línea indica si el motor
+X y el motor Y se mueven en paralelo o simultáneo respectivamente.
 
-Pantalla de calibracion:
+Pantalla de calibración:
 
-Motor: Cada motor tiene una posicion actual y sus parametros de
-velocidad, aceleracion y antiplay (backlash). Se puede cambiar el cero
-con el boton que indica que la posicion actual es el cero. Durante
-la corrida, el motor va a ir de la posicion inicial a la final con
+![Pantalla de Calibración](Documentation/configure_page_calibration.png)
+
+Motor: Cada motor tiene una posición actual y sus parámetros de
+velocidad, aceleración y antiplay (backlash). Se puede cambiar el cero
+con el botón que indica que la posición actual es el cero. Durante
+la corrida, el motor va a ir de la posición inicial a la final con
 la cantidad de pasos indicando cuantas paradas hace. Ejemplo: si el motor
-x/y estan en modo linea con los parametros: inicial 0, final 2, pasos 3; 
+x/y están en modo línea con los parámetros: inicial 0, final 2, pasos 3; 
 las posiciones van a ser (0,0), (1,1), (2,2).
 
-Mover Motor: esta seccion permite enviar el motor a la posicion en
-la caja de arriba. La caja de abajo guarda la posicion en la cual 
-estaba cuando se movio. Stop para el motor en el momento, en caso de
+Mover Motor: esta sección permite enviar el motor a la posición en
+la caja de arriba. La caja de abajo guarda la posición en la cual 
+estaba cuando se movió. Stop para el motor en el momento, en caso de
 que haya un error. 
 
 Generador de Funciones: permite configurar la amplitud, el offset, 
 la forma y el rango de frecuencias. Todos los valores de frecuencias
 son en Hertz.
-El rango de frecuencias puede ser lineal o logaritmico. Ejemplo:
-Con los parametros frecuencia inicial 10, frecuencia inicial 1000,
-pasos 3; las freucncias van a ser 10, 100, 1000.
-
-[//]: # (Actualizar texto en screenshot y remover repeat)
+El rango de frecuencias puede ser lineal o logarítmico. Ejemplo:
+Con los parámetros frecuencia inicial 10, frecuencia inicial 1000,
+pasos 3; las frecuencias van a ser 10, 100, 1000.
 
 Horno: permite configurar el rango de temperatura del horno.
 
 Control de Foco: permite prender y apagar el control laser
-de prueba, controlar su potencia y ver los graficos de reflectancia, 
-suma abcd y error de foco. El control de foco automaticamente enfoca
-el motor moviendo el eje Z con los parametros provistos (no funcional).
+de prueba, controlar su potencia y ver los gráficos de reflectancia, 
+suma abcd y error de foco. El control de foco automáticamente enfoca
+el motor moviendo el eje Z con los parámetros provistos (no funcional).
 
-[//]: # (Sacar foto de los graficos)
+![Graficos Control de Foco](Documentation/configure_page_dac_graphs.png)
 
 Lockin: permite configurar la constante de tiempo, la ganancia, la curva,
-el harmonico y la referencia externa. Importante: para los experimentos, la
-referencia externa tendria que estar siempre prendida.
+el armónico y la referencia externa. Importante: para los experimentos, la
+referencia externa tendría que estar siempre prendida.
 
-[//]: # (Sacar foto de grafico y)
+![Graficos Lock-in](Documentation/configure_page_lockin_graphs.png)
 
-Acoplamiento: permite indicar que dispositivos están acoplados y el orden 
-de los puntos. Los dispositivos con el valor más alto varian sus puntos 
+Acoplamiento: permite indicar qué dispositivos están acoplados y el orden 
+de los puntos. Los dispositivos con el valor más alto varían sus puntos 
 primero. Ejemplo: si la el horno está acoplado en 1 con los valores
-40° y 50° y el generador de frecuencia esta acoplado en 2 con los valores
+40° y 50° y el generador de frecuencia está acoplado en 2 con los valores
 100Hz y 1000Hz los puntos son (40°, 100Hz) -> (40°, 1000Hz)
  -> (50°, 100Hz) -> (50°, 1000Hz).
 

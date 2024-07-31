@@ -26,28 +26,28 @@
    <item row="2" column="1">
     <widget class="QLabel" name="harmonic_label">
      <property name="text">
-      <string>Harmonic</string>
+      <string>Harmonica</string>
      </property>
     </widget>
    </item>
    <item row="2" column="0">
     <widget class="QLabel" name="input_gain_label">
      <property name="text">
-      <string>Input Gain</string>
+      <string>Ganancia</string>
      </property>
     </widget>
    </item>
    <item row="0" column="1">
     <widget class="QLabel" name="slope_label">
      <property name="text">
-      <string>Slope</string>
+      <string>Curva</string>
      </property>
     </widget>
    </item>
    <item row="0" column="0">
     <widget class="QLabel" name="time_constant_label">
      <property name="text">
-      <string>Time Constant</string>
+      <string>Constante Temporal</string>
      </property>
     </widget>
    </item>
@@ -67,7 +67,7 @@
    <item row="1" column="2">
     <widget class="QCheckBox" name="pll_check">
      <property name="text">
-      <string>PLL</string>
+      <string>Referencia Externa</string>
      </property>
     </widget>
    </item>

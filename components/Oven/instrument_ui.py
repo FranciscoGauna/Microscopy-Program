@@ -72,7 +72,7 @@ class OvenInstrument(ConfigurableInstrument):
 
     def variable_documentation(self) -> Dict[str, str]:
         return {
-            "Temperature": "The temperature at the moment the measure was taken"
+            "Temperature": "The temperature at the moment the measure was taken in degrees celsius"
         }
 
     @Feat

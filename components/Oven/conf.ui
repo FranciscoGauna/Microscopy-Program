@@ -14,20 +14,20 @@
    <string>GroupBox</string>
   </property>
   <property name="title">
-   <string>Oven</string>
+   <string>Horno</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="1">
     <widget class="QLabel" name="max_temp_lb">
      <property name="text">
-      <string>Max Temperature</string>
+      <string>Temperatura Maxima (°C)</string>
      </property>
     </widget>
    </item>
    <item row="3" column="0">
     <widget class="QLabel" name="rate_temp_lb">
      <property name="text">
-      <string>Temperature Increase Rate</string>
+      <string>Velocidad de Temperatura (°C/min)</string>
      </property>
     </widget>
    </item>
@@ -41,7 +41,7 @@
    <item row="3" column="1">
     <widget class="QLabel" name="amount_temp_lb">
      <property name="text">
-      <string>Amount of Points</string>
+      <string>Cantidad de Puntos</string>
      </property>
     </widget>
    </item>
@@ -68,7 +68,7 @@
    <item row="1" column="0">
     <widget class="QLabel" name="min_temp_lb">
      <property name="text">
-      <string>Min Temperature</string>
+      <string>Temperatura Minima (°C)</string>
      </property>
     </widget>
    </item>

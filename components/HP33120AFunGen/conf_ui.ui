@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>351</width>
+    <width>486</width>
     <height>117</height>
    </rect>
   </property>
@@ -14,7 +14,7 @@
    <string>GroupBox</string>
   </property>
   <property name="title">
-   <string>Function Generator</string>
+   <string>Generador de Funciones</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="0">
@@ -23,14 +23,14 @@
    <item row="0" column="0">
     <widget class="QLabel" name="amplitude_frequency">
      <property name="text">
-      <string>Amplitude</string>
+      <string>Amplitud</string>
      </property>
     </widget>
    </item>
    <item row="0" column="3">
     <widget class="QLabel" name="shape_label">
      <property name="text">
-      <string>Shape</string>
+      <string>Forma</string>
      </property>
     </widget>
    </item>
@@ -40,14 +40,14 @@
    <item row="2" column="2">
     <widget class="QLabel" name="freq_min_label">
      <property name="text">
-      <string>Min Frequency</string>
+      <string>Frecuencia Minima</string>
      </property>
     </widget>
    </item>
    <item row="2" column="0">
     <widget class="QLabel" name="freq_amount_label">
      <property name="text">
-      <string>Frequency Amount</string>
+      <string>Puntos de Frecuencia</string>
      </property>
     </widget>
    </item>
@@ -94,28 +94,14 @@
    <item row="2" column="3">
     <widget class="QLabel" name="freq_max_label">
      <property name="text">
-      <string>Max Frequency</string>
+      <string>Frecuencia Maxima</string>
      </property>
     </widget>
    </item>
    <item row="3" column="4">
     <widget class="QCheckBox" name="log_check">
      <property name="text">
-      <string>Log</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="4">
-    <widget class="QSpinBox" name="spinBox">
-     <property name="minimum">
-      <number>1</number>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="4">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Repeat</string>
+      <string>Logarítmica</string>
      </property>
     </widget>
    </item>
