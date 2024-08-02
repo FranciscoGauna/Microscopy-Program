@@ -31,8 +31,8 @@ DAQ: [`MCCDAQ` de Diligent](https://cloud.digilent.com/myproducts/ULxforWindows?
 
 ## Utilización
 
-Nota: ver tambien documentacion del [SER](https://github.com/FranciscoGauna/SER)
-para mas detalles sobre la utilizacion de este software. Esta documentacion
+Nota: ver también documentacion del [SER](https://github.com/FranciscoGauna/SER)
+para más detalles sobre la utilizacion de este software. Esta documentacion
 se enfoca en los detalles pertinentes a los dispositivos asociados al 
 setup experimental asociado con el microscopio fototermico del 
 laboratorio de haces dirigidos en la Faculta de Ingenieria de la
@@ -74,9 +74,9 @@ Digital-to-Analog-Converter (DAC):
 - MCC USB-2527
 
 Los motores de la platina pueden ser cargados con archivos de configuracion
-provistos por xilab para ese motor especifico. Estos incluyen informacion
-sobre el feedback, si la direccion positiva esta invertida y sobre la
-relacion entre cuentas del motor y la distancia real. Si se tiene esta ultima
+provistos por xilab para ese motor específico. Estos incluyen información
+sobre el feedback, si la direccion positiva está invertida y sobre la
+relacion entre cuentas del motor y la distancia real. Si se tiene esta última
 la pantalla siguiente muestra la posicion en la unidad indicada.
 
 Una vez seleccionado los dispositivos lanzar inizaliza los dispositivos.
@@ -165,7 +165,7 @@ programa.
 ### Tabla de Datos
 
 Esta pantalla permite ver los datos finales del experimento. Arriba a la 
-izquierda se puede guardar la informacion de las variables, indicando
+izquierda se puede guardar la información de las variables, indicando
 que significa cada valor y su unidad. Arriba a la derecha se puede
 guardar la tabla de datos, tanto en formato matlab como formato
 csv (comma separated values).
