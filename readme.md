@@ -9,7 +9,7 @@ microscopio fototérmico desarrollado por Facundo Zaldivar Escola.
 La version de python utilizada para el desarrollo fue Python 3.11.4.
 Se puede descargar del siguiente link https://www.anaconda.com/download.
 
-### Biblioteca
+### Bibliotecas
 
 Para instalar las bibliotecas de python es solo necesario hacer el comando
 `pip install -r requirements.txt`. Proveo también el archivo `frozenreqs.txt`
