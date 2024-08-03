@@ -106,7 +106,7 @@ la ruta de movimiento de la platina. Este movimiento se puede calibrar
 con el botón calibrar. La selección de cuadrado/línea indica si el motor
 X y el motor Y se mueven en paralelo o simultáneo respectivamente.
 
-Pantalla de calibración:
+Pantalla de calibración: ver el botón info para instrucciones.
 
 ![Pantalla de Calibración](Documentation/configure_page_calibration.png)
 
@@ -156,7 +156,7 @@ primero. Ejemplo: si la el horno está acoplado en 1 con los valores
 
 Esta pantalla permite monitorear el progreso de la corrida del experimento.
 Los graficos muestran los valores de fase (°/log(Hz)) y 
-amplitud (log(V)/log(Hz)). El boton de "Parar" aborta la ejecuccion del
+amplitud (log(V)/log(Hz)). El botón de "Parar" aborta la ejecuccion del
 programa.
 
 ![Ver Corrida](Documentation/running_page.png 
