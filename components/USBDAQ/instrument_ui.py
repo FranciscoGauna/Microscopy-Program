@@ -198,7 +198,7 @@ class DACInstrument(ObservableInstrument):
         self.offset_sum = config["offset_sum"]
         self.offset_fe = config["offset_fe"]
 
-    def observe(self, *args) -> Dict[str, Any]:
+    def observe(self) -> Dict[str, Any]:
         return {
             "Probe Reflectance": self.status.probe_reflectance,
             "Sum": self.status.abcd_sum,
