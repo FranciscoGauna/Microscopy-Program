@@ -5,10 +5,10 @@ import matplotlib
 import numpy as np
 from pyqtgraph import PlotWidget, BarGraphItem, PlotItem
 
-from SER.interfaces import ProcessDataUI
+from SER.interfaces import ProcessDataUI, FinalDataUI
 
 
-class BarPlotter(ProcessDataUI):
+class BarPlotter(ProcessDataUI, FinalDataUI):
     x_data: List
     y_data: List
     canvas: PlotWidget
@@ -80,3 +80,7 @@ class BarPlotter(ProcessDataUI):
             item.addItem(BarGraphItem(x=x_data, height=y_data, width=1.5, brush='g'))
         else:
             item.addItem(BarGraphItem(x=self.x_data, height=self.y_data, width=1.5, brush='g'))
+
+    def set_data(self, data: List[Dict[str, Dict[str, Any]]]):
+        self.initialize()
+        self.add_data(data)

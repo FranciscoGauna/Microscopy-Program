@@ -100,7 +100,8 @@ class MainWindow(QMainWindow):
         self.lockin_ops = {
             "Virtual": AnfatecLockin.virtual,
             "Anfatec": AnfatecLockin.real,
-            "LI5655": AnfatecLockin.LI5655
+            "LI5655": AnfatecLockin.LI5655,
+            "Demo": AnfatecLockin.demo,
         }
         self.lockin_cb.addItems(self.lockin_ops.keys())
 
@@ -177,7 +178,8 @@ class MainWindow(QMainWindow):
 
         ser_widget = get_main_widget([fungen_component, platina_component, oven_component],
                                      [lockin_component, dac_component],
-                                     [self.platina_comp.run_ui, self.amplitude_graph, self.phase_graph], [],
+                                     [self.platina_comp.run_ui, self.amplitude_graph, self.phase_graph],
+                                     [self.amplitude_graph, self.phase_graph],
                                      coupling_ui_options={"enabled": True, "x": 1, "y": 2}, locale="es")
 
         self.experiment_layout.addWidget(ser_widget, 0, 0)

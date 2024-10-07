@@ -11,7 +11,7 @@ from inspect import getfile
 
 class VirtualLockin(foreign.Driver):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, file=None, *args, **kwargs):
         """Instanciates a new copy of the driver. -if you want to load the settings of a previous instance of this class
         , you should use the method export_settings and add it to the kwargs"""
         reference_on = kwargs.pop("reference_on", False)
@@ -25,6 +25,19 @@ class VirtualLockin(foreign.Driver):
         reference_frequency = Q_(kwargs.pop("reference_frequency", 10000), "hertz")
 
         super().__init__(*args, **kwargs)
+
+        if file is not None:
+            try:
+                self.demo = []
+                self.demo_amp_counter = 0
+                self.demo_phase_counter = 0
+                with open(file, 'r') as f:
+                    for line in f:
+                        self.demo.append(line.split(','))
+            except FileNotFoundError:
+                self.demo = None
+        else:
+            self.demo = None
 
         self.reference_on = reference_on
         self.time_constants = time_constants
@@ -130,10 +143,22 @@ class VirtualLockin(foreign.Driver):
     def amplitude(self):
         """Returns the value of the amplitude channel, which measures from the input signal"""
         sleep(1)
+        if self.demo and len(self.demo) > 0:
+            val = self.demo[self.demo_amp_counter][0]
+            self.demo_amp_counter += 1
+            if self.demo_amp_counter >= len(self.demo):
+                self.demo_amp_counter = 0
+            return float(val)
         return randrange(200)
 
     @Feat(units='degrees')
     def phase(self):
+        if self.demo and len(self.demo) > 0:
+            val = self.demo[self.demo_phase_counter][1]
+            self.demo_phase_counter += 1
+            if self.demo_phase_counter >= len(self.demo):
+                self.demo_phase_counter = 0
+            return float(val)
         """phase returns the value of the phase channel, which measures from the input signal"""
         return gauss(50, 10)
 

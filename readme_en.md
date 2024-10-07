@@ -23,7 +23,7 @@ version of Python libraries with which the program was tested and used.
 ### External Devices
 
 The operation of the Microscopy-Program depends on drivers of external devices.
-I list the drivers necesary for those devices.
+I list the drivers necessary for those devices.
 
 Lock-in AMU 2.4: [`AMU 2.4 Lockin.dll` from Anfatec](https://www.anfatec.de/products/3_lockin/amu/24/pci-bus_lockin_amplifier_amu24.html)
 
